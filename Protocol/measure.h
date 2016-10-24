@@ -26,6 +26,22 @@
 #include <stdlib.h>
 #include <stdint.h> 
 
+#define PROTOCOL_VERSION 0x00
+
+#define REALTIME_MASK 0x80
+
+typedef enum {
+	GET_PROTOCOL_VERSION 	= 0x00,
+	GET_CONFIG_FLAG 		= 0x01,
+	SET_CONFIG_FLAG			= 0x02,
+} command_type_t;
+
+typedef enum {
+	NONE 					= 0x00,
+	CMD_RESPONSE			= 0x01,
+	MEASURE					= 0x02
+} response_type_t;
+
 /*
 Measure type:
 
@@ -40,9 +56,6 @@ where the MU can be one of the following:
 	2 => volt
 	4 => watt
 */
-
-#define REALTIME_MASK 0x80
-
 typedef struct {
 	uint8_t type; // type of measure: read above
 	uint8_t channel; // the channel of measure, starting from 1, channel zero is reserved

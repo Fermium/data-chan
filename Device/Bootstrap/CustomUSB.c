@@ -115,7 +115,7 @@ void CreateGenericHIDReport(uint8_t* DataArray)
 	measure_t* data_to_be_sent = dequeue_measure();
 	
 	// if any flag as present, else flag as 'bad data'
-	DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? 0x00 : 0xFF;
+	DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
 	
 	// serialize the measure (for safe transmission)
 	unpack_measure(data_to_be_sent, (DataArray + 1));

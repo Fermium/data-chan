@@ -20,7 +20,11 @@
 #include "../config.h"
 #include "API.h"
 
-#include <usb.h>
+#ifndef _WIN32
+	#include <usb.h>
+#else
+	#include <libusb.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
@@ -49,4 +53,29 @@ int datachan_init() {
 
 int datachan_is_initialized() {
     return (init == true) ? 1 : 0;
+}
+
+usb_dev_handle *find_lvr_hid() {
+	struct usb_bus *bus;
+	struct usb_device *dev;
+	 
+	for (bus = usb_get_busses(); bus; bus = bus->next) {
+		for (dev = bus->devices; dev; dev = dev->next) {
+			if (dev->descriptor.idVendor == USB_VID && 
+					dev->descriptor.idProduct == USB_PID ) {
+				sb_dev_handle *handle;
+				printf("lvr_hid with Vendor Id: %x and Product Id: %x found.\n", VENDOR_ID, PRODUCT_ID);
+				if (!(handle = usb_open(dev))) {
+					printf("Could not open USB device\n");
+					(usb_dev_handle*)return NULL;
+				}
+				return handle;
+			}
+		}
+	}
+	return (usb_dev_handle*)NULL;
+}
+
+datachan_device_t* acquire_device(void) {
+	
 }
