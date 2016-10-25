@@ -50,6 +50,14 @@ void datachan_init() {
 	}
 }
 
+void datachan_shutdown(void) {
+	// usb shutdown
+	libusb_exit(ctx);
+	
+	// avoid dangling pointer
+	ctx = (libusb_context*)NULL;
+}
+
 datachan_acquire_result_t acquire_device(void) {
 	datachan_acquire_result_t res;
 	res.device = (datachan_device_t*)NULL;
@@ -88,4 +96,12 @@ datachan_acquire_result_t acquire_device(void) {
 	
 	// report operation result
 	return res;
+}
+
+void release_device(datachan_device_t** dev) {
+	// release the device
+	libusb_close((**dev).handler);
+	
+	// avoid dangling pointer
+	*dev = (datachan_device_t*)NULL;
 }

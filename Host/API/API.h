@@ -42,8 +42,9 @@ typedef struct {
 
 int datachan_is_initialized(void);
 void datachan_init(void);
+void datachan_shutdown(void);
 
 datachan_acquire_result_t acquire_device(void);
-void release_device(datachan_device_t*);
+void release_device(datachan_device_t**);
 
 #endif // __API_H__

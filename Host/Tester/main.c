@@ -3,12 +3,19 @@
 #include <stdio.h>
 
 int main() {
+	//initialize everything
 	datachan_init();
-    printf("Initialization success!\n\n");
+    printf("Device transmission initialization success!\n\n");
 	
+	// try to acquire a device
 	datachan_acquire_result_t scan_result = acquire_device();
 	if (scan_result.result == success) {
-		printf("Target acquired\n");
+		// get the device handler
+		datachan_device_t *device = scan_result.device;
+		printf("Target Device acquired\n");
+		
+		// release the device handler
+		release_device(&device);
 	} else {
 		printf("Something went wrong :(\n\n");
 		
@@ -38,6 +45,8 @@ int main() {
 		}
 	}
 	
-	printf("\n");
+	// shutdown everything
+	datachan_shutdown();
+	printf("\nDevice transmission shutdown\n");
 	return EXIT_SUCCESS;
 }
