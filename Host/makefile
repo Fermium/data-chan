@@ -1,28 +1,25 @@
-TARGET = DataChan
-LIBS = -lm -lusb
-CC = gcc
-CFLAGS = -g -Wall -O2 -fPIC
+#
+#             LUFA Library
+#     Copyright (C) Dean Camera, 2015.
+#
+#  dean [at] fourwalledcubicle [dot] com
+#           www.lufa-lib.org
+#
 
-.PHONY: default all clean
+# Makefile to build the LUFA library and the bootstrap AVR program.
 
-default: $(TARGET)
-all: default
+# Call with "make all" to rebuild everything, "make clean" to clean everything,
+# "make mostlyclean" to remove all intermediary files but preserve any binaries,
+# "make doxygen" to document everything with Doxygen (if installed). Call
+# "make help" for additional target build information within a specific project.
+# Call "make flash" to write the binary to the AVR microcontroller using avrdude.
 
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
+all:
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-.PRECIOUS: $(TARGET) $(OBJECTS)
-
-$(TARGET): $(OBJECTS)
-	ar rsc lib$(TARGET).a $(OBJECTS)
-#	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
-
-clean:
-	-rm -f *.o
-	-rm -f *.a
-	-rm -f $(TARGET)
-
-flash: all
+%:
+	@echo Executing \"make $@\" on all host-side data-chan elements.
+	@echo
+	$(MAKE) -C API $@
+	$(MAKE) -C Tester $@
+	@echo
+	@echo host-side data-chan \"make $@\" operation complete.

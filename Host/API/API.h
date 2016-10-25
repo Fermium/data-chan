@@ -19,15 +19,31 @@
 #ifndef __API_H__
 #define __API_H__
 
+#include <inttypes.h>
+
 typedef struct {
-    void* device;
+    void* handler;
 } datachan_device_t;
 
+typedef enum {
+	uninitialized = 0x00,
+	not_found_or_inaccessible,
+	cannot_config,
+	cannot_claim,
+	malloc_fail,
+	unknown,
+	success
+} search_result_t;
+
+typedef struct {
+	search_result_t result;
+	datachan_device_t* device;
+} datachan_acquire_result_t;
 
 int datachan_is_initialized(void);
-int datachan_init(void);
+void datachan_init(void);
 
-datachan_device_t* acquire_device(void);
+datachan_acquire_result_t acquire_device(void);
 void release_device(datachan_device_t*);
 
 #endif // __API_H__
