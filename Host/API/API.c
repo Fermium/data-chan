@@ -27,6 +27,9 @@
 #include <stdbool.h>
 
 #define USB_USED_INTERFACE 0
+#define INTERRUPT_IN_ENDPOINT 0x81
+#define INTERRUPT_OUT_ENDPOINT 0x01
+#define TIMEOUT_MS 1000
 
 static libusb_context* ctx = (libusb_context*)NULL;
 
@@ -85,4 +88,43 @@ void release_device(datachan_device_t** dev) {
 	
 	// avoid dangling pointer
 	*dev = (datachan_device_t*)NULL;
+}
+
+int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
+	int bytes_transferred = 0, result = 0;;
+
+ 	uint8_t data_in[GENERIC_REPORT_SIZE];
+	
+	result = libusb_interrupt_transfer(
+				dev->handler,
+				INTERRUPT_IN_ENDPOINT,
+				data_in,
+				GENERIC_REPORT_SIZE,
+				&bytes_transferred,
+				TIMEOUT_MS
+			);
+	
+	if ((result == 0) && (bytes_transferred > 0))	
+		memcpy((void*)data, (const void*)data_in, bytes_transferred);
+	else if (bytes_transferred != 0)
+		bytes_transferred = 0;
+	
+	return bytes_transferred;
+}
+
+int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
+	int bytes_transferred = 0, result = 0;;
+
+	result = libusb_interrupt_transfer(
+				dev->handler,
+				INTERRUPT_OUT_ENDPOINT,
+				data,
+				GENERIC_REPORT_SIZE,
+				&bytes_transferred,
+				TIMEOUT_MS
+			);
+	
+	bytes_transferred = (result == 0) ? bytes_transferred : 0;
+	
+	return bytes_transferred;
 }

@@ -22,8 +22,9 @@
 #include <stdlib.h>
 #include <stdint.h> 
 #include "../../Protocol/measure.h"
+#include "../../Protocol/data_management.h"
 
-void datachan_init();
+void datachan_init(void);
 
 void CreateGenericHIDReport(uint8_t* DataArray);
 

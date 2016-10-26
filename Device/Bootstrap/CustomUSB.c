@@ -16,7 +16,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../Protocol/measure.h"
+#include "../../Protocol/measure.h"
+#include "../../Protocol/data_management.h"
 #include "CustomUSB.h"
 #include <stdint.h>
 #include <string.h>
@@ -67,7 +68,7 @@ void unpack_measure(measure_t* in, uint8_t* out) {
 
 static managed_queue_t FIFO;
 
-void datachan_init() {
+void datachan_init(void) {
 	FIFO.first = (struct fifo_queue_t *)NULL;
 	FIFO.last = (struct fifo_queue_t *)NULL;
 }
@@ -120,6 +121,20 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
 		holding the report sent from the host.
 	*/
 
-
+	if (DataArray[0] == CMD_MAGIC_FLAG) {
+		command_type_t cmd = (command_type_t)DataArray[1];
+		
+		switch (cmd) {
+			case ENABLE_TRANSMISSION:
+				hostListening = true;
+				break;
+			case DISABLE_TRANSMISSION:
+				hostListening = false;
+				break;
+			
+			default:
+				break;
+		}
+	}
 }
 

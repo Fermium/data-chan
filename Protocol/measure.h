@@ -30,6 +30,8 @@
 
 #define REALTIME_MASK 0x80
 
+#define CMD_MAGIC_FLAG		0xCA
+
 typedef enum {
 	GET_PROTOCOL_VERSION 	= 0x00,
     ENABLE_TRANSMISSION     = 0x01,
@@ -93,55 +95,4 @@ inline measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl)
     void unpack_measure(measure_t*, uint8_t*);
 #endif
 
-struct fifo_queue_t {
-	measure_t *measure;
-	struct fifo_queue_t *next;
-};
-
-inline struct fifo_queue_t* fifo_queue_t(measure_t* m)
-{
-	struct fifo_queue_t* new_elem = (struct fifo_queue_t*)malloc(sizeof(struct fifo_queue_t));
-	new_elem->measure = m;
-	new_elem->next = (struct fifo_queue_t*)NULL;
-    return new_elem;
-}
-
-typedef struct {
-	struct fifo_queue_t *first;
-	struct fifo_queue_t *last;
-} managed_queue_t;
-
-inline void enqueue_measure(managed_queue_t* FIFO, measure_t *measure) {
-	// create the new element
-	struct fifo_queue_t* newElement = fifo_queue_t(measure);
-	
-	// the new element MUST be enqueued as the last element
-	if (FIFO->first == (struct fifo_queue_t*)NULL) {
-		FIFO->first = newElement;
-		FIFO->last = newElement;
-	} else {
-		FIFO->last->next = newElement;
-		FIFO->last = FIFO->last->next;
-	}
-}
-
-inline measure_t *dequeue_measure(managed_queue_t* FIFO) {
-	// return NULL if no measures on queue
-	if (FIFO->first == (struct fifo_queue_t*)NULL) 
-		return (measure_t*)NULL;
-	
-	// get the first measure added
-	struct fifo_queue_t* element = FIFO->first;
-	FIFO->first = FIFO->first->next;
-		
-	// store the measure to be returned
-	measure_t* m = element->measure;
-		
-	// free the memory (RAM is precious as gold is)
-	free((void*)element);
-		
-	// return the measure
-	return m;
-}
-
-#endif // __MEASURE_H__first
+#endif // __MEASURE_H__

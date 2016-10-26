@@ -1,7 +1,8 @@
 TARGET = Tester
 LIBS = -L../API -lDataChan -lusb-1.0
 CC = gcc
-CFLAGS = -g -Wall -O2 -fPIC
+CFLAGS = -g -Wall -O2
+# -fPIC generates a warning....
 
 .PHONY: default all clean
 

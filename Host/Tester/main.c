@@ -14,7 +14,20 @@ int main() {
 		datachan_device_t *device = scan_result.device;
 		printf("Target Device acquired\n");
 		
+		uint8_t data_in[GENERIC_REPORT_SIZE + 1];
+		int data_size = datachan_raw_read(device, data_in);
+		
+		if (data_size > 0) {
+			printf("Data received via interrupt transfer:\n");
+			int i;
+		  	for(i = 0; i < data_size; i++)
+		  		printf("%02x ",data_in[i]);
+		} else {
+			printf("No data received");
+		}
+		
 		// release the device handler
+		printf("\nreleasing the device...\n");
 		release_device(&device);
 	} else {
 		printf("Something went wrong :(\n\n");

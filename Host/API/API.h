@@ -22,6 +22,7 @@
 //#include <inttypes.h>
 #include <stdint.h>
 #include "../../Protocol/measure.h"
+#include "../../Protocol/data_management.h"
 #include "CustomUSB.h"
 
 typedef struct {
@@ -61,6 +62,8 @@ typedef struct {
 int datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
+int datachan_raw_read(datachan_device_t*, uint8_t*);
+int datachan_raw_write(datachan_device_t*, uint8_t*, int);
 
 datachan_acquire_result_t acquire_device(void);
 void release_device(datachan_device_t**);
