@@ -32,8 +32,10 @@
 
 typedef enum {
 	GET_PROTOCOL_VERSION 	= 0x00,
-	GET_CONFIG_FLAG 		= 0x01,
-	SET_CONFIG_FLAG			= 0x02,
+    ENABLE_TRANSMISSION     = 0x01,
+    DISABLE_TRANSMISSION    = 0x02,
+	GET_CONFIG_FLAG 		= 0x03,
+	SET_CONFIG_FLAG			= 0x04,
 } command_type_t;
 
 typedef enum {
@@ -44,20 +46,20 @@ typedef enum {
 
 /*
 Measure type:
-
-bits:
-+-----+-----------------+----------+-------------------------+
-|  7  |     timing      |  6 to 0  |  Measurement Unite (SI) |
-+-----+-----------------+----------+-------------------------+
+	0 => non-realtime
+	1 => offset-realtime
+	2 => realtime
 
 where the MU can be one of the following:
 	0 => meter
 	1 => ampere
 	2 => volt
+	3 => culomb
 	4 => watt
 */
 typedef struct {
-	uint8_t type; // type of measure: read above
+	uint8_t type; // type of measure
+	uint8_t mu; // measurement unit (SI) : read above
 	uint8_t channel; // the channel of measure, starting from 1, channel zero is reserved
 	float value; // float is used because of microcontrollers limitations: https://gcc.gnu.org/wiki/avr-gcc
 	uint32_t time; // the UNIX time of the measure
@@ -83,9 +85,63 @@ inline measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl)
 }
 
 #ifdef __HOST__
-	void repack_measure(measure_t*, uint8_t*);
+	#define REPACK_SUCCESS 				0
+	#define REPACK_TRANSMISSION_ERROR 	-1
+
+	int8_t repack_measure(measure_t*, uint8_t*);
 #else
     void unpack_measure(measure_t*, uint8_t*);
 #endif
 
-#endif // __MEASURE_H__
+struct fifo_queue_t {
+	measure_t *measure;
+	struct fifo_queue_t *next;
+};
+
+inline struct fifo_queue_t* fifo_queue_t(measure_t* m)
+{
+	struct fifo_queue_t* new_elem = (struct fifo_queue_t*)malloc(sizeof(struct fifo_queue_t));
+	new_elem->measure = m;
+	new_elem->next = (struct fifo_queue_t*)NULL;
+    return new_elem;
+}
+
+typedef struct {
+	struct fifo_queue_t *first;
+	struct fifo_queue_t *last;
+} managed_queue_t;
+
+inline void enqueue_measure(managed_queue_t* FIFO, measure_t *measure) {
+	// create the new element
+	struct fifo_queue_t* newElement = fifo_queue_t(measure);
+	
+	// the new element MUST be enqueued as the last element
+	if (FIFO->first == (struct fifo_queue_t*)NULL) {
+		FIFO->first = newElement;
+		FIFO->last = newElement;
+	} else {
+		FIFO->last->next = newElement;
+		FIFO->last = FIFO->last->next;
+	}
+}
+
+inline measure_t *dequeue_measure(managed_queue_t* FIFO) {
+	// return NULL if no measures on queue
+	if (FIFO->first == (struct fifo_queue_t*)NULL) 
+		return (measure_t*)NULL;
+	
+	// get the first measure added
+	struct fifo_queue_t* element = FIFO->first;
+	FIFO->first = FIFO->first->next;
+		
+	// store the measure to be returned
+	measure_t* m = element->measure;
+		
+	// free the memory (RAM is precious as gold is)
+	free((void*)element);
+		
+	// return the measure
+	return m;
+}
+
+#endif // __MEASURE_H__first

@@ -18,8 +18,11 @@
 
 #include "../Protocol/measure.h"
 #include "CustomUSB.h"
-#include <stdint.h> 
+#include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
+
+static bool hostListening = false;
 
 void unpack_measure(measure_t* in, uint8_t* out) {
 	//save the starting address
@@ -36,6 +39,10 @@ void unpack_measure(measure_t* in, uint8_t* out) {
 	// let's continue with the value...
 	memcpy((out), (const void*)&in->value, sizeof(in->value));
 	out += sizeof(in->value);
+
+	// ...measurement unit...
+	memcpy(out, (const void*)&in->mu, sizeof(in->mu));
+	out += sizeof(in->mu);
 
 	// ..time...
 	memcpy((out), (const void*)&in->time, sizeof(in->time));
@@ -60,37 +67,9 @@ void unpack_measure(measure_t* in, uint8_t* out) {
 
 static managed_queue_t FIFO;
 
-void enqueue_measure(measure_t *measure) {
-	// create the new element
-	struct fifo_queue_t* newElement = fifo_queue_t(measure);
-	
-	// the new element MUST be enqueued as the last element
-	if (FIFO.first == (struct fifo_queue_t*)NULL) {
-		FIFO.first = newElement;
-		FIFO.last = newElement;
-	} else {
-		FIFO.last->next = newElement;
-		FIFO.last = FIFO.last->next;
-	}
-}
-
-measure_t *dequeue_measure(void) {
-	// return NULL if no measures on queue
-	if (FIFO.first == (struct fifo_queue_t*)NULL) 
-		return (measure_t*)NULL;
-	
-	// get the first measure added
-	struct fifo_queue_t* element = FIFO.first;
-	FIFO.first = FIFO.first->next;
-		
-	// store the measure to be returned
-	measure_t* m = element->measure;
-		
-	// free the memory (RAM is precious as gold is)
-	free((void*)element);
-		
-	// return the measure
-	return m;
+void datachan_init() {
+	FIFO.first = (struct fifo_queue_t *)NULL;
+	FIFO.last = (struct fifo_queue_t *)NULL;
 }
 
 /** Function to create the next report to send back to the host at the next reporting interval.
@@ -104,24 +83,29 @@ void CreateGenericHIDReport(uint8_t* DataArray)
 		function is called each time the host is ready to accept a new report. DataArray is
 		an array to hold the report to the host.
 	*/
-	
-	// testing purpouse ONLY!
-	enqueue_measure(new_nonrealtime_measure(0xFF, 1, 0.75f));
-	
+
 	// every unused byte will be zero
 	memset((void*)DataArray, 0, GENERIC_REPORT_SIZE);
+
+	// by default nothing is sent
+	DataArray[0] = (uint8_t)NONE;	
+
+	if (hostListening) {
+		// testing purpouse ONLY!
+		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 0.75f));	
 	
-	// get the next measure to be sent over USB
-	measure_t* data_to_be_sent = dequeue_measure();
+		// get the next measure to be sent over USB
+		measure_t* data_to_be_sent = dequeue_measure(&FIFO);
 	
-	// if any flag as present, else flag as 'bad data'
-	DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
+		// if any flag as present, else flag as 'bad data'
+		DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
 	
-	// serialize the measure (for safe transmission)
-	unpack_measure(data_to_be_sent, (DataArray + 1));
+		// serialize the measure (for safe transmission)
+		unpack_measure(data_to_be_sent, (DataArray + 1));
 	
-	// the measure is going to be removed from memory
-	free((void*)data_to_be_sent); // save space!
+		// the measure is going to be removed from memory
+		free((void*)data_to_be_sent); // save space!
+	}
 }
 
 /** Function to process the last received report from the host.

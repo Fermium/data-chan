@@ -19,16 +19,34 @@
 #ifndef __API_H__
 #define __API_H__
 
-#include <inttypes.h>
+//#include <inttypes.h>
+#include <stdint.h>
+#include "../../Protocol/measure.h"
+#include "CustomUSB.h"
 
 typedef struct {
     void* handler;
+	managed_queue_t unread_measures_queue;
 } datachan_device_t;
+
+inline datachan_device_t* new_datachan_device_t(void* native_handle) {
+	// allocate memory for the device
+	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
+	
+	// register the native handle
+	dev->handler = native_handle;
+
+	// prepare the internal queue
+	dev->unread_measures_queue.first = (struct fifo_queue_t *)NULL;
+	dev->unread_measures_queue.last = (struct fifo_queue_t *)NULL;
+
+	// enjoy the device
+	return dev;
+}
 
 typedef enum {
 	uninitialized = 0x00,
 	not_found_or_inaccessible,
-	cannot_config,
 	cannot_claim,
 	malloc_fail,
 	unknown,

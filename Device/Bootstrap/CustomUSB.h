@@ -23,27 +23,7 @@
 #include <stdint.h> 
 #include "../../Protocol/measure.h"
 
-struct fifo_queue_t {
-	measure_t *measure;
-	struct fifo_queue_t *next;
-};
-
-inline struct fifo_queue_t* fifo_queue_t(measure_t* m)
-{
-	struct fifo_queue_t* new_elem = (struct fifo_queue_t*)malloc(sizeof(struct fifo_queue_t));
-	new_elem->measure = m;
-	new_elem->next = (struct fifo_queue_t*)NULL;
-    return new_elem;
-}
-
-typedef struct {
-	struct fifo_queue_t *first;
-	struct fifo_queue_t *last;
-} managed_queue_t;
-
-void enqueue_measure(measure_t *);
-
-measure_t *dequeue_measure(void);
+void datachan_init();
 
 void CreateGenericHIDReport(uint8_t* DataArray);
 

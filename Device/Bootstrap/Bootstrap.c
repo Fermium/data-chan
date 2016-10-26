@@ -74,6 +74,9 @@ void SetupHardware(void)
 
 	/* USB Hardware Initialization */
 	USB_Init();
+
+    /* Protocol initialization */
+    datachan_init();
 }
 
 /** Event handler for the USB_Connect event. This indicates that the device is enumerating via the status LEDs and

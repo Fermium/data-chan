@@ -27,10 +27,6 @@ int main() {
 			case not_found_or_inaccessible:
 				printf("A compatible device could not be found or open");
 				break;
-				
-			case cannot_config:
-				printf("The device communication protocol could not be configured");
-				break;
 			
 			case cannot_claim:
 				printf("The device control cannot be claimed");

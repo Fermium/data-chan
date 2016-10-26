@@ -30,11 +30,6 @@
 
 static libusb_context* ctx = (libusb_context*)NULL;
 
-int repack_measure(measure_t* out, uint8_t* in) {
-    //return 0; // error found (using check algorithm)
-    return 1;
-}
-
 int datachan_is_initialized() {
     return (ctx != (libusb_context*)NULL);
 }
@@ -63,34 +58,20 @@ datachan_acquire_result_t acquire_device(void) {
 	res.device = (datachan_device_t*)NULL;
 	res.result = unknown;
 	
-	// update the list of devices
-	//libusb_find_busses();
-    //libusb_find_devices();
-	
-	#ifdef LINUX
-		char dname[50];
-	#endif
-	
 	if (datachan_is_initialized()) {
 		// search for the associated device
 		libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, USB_VID, USB_PID);
 		
 		if (handle != (libusb_device_handle*)NULL) {
-			// create the device structure
-			datachan_device_t *dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
-			if (dev != (datachan_device_t*)NULL) {
-				libusb_set_auto_detach_kernel_driver(handle, 1);
-				
-				// setting the configuration 1 means selecting the corresponding bConfigurationValue
-				if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
-					// fill the device structure
-					dev->handler = handle;
-						
-					// the device structure must be returned
-					res.device = dev;
-					res.result = success;
-				} else res.result = cannot_claim;
-			} else res.result = malloc_fail;
+			libusb_set_auto_detach_kernel_driver(handle, 1);
+			
+			// setting the configuration 1 means selecting the corresponding bConfigurationValue
+			if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
+					
+				// fill the device structure
+				res.device = new_datachan_device_t((void*)handle);
+				res.result = success;
+			} else res.result = cannot_claim;
 		} else res.result = not_found_or_inaccessible;
 	} else res.result = uninitialized;
 	
