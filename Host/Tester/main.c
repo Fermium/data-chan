@@ -14,11 +14,31 @@ int main() {
 		datachan_device_t *device = scan_result.device;
 		printf("Target Device acquired\n");
 		
-		uint8_t data_in[GENERIC_REPORT_SIZE + 1];
+		uint8_t data_in[GENERIC_REPORT_SIZE];
 		int data_size = datachan_raw_read(device, data_in);
 		
 		if (data_size > 0) {
-			printf("Data received via interrupt transfer:\n");
+			printf("Data received via interrupt transfer %02x bytes:\n", data_size);
+			int i;
+		  	for(i = 0; i < data_size; i++)
+		  		printf("%02x ",data_in[i]);
+		} else {
+			printf("No data received");
+		}
+		
+		// enable data transmission
+		printf("\nTransmission of enable signal...\n");
+		uint8_t cmd[] = { CMD_MAGIC_FLAG, 0x01 };
+		data_size = datachan_raw_write(device, cmd, 2);
+		if (data_size > 0)
+			printf("\nCommand sent!\n");
+		else
+			printf("\nTransmission error!\n");
+		
+		// test the first measure
+		data_size = datachan_raw_read(device, data_in);
+		if (data_size > 0) {
+			printf("Data received via interrupt transfer %02x bytes:\n", data_size);
 			int i;
 		  	for(i = 0; i < data_size; i++)
 		  		printf("%02x ",data_in[i]);

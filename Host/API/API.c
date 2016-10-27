@@ -27,8 +27,9 @@
 #include <stdbool.h>
 
 #define USB_USED_INTERFACE 0
+//#define INTERRUPT_IN_ENDPOINT 0x02
 #define INTERRUPT_IN_ENDPOINT 0x81
-#define INTERRUPT_OUT_ENDPOINT 0x01
+#define INTERRUPT_OUT_ENDPOINT 0x02
 #define TIMEOUT_MS 1000
 
 static libusb_context* ctx = (libusb_context*)NULL;
@@ -70,7 +71,7 @@ datachan_acquire_result_t acquire_device(void) {
 			
 			// setting the configuration 1 means selecting the corresponding bConfigurationValue
 			if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
-					
+				
 				// fill the device structure
 				res.device = new_datachan_device_t((void*)handle);
 				res.result = success;
@@ -99,7 +100,7 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 				dev->handler,
 				INTERRUPT_IN_ENDPOINT,
 				data_in,
-				GENERIC_REPORT_SIZE,
+				sizeof(data_in),
 				&bytes_transferred,
 				TIMEOUT_MS
 			);
@@ -113,13 +114,17 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 }
 
 int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
-	int bytes_transferred = 0, result = 0;;
+	int bytes_transferred = 0, result = 0;
+	
+	uint8_t data_out[GENERIC_REPORT_SIZE];
+	memset((void*)data_out, 0, sizeof(data_out));
+	memcpy((void*)data_out, data, data_length);
 
 	result = libusb_interrupt_transfer(
 				dev->handler,
 				INTERRUPT_OUT_ENDPOINT,
-				data,
-				GENERIC_REPORT_SIZE,
+				data_out,
+				sizeof(data_out),
 				&bytes_transferred,
 				TIMEOUT_MS
 			);

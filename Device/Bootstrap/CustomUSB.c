@@ -122,7 +122,7 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
 	*/
 
 	if (DataArray[0] == CMD_MAGIC_FLAG) {
-		command_type_t cmd = (command_type_t)DataArray[1];
+		uint8_t cmd = DataArray[1];
 		
 		switch (cmd) {
 			case ENABLE_TRANSMISSION:
