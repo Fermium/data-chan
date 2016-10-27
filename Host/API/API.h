@@ -21,6 +21,7 @@
 
 //#include <inttypes.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
 #include "CustomUSB.h"
@@ -28,6 +29,7 @@
 typedef struct {
     void* handler;
 	managed_queue_t unread_measures_queue;
+	bool enabled;
 } datachan_device_t;
 
 inline datachan_device_t* new_datachan_device_t(void* native_handle) {
@@ -40,7 +42,10 @@ inline datachan_device_t* new_datachan_device_t(void* native_handle) {
 	// prepare the internal queue
 	dev->unread_measures_queue.first = (struct fifo_queue_t *)NULL;
 	dev->unread_measures_queue.last = (struct fifo_queue_t *)NULL;
-
+	
+	// the device is disabled
+	dev->enabled = false;
+	
 	// enjoy the device
 	return dev;
 }
@@ -62,10 +67,14 @@ typedef struct {
 int datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
+
+int datachan_device_enable(datachan_device_t*);
+int datachan_device_disable(datachan_device_t*);
+
 int datachan_raw_read(datachan_device_t*, uint8_t*);
 int datachan_raw_write(datachan_device_t*, uint8_t*, int);
 
-datachan_acquire_result_t acquire_device(void);
-void release_device(datachan_device_t**);
+datachan_acquire_result_t device_acquire(void);
+void device_release(datachan_device_t**);
 
 #endif // __API_H__

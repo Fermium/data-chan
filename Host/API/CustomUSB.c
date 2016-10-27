@@ -30,19 +30,13 @@ int8_t repack_measure(measure_t* out, uint8_t* in) {
 	// ..millis...
 	memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
 	in += sizeof(out->millis);
-    
-    // generate the check (to identify transmission errors)
-	uint8_t checkByte = 0xFF;
-	while (starting_addr != in) {
-		checkByte = checkByte ^ *(starting_addr);	
-
-		// head for the next byte
-		starting_addr++;
-	}
 
 	// append the error check byte
-	if (*(in) == checkByte)
-    	return REPACK_SUCCESS;
+	if (CRC_check(
+				starting_addr,
+				sizeof(measure_t), 
+				CRC_calc(starting_addr, sizeof(measure_t)))
+			) return REPACK_SUCCESS;
 
 	return REPACK_TRANSMISSION_ERROR;
 }

@@ -46,6 +46,11 @@ typedef enum {
 	MEASURE					= 0x02
 } response_type_t;
 
+
+/****************************************************************
+ *				measure data structures and macros				*
+ ****************************************************************/
+
 /*
 Measure type:
 	0 => non-realtime
@@ -68,13 +73,18 @@ typedef struct {
 	uint16_t millis; // this is the offset from the given UNXI time expressed as milliseconds
 } measure_t;
 
+#define NONREALTIME			0x00
+#define OFFSET_REALTIME		0x01
+#define REALTIME			0x02
+
 inline measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl)
 {
 	// memory allocation
 	measure_t* new_elem = (measure_t*)malloc(sizeof(measure_t));
 	
 	// this is a non-real-time measure
-	new_elem->type = mu & (~REALTIME_MASK);
+	new_elem->type = NONREALTIME;
+	new_elem->mu = mu;
 	new_elem->channel = (ch == 0) ? 1 : ch;
 	new_elem->value = vl;
 	
@@ -94,5 +104,18 @@ inline measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl)
 #else
     void unpack_measure(measure_t*, uint8_t*);
 #endif
+
+inline uint8_t CRC_calc(uint8_t* in, uint16_t count) {
+	// generate the check (to identify transmission errors)
+	uint8_t checkByte = 0xFF;
+	for (; count > 0; count--)
+		checkByte = checkByte ^ *(in++);
+	
+	return checkByte;
+}
+
+inline uint8_t CRC_check(uint8_t* in, uint16_t count, uint8_t crc) {
+	return (crc == CRC_calc(in, count));
+}
 
 #endif // __MEASURE_H__

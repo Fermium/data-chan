@@ -2,13 +2,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void debug_measure(datachan_device_t *device) {
+	uint8_t data_in[GENERIC_REPORT_SIZE];
+	int data_size = datachan_raw_read(device, data_in);
+	
+	measure_t* data_out = (measure_t*)malloc(sizeof(measure_t));
+	
+	// the first byte is used to flag the presence of a measure
+	uint8_t *data_pack = data_in;
+	
+	if ((data_size > 0) && (repack_measure(data_out, ++data_pack) == REPACK_SUCCESS)) {
+		printf("\n\nMeasure: \n");
+		printf("Value: %f", data_out->value);
+	} else {
+		printf("Bad measure.");
+	}
+}
+
 int main() {
 	//initialize everything
 	datachan_init();
     printf("Device transmission initialization success!\n\n");
 	
 	// try to acquire a device
-	datachan_acquire_result_t scan_result = acquire_device();
+	datachan_acquire_result_t scan_result = device_acquire();
 	if (scan_result.result == success) {
 		// get the device handler
 		datachan_device_t *device = scan_result.device;
@@ -27,28 +44,34 @@ int main() {
 		}
 		
 		// enable data transmission
-		printf("\nTransmission of enable signal...\n");
-		uint8_t cmd[] = { CMD_MAGIC_FLAG, 0x01 };
-		data_size = datachan_raw_write(device, cmd, 2);
-		if (data_size > 0)
-			printf("\nCommand sent!\n");
+		if (datachan_device_enable(device))
+			printf("\nDevice enabled\n\n");
+		else
+			printf("\nTransmission error!\n\n");
+		
+		int times;
+		for (times = 50; times >= 0; times--) {
+			debug_measure(device);
+			/*data_size = datachan_raw_read(device, data_in);
+			if (data_size > 0) {
+				printf("Data received via interrupt transfer %02x bytes:\n", data_size);
+				int i;
+				for(i = 0; i < data_size; i++)
+					printf("%02x ",data_in[i]);
+			} else {
+				printf("No data received");
+			}*/
+		}
+		
+		// enable data transmission
+		if (datachan_device_disable(device))
+			printf("\nDevice disabled\n");
 		else
 			printf("\nTransmission error!\n");
 		
-		// test the first measure
-		data_size = datachan_raw_read(device, data_in);
-		if (data_size > 0) {
-			printf("Data received via interrupt transfer %02x bytes:\n", data_size);
-			int i;
-		  	for(i = 0; i < data_size; i++)
-		  		printf("%02x ",data_in[i]);
-		} else {
-			printf("No data received");
-		}
-		
 		// release the device handler
-		printf("\nreleasing the device...\n");
-		release_device(&device);
+		printf("\n\nreleasing the device...\n");
+		device_release(&device);
 	} else {
 		printf("Something went wrong :(\n\n");
 		

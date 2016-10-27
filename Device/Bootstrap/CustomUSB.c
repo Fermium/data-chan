@@ -53,17 +53,8 @@ void unpack_measure(measure_t* in, uint8_t* out) {
 	memcpy((out), (const void*)&in->millis, sizeof(in->millis));
 	out += sizeof(in->millis);
 
-	// generate the check (to identify transmission errors)
-	uint8_t checkByte = 0xFF;
-	while (starting_addr != out) {
-		checkByte = checkByte ^ *(starting_addr);	
-
-		// head for the next byte
-		starting_addr++;
-	}
-
 	// append the error check byte
-	*(out) = checkByte;
+	*(out) = CRC_calc(starting_addr, sizeof(measure_t));
 }
 
 static managed_queue_t FIFO;
@@ -93,7 +84,7 @@ void CreateGenericHIDReport(uint8_t* DataArray)
 
 	if (hostListening) {
 		// testing purpouse ONLY!
-		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 0.75f));	
+		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));	
 	
 		// get the next measure to be sent over USB
 		measure_t* data_to_be_sent = dequeue_measure(&FIFO);

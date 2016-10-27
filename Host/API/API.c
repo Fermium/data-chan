@@ -57,7 +57,7 @@ void datachan_shutdown(void) {
 	ctx = (libusb_context*)NULL;
 }
 
-datachan_acquire_result_t acquire_device(void) {
+datachan_acquire_result_t device_acquire(void) {
 	datachan_acquire_result_t res;
 	res.device = (datachan_device_t*)NULL;
 	res.result = unknown;
@@ -83,7 +83,10 @@ datachan_acquire_result_t acquire_device(void) {
 	return res;
 }
 
-void release_device(datachan_device_t** dev) {
+void device_release(datachan_device_t** dev) {
+	// make sure the device won't send precious data to the OS
+	datachan_device_disable(*dev);
+	
 	// release the device
 	libusb_close((**dev).handler);
 	
@@ -94,8 +97,10 @@ void release_device(datachan_device_t** dev) {
 int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 	int bytes_transferred = 0, result = 0;;
 
+	// create a private safe buffer
  	uint8_t data_in[GENERIC_REPORT_SIZE];
 	
+	// perform the data transmission
 	result = libusb_interrupt_transfer(
 				dev->handler,
 				INTERRUPT_IN_ENDPOINT,
@@ -105,6 +110,7 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 				TIMEOUT_MS
 			);
 	
+	// copy the result on the unsafe buffer (on success)
 	if ((result == 0) && (bytes_transferred > 0))	
 		memcpy((void*)data, (const void*)data_in, bytes_transferred);
 	else if (bytes_transferred != 0)
@@ -116,10 +122,15 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
 	int bytes_transferred = 0, result = 0;
 	
+	// avoid buffer overflow during memcpy
+	data_length = (data_length > GENERIC_REPORT_SIZE) ? GENERIC_REPORT_SIZE : data_length;
+	
+	// zero everything unused and copy the buffer
 	uint8_t data_out[GENERIC_REPORT_SIZE];
 	memset((void*)data_out, 0, sizeof(data_out));
 	memcpy((void*)data_out, data, data_length);
 
+	// perform the data transmission
 	result = libusb_interrupt_transfer(
 				dev->handler,
 				INTERRUPT_OUT_ENDPOINT,
@@ -129,7 +140,40 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
 				TIMEOUT_MS
 			);
 	
+	// erro check
 	bytes_transferred = (result == 0) ? bytes_transferred : 0;
 	
 	return bytes_transferred;
+}
+
+int datachan_device_enable(datachan_device_t* dev) {
+	if (!dev->enabled) {
+		// generate the enable command
+		uint8_t cmd[] = { CMD_MAGIC_FLAG, ENABLE_TRANSMISSION };
+		
+		// write the command on the USB bus
+		int data_size = datachan_raw_write(dev, cmd, sizeof(cmd));
+	
+		// report the result
+		dev->enabled = (data_size >= sizeof(cmd));
+	}
+	
+	// is the device enabled now?
+	return dev->enabled;
+}
+
+int datachan_device_disable(datachan_device_t* dev) {
+	if (dev->enabled) {
+		// generate the enable command
+		uint8_t cmd[] = { CMD_MAGIC_FLAG, DISABLE_TRANSMISSION };
+		
+		// write the command on the USB bus
+		int data_size = datachan_raw_write(dev, cmd, sizeof(cmd));
+	
+		// report the result
+		dev->enabled = !(data_size >= sizeof(cmd));
+	}
+	
+	// is the device enabled now?
+	return !dev->enabled;
 }
