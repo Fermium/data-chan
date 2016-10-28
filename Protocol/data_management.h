@@ -19,6 +19,9 @@ inline struct fifo_queue_t* fifo_queue_t(measure_t* m)
 typedef struct {
 	struct fifo_queue_t *first;
 	struct fifo_queue_t *last;
+	#ifdef __HOST__
+		uint32_t count;
+	#endif
 } managed_queue_t;
 
 inline void enqueue_measure(managed_queue_t* FIFO, measure_t *measure) {
@@ -33,6 +36,10 @@ inline void enqueue_measure(managed_queue_t* FIFO, measure_t *measure) {
 		FIFO->last->next = newElement;
 		FIFO->last = FIFO->last->next;
 	}
+	
+	#ifdef __HOST__
+		FIFO->count++;
+	#endif
 }
 
 inline measure_t *dequeue_measure(managed_queue_t* FIFO) {
@@ -49,9 +56,20 @@ inline measure_t *dequeue_measure(managed_queue_t* FIFO) {
 		
 	// free the memory (RAM is precious as gold is)
 	free((void*)element);
-		
+	
+	#ifdef __HOST__
+		FIFO->count--;
+	#endif
+	
 	// return the measure
 	return m;
 }
+
+#ifdef __HOST__
+inline uint32_t count_measures(managed_queue_t* FIFO) {
+	// return the measure
+	return FIFO->count--;
+}
+#endif
 
 #endif // __DATA_MANAGEMENT_H__

@@ -29,17 +29,29 @@
 #include "CustomUSB.h"
 
 typedef struct {
-    libusb_device_handle* handler;
+	// mutexes attributes
+	pthread_mutexattr_t mutex_attr;
+	
+    // mutexes
 	pthread_mutex_t handler_mutex;
 	pthread_mutex_t measures_queue_mutex;
-	managed_queue_t measures_queue;
-	pthread_t* reader;
-	pthread_attr_t reader_attr;
+	pthread_mutex_t exitlock;
 	pthread_mutex_t enabled_mutex;
+	
+	// USB device handler
+	libusb_device_handle* handler;
+	
+	// measures queue
+	managed_queue_t measures_queue;
+	
+	// USB threads
+	pthread_t reader;
+	pthread_attr_t reader_attr;
+	
 	bool enabled;
 } datachan_device_t;
 
-inline datachan_device_t* new_datachan_device_t(libusb_device_handle* native_handle) {
+inline datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
 	// allocate memory for the device
 	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
 	
@@ -49,22 +61,36 @@ inline datachan_device_t* new_datachan_device_t(libusb_device_handle* native_han
 	// prepare the internal queue
 	dev->measures_queue.first = (struct fifo_queue_t *)NULL;
 	dev->measures_queue.last = (struct fifo_queue_t *)NULL;
-	dev->measures_queue_mutex = PTHREAD_MUTEX_INITIALIZER;
+	dev->measures_queue.count = 0;
 	
 	// the device is disabled, there is nothing to read, and a reader thread is unnecessary
 	dev->enabled = false;
-	dev->reader = NULL;
 	
 	// pthread attribute creation
 	pthread_attr_init(&dev->reader_attr);
-	pthread_attr_setdetachstate(&dev->reader_attr,PTHREAD_CREATE_DETACHED);
+	
+	pthread_mutexattr_init(&dev->mutex_attr);
 	
 	// pthread mutex
-	dev->enabled_mutex = PTHREAD_MUTEX_INITIALIZER;
-	dev->handler_mutex = PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
+	pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
+	pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
 	
 	// enjoy the device
 	return dev;
+}
+
+inline void datachan_device_cleanup(datachan_device_t* dev) {
+	// no need for the thread
+	pthread_attr_destroy(&dev->reader_attr);
+	
+	// remove the mutex safely (acquire and release it first)
+	pthread_mutex_destroy(&dev->enabled_mutex);
+	pthread_mutex_destroy(&dev->measures_queue_mutex);
+	pthread_mutex_destroy(&dev->handler_mutex);
+	
+	// remove the mutex attribute safely
+	pthread_mutexattr_destroy(&dev->mutex_attr);
 }
 
 typedef enum {
@@ -85,9 +111,9 @@ int datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
 
-int datachan_device_enable(datachan_device_t*);
+bool datachan_device_enable(datachan_device_t*);
 bool datachan_device_is_enabled(datachan_device_t*);
-int datachan_device_disable(datachan_device_t*);
+bool datachan_device_disable(datachan_device_t*);
 
 int datachan_raw_read(datachan_device_t*, uint8_t*);
 int datachan_raw_write(datachan_device_t*, uint8_t*, int);

@@ -34,29 +34,13 @@ int main() {
 		datachan_device_t *device = scan_result.device;
 		printf("Target Device acquired\n");
 		
-		uint8_t data_in[GENERIC_REPORT_SIZE];
-		int data_size = datachan_raw_read(device, data_in);
-		
-		if (data_size > 0) {
-			printf("Data received via interrupt transfer %02x bytes:\n", data_size);
-			int i;
-		  	for(i = 0; i < data_size; i++)
-		  		printf("%02x ",data_in[i]);
-		} else {
-			printf("No data received");
-		}
-		
 		// enable data transmission
 		if (datachan_device_enable(device))
 			printf("\nDevice enabled\n\n");
 		else
 			printf("\nTransmission error!\n\n");
 		
-		/*int times;
-		for (times = 50; times >= 0; times--) {
-			//debug_measure(device);
-		}*/
-		sleep(60);
+		sleep(1);
 		
 		// enable data transmission
 		if (datachan_device_disable(device))
