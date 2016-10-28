@@ -105,17 +105,23 @@ inline measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl)
     void unpack_measure(measure_t*, uint8_t*);
 #endif
 
-inline uint8_t CRC_calc(uint8_t* in, uint16_t count) {
+inline uint8_t CRC_calc(const uint8_t* data, uint16_t len) {
 	// generate the check (to identify transmission errors)
-	uint8_t checkByte = 0xFF;
-	for (; count > 0; count--)
-		checkByte = checkByte ^ *(in++);
-	
-	return checkByte;
+	uint8_t crc = 0x00;
+	while (len--) {
+		uint8_t extract = *data++;
+		for (uint8_t tempI = 8; tempI; tempI--) {
+			uint8_t sum = (crc ^ extract) & 0x01;
+			crc >>= 1;
+			if (sum) crc ^= 0x8C;
+			extract >>= 1;
+		}
+	}
+	return crc;
 }
 
-inline uint8_t CRC_check(uint8_t* in, uint16_t count, uint8_t crc) {
-	return (crc == CRC_calc(in, count));
+inline uint8_t CRC_check(const uint8_t* data, uint16_t len, uint8_t crc) {
+	return (crc == CRC_calc(data, len));
 }
 
 #endif // __MEASURE_H__

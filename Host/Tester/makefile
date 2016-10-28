@@ -1,5 +1,5 @@
 TARGET = Tester
-LIBS = -L../API -lDataChan -lusb-1.0
+LIBS = -L../API -lDataChan -lusb-1.0 -lpthread
 CC = gcc
 CFLAGS = -g -Wall -O2 -D__HOST__
 # -fPIC generates a warning....

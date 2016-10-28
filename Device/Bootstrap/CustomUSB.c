@@ -84,7 +84,7 @@ void CreateGenericHIDReport(uint8_t* DataArray)
 
 	if (hostListening) {
 		// testing purpouse ONLY!
-		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));	
+		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
 	
 		// get the next measure to be sent over USB
 		measure_t* data_to_be_sent = dequeue_measure(&FIFO);

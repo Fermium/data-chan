@@ -1,6 +1,7 @@
 #include "../API/API.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void debug_measure(datachan_device_t *device) {
 	uint8_t data_in[GENERIC_REPORT_SIZE];
@@ -17,6 +18,8 @@ void debug_measure(datachan_device_t *device) {
 	} else {
 		printf("Bad measure.");
 	}
+	
+	free((void*)data_out);
 }
 
 int main() {
@@ -49,19 +52,11 @@ int main() {
 		else
 			printf("\nTransmission error!\n\n");
 		
-		int times;
+		/*int times;
 		for (times = 50; times >= 0; times--) {
-			debug_measure(device);
-			/*data_size = datachan_raw_read(device, data_in);
-			if (data_size > 0) {
-				printf("Data received via interrupt transfer %02x bytes:\n", data_size);
-				int i;
-				for(i = 0; i < data_size; i++)
-					printf("%02x ",data_in[i]);
-			} else {
-				printf("No data received");
-			}*/
-		}
+			//debug_measure(device);
+		}*/
+		sleep(60);
 		
 		// enable data transmission
 		if (datachan_device_disable(device))

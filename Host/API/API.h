@@ -22,17 +22,24 @@
 //#include <inttypes.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <libusb-1.0/libusb.h>
+#include <pthread.h>
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
 #include "CustomUSB.h"
 
 typedef struct {
-    void* handler;
-	managed_queue_t unread_measures_queue;
+    libusb_device_handle* handler;
+	pthread_mutex_t handler_mutex;
+	pthread_mutex_t measures_queue_mutex;
+	managed_queue_t measures_queue;
+	pthread_t* reader;
+	pthread_attr_t reader_attr;
+	pthread_mutex_t enabled_mutex;
 	bool enabled;
 } datachan_device_t;
 
-inline datachan_device_t* new_datachan_device_t(void* native_handle) {
+inline datachan_device_t* new_datachan_device_t(libusb_device_handle* native_handle) {
 	// allocate memory for the device
 	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
 	
@@ -40,11 +47,21 @@ inline datachan_device_t* new_datachan_device_t(void* native_handle) {
 	dev->handler = native_handle;
 
 	// prepare the internal queue
-	dev->unread_measures_queue.first = (struct fifo_queue_t *)NULL;
-	dev->unread_measures_queue.last = (struct fifo_queue_t *)NULL;
+	dev->measures_queue.first = (struct fifo_queue_t *)NULL;
+	dev->measures_queue.last = (struct fifo_queue_t *)NULL;
+	dev->measures_queue_mutex = PTHREAD_MUTEX_INITIALIZER;
 	
-	// the device is disabled
+	// the device is disabled, there is nothing to read, and a reader thread is unnecessary
 	dev->enabled = false;
+	dev->reader = NULL;
+	
+	// pthread attribute creation
+	pthread_attr_init(&dev->reader_attr);
+	pthread_attr_setdetachstate(&dev->reader_attr,PTHREAD_CREATE_DETACHED);
+	
+	// pthread mutex
+	dev->enabled_mutex = PTHREAD_MUTEX_INITIALIZER;
+	dev->handler_mutex = PTHREAD_MUTEX_INITIALIZER;
 	
 	// enjoy the device
 	return dev;
@@ -69,6 +86,7 @@ void datachan_init(void);
 void datachan_shutdown(void);
 
 int datachan_device_enable(datachan_device_t*);
+bool datachan_device_is_enabled(datachan_device_t*);
 int datachan_device_disable(datachan_device_t*);
 
 int datachan_raw_read(datachan_device_t*, uint8_t*);
@@ -76,5 +94,7 @@ int datachan_raw_write(datachan_device_t*, uint8_t*, int);
 
 datachan_acquire_result_t device_acquire(void);
 void device_release(datachan_device_t**);
+
+void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 
 #endif // __API_H__
