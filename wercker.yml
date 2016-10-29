@@ -5,7 +5,7 @@ box: java
 build:
   steps:
     - install-packages:
-        packages: git openssl pkg-config libssl-dev wget libusb-1.0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
     - script:
         name: Building Project
         code: make all
