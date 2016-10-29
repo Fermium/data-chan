@@ -64,7 +64,7 @@ typedef struct {
     datachan_device_t* device;
 } datachan_acquire_result_t;
 
-int datachan_is_initialized(void);
+bool datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
 
@@ -80,6 +80,6 @@ void device_release(datachan_device_t**);
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);
-uint32_t datachan_device_enqueued_measures(datachan_device_t*);
+int32_t datachan_device_enqueued_measures(datachan_device_t*);
 
 #endif // __API_H__

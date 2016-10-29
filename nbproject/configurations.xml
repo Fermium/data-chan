@@ -512,6 +512,7 @@
         <in>measure.h</in>
       </df>
       <in>config.h</in>
+      <in>wercker.yml</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -2171,6 +2172,8 @@
       <item path="Protocol/measure.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="wercker.yml" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
