@@ -46,7 +46,7 @@ deploy :
           git clone -b gh-pages $GIT_REMOTE
           sudo chmod 0777 -R site
           sudo rsync -avh ./site/ ./data-chan/
-          cd Pizza
+          cd data-chan
           git add .
           git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
           git push --quiet &> /dev/null
