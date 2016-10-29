@@ -1,0 +1,7 @@
+site_name: data-chan
+
+pages:
+- Home: index.md
+- Building: build.md
+
+theme: readthedocs
