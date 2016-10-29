@@ -24,10 +24,10 @@
 #endif
 
 // USB Device Configuration
-#define USB_VID 				0x03EB
-#define USB_PID 				0x204F
-#define USB_MANUFACTURE			L"Dio"
-#define USB_NAME				L"CazzoDuro 8=====D"
-#define GENERIC_REPORT_SIZE 	0x6A
+#define USB_VID                                 0x03EB
+#define USB_PID                                 0x204F
+#define USB_MANUFACTURE                         L"Dio"
+#define USB_NAME                                L"CazzoDuro 8=====D"
+#define GENERIC_REPORT_SIZE                     0x40
 
 #endif // __DATACHAN_CONFIG_H__

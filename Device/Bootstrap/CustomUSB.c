@@ -26,42 +26,36 @@
 static bool hostListening = false;
 
 void unpack_measure(measure_t* in, uint8_t* out) {
-	//save the starting address
-	uint8_t *starting_addr = out;
-	
-	// the first byte is the type of measure sent
-	memcpy(out, (const void*)&in->type, sizeof(in->type));
-	out += sizeof(in->type);
-	
-	// the second byte is the source channel
-	memcpy((out), (const void*)&in->channel, sizeof(in->channel));
-	out += sizeof(in->channel);
-	
-	// let's continue with the value...
-	memcpy((out), (const void*)&in->value, sizeof(in->value));
-	out += sizeof(in->value);
+    // the first byte is the type of measure sent
+    memcpy(out, (const void*)&in->type, sizeof(in->type));
+    out += sizeof(in->type);
 
-	// ...measurement unit...
-	memcpy(out, (const void*)&in->mu, sizeof(in->mu));
-	out += sizeof(in->mu);
+    // the second byte is the source channel
+    memcpy((out), (const void*)&in->channel, sizeof(in->channel));
+    out += sizeof(in->channel);
 
-	// ..time...
-	memcpy((out), (const void*)&in->time, sizeof(in->time));
-	out += sizeof(in->time);
+    // let's continue with the value...
+    memcpy((out), (const void*)&in->value, sizeof(in->value));
+    out += sizeof(in->value);
 
-	// ..millis...
-	memcpy((out), (const void*)&in->millis, sizeof(in->millis));
-	out += sizeof(in->millis);
+    // ...measurement unit...
+    memcpy(out, (const void*)&in->mu, sizeof(in->mu));
+    out += sizeof(in->mu);
 
-	// append the error check byte
-	*(out) = CRC_calc(starting_addr, sizeof(measure_t));
+    // ..time...
+    memcpy((out), (const void*)&in->time, sizeof(in->time));
+    out += sizeof(in->time);
+
+    // ..millis...
+    memcpy((out), (const void*)&in->millis, sizeof(in->millis));
+    out += sizeof(in->millis);
 }
 
 static managed_queue_t FIFO;
 
 void datachan_init(void) {
-	FIFO.first = (struct fifo_queue_t *)NULL;
-	FIFO.last = (struct fifo_queue_t *)NULL;
+    FIFO.first = (struct fifo_queue_t *)NULL;
+    FIFO.last = (struct fifo_queue_t *)NULL;
 }
 
 /** Function to create the next report to send back to the host at the next reporting interval.
@@ -98,6 +92,11 @@ void CreateGenericHIDReport(uint8_t* DataArray)
 		// the measure is going to be removed from memory
 		free((void*)data_to_be_sent); // save space!
 	}
+        
+        
+        
+    // append the error check byte to the end of EVERY message
+    DataArray[GENERIC_REPORT_SIZE - 1] = CRC_calc(DataArray, GENERIC_REPORT_SIZE - 1);
 }
 
 /** Function to process the last received report from the host.

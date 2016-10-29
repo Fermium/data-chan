@@ -73,17 +73,20 @@ typedef struct {
 	uint16_t millis; // this is the offset from the given UNXI time expressed as milliseconds
 } measure_t;
 
-#define NONREALTIME			0x00
-#define OFFSET_REALTIME		0x01
-#define REALTIME			0x02
+#define NONREALTIME                     0x00
+#define OFFSET_REALTIME                 0x01
+#define REALTIME                        0x02
 
 #ifdef __HOST__
-	#define REPACK_SUCCESS 				0
-	#define REPACK_TRANSMISSION_ERROR 	-1
+    #define REPACK_SUCCESS                          0
+    #define REPACK_TRANSMISSION_ERROR               -1
 
-	int8_t repack_measure(measure_t*, uint8_t*);
+    void repack_measure(measure_t*, uint8_t*);
 #else
     void unpack_measure(measure_t*, uint8_t*);
 #endif
 
+// please, stop complaining like a retard shit
+measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl);
+    
 #endif // __MEASURE_H__

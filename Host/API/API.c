@@ -38,10 +38,7 @@ static libusb_context* ctx = (libusb_context*)NULL;
  *                          repack measure and check the CRC                    *
  ********************************************************************************/
 
-int8_t repack_measure(measure_t* out, uint8_t* in) {
-    //save the starting address
-    uint8_t *starting_addr = in;
-
+void repack_measure(measure_t* out, uint8_t* in) {
     // the first byte is the type of measure sent
     memcpy((void*)&out->type, (const void*)in, sizeof(out->type));
     in += sizeof(out->type);
@@ -65,15 +62,6 @@ int8_t repack_measure(measure_t* out, uint8_t* in) {
     // ..millis...
     memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
     in += sizeof(out->millis);
-
-    // append the error check byte
-    if (CRC_check(
-            starting_addr,
-            sizeof(measure_t), 
-            CRC_calc(starting_addr, sizeof(measure_t)))
-        ) return REPACK_SUCCESS;
-
-    return REPACK_TRANSMISSION_ERROR;
 }
 
 /********************************************************************************
@@ -144,9 +132,9 @@ void* msg_reader_thread(void* device) {
         // deserialize the received measure only if it really is a valid measure
         if ((data_size > 0) && (*(data_in) == MEASURE)) {
 
-            // deserialize and check if data really is valid
-            if (repack_measure(&m, data_in + 1) == REPACK_SUCCESS)
-                datachan_device_enqueue_measure(dev, (const measure_t*)&m);
+            // deserialize the measure and insert the result into the queue
+            repack_measure(&m, data_in + 1);
+            datachan_device_enqueue_measure(dev, (const measure_t*)&m);
         }
     }
 
@@ -290,13 +278,22 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
             TIMEOUT_MS
         );
     pthread_mutex_unlock(&dev->handler_mutex);
-	
+
+    // append the error check byte
+    if (CRC_check(
+            data_in,
+            sizeof(measure_t), 
+            *(data_in + GENERIC_REPORT_SIZE - 1))
+        );
+
+    return REPACK_TRANSMISSION_ERROR;
+    
     // copy the result on the unsafe buffer (on success)
     if ((result == 0) && (bytes_transferred > 0))	
         memcpy((void*)data, (const void*)data_in, bytes_transferred);
     else if (bytes_transferred != 0)
         bytes_transferred = 0;
-	
+
     return bytes_transferred;
 }
 
@@ -313,7 +310,8 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
     uint8_t data_out[GENERIC_REPORT_SIZE];
     memset((void*)data_out, 0, sizeof(data_out));
     memcpy((void*)data_out, data, data_length);
-
+    *(data_out + GENERIC_REPORT_SIZE - 1) = CRC_calc(data_out, GENERIC_REPORT_SIZE - 1);
+    
     // perform the data transmission
     pthread_mutex_lock(&dev->handler_mutex);
     result = libusb_interrupt_transfer(

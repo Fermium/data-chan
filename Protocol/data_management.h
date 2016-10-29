@@ -24,6 +24,7 @@ typedef struct {
 measure_t *dequeue_measure(managed_queue_t* FIFO);
 void enqueue_measure(managed_queue_t* FIFO, measure_t *measure);
 struct fifo_queue_t* fifo_queue_t(measure_t* m);
-
+uint8_t CRC_calc(const uint8_t* data, uint16_t len);
+uint8_t CRC_check(const uint8_t* data, uint16_t len, uint8_t crc);
 
 #endif // __DATA_MANAGEMENT_H__
