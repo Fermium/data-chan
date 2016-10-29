@@ -122,5 +122,7 @@ datachan_acquire_result_t device_acquire(void);
 void device_release(datachan_device_t**);
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
+measure_t* datachan_device_dequeue_measure(datachan_device_t*);
+uint32_t datachan_device_enqueue_measures(datachan_device_t*);
 
 #endif // __API_H__

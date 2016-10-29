@@ -68,7 +68,7 @@ inline measure_t *dequeue_measure(managed_queue_t* FIFO) {
 #ifdef __HOST__
 inline uint32_t count_measures(managed_queue_t* FIFO) {
 	// return the measure
-	return FIFO->count--;
+	return FIFO->count;
 }
 #endif
 
