@@ -5,14 +5,14 @@ box: java
 build:
   steps:
     - install-packages:
-        packages: git openssl pkg-config libssl-dev wget zlib1g-dev unzip openssh-client unzip tar maven gcc g++ avr-gcc make
+        packages: git openssl pkg-config libssl-dev wget libusb-1.0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
     - script:
         name: Building Project
-        code: mvn compile && mvn javadoc:javadoc
+        code: make all
 deploy :
   steps :
     - install-packages:
-        packages: git openssl pkg-config libssl-dev python wget zlib1g-dev unzip openssh-client rsync doxygen libusb-1.0-dev
+        packages: git openssl pkg-config libssl-dev python wget zlib1g-dev unzip openssh-client rsync doxygen
     - script:
         name: Downloading PIP
         code: |-
