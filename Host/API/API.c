@@ -16,9 +16,10 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../../Protocol/measure.h"
 #include "../../config.h"
 #include "API.h"
+#include "../../Protocol/measure_functions.h"
+#include "../../Protocol/data_management_functions.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -33,9 +34,97 @@
 
 static libusb_context* ctx = (libusb_context*)NULL;
 
-/****************************************************
- *				message reader						*
- ****************************************************/
+/********************************************************************************
+ *                          repack measure and check the CRC                    *
+ ********************************************************************************/
+
+int8_t repack_measure(measure_t* out, uint8_t* in) {
+    //save the starting address
+	uint8_t *starting_addr = in;
+
+    // the first byte is the type of measure sent
+	memcpy((void*)&out->type, (const void*)in, sizeof(out->type));
+	in += sizeof(out->type);
+
+	// the second byte is the source channel
+	memcpy((void*)&out->channel, (const void*)in, sizeof(out->channel));
+	in += sizeof(out->channel);
+	
+	// let's continue with the value...
+	memcpy((void*)&out->value, (const void*)in, sizeof(out->value));
+	in += sizeof(out->value);
+
+	// ...measurement unit...
+	memcpy((void*)&out->mu, (const void*)in, sizeof(out->mu));
+	in += sizeof(out->mu);
+
+	// ..time...
+	memcpy((void*)&out->time, (const void*)in, sizeof(out->time));
+	in += sizeof(out->time);
+
+	// ..millis...
+	memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
+	in += sizeof(out->millis);
+
+	// append the error check byte
+	if (CRC_check(
+				starting_addr,
+				sizeof(measure_t), 
+				CRC_calc(starting_addr, sizeof(measure_t)))
+			) return REPACK_SUCCESS;
+
+	return REPACK_TRANSMISSION_ERROR;
+}
+
+/********************************************************************************
+ *              Device Structure initializer and deinitializer                  *
+ ********************************************************************************/
+
+datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
+	// allocate memory for the device
+	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
+	
+	// register the native handle
+	dev->handler = native_handle;
+
+	// prepare the internal queue
+	dev->measures_queue.first = (struct fifo_queue_t *)NULL;
+	dev->measures_queue.last = (struct fifo_queue_t *)NULL;
+	dev->measures_queue.count = 0;
+	
+	// the device is disabled, there is nothing to read, and a reader thread is unnecessary
+	dev->enabled = false;
+	
+	// pthread attribute creation
+	pthread_attr_init(&dev->reader_attr);
+	
+	pthread_mutexattr_init(&dev->mutex_attr);
+	
+	// pthread mutex
+	pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
+	pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
+	pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
+	
+	// enjoy the device
+	return dev;
+}
+
+void datachan_device_cleanup(datachan_device_t* dev) {
+	// no need for the thread
+	pthread_attr_destroy(&dev->reader_attr);
+	
+	// remove the mutex safely (acquire and release it first)
+	pthread_mutex_destroy(&dev->enabled_mutex);
+	pthread_mutex_destroy(&dev->measures_queue_mutex);
+	pthread_mutex_destroy(&dev->handler_mutex);
+	
+	// remove the mutex attribute safely
+	pthread_mutexattr_destroy(&dev->mutex_attr);
+}
+
+/********************************************************************************
+ *				message reader					*
+ ********************************************************************************/
 
 void* msg_reader_thread(void* device) {
 	datachan_device_t* dev = (datachan_device_t*)device;
@@ -62,7 +151,7 @@ void* msg_reader_thread(void* device) {
 } 
  
 /********************************************************************************
- *					Measures Queue				*	*
+ *					Measures Queue				*
  ********************************************************************************/
  
 void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m) {
@@ -82,13 +171,13 @@ measure_t* datachan_device_dequeue_measure(datachan_device_t* dev) {
     
     // lock on the queue and perform the deletion
     pthread_mutex_lock(&dev->measures_queue_mutex);
-    dequeue_measure(&dev->measures_queue);
+    measure = dequeue_measure(&dev->measures_queue);
     pthread_mutex_unlock(&dev->measures_queue_mutex);
     
     return measure;
 }
 
-uint32_t datachan_device_enqueue_measures(datachan_device_t* dev) {
+uint32_t datachan_device_enqueued_measures(datachan_device_t* dev) {
     uint32_t count = 0;
     
     // lock on the queue and get the actual measures count
@@ -100,7 +189,7 @@ uint32_t datachan_device_enqueue_measures(datachan_device_t* dev) {
 }
 
 /********************************************************************************
- *				Public Device API				*	*
+ *				Public Device API				*
  ********************************************************************************/
 
 int datachan_is_initialized() {

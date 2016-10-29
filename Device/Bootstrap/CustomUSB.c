@@ -16,8 +16,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../../Protocol/measure.h"
-#include "../../Protocol/data_management.h"
+#include "../../Protocol/measure_functions.h"
+#include "../../Protocol/data_management_functions.h"
 #include "CustomUSB.h"
 #include <stdint.h>
 #include <string.h>

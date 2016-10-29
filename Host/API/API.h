@@ -26,85 +26,42 @@
 #include <pthread.h>
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
-#include "CustomUSB.h"
 
 typedef struct {
-	// mutexes attributes
-	pthread_mutexattr_t mutex_attr;
-	
+    // mutexes attributes
+    pthread_mutexattr_t mutex_attr;
+
     // mutexes
-	pthread_mutex_t handler_mutex;
-	pthread_mutex_t measures_queue_mutex;
-	pthread_mutex_t exitlock;
-	pthread_mutex_t enabled_mutex;
-	
-	// USB device handler
-	libusb_device_handle* handler;
-	
-	// measures queue
-	managed_queue_t measures_queue;
-	
-	// USB threads
-	pthread_t reader;
-	pthread_attr_t reader_attr;
-	
-	bool enabled;
+    pthread_mutex_t handler_mutex;
+    pthread_mutex_t measures_queue_mutex;
+    pthread_mutex_t exitlock;
+    pthread_mutex_t enabled_mutex;
+
+    // USB device handler
+    libusb_device_handle* handler;
+
+    // measures queue
+    managed_queue_t measures_queue;
+
+    // USB threads
+    pthread_t reader;
+    pthread_attr_t reader_attr;
+
+    bool enabled;
 } datachan_device_t;
 
-inline datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
-	// allocate memory for the device
-	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
-	
-	// register the native handle
-	dev->handler = native_handle;
-
-	// prepare the internal queue
-	dev->measures_queue.first = (struct fifo_queue_t *)NULL;
-	dev->measures_queue.last = (struct fifo_queue_t *)NULL;
-	dev->measures_queue.count = 0;
-	
-	// the device is disabled, there is nothing to read, and a reader thread is unnecessary
-	dev->enabled = false;
-	
-	// pthread attribute creation
-	pthread_attr_init(&dev->reader_attr);
-	
-	pthread_mutexattr_init(&dev->mutex_attr);
-	
-	// pthread mutex
-	pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
-	pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
-	pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
-	
-	// enjoy the device
-	return dev;
-}
-
-inline void datachan_device_cleanup(datachan_device_t* dev) {
-	// no need for the thread
-	pthread_attr_destroy(&dev->reader_attr);
-	
-	// remove the mutex safely (acquire and release it first)
-	pthread_mutex_destroy(&dev->enabled_mutex);
-	pthread_mutex_destroy(&dev->measures_queue_mutex);
-	pthread_mutex_destroy(&dev->handler_mutex);
-	
-	// remove the mutex attribute safely
-	pthread_mutexattr_destroy(&dev->mutex_attr);
-}
-
 typedef enum {
-	uninitialized = 0x00,
-	not_found_or_inaccessible,
-	cannot_claim,
-	malloc_fail,
-	unknown,
-	success
+    uninitialized = 0x00,
+    not_found_or_inaccessible,
+    cannot_claim,
+    malloc_fail,
+    unknown,
+    success
 } search_result_t;
 
 typedef struct {
-	search_result_t result;
-	datachan_device_t* device;
+    search_result_t result;
+    datachan_device_t* device;
 } datachan_acquire_result_t;
 
 int datachan_is_initialized(void);
@@ -123,6 +80,6 @@ void device_release(datachan_device_t**);
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);
-uint32_t datachan_device_enqueue_measures(datachan_device_t*);
+uint32_t datachan_device_enqueued_measures(datachan_device_t*);
 
 #endif // __API_H__

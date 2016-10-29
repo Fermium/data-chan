@@ -1,7 +1,8 @@
 TARGET = libDataChan.a
 LIBS = -lusb-1.0 -lpthread
 CC = gcc
-CFLAGS = -g -Wall -O2 -D__HOST__ 
+CFLAGS = -std=c99 -g -Wall -D__HOST__ -O0 
+# -O2 is to be used only on release 
 # -fPIC generates a warning....
 
 .PHONY: default all clean

@@ -1,7 +1,8 @@
 TARGET = Tester
 LIBS = -L../API -lDataChan -lusb-1.0 -lpthread
 CC = gcc
-CFLAGS = -g -Wall -O2 -D__HOST__ 
+CFLAGS = -std=c99 -g -Wall -D__HOST__ -O0 
+# -O2 is to be used only on release 
 # -fPIC generates a warning....
 
 .PHONY: default all clean
@@ -22,6 +23,7 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	-rm -f *.o
+	-rm -f *.exe
 	-rm -f $(TARGET)
 
 flash: all
