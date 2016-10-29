@@ -40,40 +40,40 @@ static libusb_context* ctx = (libusb_context*)NULL;
 
 int8_t repack_measure(measure_t* out, uint8_t* in) {
     //save the starting address
-	uint8_t *starting_addr = in;
+    uint8_t *starting_addr = in;
 
     // the first byte is the type of measure sent
-	memcpy((void*)&out->type, (const void*)in, sizeof(out->type));
-	in += sizeof(out->type);
+    memcpy((void*)&out->type, (const void*)in, sizeof(out->type));
+    in += sizeof(out->type);
 
-	// the second byte is the source channel
-	memcpy((void*)&out->channel, (const void*)in, sizeof(out->channel));
-	in += sizeof(out->channel);
-	
-	// let's continue with the value...
-	memcpy((void*)&out->value, (const void*)in, sizeof(out->value));
-	in += sizeof(out->value);
+    // the second byte is the source channel
+    memcpy((void*)&out->channel, (const void*)in, sizeof(out->channel));
+    in += sizeof(out->channel);
 
-	// ...measurement unit...
-	memcpy((void*)&out->mu, (const void*)in, sizeof(out->mu));
-	in += sizeof(out->mu);
+    // let's continue with the value...
+    memcpy((void*)&out->value, (const void*)in, sizeof(out->value));
+    in += sizeof(out->value);
 
-	// ..time...
-	memcpy((void*)&out->time, (const void*)in, sizeof(out->time));
-	in += sizeof(out->time);
+    // ...measurement unit...
+    memcpy((void*)&out->mu, (const void*)in, sizeof(out->mu));
+    in += sizeof(out->mu);
 
-	// ..millis...
-	memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
-	in += sizeof(out->millis);
+    // ..time...
+    memcpy((void*)&out->time, (const void*)in, sizeof(out->time));
+    in += sizeof(out->time);
 
-	// append the error check byte
-	if (CRC_check(
-				starting_addr,
-				sizeof(measure_t), 
-				CRC_calc(starting_addr, sizeof(measure_t)))
-			) return REPACK_SUCCESS;
+    // ..millis...
+    memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
+    in += sizeof(out->millis);
 
-	return REPACK_TRANSMISSION_ERROR;
+    // append the error check byte
+    if (CRC_check(
+            starting_addr,
+            sizeof(measure_t), 
+            CRC_calc(starting_addr, sizeof(measure_t)))
+        ) return REPACK_SUCCESS;
+
+    return REPACK_TRANSMISSION_ERROR;
 }
 
 /********************************************************************************
@@ -81,45 +81,45 @@ int8_t repack_measure(measure_t* out, uint8_t* in) {
  ********************************************************************************/
 
 datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
-	// allocate memory for the device
-	datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
-	
-	// register the native handle
-	dev->handler = native_handle;
+    // allocate memory for the device
+    datachan_device_t* dev = (datachan_device_t*)malloc(sizeof(datachan_device_t));
 
-	// prepare the internal queue
-	dev->measures_queue.first = (struct fifo_queue_t *)NULL;
-	dev->measures_queue.last = (struct fifo_queue_t *)NULL;
-	dev->measures_queue.count = 0;
-	
-	// the device is disabled, there is nothing to read, and a reader thread is unnecessary
-	dev->enabled = false;
-	
-	// pthread attribute creation
-	pthread_attr_init(&dev->reader_attr);
-	
-	pthread_mutexattr_init(&dev->mutex_attr);
-	
-	// pthread mutex
-	pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
-	pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
-	pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
-	
-	// enjoy the device
-	return dev;
+    // register the native handle
+    dev->handler = native_handle;
+
+    // prepare the internal queue
+    dev->measures_queue.first = (struct fifo_queue_t *)NULL;
+    dev->measures_queue.last = (struct fifo_queue_t *)NULL;
+    dev->measures_queue.count = 0;
+
+    // the device is disabled, there is nothing to read, and a reader thread is unnecessary
+    dev->enabled = false;
+
+    // pthread attribute creation
+    pthread_attr_init(&dev->reader_attr);
+
+    pthread_mutexattr_init(&dev->mutex_attr);
+
+    // pthread mutex
+    pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
+    pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
+    pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
+
+    // enjoy the device
+    return dev;
 }
 
 void datachan_device_cleanup(datachan_device_t* dev) {
-	// no need for the thread
-	pthread_attr_destroy(&dev->reader_attr);
+    // no need for the thread
+    pthread_attr_destroy(&dev->reader_attr);
+
+    // remove the mutex safely (acquire and release it first)
+    pthread_mutex_destroy(&dev->enabled_mutex);
+    pthread_mutex_destroy(&dev->measures_queue_mutex);
+    pthread_mutex_destroy(&dev->handler_mutex);
 	
-	// remove the mutex safely (acquire and release it first)
-	pthread_mutex_destroy(&dev->enabled_mutex);
-	pthread_mutex_destroy(&dev->measures_queue_mutex);
-	pthread_mutex_destroy(&dev->handler_mutex);
-	
-	// remove the mutex attribute safely
-	pthread_mutexattr_destroy(&dev->mutex_attr);
+    // remove the mutex attribute safely
+    pthread_mutexattr_destroy(&dev->mutex_attr);
 }
 
 /********************************************************************************
@@ -127,27 +127,30 @@ void datachan_device_cleanup(datachan_device_t* dev) {
  ********************************************************************************/
 
 void* msg_reader_thread(void* device) {
-	datachan_device_t* dev = (datachan_device_t*)device;
-	uint8_t data_in[GENERIC_REPORT_SIZE];
-	int data_size;
-	measure_t m;
-	
-	while (datachan_device_is_enabled(dev)) {
-		data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
-		
-		// this is used as a data cursor
-		uint8_t *data_ptr = data_in;
-		
-		// deserialize the received measure only if it really is a valid measure
-		if ((data_size > 0) && (*(data_ptr++) == MEASURE)) {
-			
-			// deserialize and check if data really is valid
-			if (repack_measure(&m, data_ptr) == REPACK_SUCCESS)
-				datachan_device_enqueue_measure(dev, (const measure_t*)&m);
-		}
-	}
-	
-	return NULL;
+    if (device == NULL)
+        pthread_exit(NULL);
+    
+    datachan_device_t* dev = (datachan_device_t*)device;
+    uint8_t data_in[GENERIC_REPORT_SIZE];
+    int data_size;
+    measure_t m;
+
+    while (datachan_device_is_enabled(dev)) {
+        data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
+
+        // this is used as a data cursor
+        //uint8_t *data_ptr = data_in;
+
+        // deserialize the received measure only if it really is a valid measure
+        if ((data_size > 0) && (*(data_in) == MEASURE)) {
+
+            // deserialize and check if data really is valid
+            if (repack_measure(&m, data_in + 1) == REPACK_SUCCESS)
+                datachan_device_enqueue_measure(dev, (const measure_t*)&m);
+        }
+    }
+
+    return NULL;
 } 
  
 /********************************************************************************
@@ -155,17 +158,23 @@ void* msg_reader_thread(void* device) {
  ********************************************************************************/
  
 void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m) {
-	// copy the measure in a safe place
-	measure_t* measure_copy = (measure_t*)malloc(sizeof(measure_t));
-	memcpy((void*)measure_copy, (const void*)m, sizeof(measure_t));
-	
-	// lock on the queue and perform the insertion
-	pthread_mutex_lock(&dev->measures_queue_mutex);
-	enqueue_measure(&dev->measures_queue, measure_copy);
-	pthread_mutex_unlock(&dev->measures_queue_mutex);
+    if ((dev == (datachan_device_t*)NULL) || (m == (const measure_t*)NULL))
+        return;
+    
+    // copy the measure in a safe place
+    measure_t* measure_copy = (measure_t*)malloc(sizeof(measure_t));
+    memcpy((void*)measure_copy, (const void*)m, sizeof(measure_t));
+
+    // lock on the queue and perform the insertion
+    pthread_mutex_lock(&dev->measures_queue_mutex);
+    enqueue_measure(&dev->measures_queue, measure_copy);
+    pthread_mutex_unlock(&dev->measures_queue_mutex);
 }
 
 measure_t* datachan_device_dequeue_measure(datachan_device_t* dev) {
+    if (dev == (datachan_device_t*)NULL)
+        return (measure_t*)NULL;
+        
     // the measure
     measure_t* measure = (measure_t*)NULL;
     
@@ -177,7 +186,10 @@ measure_t* datachan_device_dequeue_measure(datachan_device_t* dev) {
     return measure;
 }
 
-uint32_t datachan_device_enqueued_measures(datachan_device_t* dev) {
+int32_t datachan_device_enqueued_measures(datachan_device_t* dev) {
+    if (dev == (datachan_device_t*)NULL)
+        return -1;
+    
     uint32_t count = 0;
     
     // lock on the queue and get the actual measures count
@@ -185,14 +197,14 @@ uint32_t datachan_device_enqueued_measures(datachan_device_t* dev) {
     count = count_measures(&dev->measures_queue);
     pthread_mutex_unlock(&dev->measures_queue_mutex);
     
-    return count;
+    return (int32_t)count;
 }
 
 /********************************************************************************
  *				Public Device API				*
  ********************************************************************************/
 
-int datachan_is_initialized() {
+bool datachan_is_initialized() {
     return (ctx != (libusb_context*)NULL);
 }
 
@@ -216,32 +228,34 @@ void datachan_shutdown(void) {
 }
 
 datachan_acquire_result_t device_acquire(void) {
-	datachan_acquire_result_t res;
-	res.device = (datachan_device_t*)NULL;
-	res.result = unknown;
-	
-	if (datachan_is_initialized()) {
-		// search for the associated device
-		libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, USB_VID, USB_PID);
-		
-		if (handle != (libusb_device_handle*)NULL) {
-			libusb_set_auto_detach_kernel_driver(handle, 1);
-			
-			// setting the configuration 1 means selecting the corresponding bConfigurationValue
-			if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
-				
-				// fill the device structure
-				res.device = datachan_device_setup(handle);
-				res.result = success;
-			} else res.result = cannot_claim;
-		} else res.result = not_found_or_inaccessible;
-	} else res.result = uninitialized;
-	
-	// report operation result
-	return res;
+    datachan_acquire_result_t res;
+    res.device = (datachan_device_t*)NULL;
+    res.result = unknown;
+
+    if (datachan_is_initialized()) {
+        // search for the associated device
+        libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, USB_VID, USB_PID);
+
+        if (handle != (libusb_device_handle*)NULL) {
+            libusb_set_auto_detach_kernel_driver(handle, 1);
+
+            // setting the configuration 1 means selecting the corresponding bConfigurationValue
+            if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
+                // fill the device structure
+                res.device = datachan_device_setup(handle);
+                res.result = success;
+            } else res.result = cannot_claim;
+        } else res.result = not_found_or_inaccessible;
+    } else res.result = uninitialized;
+
+    // report operation result
+    return res;
 }
 
 void device_release(datachan_device_t** dev) {
+    if ((dev == (datachan_device_t**)NULL) || (*dev == (datachan_device_t*)NULL))
+        return;
+    
     // make sure the device won't send precious data to the OS
     datachan_device_disable(*dev);
 	
@@ -257,6 +271,9 @@ void device_release(datachan_device_t** dev) {
 }
 
 int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
+    if ((dev == (datachan_device_t*)NULL) || (data == (uint8_t*)NULL))
+        return 0;
+    
     int bytes_transferred = 0, result = 0;;
 
     // create a private safe buffer
@@ -284,6 +301,9 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
 }
 
 int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
+    if ((dev == (datachan_device_t*)NULL) || (data == (uint8_t*)NULL) || (data_length == 0))
+        return 0;
+    
     int bytes_transferred = 0, result = 0;
 
     // avoid buffer overflow during memcpy
@@ -313,6 +333,9 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
 }
 
 bool datachan_device_is_enabled(datachan_device_t* dev) {
+    if (dev == (datachan_device_t*)NULL)
+        return false;
+    
     bool enabled;
 	
     pthread_mutex_lock(&dev->enabled_mutex);
@@ -323,6 +346,9 @@ bool datachan_device_is_enabled(datachan_device_t* dev) {
 }
 
 bool datachan_device_enable(datachan_device_t* dev) {
+    if (dev == (datachan_device_t*)NULL)
+        return false;
+    
     bool enabled = datachan_device_is_enabled(dev);
 	
     if (!enabled) {
@@ -352,6 +378,9 @@ bool datachan_device_enable(datachan_device_t* dev) {
 }
 
 bool datachan_device_disable(datachan_device_t* dev) {
+    if (dev == (datachan_device_t*)NULL)
+        return false;
+    
     bool enabled = datachan_device_is_enabled(dev);
 	
     if (enabled) {
