@@ -1,0 +1,39 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Data-Chan\n\n\nData-chan is either a protocol and a collection of subroutines to use the protocol.\n\n\nData-chan is used to send physics measures from a generic device\nto the PC using native USB, \nNOT AN UGLY SERIAL-\nUSB IC!\n\n\nDue to the diversity of electronics devices and needs the protocol is designed to be:\n\n\n * simple and minimal\n * fast\n * costomizable\n\n\n\nAtmel AVR\n\n\nOn this repository you can find the device client program for the atmega32u4 and other AVR microcontrollers.\n\n\nHave you prepared your arduino nano pro?\n\n\nMeasures and Commands\n\n\nReceiving measures from a generic USB device is the main goal a data-chan.\n\n\nWe all know that physics devices needs command and configuration to properly operate,\nto fulfill this need data-chan can send two types of commands to the target device:\n\n\n * protocol-specific commands\n * free commands", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#data-chan", 
+            "text": "Data-chan is either a protocol and a collection of subroutines to use the protocol.  Data-chan is used to send physics measures from a generic device\nto the PC using native USB,  NOT AN UGLY SERIAL- USB IC!  Due to the diversity of electronics devices and needs the protocol is designed to be:   * simple and minimal\n * fast\n * costomizable", 
+            "title": "Data-Chan"
+        }, 
+        {
+            "location": "/#atmel-avr", 
+            "text": "On this repository you can find the device client program for the atmega32u4 and other AVR microcontrollers.  Have you prepared your arduino nano pro?", 
+            "title": "Atmel AVR"
+        }, 
+        {
+            "location": "/#measures-and-commands", 
+            "text": "Receiving measures from a generic USB device is the main goal a data-chan.  We all know that physics devices needs command and configuration to properly operate,\nto fulfill this need data-chan can send two types of commands to the target device:   * protocol-specific commands\n * free commands", 
+            "title": "Measures and Commands"
+        }, 
+        {
+            "location": "/build/", 
+            "text": "Build\n\n\nThe enteire project can be built with \"make all\" even on windows, but it reuires a lot of software!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)\n\n\n\nIf you're using windows you will need to install:\n\n\n * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)\n\n\n\nEither if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device!", 
+            "title": "Building"
+        }, 
+        {
+            "location": "/build/#build", 
+            "text": "The enteire project can be built with \"make all\" even on windows, but it reuires a lot of software!", 
+            "title": "Build"
+        }, 
+        {
+            "location": "/build/#environment", 
+            "text": "On a generic system you will need at least:   * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)  If you're using windows you will need to install:   * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)  Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device!", 
+            "title": "Environment"
+        }
+    ]
+}
