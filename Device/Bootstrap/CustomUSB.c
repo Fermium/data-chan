@@ -64,37 +64,35 @@ void datachan_init(void) {
  */
 void CreateGenericHIDReport(uint8_t* DataArray)
 {
-	/*
-		This is where you need to create reports to be sent to the host from the device. This
-		function is called each time the host is ready to accept a new report. DataArray is
-		an array to hold the report to the host.
-	*/
+    /*
+    This is where you need to create reports to be sent to the host from the device. This
+    function is called each time the host is ready to accept a new report. DataArray is
+    an array to hold the report to the host.
+    */
 
-	// every unused byte will be zero
-	memset((void*)DataArray, 0, GENERIC_REPORT_SIZE);
+    // every unused byte will be 00
+    memset((void*)DataArray, 0x00, GENERIC_REPORT_SIZE);
 
-	// by default nothing is sent
-	DataArray[0] = (uint8_t)NONE;	
+    // by default nothing is sent
+    DataArray[0] = (uint8_t)NONE;	
 
-	if (hostListening) {
-		// testing purpouse ONLY!
-		enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
-	
-		// get the next measure to be sent over USB
-		measure_t* data_to_be_sent = dequeue_measure(&FIFO);
-	
-		// if any flag as present, else flag as 'bad data'
-		DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
-	
-		// serialize the measure (for safe transmission)
-		unpack_measure(data_to_be_sent, (DataArray + 1));
-	
-		// the measure is going to be removed from memory
-		free((void*)data_to_be_sent); // save space!
-	}
+    if (hostListening) {
+        // testing purpouse ONLY!
+        enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
+
+        // get the next measure to be sent over USB
+        measure_t* data_to_be_sent = dequeue_measure(&FIFO);
+
+        // if any flag as present, else flag as 'bad data'
+        DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
+
+        // serialize the measure (for safe transmission)
+        unpack_measure(data_to_be_sent, (DataArray + 1));
         
-        
-        
+        // the measure is going to be removed from memory
+        free((void*)data_to_be_sent); // save space!
+    }
+    
     // append the error check byte to the end of EVERY message
     DataArray[GENERIC_REPORT_SIZE - 1] = CRC_calc(DataArray, GENERIC_REPORT_SIZE - 1);
 }
@@ -105,26 +103,26 @@ void CreateGenericHIDReport(uint8_t* DataArray)
  */
 void ProcessGenericHIDReport(uint8_t* DataArray)
 {
-	/*
-		This is where you need to process reports sent from the host to the device. This
-		function is called each time the host has sent a new report. DataArray is an array
-		holding the report sent from the host.
-	*/
+    /*
+        This is where you need to process reports sent from the host to the device. This
+        function is called each time the host has sent a new report. DataArray is an array
+        holding the report sent from the host.
+    */
+    
+    if ((DataArray[0] == CMD_MAGIC_FLAG) && (CRC_check(DataArray, GENERIC_REPORT_SIZE - 1, DataArray[GENERIC_REPORT_SIZE - 1]))) {
+        uint8_t cmd = DataArray[1];
+        switch (cmd) {
+            case ENABLE_TRANSMISSION:
+                hostListening = true;
+                break;
+                
+            case DISABLE_TRANSMISSION:
+                hostListening = false;
+                break;
 
-	if (DataArray[0] == CMD_MAGIC_FLAG) {
-		uint8_t cmd = DataArray[1];
-		
-		switch (cmd) {
-			case ENABLE_TRANSMISSION:
-				hostListening = true;
-				break;
-			case DISABLE_TRANSMISSION:
-				hostListening = false;
-				break;
-			
-			default:
-				break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 }
 

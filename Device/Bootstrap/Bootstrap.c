@@ -32,6 +32,8 @@
 #include "CustomUSB.h"
 #include "../../config.h"
 
+// used as USB IN/OUT buffer
+static uint8_t GenericData[GENERIC_REPORT_SIZE];
 
 /** 
  *  Main program entry point. This routine configures the hardware required by the application, then
@@ -121,22 +123,19 @@ void EVENT_USB_Device_ControlRequest(void)
 		case HID_REQ_GetReport:
 			if (USB_ControlRequest.bmRequestType == (REQDIR_DEVICETOHOST | REQTYPE_CLASS | REQREC_INTERFACE))
 			{
-				uint8_t GenericData[GENERIC_REPORT_SIZE];
-				CreateGenericHIDReport(GenericData);
-
-				Endpoint_ClearSETUP();
-
-				/* Write the report data to the control endpoint */
-				Endpoint_Write_Control_Stream_LE(&GenericData, sizeof(GenericData));
-				Endpoint_ClearOUT();
+                            CreateGenericHIDReport(GenericData);
+                            
+                            Endpoint_ClearSETUP();
+                            
+                            /* Write the report data to the control endpoint */
+                            Endpoint_Write_Control_Stream_LE(GenericData, GENERIC_REPORT_SIZE);
+                            Endpoint_ClearOUT();
 			}
 
 			break;
 		case HID_REQ_SetReport:
 			if (USB_ControlRequest.bmRequestType == (REQDIR_HOSTTODEVICE | REQTYPE_CLASS | REQREC_INTERFACE))
 			{
-				uint8_t GenericData[GENERIC_REPORT_SIZE];
-
 				Endpoint_ClearSETUP();
 
 				/* Read the report data from the control endpoint */
