@@ -21,7 +21,7 @@
 #include "../../Protocol/measure_functions.h"
 #include "../../Protocol/data_management_functions.h"
 
-#define _POSIX_C_SOURCE >= 199309L
+#define _POSIX_C_SOURCE 199309L
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -31,7 +31,6 @@
 #include <sys/time.h>
 
 #define USB_USED_INTERFACE 0
-//#define INTERRUPT_IN_ENDPOINT 0x02
 #define INTERRUPT_IN_ENDPOINT 0x81
 #define INTERRUPT_OUT_ENDPOINT 0x02
 #define TIMEOUT_MS 1000
