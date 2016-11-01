@@ -39,8 +39,8 @@
 
 #define NONE            0x00
 #define CMD_RESPONSE    0x01
-#define CMD_REQUEST     0xCA
-#define MEASURE         0x02
+#define CMD_REQUEST     0x02
+#define MEASURE         0x03
 
 
 /********************************************************************************
@@ -66,7 +66,7 @@ typedef struct {
 	uint8_t channel; // the channel of measure, starting from 1, channel zero is reserved
 	float value; // float is used because of microcontrollers limitations: https://gcc.gnu.org/wiki/avr-gcc
 	uint32_t time; // the UNIX time of the measure
-	uint16_t millis; // this is the offset from the given UNXI time expressed as milliseconds
+	uint16_t millis; // this is the offset from the given UNIX time expressed in milliseconds
 } measure_t;
 
 #define NONREALTIME                     0x00

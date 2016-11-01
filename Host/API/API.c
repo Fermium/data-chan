@@ -26,6 +26,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define USB_USED_INTERFACE 0
 //#define INTERRUPT_IN_ENDPOINT 0x02
@@ -126,9 +127,6 @@ void* msg_reader_thread(void* device) {
 
     while (datachan_device_is_enabled(dev)) {
         data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
-        
-        // this is used as a data cursor
-        //uint8_t *data_ptr = data_in;
 
         // deserialize the received measure only if it really is a valid measure
         if ((data_size > 0) && (*(data_in) == MEASURE)) {
@@ -153,6 +151,20 @@ void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m)
     measure_t* measure_copy = (measure_t*)malloc(sizeof(measure_t));
     memcpy((void*)measure_copy, (const void*)m, sizeof(measure_t));
 
+    if (measure_copy->type == NONREALTIME) {
+        long            ms; // Milliseconds
+        time_t          s;  // Seconds
+        struct timespec spec;
+
+        // get the UNIX time and millis
+        clock_gettime(CLOCK_REALTIME, &spec);
+        s  = spec.tv_sec;
+        ms = round(spec.tv_nsec / 1.0e6);
+        
+        measure_copy->time = s;
+        measure_copy->millis = ms;
+    }
+    
     // lock on the queue and perform the insertion
     pthread_mutex_lock(&dev->measures_queue_mutex);
     enqueue_measure(&dev->measures_queue, measure_copy);
@@ -247,10 +259,10 @@ void datachan_device_release(datachan_device_t** dev) {
     // make sure the device won't send precious data to the OS
     datachan_device_disable(*dev);
 	
-    // lock & release the device
+    // lock the device (wait for the last operation to finish and prevent usage of device))
     pthread_mutex_lock(&(**dev).handler_mutex);
     libusb_close((**dev).handler);
-	
+
     // device structure clean
     datachan_device_cleanup(*dev);
 	
