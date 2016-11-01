@@ -1,7 +1,7 @@
 TARGET = Tester
 LIBS = -L../API -lDataChan -lusb-1.0 -lpthread -lm
 CC = gcc
-CFLAGS = -std=c99 -g -Wall -D__HOST__ -O0 
+CFLAGS = -std=gnu99 -g -Wall -D__HOST__ -O0 
 # -O2 is to be used only on release 
 # -fPIC generates a warning....
 
