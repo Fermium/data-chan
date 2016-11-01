@@ -126,11 +126,21 @@ that macro defines the number of bytes in each USB packet.</p>
 <p>The data-chan protocol uses <em>little-endian</em> then serializing data larger than one byte.</p>
 <h2 id="packets-structure">Packets Structure</h2>
 <p>Both IN and OUT packets are formed this way:</p>
-<p>+--------+---------+-----------+--------+
-|  byte  |  first  | following |  last  |
-+--------+---------+-----------+--------+
-| desc   |   type  |    data   |  CRC8  |
-+--------+---------+-----------+--------+</p>
+<table border="1">
+    <tr>
+        <td>byte</td>
+        <td>first</td>
+        <td>following</td>
+        <td>last</td>
+    </tr>
+    <tr>
+        <td>desc</td>
+        <td>type</td>
+        <td>data</td>
+        <td>CRC-8</td>
+    </tr>
+</table>
+
 <p>The first byte contains the packet type: how data is used depends on the very first byte.</p>
 <p>Each packet ends with the last byte used for the CRC code (standard 8 bits).</p>
 <p>From the host perspective there are two types of packets IN packets and OUT packets.</p>
@@ -145,11 +155,26 @@ that macro defines the number of bytes in each USB packet.</p>
 which can't decode packets.</p>
 <p>When the device is active every type of packet will be used.</p>
 <p>A MEASURE packet has the data field formed this way:</p>
-<p>+--------+---------+---------+----------+-------+-----------+----------+
-| bytes  |    0    |    1    |  2 to 6  |   7   |  8 to 12  | 13 to 14 |
-+--------+---------+---------+----------+-------+-----------+----------+
-| descr  |   type  | channel |  value   |   mu  | timestamp |   millis |
-+--------+---------+---------+----------+-------+-----------+----------+</p>
+<table border="1">
+    <tr>
+        <td>bytes</td>
+        <td>0</td>
+        <td>1</td>
+        <td>2 to 6</td>
+        <td>7</td>
+        <td>8 to 12</td>
+        <td>13 to 14</td>
+    </tr>
+    <tr>
+        <td>descr</td>
+        <td>type</td>
+        <td>channel</td>
+        <td>value</td>
+        <td>mu</td>
+        <td>timestamp</td>
+        <td>millis</td>
+    </tr>
+</table>
               
             </div>
           </div>
