@@ -167,6 +167,15 @@ which can't decode packets.</p>
         <td>13 to 14</td>
     </tr>
     <tr>
+        <td>type (8bits)</td>
+        <td>byte (8bits)</td>
+        <td>byte (8bits)</td>
+        <td>float (32bits)</td>
+        <td>byte (8bits)</td>
+        <td>big int (32bits)</td>
+        <td>small int (16bits)</td>
+    </tr>
+    <tr>
         <td>descr</td>
         <td>type</td>
         <td>channel</td>
@@ -176,6 +185,24 @@ which can't decode packets.</p>
         <td>millis</td>
     </tr>
 </table>
+
+<p>Allowed measure types are:
+<ul>
+    <li>00h =&gt; NONREALTIME</li>
+    <li>01h =&gt; OFFSET_REALTIME</li>
+    <li>02h =&gt; REALTIME</li>
+    <li>03h =&gt; PROGRESSIVE</li>
+</ul></p>
+<h3 id="type">Type</h3>
+<p>In a NONREALTIME measure time and millis fields are unused, the host will replace their values
+with the timestamp and millis upon receipt.</p>
+<p>In a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.</p>
+<p>In a REALTIME measure time and millis contains the correct values.</p>
+<p>In a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.</p>
+<h3 id="channel">Channel</h3>
+<p>The channel field is used to identify the channel that has generated the measure.</p>
+<p>The channel field starts from 1, this means that an instrument can have 255 possible channels:
+from 1 to 255.</p>
               
             </div>
           </div>

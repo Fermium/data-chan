@@ -119,20 +119,22 @@
                 <h1 id="build">Build</h1>
 <p>The entire project can be compiled with the "make all" command, even on windows, but it requires a lot of software!</p>
 <h2 id="environment">Environment</h2>
-<p>On a generic system you will need at least:</p>
-<pre><code> * make
- * gcc-avr
- * avr-libc
- * gcc
- * g++
- * libusb-1.0-0-dev
- * libpthread-stubs0-dev (pre-installed on most systems)
-</code></pre>
-<p>If you're using windows you will <strong>also</strong> need to install:</p>
-<pre><code> * msys 1.0
- * [tdm-gcc](http://tdm-gcc.tdragon.net/)
- * [grep for windows](http://www.wingrep.com/)
-</code></pre>
+<p>On a generic system you will need at least:
+<ul>
+make
+    <li>gcc-avr</li>
+    <li>avr-libc</li>
+    <li>gcc</li>
+    <li>g++</li>
+    <li>libusb-1.0-0-dev</li>
+    <li>libpthread-stubs0-dev (pre-installed on most systems)</li>
+</ul></p>
+<p>If you're using windows you will <strong>also</strong> need to install:
+<ul>
+    <li>msys 1.0</li>
+    <li><a href="http://tdm-gcc.tdragon.net/">tdm-gcc</a></li>
+    <li><a href="http://www.wingrep.com/">grep for windows</a></li>
+</ul></p>
 <p>Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other
 AVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be
 unable to operate again once the first write!</p>
