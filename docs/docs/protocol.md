@@ -14,11 +14,20 @@ The data-chan protocol uses *little-endian* then serializing data larger than on
 
 Both IN and OUT packets are formed this way:
 
-+--------+---------+-----------+--------+
-|  byte  |  first  | following |  last  |
-+--------+---------+-----------+--------+
-| desc   |   type  |    data   |  CRC8  |
-+--------+---------+-----------+--------+
+<table border="1">
+	<tr>
+		<td>byte</td>
+		<td>first</td>
+		<td>following</td>
+		<td>last</td>
+	</tr>
+	<tr>
+		<td>desc</td>
+		<td>type</td>
+		<td>data</td>
+		<td>CRC-8</td>
+	</tr>
+</table>
 
 The first byte contains the packet type: how data is used depends on the very first byte.
 
@@ -44,9 +53,23 @@ When the device is active every type of packet will be used.
 
 A MEASURE packet has the data field formed this way:
 
-+--------+---------+---------+----------+-------+-----------+----------+
-| bytes  |    0    |    1    |  2 to 6  |   7   |  8 to 12  | 13 to 14 |
-+--------+---------+---------+----------+-------+-----------+----------+
-| descr  |   type  | channel |  value   |   mu  | timestamp |   millis |
-+--------+---------+---------+----------+-------+-----------+----------+
-
+<table border="1">
+	<tr>
+		<td>bytes</td>
+		<td>0</td>
+		<td>1</td>
+		<td>2 to 6</td>
+		<td>7</td>
+		<td>8 to 12</td>
+		<td>13 to 14</td>
+	</tr>
+	<tr>
+		<td>descr</td>
+		<td>type</td>
+		<td>channel</td>
+		<td>value</td>
+		<td>mu</td>
+		<td>timestamp</td>
+		<td>millis</td>
+	</tr>
+</table>
