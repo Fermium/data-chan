@@ -27,6 +27,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include <math.h>
+#include <sys/time.h>
 
 #define USB_USED_INTERFACE 0
 //#define INTERRUPT_IN_ENDPOINT 0x02
