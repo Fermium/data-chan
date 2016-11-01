@@ -9,7 +9,7 @@ int main() {
     printf("Device transmission initialization success!\n\n");
 	
     // try to acquire a device
-    datachan_acquire_result_t scan_result = device_acquire();
+    datachan_acquire_result_t scan_result = datachan_device_acquire();
     if (scan_result.result == success) {
         // get the device handler
         datachan_device_t *device = scan_result.device;
@@ -43,7 +43,7 @@ int main() {
         
         // release the device handler
         printf("\n\nreleasing the device...\n");
-        device_release(&device);
+        datachan_device_release(&device);
     } else {
         printf("Something went wrong :(\n\n");
 

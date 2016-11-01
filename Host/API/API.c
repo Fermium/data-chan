@@ -215,7 +215,7 @@ void datachan_shutdown(void) {
     ctx = (libusb_context*)NULL;
 }
 
-datachan_acquire_result_t device_acquire(void) {
+datachan_acquire_result_t datachan_device_acquire(void) {
     datachan_acquire_result_t res;
     res.device = (datachan_device_t*)NULL;
     res.result = unknown;
@@ -240,7 +240,7 @@ datachan_acquire_result_t device_acquire(void) {
     return res;
 }
 
-void device_release(datachan_device_t** dev) {
+void datachan_device_release(datachan_device_t** dev) {
     if ((dev == (datachan_device_t**)NULL) || (*dev == (datachan_device_t*)NULL))
         return;
     
@@ -256,6 +256,36 @@ void device_release(datachan_device_t** dev) {
 	
     // avoid dangling pointer
     *dev = (datachan_device_t*)NULL;
+}
+
+bool datachan_device_set_config(datachan_device_t* dev, uint32_t entry, uint8_t channel, void* data, uint16_t data_size) {
+    //this is the data buffer
+    uint8_t cmd[GENERIC_REPORT_SIZE] = { CMD_REQUEST, SET_CONFIG_FLAG };
+    uint8_t *cmd_builder_buffer = cmd + 2;
+    
+    // fill unused space with zeroes
+    memset(cmd_builder_buffer, 0, GENERIC_REPORT_SIZE - 2);
+    
+    // write the setting ID
+    memcpy((void*)cmd_builder_buffer, (const void*)&entry, sizeof(entry));
+    cmd_builder_buffer += sizeof(entry);
+    
+    // write the destination channel
+    memcpy((void*)cmd_builder_buffer, (const void*)&channel, sizeof(channel));
+    cmd_builder_buffer += sizeof(channel);
+    
+    // prevent buffer overflow (12 means: CMD_REQUEST(1), SET_CONFIG_FLAG(1), entry(4), channel(1), data_size(2), CRC(1) )
+    data_size = (data_size > (GENERIC_REPORT_SIZE - 10)) ? GENERIC_REPORT_SIZE - 10 : data_size;
+    
+    // write the data length
+    memcpy((void*)cmd_builder_buffer, (const void*)data_size, sizeof(data_size));
+    cmd_builder_buffer += sizeof(data_size);
+    
+    // write the data
+    memcpy((void*)cmd_builder_buffer, (const void*)data, data_size);
+    
+    // success?
+    return (datachan_raw_write(dev, cmd, sizeof(cmd)) == GENERIC_REPORT_SIZE);
 }
 
 int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
@@ -279,17 +309,16 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
         );
     pthread_mutex_unlock(&dev->handler_mutex);
     
+    // check for the CRC
+    if ((bytes_transferred == GENERIC_REPORT_SIZE) && (!CRC_check(data_in, GENERIC_REPORT_SIZE - 1, data_in[GENERIC_REPORT_SIZE - 1])))
+        bytes_transferred = 0;
+    
     // copy the result on the unsafe buffer (on success)
     if ((result == 0) && (bytes_transferred > 0))	
-        memcpy((void*)data, (const void*)data_in, bytes_transferred);
+        memcpy((void*)data, (const void*)data_in, bytes_transferred - 1);
     else if (bytes_transferred != 0)
         bytes_transferred = 0;
 
-    if (!CRC_check(data_in, GENERIC_REPORT_SIZE - 1, data_in[GENERIC_REPORT_SIZE - 1])) {
-        printf("\nBAD CRC, expected %x, found: %x\n", CRC_calc(data_in, GENERIC_REPORT_SIZE - 1), data_in[GENERIC_REPORT_SIZE - 1]);
-        bytes_transferred = 0;
-    }
-        
     return bytes_transferred;
 }
 
@@ -300,7 +329,7 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
     int bytes_transferred = 0, result = 0;
 
     // avoid buffer overflow during memcpy
-    data_length = (data_length > GENERIC_REPORT_SIZE) ? GENERIC_REPORT_SIZE : data_length;
+    data_length = (data_length > (GENERIC_REPORT_SIZE-1)) ? GENERIC_REPORT_SIZE-1 : data_length;
 	
     // zero everything unused and copy the buffer
     uint8_t data_out[GENERIC_REPORT_SIZE];
@@ -349,7 +378,7 @@ bool datachan_device_enable(datachan_device_t* dev) {
 	
     if (!enabled) {
         // generate the enable command
-        uint8_t cmd[] = { CMD_MAGIC_FLAG, ENABLE_TRANSMISSION };
+        uint8_t cmd[] = { CMD_REQUEST, ENABLE_TRANSMISSION };
 		
         // write the command on the USB bus
         int data_size = datachan_raw_write(dev, cmd, sizeof(cmd));
@@ -381,7 +410,7 @@ bool datachan_device_disable(datachan_device_t* dev) {
 	
     if (enabled) {
         // generate the enable command
-        uint8_t cmd[] = { CMD_MAGIC_FLAG, DISABLE_TRANSMISSION };
+        uint8_t cmd[] = { CMD_REQUEST, DISABLE_TRANSMISSION };
 
         // write the command on the USB bus and if the result is good the device will be disabled
         if (datachan_raw_write(dev, cmd, sizeof(cmd)) >= sizeof(cmd)) {

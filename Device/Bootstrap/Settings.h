@@ -16,18 +16,30 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __CUSTOMUSB__
-#define __CUSTOMUSB__
+#ifndef __SETTINGS_H__
+#define __SETTINGS_H__
 
 #include <stdlib.h>
 #include <stdint.h>
-#include "../../Protocol/measure.h"
-#include "../../Protocol/data_management.h"
+#include <stdbool.h>
 
-void datachan_init(void);
+typedef struct {
+	uint32_t size;
+	void* start_addr;
+} memory_block_t;
 
-void CreateGenericHIDReport(uint8_t* DataArray);
+typedef struct {
+	uint32_t entry;
+	uint8_t channel;
+	memory_block_t setting;
+} setting_entry_t;
 
-void ProcessGenericHIDReport(uint8_t* DataArray);
+struct setting_queue_t {
+	setting_entry_t *entry;
+	struct setting_queue_t *next;
+};
+
+void setSetting(const setting_entry_t*);
+memory_block_t *getSetting(uint32_t, uint8_t);
 
 #endif

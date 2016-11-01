@@ -75,8 +75,9 @@ bool datachan_device_disable(datachan_device_t*);
 int datachan_raw_read(datachan_device_t*, uint8_t*);
 int datachan_raw_write(datachan_device_t*, uint8_t*, int);
 
-datachan_acquire_result_t device_acquire(void);
-void device_release(datachan_device_t**);
+datachan_acquire_result_t datachan_device_acquire(void);
+void datachan_device_release(datachan_device_t**);
+bool datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);

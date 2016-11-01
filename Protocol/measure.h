@@ -30,26 +30,22 @@
 
 #define REALTIME_MASK 0x80
 
-// command magic flag
-#define CMD_MAGIC_FLAG		0xCA
-
 // commands codes
-#define GET_PROTOCOL_VERSION 	0x00
+#define GET_PROTOCOL_VERSION    0x00
 #define ENABLE_TRANSMISSION     0x01
 #define DISABLE_TRANSMISSION    0x02
-#define GET_CONFIG_FLAG 		0x03
-#define SET_CONFIG_FLAG			0x04
+#define GET_CONFIG_FLAG         0x03
+#define SET_CONFIG_FLAG         0x04
 
-typedef enum {
-	NONE 					= 0x00,
-	CMD_RESPONSE			= 0x01,
-	MEASURE					= 0x02
-} response_type_t;
+#define NONE            0x00
+#define CMD_RESPONSE    0x01
+#define CMD_REQUEST     0xCA
+#define MEASURE         0x02
 
 
-/****************************************************************
- *				measure data structures and macros				*
- ****************************************************************/
+/********************************************************************************
+ *                          measure data structures and macros                  *
+ ********************************************************************************/
 
 /*
 Measure type:

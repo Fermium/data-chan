@@ -19,6 +19,7 @@
 #include "../../Protocol/measure_functions.h"
 #include "../../Protocol/data_management_functions.h"
 #include "CustomUSB.h"
+#include "Settings.h"
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
@@ -109,8 +110,15 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
         holding the report sent from the host.
     */
     
-    if ((DataArray[0] == CMD_MAGIC_FLAG) && (CRC_check(DataArray, GENERIC_REPORT_SIZE - 1, DataArray[GENERIC_REPORT_SIZE - 1]))) {
+    if ((DataArray[0] == CMD_REQUEST) && (CRC_check(DataArray, GENERIC_REPORT_SIZE - 1, DataArray[GENERIC_REPORT_SIZE - 1]))) {
         uint8_t cmd = DataArray[1];
+        
+        uint32_t entry;
+        uint16_t data_size = 1;
+        uint8_t channel;
+        void* data;
+        uint8_t *cmd_builder_buffer = DataArray + 2;
+        
         switch (cmd) {
             case ENABLE_TRANSMISSION:
                 hostListening = true;
@@ -120,6 +128,37 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
                 hostListening = false;
                 break;
 
+            case SET_CONFIG_FLAG:
+                // read the setting ID
+                memcpy((void*)&entry, (const void*)cmd_builder_buffer, sizeof(entry));
+                cmd_builder_buffer += sizeof(entry);
+                
+                // read the destination channel
+                memcpy((void*)&channel, (const void*)cmd_builder_buffer, sizeof(channel));
+                cmd_builder_buffer += sizeof(channel);
+                
+                // read the data length
+                memcpy((void*)data_size, (const void*)cmd_builder_buffer, sizeof(data_size));
+                cmd_builder_buffer += sizeof(data_size);
+                
+                // if the length is correct allocate memory
+                if (data_size < (GENERIC_REPORT_SIZE - 10)) data = malloc(data_size);
+                
+                // read the data
+                memcpy((void*)data, (const void*)cmd_builder_buffer, data_size);
+                
+                // build the setting data
+                memory_block_t mem;
+                mem.size = data_size;
+                mem.start_addr = malloc(mem.size);
+                memcpy(mem.start_addr, (const void*)&data, mem.size);
+                setting_entry_t new_set;
+                new_set.channel = channel;
+                new_set.entry = entry;
+                memcpy((void*)(&new_set.setting), (const void*)&mem, sizeof(mem));
+                setSetting(&new_set);
+                break;
+                
             default:
                 break;
         }
