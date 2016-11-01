@@ -39,10 +39,11 @@ From the host perspective there are two types of packets IN packets and OUT pack
 ## IN packets
 
 An incoming packet can be flagged as either one of these types:
-    
-    * 00h => NONE
-	* 01h => CMD_RESPONSE
-	* 03h => MEASURE
+<ul>
+	<li>00h => NONE</li>
+	<li>01h => CMD_RESPONSE</li>
+	<li>03h => MEASURE</li>
+</ul>
 	
 When the packets is flagged as NONE it must be ignored.
 
