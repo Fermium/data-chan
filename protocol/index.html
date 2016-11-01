@@ -145,11 +145,12 @@ that macro defines the number of bytes in each USB packet.</p>
 <p>Each packet ends with the last byte used for the CRC code (standard 8 bits).</p>
 <p>From the host perspective there are two types of packets IN packets and OUT packets.</p>
 <h2 id="in-packets">IN packets</h2>
-<p>An incoming packet can be flagged as either one of these types:</p>
-<pre><code>* 00h =&gt; NONE
-* 01h =&gt; CMD_RESPONSE
-* 03h =&gt; MEASURE
-</code></pre>
+<p>An incoming packet can be flagged as either one of these types:
+<ul>
+    <li>00h =&gt; NONE</li>
+    <li>01h =&gt; CMD_RESPONSE</li>
+    <li>03h =&gt; MEASURE</li>
+</ul></p>
 <p>When the packets is flagged as NONE it must be ignored.</p>
 <p>By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,
 which can't decode packets.</p>
