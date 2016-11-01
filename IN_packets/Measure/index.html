@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Measure - data-chan</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Measure";
+    var mkdocs_page_input_path = "IN_packets/Measure.md";
+    var mkdocs_page_url = "/IN_packets/Measure/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> data-chan</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../build/">Building</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../protocol/">Protocol</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>IN Packets</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Measure</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#measure">Measure</a></li>
+                
+                    <li><a class="toctree-l4" href="#type">Type</a></li>
+                
+                    <li><a class="toctree-l4" href="#channel">Channel</a></li>
+                
+                    <li><a class="toctree-l4" href="#unit-of-measurement">Unit of Measurement</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">data-chan</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>IN Packets &raquo;</li>
+        
+      
+    
+    <li>Measure</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="measure">Measure</h1>
+<p>A MEASURE packet has the data field formed this way:</p>
+<table border="1">
+    <tr>
+        <td>bytes</td>
+        <td>0</td>
+        <td>1</td>
+        <td>2 to 6</td>
+        <td>7</td>
+        <td>8 to 12</td>
+        <td>13 to 14</td>
+    </tr>
+    <tr>
+        <td>type (8bits)</td>
+        <td>byte (8bits)</td>
+        <td>byte (8bits)</td>
+        <td>float (32bits)</td>
+        <td>byte (8bits)</td>
+        <td>big int (32bits)</td>
+        <td>small int (16bits)</td>
+    </tr>
+    <tr>
+        <td>descr</td>
+        <td>type</td>
+        <td>channel</td>
+        <td>value</td>
+        <td>mu</td>
+        <td>timestamp</td>
+        <td>millis</td>
+    </tr>
+</table>
+
+<p>Allowed measure types are:
+<ul>
+    <li>00h =&gt; NONREALTIME</li>
+    <li>01h =&gt; OFFSET_REALTIME</li>
+    <li>02h =&gt; REALTIME</li>
+    <li>03h =&gt; PROGRESSIVE</li>
+</ul></p>
+<h2 id="type">Type</h2>
+<p>In a NONREALTIME measure time and millis fields are unused, the host will replace their values
+with the timestamp and millis upon receipt.</p>
+<p>In a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.</p>
+<p>In a REALTIME measure time and millis contains the correct values.</p>
+<p>In a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.</p>
+<h2 id="channel">Channel</h2>
+<p>The channel field is used to identify the channel that has generated the measure.</p>
+<p>The channel field starts from 1, this means that an instrument can have 255 possible channels:
+from 1 to 255.</p>
+<h2 id="unit-of-measurement">Unit of Measurement</h2>
+<p>The Unit of Measurement field is a byte that reveils the used unit of measurement, according to the following list:
+<ul>
+    <li>0 =&gt; metre</li>
+    <li>1 =&gt; ampere</li>
+    <li>2 =&gt; volt</li>
+    <li>3 =&gt; coulomb</li>
+    <li>4 =&gt; watt</li>
+    <li>5 =&gt; kilogram</li>
+    <li>6 =&gt; kelvin</li>
+    <li>7 =&gt; candela</li>
+    <li>8 =&gt; mole</li>
+    <li>9 =&gt; hertz</li>
+    <li>10 =&gt; radian</li>
+    <li>11 =&gt; steradian</li>
+    <li>12 =&gt; newton</li>
+    <li>13 =&gt; pascal</li>
+    <li>14 =&gt; joule</li>
+    <li>15 =&gt; farad</li>
+    <li>16 =&gt; ohm</li>
+    <li>17 =&gt; siemens</li>
+    <li>18 =&gt; weber</li>
+    <li>19 =&gt; tesla</li>
+    <li>20 =&gt; henry</li>
+    <li>21 =&gt; lumen</li>
+    <li>22 =&gt; lux</li>
+    <li>23 =&gt; becquerel</li>
+    <li>24 =&gt; gray</li>
+    <li>25 =&gt; sievert</li>
+    <li>26 =&gt; katal</li>
+</ul></p>
+<p>The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../../protocol/" class="btn btn-neutral" title="Protocol"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../protocol/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+
+</body>
+</html>
