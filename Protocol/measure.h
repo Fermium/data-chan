@@ -54,11 +54,34 @@ Measure type:
 	2 => realtime
 
 where the MU can be one of the following:
-	0 => meter
+	0 => metre
 	1 => ampere
 	2 => volt
-	3 => culomb
+	3 => coulomb
 	4 => watt
+	5 => kilogram
+	6 => kelvin
+	7 => candela
+	8 => mole
+	9 => hertz
+	10 => radian
+	11 => steradian
+	12 => newton
+	13 => pascal
+	14 => joule
+	15 => farad
+	16 => ohm
+	17 => siemens
+	18 => weber
+	19 => tesla
+	20 => henry
+	21 => lumen
+	22 => lux
+	23 => becquerel
+	24 => gray
+	25 => sievert
+	26 => katal
+and more.... Read the documentation!
 */
 typedef struct {
 	uint8_t type; // type of measure
