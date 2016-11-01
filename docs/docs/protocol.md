@@ -65,6 +65,15 @@ A MEASURE packet has the data field formed this way:
 		<td>13 to 14</td>
 	</tr>
 	<tr>
+		<td>type (8bits)</td>
+		<td>byte (8bits)</td>
+		<td>byte (8bits)</td>
+		<td>float (32bits)</td>
+		<td>byte (8bits)</td>
+		<td>big int (32bits)</td>
+		<td>small int (16bits)</td>
+	</tr>
+	<tr>
 		<td>descr</td>
 		<td>type</td>
 		<td>channel</td>
@@ -74,3 +83,31 @@ A MEASURE packet has the data field formed this way:
 		<td>millis</td>
 	</tr>
 </table>
+
+Allowed measure types are:
+<ul>
+	<li>00h => NONREALTIME</li>
+	<li>01h => OFFSET_REALTIME</li>
+	<li>02h => REALTIME</li>
+	<li>03h => PROGRESSIVE</li>
+</ul>
+
+### Type
+
+In a NONREALTIME measure time and millis fields are unused, the host will replace their values
+with the timestamp and millis upon receipt.
+
+In a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.
+
+In a REALTIME measure time and millis contains the correct values.
+
+In a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.
+
+
+### Channel
+
+The channel field is used to identify the channel that has generated the measure.
+
+The channel field starts from 1, this means that an instrument can have 255 possible channels:
+from 1 to 255.
+

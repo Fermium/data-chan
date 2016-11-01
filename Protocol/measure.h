@@ -72,6 +72,7 @@ typedef struct {
 #define NONREALTIME                     0x00
 #define OFFSET_REALTIME                 0x01
 #define REALTIME                        0x02
+#define PROGRESSIVE                     0x03
 
 #ifdef __HOST__
     #define REPACK_SUCCESS                          0
