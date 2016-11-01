@@ -22,18 +22,38 @@
         }, 
         {
             "location": "/build/", 
-            "text": "Build\n\n\nThe enteire project can be built with \"make all\" even on windows, but it reuires a lot of software!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)\n\n\n\nIf you're using windows you will need to install:\n\n\n * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)\n\n\n\nEither if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device!", 
+            "text": "Build\n\n\nThe entire project can be compiled with the \"make all\" command, even on windows, but it requires a lot of software!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)\n\n\n\nEither if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be\nunable to operate again once the first write!", 
             "title": "Building"
         }, 
         {
             "location": "/build/#build", 
-            "text": "The enteire project can be built with \"make all\" even on windows, but it reuires a lot of software!", 
+            "text": "The entire project can be compiled with the \"make all\" command, even on windows, but it requires a lot of software!", 
             "title": "Build"
         }, 
         {
             "location": "/build/#environment", 
-            "text": "On a generic system you will need at least:   * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)  If you're using windows you will need to install:   * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)  Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device!", 
+            "text": "On a generic system you will need at least:   * make\n * gcc-avr\n * avr-libc\n * gcc\n * g++\n * libusb-1.0-0-dev\n * libpthread-stubs0-dev (pre-installed on most systems)  If you're using windows you will  also  need to install:   * msys 1.0\n * [tdm-gcc](http://tdm-gcc.tdragon.net/)\n * [grep for windows](http://www.wingrep.com/)  Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be\nunable to operate again once the first write!", 
             "title": "Environment"
+        }, 
+        {
+            "location": "/protocol/", 
+            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics.\n\n\nThe protocol minimum entity is a packet.\n\n\nThe protocol makes \nHUGE\n usage of the \nGENERIC_REPORT_SIZE\n macro,\nthat macro defines the number of bytes in each USB packet.\n\n\nThe data-chan protocol uses \nlittle-endian\n then serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n+--------+---------+-----------+--------+\n|  byte  |  first  | following |  last  |\n+--------+---------+-----------+--------+\n| desc   |   type  |    data   |  CRC8  |\n+--------+---------+-----------+--------+\n\n\nThe first byte contains the packet type: how data is used depends on the very first byte.\n\n\nEach packet ends with the last byte used for the CRC code (standard 8 bits).\n\n\nFrom the host perspective there are two types of packets IN packets and OUT packets.\n\n\nIN packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n* 00h =\n NONE\n* 01h =\n CMD_RESPONSE\n* 03h =\n MEASURE\n\n\n\nWhen the packets is flagged as NONE it must be ignored.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,\nwhich can't decode packets.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE packet has the data field formed this way:\n\n\n+--------+---------+---------+----------+-------+-----------+----------+\n| bytes  |    0    |    1    |  2 to 6  |   7   |  8 to 12  | 13 to 14 |\n+--------+---------+---------+----------+-------+-----------+----------+\n| descr  |   type  | channel |  value   |   mu  | timestamp |   millis |\n+--------+---------+---------+----------+-------+-----------+----------+", 
+            "title": "Protocol"
+        }, 
+        {
+            "location": "/protocol/#protocol", 
+            "text": "The protocol can be customized starting from the very USB basics.  The protocol minimum entity is a packet.  The protocol makes  HUGE  usage of the  GENERIC_REPORT_SIZE  macro,\nthat macro defines the number of bytes in each USB packet.  The data-chan protocol uses  little-endian  then serializing data larger than one byte.", 
+            "title": "Protocol"
+        }, 
+        {
+            "location": "/protocol/#packets-structure", 
+            "text": "Both IN and OUT packets are formed this way:  +--------+---------+-----------+--------+\n|  byte  |  first  | following |  last  |\n+--------+---------+-----------+--------+\n| desc   |   type  |    data   |  CRC8  |\n+--------+---------+-----------+--------+  The first byte contains the packet type: how data is used depends on the very first byte.  Each packet ends with the last byte used for the CRC code (standard 8 bits).  From the host perspective there are two types of packets IN packets and OUT packets.", 
+            "title": "Packets Structure"
+        }, 
+        {
+            "location": "/protocol/#in-packets", 
+            "text": "An incoming packet can be flagged as either one of these types:  * 00h =  NONE\n* 01h =  CMD_RESPONSE\n* 03h =  MEASURE  When the packets is flagged as NONE it must be ignored.  By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,\nwhich can't decode packets.  When the device is active every type of packet will be used.  A MEASURE packet has the data field formed this way:  +--------+---------+---------+----------+-------+-----------+----------+\n| bytes  |    0    |    1    |  2 to 6  |   7   |  8 to 12  | 13 to 14 |\n+--------+---------+---------+----------+-------+-----------+----------+\n| descr  |   type  | channel |  value   |   mu  | timestamp |   millis |\n+--------+---------+---------+----------+-------+-----------+----------+", 
+            "title": "IN packets"
         }
     ]
 }

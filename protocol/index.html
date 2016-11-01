@@ -8,7 +8,7 @@
   
   
   
-  <title>Building - data-chan</title>
+  <title>Protocol - data-chan</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Building";
-    var mkdocs_page_input_path = "build.md";
-    var mkdocs_page_url = "/build/";
+    var mkdocs_page_name = "Protocol";
+    var mkdocs_page_input_path = "protocol.md";
+    var mkdocs_page_url = "/protocol/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,24 +62,26 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Building</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#build">Build</a></li>
-                
-                    <li><a class="toctree-l4" href="#environment">Environment</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../build/">Building</a>
         
     </li>
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../protocol/">Protocol</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Protocol</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#protocol">Protocol</a></li>
+                
+                    <li><a class="toctree-l4" href="#packets-structure">Packets Structure</a></li>
+                
+                    <li><a class="toctree-l4" href="#in-packets">IN packets</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -106,7 +108,7 @@
     
       
     
-    <li>Building</li>
+    <li>Protocol</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -116,26 +118,38 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="build">Build</h1>
-<p>The entire project can be compiled with the "make all" command, even on windows, but it requires a lot of software!</p>
-<h2 id="environment">Environment</h2>
-<p>On a generic system you will need at least:</p>
-<pre><code> * make
- * gcc-avr
- * avr-libc
- * gcc
- * g++
- * libusb-1.0-0-dev
- * libpthread-stubs0-dev (pre-installed on most systems)
+                <h1 id="protocol">Protocol</h1>
+<p>The protocol can be customized starting from the very USB basics.</p>
+<p>The protocol minimum entity is a packet.</p>
+<p>The protocol makes <strong>HUGE</strong> usage of the <strong>GENERIC_REPORT_SIZE</strong> macro,
+that macro defines the number of bytes in each USB packet.</p>
+<p>The data-chan protocol uses <em>little-endian</em> then serializing data larger than one byte.</p>
+<h2 id="packets-structure">Packets Structure</h2>
+<p>Both IN and OUT packets are formed this way:</p>
+<p>+--------+---------+-----------+--------+
+|  byte  |  first  | following |  last  |
++--------+---------+-----------+--------+
+| desc   |   type  |    data   |  CRC8  |
++--------+---------+-----------+--------+</p>
+<p>The first byte contains the packet type: how data is used depends on the very first byte.</p>
+<p>Each packet ends with the last byte used for the CRC code (standard 8 bits).</p>
+<p>From the host perspective there are two types of packets IN packets and OUT packets.</p>
+<h2 id="in-packets">IN packets</h2>
+<p>An incoming packet can be flagged as either one of these types:</p>
+<pre><code>* 00h =&gt; NONE
+* 01h =&gt; CMD_RESPONSE
+* 03h =&gt; MEASURE
 </code></pre>
-<p>If you're using windows you will <strong>also</strong> need to install:</p>
-<pre><code> * msys 1.0
- * [tdm-gcc](http://tdm-gcc.tdragon.net/)
- * [grep for windows](http://www.wingrep.com/)
-</code></pre>
-<p>Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other
-AVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be
-unable to operate again once the first write!</p>
+<p>When the packets is flagged as NONE it must be ignored.</p>
+<p>By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,
+which can't decode packets.</p>
+<p>When the device is active every type of packet will be used.</p>
+<p>A MEASURE packet has the data field formed this way:</p>
+<p>+--------+---------+---------+----------+-------+-----------+----------+
+| bytes  |    0    |    1    |  2 to 6  |   7   |  8 to 12  | 13 to 14 |
++--------+---------+---------+----------+-------+-----------+----------+
+| descr  |   type  | channel |  value   |   mu  | timestamp |   millis |
++--------+---------+---------+----------+-------+-----------+----------+</p>
               
             </div>
           </div>
@@ -143,10 +157,8 @@ unable to operate again once the first write!</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../protocol/" class="btn btn-neutral float-right" title="Protocol">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../build/" class="btn btn-neutral" title="Building"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -172,10 +184,8 @@ unable to operate again once the first write!</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../build/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../protocol/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
