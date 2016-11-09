@@ -70,7 +70,11 @@ void setSetting(const setting_entry_t *setting) {
 		bool inserted = false;
 		while ((current->next != (struct setting_queue_t*)NULL) && (!inserted)) {
 			if ((current->entry->entry == setting->entry) && (current->entry->channel == setting->channel)) {
-				current->entry->setting = setting->setting;
+			    // remove the memory for the old setting
+                free(current->entry->setting->start_addr);
+
+                // save the new setting
+                current->entry->setting = setting->setting;
 				inserted = true;
 
 				// avoid memory leak
