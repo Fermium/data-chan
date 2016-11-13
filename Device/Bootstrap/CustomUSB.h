@@ -24,6 +24,12 @@
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
 
+struct request_t {
+    uint32_t number;
+    uint8_t request_type;
+    struct request_t *next;
+}
+
 void datachan_init(void);
 
 void CreateGenericHIDReport(uint8_t* DataArray);

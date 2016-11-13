@@ -140,7 +140,7 @@ void* msg_reader_thread(void* device) {
 } 
  
 /********************************************************************************
- *					Measures Queue				*
+ *                                 Measures Queue                               *
  ********************************************************************************/
  
 void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m) {
@@ -201,7 +201,7 @@ int32_t datachan_device_enqueued_measures(datachan_device_t* dev) {
 }
 
 /********************************************************************************
- *				Public Device API				*
+ *                                 Public Device API                            *
  ********************************************************************************/
 
 bool datachan_is_initialized() {

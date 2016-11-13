@@ -52,6 +52,8 @@ void unpack_measure(measure_t* in, uint8_t* out) {
     out += sizeof(in->millis);
 }
 
+static struct request_t req_queue;
+
 static managed_queue_t FIFO;
 
 void datachan_init(void) {
