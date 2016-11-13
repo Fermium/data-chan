@@ -43,7 +43,10 @@ deploy :
         name: Deploy to github pages
         code: |-
           cd docs
-          git clone -bgh-pages -o $GIT_REMOTE
+          git clone $GIT_REMOTE
+          cd data-chan
+          git checkout gh-pages
+          cd ../
           sudo chmod 0777 -R site
           sudo rsync -avh ./site/ ./data-chan/
           cd data-chan
