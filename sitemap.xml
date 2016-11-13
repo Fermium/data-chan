@@ -3,24 +3,24 @@
 
     
     <url>
-     <loc>None/</loc>
-     <lastmod>2016-11-01</lastmod>
+     <loc>/</loc>
+     <lastmod>2016-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>None/build/</loc>
-     <lastmod>2016-11-01</lastmod>
+     <loc>/build/</loc>
+     <lastmod>2016-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>None/protocol/</loc>
-     <lastmod>2016-11-01</lastmod>
+     <loc>/protocol/</loc>
+     <lastmod>2016-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,8 +28,8 @@
     
         
     <url>
-     <loc>None/IN_packets/Measure/</loc>
-     <lastmod>2016-11-01</lastmod>
+     <loc>/IN_packets/Measure/</loc>
+     <lastmod>2016-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
