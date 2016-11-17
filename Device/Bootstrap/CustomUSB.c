@@ -53,10 +53,12 @@ void unpack_measure(measure_t* in, uint8_t* out) {
 }
 
 static struct request_t req_queue;
+static struct request_t *cmd_queue;
 
 static managed_queue_t FIFO;
 
 void datachan_init(void) {
+    cmd_queue = (struct request_t*)NULL;
     FIFO.first = (struct fifo_queue_t *)NULL;
     FIFO.last = (struct fifo_queue_t *)NULL;
 }
@@ -159,6 +161,29 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
                 new_set.entry = entry;
                 memcpy((void*)(&new_set.setting), (const void*)&mem, sizeof(mem));
                 setSetting(&new_set);
+                break;
+
+            case CMD_ASYNC_REQUEST:
+                // get and store the ID of the request
+                memcpy((void*)&entry, (void*)cmd_builder_buffer, sizeof(uint32_t));
+                cmd_builder_buffer += sizeof(uint32_t);
+                
+                // get and store the request
+                data = malloc(GENERIC_REPORT_SIZE - sizeof(uint32_t) - 2);
+                memcpy(data, (void*)cmd_builder_buffer, GENERIC_REPORT_SIZE - sizeof(uint32_t) - 2);
+                
+                // create and populate the structure that will hold the request
+                struct request_t *new_request = (struct request_t*)malloc(sizeof(struct request_t));
+                new_request->id = entry;
+                new_request->buffer = data;
+                new_request->next = (struct request_t*)NULL;                
+
+                // append the previous list to the newly created element
+                struct request_t* last_populated = cmd_queue;
+                new_request->next = last_populated;
+                
+                // exchange the old list with the new one
+                cmd_queue = new_request;
                 break;
                 
             default:

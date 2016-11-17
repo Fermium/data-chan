@@ -31,16 +31,17 @@
 #define REALTIME_MASK 0x80
 
 // commands codes
-#define GET_PROTOCOL_VERSION    0x00
 #define ENABLE_TRANSMISSION     0x01
 #define DISABLE_TRANSMISSION    0x02
 #define GET_CONFIG_FLAG         0x03
 #define SET_CONFIG_FLAG         0x04
 
-#define NONE            0x00
-#define CMD_RESPONSE    0x01
-#define CMD_REQUEST     0x02
-#define MEASURE         0x03
+// request/response codes
+#define NONE                    0x00
+#define CMD_REQUEST             0x01 // this is a request that must be fulfilled immediatly
+#define CMD_ASYNC_RESPONSE      0x02 // this is a response to an async request
+#define CMD_ASYNC_REQUEST       0x03 // this is a request that can be fulfilled at any time
+#define MEASURE                 0x04 // this is a measure
 
 
 /********************************************************************************

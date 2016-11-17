@@ -25,8 +25,8 @@
 #include "../../Protocol/data_management.h"
 
 struct request_t {
-    uint32_t number;
-    uint8_t request_type;
+    uint32_t id;
+    void* buffer;
     struct request_t *next;
 };
 
