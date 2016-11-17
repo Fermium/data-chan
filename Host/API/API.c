@@ -24,10 +24,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
 #include <stdbool.h>
 #include <math.h>
 #include <sys/time.h>
+
+#if defined(__MACH__)
+
+#else
+    #include <malloc.h>
+#endif
 
 #define USB_USED_INTERFACE 0
 #define INTERRUPT_IN_ENDPOINT 0x81
