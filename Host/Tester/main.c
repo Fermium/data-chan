@@ -21,6 +21,7 @@ int main() {
         else
             printf("\nTransmission error!\n\n");
 
+        // sleep one second
         sleep(1);
         
         // enable data transmission
@@ -30,6 +31,7 @@ int main() {
             printf("\nTransmission error!\n");
 	
         int i = datachan_device_enqueued_measures(device);
+        printf("Read %d measures in about 1 second", i);
         while (i--) {
             measure_t* data_out = datachan_device_dequeue_measure(device);
             

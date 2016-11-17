@@ -81,8 +81,11 @@ void CreateGenericHIDReport(uint8_t* DataArray)
     DataArray[0] = (uint8_t)NONE;	
 
     if (hostListening) {
+        // testing purpouse ONLY!
+        enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
+
         // async requests manager
-        if (cmd_queue != NULL) {
+        /*if (cmd_queue != (struct request_t*)NULL) {
             // point to the first byte after the response type
             uint8_t *response_builder = DataArray + 1;
             
@@ -110,21 +113,21 @@ void CreateGenericHIDReport(uint8_t* DataArray)
             // remove from the memory the fulfilled async command
             if (req->buffer != NULL) free((void*)req->buffer);
             free((void*)req);
-        } else {
-            // testing purpouse ONLY!
-            enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
-
-            // get the next measure to be sent over USB
-            measure_t* data_to_be_sent = dequeue_measure(&FIFO);
-
+        } else */
+        // get the next measure to be sent over USB
+        measure_t* data_to_be_sent = dequeue_measure(&FIFO);
+        
+        if (data_to_be_sent != (measure_t*)NULL) {
             // if any flag as present, else flag as 'bad data'
-            DataArray[0] = (data_to_be_sent == (measure_t*)NULL) ? ((uint8_t)NONE) : ((uint8_t)MEASURE);
+            DataArray[0] = (uint8_t)MEASURE;
 
             // serialize the measure (for safe transmission)
             unpack_measure(data_to_be_sent, (DataArray + 1));
             
             // the measure is going to be removed from memory
             free((void*)data_to_be_sent); // save space!
+        } else {
+            DataArray[0] = ((uint8_t)NONE);
         }
     }
     

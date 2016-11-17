@@ -30,4 +30,12 @@
 #define USB_NAME                                L"datachan tester"
 #define GENERIC_REPORT_SIZE                     25
 
+/*
+65 can also be used (but using a 65b packet means 35 measures each second,
+whereas using a 25b packet means that the software is able to transfert
+more than 83 measures each second).
+
+Measures done on a Linux kernel 4.4 with an atmega32u4
+*/
+
 #endif // __DATACHAN_CONFIG_H__

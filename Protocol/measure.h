@@ -37,7 +37,7 @@
 #define SET_CONFIG_FLAG         0x04
 
 // request/response codes
-#define NONE                    0x00
+#define NONE                    0x00 // this is nothing. Nothing to send or device disabled
 #define CMD_REQUEST             0x01 // this is a request that must be fulfilled immediatly
 #define CMD_ASYNC_RESPONSE      0x02 // this is a response to an async request
 #define CMD_ASYNC_REQUEST       0x03 // this is a request that can be fulfilled at any time
