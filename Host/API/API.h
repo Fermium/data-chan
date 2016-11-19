@@ -1,17 +1,17 @@
 /**
 	data-chan physic through USB
 	Copyright (C) 2016  Benato Denis
-	
+
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
-	
+
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-	
+
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -82,5 +82,10 @@ bool datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, ui
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);
 int32_t datachan_device_enqueued_measures(datachan_device_t*);
+
+void repack_measure(measure_t* out, uint8_t* in);
+
+datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
+void datachan_device_cleanup(datachan_device_t* dev);
 
 #endif // __API_H__
