@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="97">
+<configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <df name="Device">
@@ -502,6 +502,7 @@
           <in>API.h</in>
           <in>CustomUSB.c</in>
           <in>CustomUSB.h</in>
+          <in>requests_queue.c</in>
         </df>
         <df name="Tester">
           <in>main.c</in>
@@ -2164,6 +2165,8 @@
       <item path="Host/API/CustomUSB.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Host/API/CustomUSB.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Host/API/requests_queue.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Host/Tester/main.c" ex="false" tool="0" flavor2="0">
       </item>

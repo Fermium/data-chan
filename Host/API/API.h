@@ -19,13 +19,17 @@
 #ifndef __API_H__
 #define __API_H__
 
-//#include <inttypes.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
+
+struct bulk_out_t {
+    uint8_t *buffer;
+    struct bulk_out_t *prev;
+};
 
 typedef struct {
     // mutexes attributes
@@ -36,7 +40,8 @@ typedef struct {
     pthread_mutex_t measures_queue_mutex;
     pthread_mutex_t exitlock;
     pthread_mutex_t enabled_mutex;
-
+    pthread_mutex_t requests_queue_mutex;
+    
     // USB device handler
     libusb_device_handle* handler;
 
@@ -47,7 +52,11 @@ typedef struct {
     pthread_t reader;
     pthread_attr_t reader_attr;
 
+    // Is the device enabled?
     bool enabled;
+    
+    // The requests queue
+    struct bulk_out_t *requests_queue;
 } datachan_device_t;
 
 typedef enum {
@@ -64,20 +73,25 @@ typedef struct {
     datachan_device_t* device;
 } datachan_acquire_result_t;
 
+#define USB_USED_INTERFACE      0
+#define USB_IN_ENDPOINT         0x83
+#define USB_OUT_ENDPOINT        0x04
+#define TIMEOUT_MS              1000
+
 bool datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
+
+void datachan_enqueue_request(datachan_device_t*, uint8_t*);
+void datachan_dequeue_request(datachan_device_t*, uint8_t*);
 
 bool datachan_device_enable(datachan_device_t*);
 bool datachan_device_is_enabled(datachan_device_t*);
 bool datachan_device_disable(datachan_device_t*);
 
-int datachan_raw_read(datachan_device_t*, uint8_t*);
-int datachan_raw_write(datachan_device_t*, uint8_t*, int);
-
 datachan_acquire_result_t datachan_device_acquire(void);
 void datachan_device_release(datachan_device_t**);
-bool datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
+void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);
