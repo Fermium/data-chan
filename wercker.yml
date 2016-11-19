@@ -9,10 +9,10 @@ build:
     - script:
         name: Building Project
         code: make all
-        
   after-steps:
     - install-packages:
         packages: ruby
+    - iansmith9876/pretty-slack-notify:
         team: fermiumlabs
         token: $SLACK_API_TOKEN
         channel: project-hall
