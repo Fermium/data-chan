@@ -34,10 +34,10 @@
     #include <malloc.h>
 #endif
 
-#define USB_USED_INTERFACE 0
-#define INTERRUPT_IN_ENDPOINT 0x81
-#define INTERRUPT_OUT_ENDPOINT 0x02
-#define TIMEOUT_MS 1000
+#define USB_USED_INTERFACE      0
+#define USB_IN_ENDPOINT         0x83
+#define USB_OUT_ENDPOINT        0x04
+#define TIMEOUT_MS              1000
 
 static libusb_context* ctx = (libusb_context*)NULL;
 
@@ -77,13 +77,7 @@ datachan_acquire_result_t datachan_device_acquire(void) {
             libusb_set_auto_detach_kernel_driver(handle, 1);
 
             // setting the configuration 1 means selecting the corresponding bConfigurationValue
-            if (
-#if !defined(__MACH__)
-                libusb_claim_interface(handle, USB_USED_INTERFACE) == 0
-#else
-                1
-#endif
-                ) {
+            if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
                 // fill the device structure
                 res.device = datachan_device_setup(handle);
                 res.result = success;
@@ -156,7 +150,7 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
     pthread_mutex_lock(&dev->handler_mutex);
     result = libusb_bulk_transfer(
             dev->handler,
-            INTERRUPT_IN_ENDPOINT,
+            USB_IN_ENDPOINT,
             data_in,
             sizeof(data_in),
             &bytes_transferred,
@@ -198,7 +192,7 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
     pthread_mutex_lock(&dev->handler_mutex);
     result = libusb_bulk_transfer(
             dev->handler,
-            INTERRUPT_OUT_ENDPOINT,
+            USB_OUT_ENDPOINT,
             data_out,
             sizeof(data_out),
             &bytes_transferred,
