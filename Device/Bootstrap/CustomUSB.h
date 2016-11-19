@@ -32,8 +32,10 @@ struct request_t {
 
 void datachan_init(void);
 
-void CreateGenericHIDReport(uint8_t* DataArray);
+void datachan_sudden_disconnection(void);
 
-void ProcessGenericHIDReport(uint8_t* DataArray);
+void datachan_generate_report(uint8_t* DataArray);
+
+void datachan_process_report(uint8_t* DataArray);
 
 #endif

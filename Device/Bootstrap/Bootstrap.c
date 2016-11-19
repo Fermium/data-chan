@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2015.
+     Copyright (C) Dean Camera, 2016.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -28,27 +28,49 @@
   this software.
 */
 
-#include "GenericHID.h"
+/** \file
+ *
+ *  Main source file for the Bulk Vendor demo. This file contains the main tasks of the demo and
+ *  is responsible for the initial application hardware configuration.
+ */
+
+#define  INCLUDE_FROM_BULKVENDOR_C
+#include "BulkVendor.h"
 #include "CustomUSB.h"
-#include "../../config.h"
 
-// used as USB IN/OUT buffer
-static uint8_t GenericData[GENERIC_REPORT_SIZE];
-
-/** 
- *  Main program entry point. This routine configures the hardware required by the application, then
+/** Main program entry point. This routine configures the hardware required by the application, then
  *  enters a loop to run the application tasks in sequence.
  */
 int main(void)
 {
 	SetupHardware();
 
+	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
 	GlobalInterruptEnable();
-	
+
 	for (;;)
 	{
-		HID_Task();
 		USB_USBTask();
+
+		uint8_t ReceivedData[VENDOR_IO_EPSIZE];
+		memset(ReceivedData, 0x00, sizeof(ReceivedData));
+
+		Endpoint_SelectEndpoint(VENDOR_OUT_EPADDR);
+		if (Endpoint_IsOUTReceived())
+		{
+			Endpoint_Read_Stream_LE(ReceivedData, VENDOR_IO_EPSIZE, NULL);
+			Endpoint_ClearOUT();
+
+			// custom algorithm to parse request data
+			datachan_process_report(ReceivedData);
+
+			// custom algorithm to generate measure/response data
+			datachan_generate_report(ReceivedData);
+
+			Endpoint_SelectEndpoint(VENDOR_IN_EPADDR);
+			Endpoint_Write_Stream_LE(ReceivedData, VENDOR_IO_EPSIZE, NULL);
+			Endpoint_ClearIN();
+		}
 	}
 }
 
@@ -81,34 +103,30 @@ void SetupHardware(void)
     datachan_init();
 }
 
-/** Event handler for the USB_Connect event. This indicates that the device is enumerating via the status LEDs and
- *  starts the library USB task to begin the enumeration and USB management process.
- */
+/** Event handler for the USB_Connect event. This indicates that the device is enumerating via the status LEDs. */
 void EVENT_USB_Device_Connect(void)
 {
 	
 }
 
 /** Event handler for the USB_Disconnect event. This indicates that the device is no longer connected to a host via
- *  the status LEDs and stops the USB management task.
+ *  the status LEDs.
  */
 void EVENT_USB_Device_Disconnect(void)
 {
 	
 }
 
-/** Event handler for the USB_ConfigurationChanged event. This is fired when the host sets the current configuration
- *  of the USB device after enumeration, and configures the generic HID device endpoints.
+/** Event handler for the USB_ConfigurationChanged event. This is fired when the host set the current configuration
+ *  of the USB device after enumeration - the device endpoints are configured.
  */
 void EVENT_USB_Device_ConfigurationChanged(void)
 {
-	bool ConfigSuccess = true;
+	bool ConfigSuccess = false;
 
-	/* Setup HID Report Endpoints */
-	ConfigSuccess &= Endpoint_ConfigureEndpoint(GENERIC_IN_EPADDR, EP_TYPE_INTERRUPT, GENERIC_EPSIZE, 1);
-	ConfigSuccess &= Endpoint_ConfigureEndpoint(GENERIC_OUT_EPADDR, EP_TYPE_INTERRUPT, GENERIC_EPSIZE, 1);
-
-    //if (ConfigSuccess) {} else {}
+	/* Setup Vendor Data Endpoints */
+	ConfigSuccess &= Endpoint_ConfigureEndpoint(VENDOR_IN_EPADDR,  EP_TYPE_BULK, VENDOR_IO_EPSIZE, 1);
+	ConfigSuccess &= Endpoint_ConfigureEndpoint(VENDOR_OUT_EPADDR, EP_TYPE_BULK, VENDOR_IO_EPSIZE, 1);
 }
 
 /** Event handler for the USB_ControlRequest event. This is used to catch and process control requests sent to
@@ -117,82 +135,5 @@ void EVENT_USB_Device_ConfigurationChanged(void)
  */
 void EVENT_USB_Device_ControlRequest(void)
 {
-	/* Handle HID Class specific requests */
-	switch (USB_ControlRequest.bRequest)
-	{
-		case HID_REQ_GetReport:
-			if (USB_ControlRequest.bmRequestType == (REQDIR_DEVICETOHOST | REQTYPE_CLASS | REQREC_INTERFACE))
-			{
-                            CreateGenericHIDReport(GenericData);
-                            
-                            Endpoint_ClearSETUP();
-                            
-                            /* Write the report data to the control endpoint */
-                            Endpoint_Write_Control_Stream_LE(GenericData, GENERIC_REPORT_SIZE);
-                            Endpoint_ClearOUT();
-			}
-
-			break;
-		case HID_REQ_SetReport:
-			if (USB_ControlRequest.bmRequestType == (REQDIR_HOSTTODEVICE | REQTYPE_CLASS | REQREC_INTERFACE))
-			{
-				Endpoint_ClearSETUP();
-
-				/* Read the report data from the control endpoint */
-				Endpoint_Read_Control_Stream_LE(&GenericData, sizeof(GenericData));
-				Endpoint_ClearIN();
-
-				ProcessGenericHIDReport(GenericData);
-			}
-
-			break;
-	}
+	// Process vendor specific control requests here
 }
-
-void HID_Task(void)
-{
-	/* Device must be connected and configured for the task to run */
-	if (USB_DeviceState != DEVICE_STATE_Configured)
-	  return;
-
-	Endpoint_SelectEndpoint(GENERIC_OUT_EPADDR);
-
-	/* Check to see if a packet has been sent from the host */
-	if (Endpoint_IsOUTReceived())
-	{
-		/* Check to see if the packet contains data */
-		if (Endpoint_IsReadWriteAllowed())
-		{
-			/* Create a temporary buffer to hold the read in report from the host */
-			uint8_t GenericData[GENERIC_REPORT_SIZE];
-
-			/* Read Generic Report Data */
-			Endpoint_Read_Stream_LE(&GenericData, sizeof(GenericData), NULL);
-
-			/* Process Generic Report Data */
-			ProcessGenericHIDReport(GenericData);
-		}
-
-		/* Finalize the stream transfer to send the last packet */
-		Endpoint_ClearOUT();
-	}
-
-	Endpoint_SelectEndpoint(GENERIC_IN_EPADDR);
-
-	/* Check to see if the host is ready to accept another packet */
-	if (Endpoint_IsINReady())
-	{
-		/* Create a temporary buffer to hold the report to send to the host */
-		uint8_t GenericData[GENERIC_REPORT_SIZE];
-
-		/* Create Generic Report Data */
-		CreateGenericHIDReport(GenericData);
-
-		/* Write Generic Report Data */
-		Endpoint_Write_Stream_LE(&GenericData, sizeof(GenericData), NULL);
-
-		/* Finalize the stream transfer to send the last packet */
-		Endpoint_ClearIN();
-	}
-}
-

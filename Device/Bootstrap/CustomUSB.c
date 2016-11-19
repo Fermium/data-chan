@@ -18,6 +18,7 @@
 
 #include "../../Protocol/measure_functions.h"
 #include "../../Protocol/data_management_functions.h"
+#include "BulkVendor.h"
 #include "CustomUSB.h"
 #include "Settings.h"
 #include <stdint.h>
@@ -60,13 +61,18 @@ void datachan_init(void) {
     cmd_queue = (struct request_t*)NULL;
     FIFO.first = (struct fifo_queue_t *)NULL;
     FIFO.last = (struct fifo_queue_t *)NULL;
+    hostListening = false;
+}
+
+void datachan_sudden_disconnection(void) {
+    hostListening = false;
 }
 
 /** Function to create the next report to send back to the host at the next reporting interval.
  *
  *  \param[out] DataArray  Pointer to a buffer where the next report data should be stored
  */
-void CreateGenericHIDReport(uint8_t* DataArray)
+void datachan_generate_report(uint8_t* DataArray)
 {
     /*
     This is where you need to create reports to be sent to the host from the device. This
@@ -75,7 +81,7 @@ void CreateGenericHIDReport(uint8_t* DataArray)
     */
 
     // every unused byte will be 00
-    memset((void*)DataArray, 0x00, GENERIC_REPORT_SIZE);
+    memset((void*)DataArray, 0x00, VENDOR_IO_EPSIZE);
 
     // by default nothing is sent
     DataArray[0] = (uint8_t)NONE;	
@@ -132,14 +138,14 @@ void CreateGenericHIDReport(uint8_t* DataArray)
     }
     
     // append the error check byte to the end of EVERY message
-    DataArray[GENERIC_REPORT_SIZE - 1] = CRC_calc(DataArray, GENERIC_REPORT_SIZE - 1);
+    DataArray[VENDOR_IO_EPSIZE - 1] = CRC_calc(DataArray, VENDOR_IO_EPSIZE - 1);
 }
 
 /** Function to process the last received report from the host.
  *
  *  \param[in] DataArray  Pointer to a buffer where the last received report has been stored
  */
-void ProcessGenericHIDReport(uint8_t* DataArray)
+void datachan_process_report(uint8_t* DataArray)
 {
     /*
         This is where you need to process reports sent from the host to the device. This
@@ -147,7 +153,7 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
         holding the report sent from the host.
     */
     
-    if ((DataArray[0] == CMD_REQUEST) && (CRC_check(DataArray, GENERIC_REPORT_SIZE - 1, DataArray[GENERIC_REPORT_SIZE - 1]))) {
+    if ((DataArray[0] == CMD_REQUEST) && (CRC_check(DataArray, VENDOR_IO_EPSIZE - 1, DataArray[VENDOR_IO_EPSIZE - 1]))) {
         uint8_t cmd = DataArray[1];
         
         uint32_t entry;
@@ -179,7 +185,7 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
                 cmd_builder_buffer += sizeof(data_size);
                 
                 // if the length is correct allocate memory
-                if (data_size < (GENERIC_REPORT_SIZE - 10)) data = malloc(data_size);
+                if (data_size < (VENDOR_IO_EPSIZE - 10)) data = malloc(data_size);
                 
                 // read the data
                 memcpy((void*)data, (const void*)cmd_builder_buffer, data_size);
@@ -202,8 +208,8 @@ void ProcessGenericHIDReport(uint8_t* DataArray)
                 cmd_builder_buffer += sizeof(uint32_t);
                 
                 // get and store the request
-                data = malloc(GENERIC_REPORT_SIZE - sizeof(uint32_t) - 2);
-                memcpy(data, (void*)cmd_builder_buffer, GENERIC_REPORT_SIZE - sizeof(uint32_t) - 2);
+                data = malloc(VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
+                memcpy(data, (void*)cmd_builder_buffer, VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
                 
                 // create and populate the structure that will hold the request
                 struct request_t *new_request = (struct request_t*)malloc(sizeof(struct request_t));

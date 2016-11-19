@@ -28,7 +28,7 @@
 #define USB_PID                                 0x204F
 #define USB_MANUFACTURE                         L"Denis"
 #define USB_NAME                                L"datachan tester"
-#define GENERIC_REPORT_SIZE                     25
+#define GENERIC_REPORT_SIZE                     64
 
 /*
 65 can also be used (but using a 65b packet means 35 measures each second,

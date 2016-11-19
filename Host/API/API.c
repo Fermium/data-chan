@@ -245,7 +245,13 @@ datachan_acquire_result_t datachan_device_acquire(void) {
             libusb_set_auto_detach_kernel_driver(handle, 1);
 
             // setting the configuration 1 means selecting the corresponding bConfigurationValue
-            if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
+            if (
+#if !defined(__MACH__)
+                libusb_claim_interface(handle, USB_USED_INTERFACE) == 0
+#else
+                1
+#endif  
+                ) {
                 // fill the device structure
                 res.device = datachan_device_setup(handle);
                 res.result = success;

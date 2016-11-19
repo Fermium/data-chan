@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2015.
+     Copyright (C) Dean Camera, 2016.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -43,6 +43,16 @@
 
 		#include "../../config.h"
 
+	/* Macros: */
+		/** Endpoint address of the Bulk Vendor device-to-host data IN endpoint. */
+		#define VENDOR_IN_EPADDR               (ENDPOINT_DIR_IN  | 3)
+
+		/** Endpoint address of the Bulk Vendor host-to-device data OUT endpoint. */
+		#define VENDOR_OUT_EPADDR              (ENDPOINT_DIR_OUT | 4)
+
+		/** Size in bytes of the Bulk Vendor data endpoints. */
+		#define VENDOR_IO_EPSIZE               GENERIC_REPORT_SIZE
+
 	/* Type Defines: */
 		/** Type define for the device configuration descriptor structure. This must be defined in the
 		 *  application code, as the configuration descriptor contains several sub-descriptors which
@@ -52,11 +62,10 @@
 		{
 			USB_Descriptor_Configuration_Header_t Config;
 
-			// Generic HID Interface
-			USB_Descriptor_Interface_t            HID_Interface;
-			USB_HID_Descriptor_HID_t              HID_GenericHID;
-			USB_Descriptor_Endpoint_t             HID_ReportINEndpoint;
-			USB_Descriptor_Endpoint_t             HID_ReportOUTEndpoint;
+			// Vendor Interface
+			USB_Descriptor_Interface_t            Vendor_Interface;
+			USB_Descriptor_Endpoint_t             Vendor_DataInEndpoint;
+			USB_Descriptor_Endpoint_t             Vendor_DataOutEndpoint;
 		} USB_Descriptor_Configuration_t;
 
 		/** Enum for the device interface descriptor IDs within the device. Each interface descriptor
@@ -65,7 +74,7 @@
 		 */
 		enum InterfaceDescriptors_t
 		{
-			INTERFACE_ID_GenericHID = 0, /**< GenericHID interface descriptor ID */
+			INTERFACE_ID_Vendor = 0, /**< Vendor interface descriptor ID */
 		};
 
 		/** Enum for the device string descriptor IDs within the device. Each string descriptor should
@@ -78,16 +87,6 @@
 			STRING_ID_Manufacturer = 1, /**< Manufacturer string ID */
 			STRING_ID_Product      = 2, /**< Product string ID */
 		};
-
-	/* Macros: */
-		/** Endpoint address of the Generic HID reporting IN endpoint. */
-		#define GENERIC_IN_EPADDR         (ENDPOINT_DIR_IN  | 1)
-
-		/** Endpoint address of the Generic HID reporting OUT endpoint. */
-		#define GENERIC_OUT_EPADDR        (ENDPOINT_DIR_OUT | 2)
-
-		/** Size in bytes of the Generic HID reporting endpoint. */
-		#define GENERIC_EPSIZE            8
 
 	/* Function Prototypes: */
 		uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
