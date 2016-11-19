@@ -10,7 +10,7 @@ build:
         name: Initialize git submodules
         code: git submodule update --init --recursive
     - script:
-        name: Building Project
+        name: Build Project
         code: make all
 deploy :
   steps :
