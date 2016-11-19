@@ -45,6 +45,9 @@ datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
     dev->measures_queue.last = (struct fifo_queue_t *)NULL;
     dev->measures_queue.count = 0;
 
+    // prepare the requests queue
+    dev->requests_queue = (struct bulk_out_t*)NULL;
+    
     // the device is disabled, there is nothing to read, and a reader thread is unnecessary
     dev->enabled = false;
 
@@ -57,6 +60,7 @@ datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
     pthread_mutex_init(&dev->measures_queue_mutex, &dev->mutex_attr);
     pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
     pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
+    pthread_mutex_init(&dev->requests_queue_mutex, &dev->mutex_attr);
 
     // enjoy the device
     return dev;
@@ -70,6 +74,7 @@ void datachan_device_cleanup(datachan_device_t* dev) {
     pthread_mutex_destroy(&dev->enabled_mutex);
     pthread_mutex_destroy(&dev->measures_queue_mutex);
     pthread_mutex_destroy(&dev->handler_mutex);
+    pthread_mutex_destroy(&dev->requests_queue_mutex);
 
     // remove the mutex attribute safely
     pthread_mutexattr_destroy(&dev->mutex_attr);

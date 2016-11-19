@@ -74,12 +74,6 @@ void datachan_sudden_disconnection(void) {
  */
 void datachan_generate_report(uint8_t* DataArray)
 {
-    /*
-    This is where you need to create reports to be sent to the host from the device. This
-    function is called each time the host is ready to accept a new report. DataArray is
-    an array to hold the report to the host.
-    */
-
     // every unused byte will be 00
     memset((void*)DataArray, 0x00, VENDOR_IO_EPSIZE);
 
@@ -89,7 +83,7 @@ void datachan_generate_report(uint8_t* DataArray)
     if (hostListening) {
         // testing purpouse ONLY!
         enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
-
+        
         // async requests manager
         /*if (cmd_queue != (struct request_t*)NULL) {
             // point to the first byte after the response type
@@ -147,20 +141,21 @@ void datachan_generate_report(uint8_t* DataArray)
  */
 void datachan_process_report(uint8_t* DataArray)
 {
-    /*
-        This is where you need to process reports sent from the host to the device. This
-        function is called each time the host has sent a new report. DataArray is an array
-        holding the report sent from the host.
-    */
+    // on invalid CRC discard the message
+    if (!CRC_check(DataArray, VENDOR_IO_EPSIZE - 1, DataArray[VENDOR_IO_EPSIZE - 1]))
+            return;
     
-    if ((DataArray[0] == CMD_REQUEST) && (CRC_check(DataArray, VENDOR_IO_EPSIZE - 1, DataArray[VENDOR_IO_EPSIZE - 1]))) {
+    uint8_t *cmd_builder_buffer;
+    uint32_t entry;
+    uint16_t data_size = 1;
+    uint8_t channel;
+    void* data;
+    
+    if (DataArray[0] == CMD_REQUEST) {
         uint8_t cmd = DataArray[1];
         
-        uint32_t entry;
-        uint16_t data_size = 1;
-        uint8_t channel;
-        void* data;
-        uint8_t *cmd_builder_buffer = DataArray + 2;
+        // the begin of the cmd buffer is the third byte
+        cmd_builder_buffer = DataArray + 2;
         
         switch (cmd) {
             case ENABLE_TRANSMISSION:
@@ -201,33 +196,36 @@ void datachan_process_report(uint8_t* DataArray)
                 memcpy((void*)(&new_set.setting), (const void*)&mem, sizeof(mem));
                 setSetting(&new_set);
                 break;
-
-            case CMD_ASYNC_REQUEST:
-                // get and store the ID of the request
-                memcpy((void*)&entry, (void*)cmd_builder_buffer, sizeof(uint32_t));
-                cmd_builder_buffer += sizeof(uint32_t);
-                
-                // get and store the request
-                data = malloc(VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
-                memcpy(data, (void*)cmd_builder_buffer, VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
-                
-                // create and populate the structure that will hold the request
-                struct request_t *new_request = (struct request_t*)malloc(sizeof(struct request_t));
-                new_request->id = entry;
-                new_request->buffer = data;
-                new_request->next = (struct request_t*)NULL;                
-
-                // append the previous list to the newly created element
-                struct request_t* last_populated = cmd_queue;
-                new_request->next = last_populated;
-                
-                // exchange the old list with the new one
-                cmd_queue = new_request;
-                break;
                 
             default:
                 break;
         }
+    } else if (DataArray[0] == CMD_ASYNC_REQUEST) {
+        // the begin of the cmd buffer is the second byte
+        cmd_builder_buffer = DataArray + 1;
+        
+        // get and store the ID of the request
+        memcpy((void*)&entry, (void*)cmd_builder_buffer, sizeof(uint32_t));
+        cmd_builder_buffer += sizeof(uint32_t);
+                
+        // get and store the request
+        data = malloc(VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
+        memcpy(data, (void*)cmd_builder_buffer, VENDOR_IO_EPSIZE - sizeof(uint32_t) - 2);
+                
+        // create and populate the structure that will hold the request
+        struct request_t *new_request = (struct request_t*)malloc(sizeof(struct request_t));
+        new_request->id = entry;
+        new_request->buffer = data;
+        new_request->next = (struct request_t*)NULL;                
+
+        // append the previous list to the newly created element
+        struct request_t* last_populated = cmd_queue;
+        new_request->next = last_populated;
+                
+        // exchange the old list with the new one
+        cmd_queue = new_request;
+    } else if (DataArray[0] == NONE) {
+        // nothing to do here!
     }
 }
 
