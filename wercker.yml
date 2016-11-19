@@ -1,5 +1,5 @@
 # docker box definition
-box: java
+box: ubuntu:xenial
 
 # defining the dev pipeline
 build:
@@ -10,12 +10,8 @@ build:
         name: Building Project
         code: make all
   after-steps:
-    - install-packages:
-        packages: ruby
-    - iansmith9876/pretty-slack-notify:
-        team: fermiumlabs
-        token: $SLACK_API_TOKEN
-        channel: project-hall
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_API_TOKEN
 
 deploy :
   steps :
