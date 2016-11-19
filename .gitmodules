@@ -1,0 +1,3 @@
+[submodule "Device/lufa"]
+	path = Device/lufa
+	url = https://github.com/abcminiuser/lufa.git
