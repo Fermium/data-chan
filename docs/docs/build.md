@@ -8,8 +8,8 @@ The entire project can be compiled with the `make all` command, even on windows,
 On a generic system you will need at least:
 
 * make
-* gcc-avr
-* avr-libc
+* gcc-avr (somewhere called avr-gcc)
+* avr-libc 
 * gcc
 * g++
 * libusb-1.0-0-dev
@@ -19,6 +19,12 @@ On Ubuntu/Debian run:
 
 ```sh
 sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+```
+
+On MacOS if you use Homebrew you have to tap an external repo:
+```sh
+brew tap osx-cross/avr
+brew install avr-libc avr-gcc gcc libusb 
 ```
 
 	 
