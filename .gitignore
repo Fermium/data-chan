@@ -34,3 +34,6 @@
 # Netbeast bloat
 /nbproject/private
 Host/Tester/Tester
+
+#eclipse bloat
+.settings/
