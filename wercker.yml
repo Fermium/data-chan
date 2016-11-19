@@ -13,7 +13,6 @@ build:
   after-steps:
     - install-packages:
         packages: ruby
-    - wantedly/step-pretty-slack-notify:
         team: fermiumlabs
         token: $SLACK_API_TOKEN
         channel: project-hall
