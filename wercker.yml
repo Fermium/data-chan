@@ -9,6 +9,12 @@ build:
     - script:
         name: Building Project
         code: make all
+  after-steps:
+    - iansmith9876/pretty-slack-notify:
+        team: fermiumlabs
+        token: $SLACK_API_TOKEN
+        channel: project-hall
+
 deploy :
   steps :
     - install-packages:
@@ -53,4 +59,3 @@ deploy :
           git add .
           git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
           git push --quiet &> /dev/null
-
