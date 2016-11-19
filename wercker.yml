@@ -1,5 +1,5 @@
 # docker box definition
-box: java
+box: ubuntu:xenial
 
 # defining the dev pipeline
 build:
