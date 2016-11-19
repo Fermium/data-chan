@@ -921,16 +921,15 @@ void ihex_get_data(int addr, int len, unsigned char *bytes)
 int printf_verbose(const char *format, ...)
 {
 	va_list ap;
-	int r = 0;
+	int r;
 
 	va_start(ap, format);
 	if (verbose) {
 		r = vprintf(format, ap);
 		fflush(stdout);
+		return r;
 	}
-	va_end(ap);
-
-	return r;
+	return 0;
 }
 
 void delay(double seconds)
@@ -949,8 +948,6 @@ void die(const char *str, ...)
 	va_start(ap, str);
 	vfprintf(stderr, str, ap);
 	fprintf(stderr, "\n");
-	va_end(ap);
-
 	exit(1);
 }
 

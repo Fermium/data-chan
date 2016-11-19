@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -380,7 +380,7 @@ static bool ProcessNDISSet(uint32_t OId, void* SetData, uint16_t SetSize)
 			CurrPacketFilter = *((uint32_t*)SetData);
 
 			/* Set the RNDIS state to initialized if the packet filter is non-zero */
-			CurrRNDISState = ((CurrPacketFilter) ? RNDIS_Data_Initialized : RNDIS_Initialized);
+			CurrRNDISState = ((CurrPacketFilter) ? RNDIS_Data_Initialized : RNDIS_Data_Initialized);
 
 			return true;
 		case OID_802_3_MULTICAST_LIST:

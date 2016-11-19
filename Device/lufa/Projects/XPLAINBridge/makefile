@@ -1,6 +1,6 @@
 #
 #             LUFA Library
-#     Copyright (C) Dean Camera, 2016.
+#     Copyright (C) Dean Camera, 2015.
 #
 #  dean [at] fourwalledcubicle [dot] com
 #           www.lufa-lib.org
@@ -33,22 +33,19 @@ all:
 
 # Since this project borrows files from the AVRISP-MKII project which may also have an
 # identical OBJDIR directory, we need to enforce the use of this project's object file
-# directory as the one where the build object files are to be stored, by giving it a
-# path relative to the current folder.
-OBJDIR      := ./obj
+# directory as the one where the build object files are to be stored by pre-pending the
+# absolute path of the current project to the OBJDIR variable.
+ifneq ($(OBJDIR),)
+  override OBJDIR:=$(shell pwd)/$(OBJDIR)
+endif
 
-# Include LUFA-specific DMBS extension modules
-DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
-include $(DMBS_LUFA_PATH)/lufa-sources.mk
-include $(DMBS_LUFA_PATH)/lufa-gcc.mk
-
-# Include common DMBS build system modules
-DMBS_PATH      ?= $(LUFA_PATH)/Build/DMBS/DMBS
-include $(DMBS_PATH)/core.mk
-include $(DMBS_PATH)/cppcheck.mk
-include $(DMBS_PATH)/doxygen.mk
-include $(DMBS_PATH)/dfu.mk
-include $(DMBS_PATH)/gcc.mk
-include $(DMBS_PATH)/hid.mk
-include $(DMBS_PATH)/avrdude.mk
-include $(DMBS_PATH)/atprogram.mk
+# Include LUFA build script makefiles
+include $(LUFA_PATH)/Build/lufa_core.mk
+include $(LUFA_PATH)/Build/lufa_sources.mk
+include $(LUFA_PATH)/Build/lufa_build.mk
+include $(LUFA_PATH)/Build/lufa_cppcheck.mk
+include $(LUFA_PATH)/Build/lufa_doxygen.mk
+include $(LUFA_PATH)/Build/lufa_dfu.mk
+include $(LUFA_PATH)/Build/lufa_hid.mk
+include $(LUFA_PATH)/Build/lufa_avrdude.mk
+include $(LUFA_PATH)/Build/lufa_atprogram.mk

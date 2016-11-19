@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -91,10 +91,8 @@ void Serial_SendData(USART_t* const USART,
                      const void* Buffer,
                      uint16_t Length)
 {
-	uint8_t* CurrByte = (uint8_t*)Buffer;
-
 	while (Length--)
-	  Serial_SendByte(USART, *(CurrByte++));
+	  Serial_SendByte(USART, *((uint8_t*)Buffer++));
 }
 
 void Serial_CreateStream(USART_t* USART, FILE* Stream)

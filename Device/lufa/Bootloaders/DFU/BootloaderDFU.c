@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -400,7 +400,7 @@ void EVENT_USB_Device_ControlRequest(void)
 							}
 
 							/* Read the byte from the USB interface and write to to the EEPROM */
-							eeprom_update_byte((uint8_t*)StartAddr, Endpoint_Read_8());
+							eeprom_write_byte((uint8_t*)StartAddr, Endpoint_Read_8());
 
 							/* Adjust counters */
 							StartAddr++;
@@ -857,3 +857,4 @@ static void ProcessReadCommand(void)
 		DFU_Status = errADDRESS;
 	}
 }
+

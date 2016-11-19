@@ -1,6 +1,6 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
@@ -8,7 +8,7 @@
 
 /*
   Copyright 2010  OBinou (obconseil [at] gmail [dot] com)
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -139,7 +139,7 @@ const USB_Descriptor_String_t PROGMEM RelayBoard_SerialString = USB_STRING_DESCR
  *  USB host.
  */
 uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
-                                    const uint16_t wIndex,
+                                    const uint8_t wIndex,
                                     const void** const DescriptorAddress)
 {
 	const uint8_t  DescriptorType   = (wValue >> 8);

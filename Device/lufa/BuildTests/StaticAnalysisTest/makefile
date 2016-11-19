@@ -1,6 +1,6 @@
 #
 #             LUFA Library
-#     Copyright (C) Dean Camera, 2016.
+#     Copyright (C) Dean Camera, 2015.
 #
 #  dean [at] fourwalledcubicle [dot] com
 #           www.lufa-lib.org
@@ -9,7 +9,7 @@
 # Static anlysis of the entire LUFA source tree, using the free cross-platform "cppcheck" tool.
 
 # Path to the LUFA library core
-LUFA_PATH := ../../lufa/LUFA/
+LUFA_PATH := ../../LUFA/
 
 CPPCHECK_EXCLUDES := FATFs/            \
                      PetiteFATFs/      \
@@ -39,9 +39,9 @@ end:
 
 %:
 
+
 .PHONY: all begin end
 
-# Include common DMBS build system modules
-DMBS_PATH      ?= $(LUFA_PATH)/Build/DMBS/DMBS
-include $(DMBS_PATH)/core.mk
-include $(DMBS_PATH)/cppcheck.mk
+# Include LUFA build script makefiles
+include $(LUFA_PATH)/Build/lufa_core.mk
+include $(LUFA_PATH)/Build/lufa_cppcheck.mk

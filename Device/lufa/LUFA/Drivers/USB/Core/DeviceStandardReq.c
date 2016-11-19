@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -152,8 +152,8 @@ static void USB_Device_SetConfiguration(void)
 			#define MemoryAddressSpace  MEMSPACE_FLASH
 		#elif defined(USE_EEPROM_DESCRIPTORS)
 			#define MemoryAddressSpace  MEMSPACE_EEPROM
-		#elif defined(USE_RAM_DESCRIPTORS)
-			#define MemoryAddressSpace  MEMSPACE_RAM
+		#elif defined(USE_SRAM_DESCRIPTORS)
+			#define MemoryAddressSpace  MEMSPACE_SRAM
 		#else
 			uint8_t MemoryAddressSpace;
 		#endif
@@ -292,7 +292,6 @@ static void USB_Device_GetStatus(void)
 	switch (USB_ControlRequest.bmRequestType)
 	{
 		case (REQDIR_DEVICETOHOST | REQTYPE_STANDARD | REQREC_DEVICE):
-		{
 			#if !defined(NO_DEVICE_SELF_POWER)
 			if (USB_Device_CurrentlySelfPowered)
 			  CurrentStatus |= FEATURE_SELFPOWERED_ENABLED;
@@ -303,16 +302,9 @@ static void USB_Device_GetStatus(void)
 			  CurrentStatus |= FEATURE_REMOTE_WAKEUP_ENABLED;
 			#endif
 			break;
-		}
 		case (REQDIR_DEVICETOHOST | REQTYPE_STANDARD | REQREC_ENDPOINT):
-		{
 			#if !defined(CONTROL_ONLY_DEVICE)
-			uint8_t EndpointIndex = ((uint8_t)USB_ControlRequest.wIndex & ENDPOINT_EPNUM_MASK);
-
-			if (EndpointIndex >= ENDPOINT_TOTAL_ENDPOINTS)
-				return;
-
-			Endpoint_SelectEndpoint(EndpointIndex);
+			Endpoint_SelectEndpoint((uint8_t)USB_ControlRequest.wIndex & ENDPOINT_EPNUM_MASK);
 
 			CurrentStatus = Endpoint_IsStalled();
 
@@ -320,7 +312,6 @@ static void USB_Device_GetStatus(void)
 			#endif
 
 			break;
-		}
 		default:
 			return;
 	}
@@ -339,23 +330,20 @@ static void USB_Device_ClearSetFeature(void)
 	{
 		#if !defined(NO_DEVICE_REMOTE_WAKEUP)
 		case REQREC_DEVICE:
-		{
 			if ((uint8_t)USB_ControlRequest.wValue == FEATURE_SEL_DeviceRemoteWakeup)
 			  USB_Device_RemoteWakeupEnabled = (USB_ControlRequest.bRequest == REQ_SetFeature);
 			else
 			  return;
 
 			break;
-		}
 		#endif
 		#if !defined(CONTROL_ONLY_DEVICE)
 		case REQREC_ENDPOINT:
-		{
 			if ((uint8_t)USB_ControlRequest.wValue == FEATURE_SEL_EndpointHalt)
 			{
 				uint8_t EndpointIndex = ((uint8_t)USB_ControlRequest.wIndex & ENDPOINT_EPNUM_MASK);
 
-				if (EndpointIndex == ENDPOINT_CONTROLEP || EndpointIndex >= ENDPOINT_TOTAL_ENDPOINTS)
+				if (EndpointIndex == ENDPOINT_CONTROLEP)
 				  return;
 
 				Endpoint_SelectEndpoint(EndpointIndex);
@@ -376,7 +364,6 @@ static void USB_Device_ClearSetFeature(void)
 			}
 
 			break;
-		}
 		#endif
 		default:
 			return;

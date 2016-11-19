@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -364,8 +364,8 @@ void USB_SetHIDReportItemInfo(uint8_t* ReportData,
 
 	while (DataBitsRem--)
 	{
-		if (ReportItem->Value & BitMask)
-		  ReportData[CurrentBit / 8] |= (1 << (CurrentBit % 8));
+		if (ReportItem->Value & (1 << (CurrentBit % 8)))
+		  ReportData[CurrentBit / 8] |= BitMask;
 
 		CurrentBit++;
 		BitMask <<= 1;

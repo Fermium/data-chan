@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -149,7 +149,7 @@ void Application_Jump_Check(void)
 		MagicBootKey = 0;
 
 		// cppcheck-suppress constStatement
-		((void (*)(void))0x7000)();
+		((void (*)(void))0x0000)();
 	}
 }
 

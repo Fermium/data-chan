@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -197,14 +197,17 @@ const USB_Descriptor_String_t PROGMEM USART_ProductString = USB_STRING_DESCRIPTO
  *  callback function in the main source file, to retrieve the device's descriptors when in USART bridge mode.
  */
 uint16_t USART_GetDescriptor(const uint16_t wValue,
-                             const uint16_t wIndex,
-                             const void** const DescriptorAddress)
+                             const uint8_t wIndex,
+                             const void** const DescriptorAddress,
+                             uint8_t* const DescriptorMemorySpace)
 {
 	const uint8_t  DescriptorType   = (wValue >> 8);
 	const uint8_t  DescriptorNumber = (wValue & 0xFF);
 
 	const void* Address = NULL;
 	uint16_t    Size    = NO_DESCRIPTOR;
+
+	*DescriptorMemorySpace = MEMSPACE_FLASH;
 
 	switch (DescriptorType)
 	{

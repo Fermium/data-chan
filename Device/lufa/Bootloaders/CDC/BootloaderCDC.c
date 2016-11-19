@@ -1,13 +1,13 @@
 /*
              LUFA Library
-     Copyright (C) Dean Camera, 2016.
+     Copyright (C) Dean Camera, 2015.
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
 */
 
 /*
-  Copyright 2016  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  Copyright 2015  Dean Camera (dean [at] fourwalledcubicle [dot] com)
 
   Permission to use, copy, modify, distribute, and sell this
   software and its documentation for any purpose is hereby granted
@@ -360,7 +360,7 @@ static void ReadWriteMemoryBlock(const uint8_t Command)
 			else
 			{
 				/* Write the next EEPROM byte from the endpoint */
-				eeprom_update_byte((uint8_t*)((intptr_t)(CurrAddress >> 1)), FetchNextCommandByte());
+				eeprom_write_byte((uint8_t*)((intptr_t)(CurrAddress >> 1)), FetchNextCommandByte());
 
 				/* Increment the address counter after use */
 				CurrAddress += 2;
@@ -614,7 +614,7 @@ static void CDC_Task(void)
 	else if (Command == AVR109_COMMAND_WriteEEPROM)
 	{
 		/* Read the byte from the endpoint and write it to the EEPROM */
-		eeprom_update_byte((uint8_t*)((intptr_t)(CurrAddress >> 1)), FetchNextCommandByte());
+		eeprom_write_byte((uint8_t*)((intptr_t)(CurrAddress >> 1)), FetchNextCommandByte());
 
 		/* Increment the address after use */
 		CurrAddress += 2;
@@ -671,3 +671,4 @@ static void CDC_Task(void)
 	/* Acknowledge the command from the host */
 	Endpoint_ClearOUT();
 }
+

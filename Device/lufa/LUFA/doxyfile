@@ -806,7 +806,6 @@ RECURSIVE              = YES
 
 EXCLUDE                = Documentation/ \
                          StudioIntegration/ \
-                         Build/ \
                          License.txt
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
