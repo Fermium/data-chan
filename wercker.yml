@@ -7,6 +7,9 @@ build:
     - install-packages:
         packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
     - script:
+        name: Initialize git submodules
+        code: git submodule update --init --recursive
+    - script:
         name: Building Project
         code: make all
 deploy :
@@ -53,4 +56,3 @@ deploy :
           git add .
           git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
           git push --quiet &> /dev/null
-
