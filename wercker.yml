@@ -9,8 +9,11 @@ build:
     - script:
         name: Building Project
         code: make all
+        
   after-steps:
-    - iansmith9876/pretty-slack-notify:
+    - install-packages:
+        packages: ruby
+    - wantedly/step-pretty-slack-notify:
         team: fermiumlabs
         token: $SLACK_API_TOKEN
         channel: project-hall
