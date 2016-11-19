@@ -29,7 +29,7 @@
 #define USB_MANUFACTURE                         L"Denis"
 #define USB_NAME                                L"datachan tester"
 #define GENERIC_REPORT_SIZE                     64
-#define GENERIC_POLL_INTERVAL_MS                0x05
+#define GENERIC_POLL_INTERVAL_MS                0x01 // originally was 0x05
 
 /*
 65 can also be used (but using a 65b packet means 35 measures each second,

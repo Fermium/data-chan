@@ -32,6 +32,75 @@
     #include <malloc.h>
 #endif
 
+int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
+    if ((dev == (datachan_device_t*)NULL) || (data == (uint8_t*)NULL))
+        return 0;
+
+    int bytes_transferred = 0, result = 0;;
+
+    // create a private safe buffer
+    uint8_t data_in[GENERIC_REPORT_SIZE];
+
+    // perform the data transmission
+    pthread_mutex_lock(&dev->handler_mutex);
+    result = libusb_bulk_transfer(
+            dev->handler,
+            USB_IN_ENDPOINT,
+            data_in,
+            sizeof(data_in),
+            &bytes_transferred,
+            TIMEOUT_MS
+        );
+    pthread_mutex_unlock(&dev->handler_mutex);
+
+    // check for the CRC
+    if ((bytes_transferred == GENERIC_REPORT_SIZE) && (!CRC_check(data_in, GENERIC_REPORT_SIZE - 1, data_in[GENERIC_REPORT_SIZE - 1])))
+        bytes_transferred = 0;
+
+    // copy the result on the unsafe buffer (on success)
+    if ((result == 0) && (bytes_transferred > 0))
+        memcpy((void*)data, (const void*)data_in, bytes_transferred - 1);
+    else if (bytes_transferred != 0)
+        bytes_transferred = 0;
+
+    return bytes_transferred;
+}
+
+int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
+    if ((dev == (datachan_device_t*)NULL) || (data == (uint8_t*)NULL) || (data_length == 0))
+        return 0;
+
+    int bytes_transferred = 0, result = 0;
+
+    // avoid buffer overflow during memcpy
+    data_length = (data_length > (GENERIC_REPORT_SIZE-1)) ? GENERIC_REPORT_SIZE-1 : data_length;
+
+    // zero everything unused and copy the buffer
+    uint8_t data_out[GENERIC_REPORT_SIZE];
+    memset((void*)data_out, 0, sizeof(data_out));
+    memcpy((void*)data_out, data, data_length);
+
+    // append the CRC byte for error catching purpose
+    data_out[GENERIC_REPORT_SIZE - 1] = CRC_calc(data_out, GENERIC_REPORT_SIZE - 1);
+
+    // perform the data transmission
+    pthread_mutex_lock(&dev->handler_mutex);
+    result = libusb_bulk_transfer(
+            dev->handler,
+            USB_OUT_ENDPOINT,
+            data_out,
+            sizeof(data_out),
+            &bytes_transferred,
+            TIMEOUT_MS
+        );
+    pthread_mutex_unlock(&dev->handler_mutex);
+
+    // error check
+    bytes_transferred = (result == 0) ? bytes_transferred : 0;
+
+    return bytes_transferred;
+}
+
 void* IO_bulk_thread(void* device) {
     if (device == NULL)
         pthread_exit(NULL);
@@ -42,6 +111,14 @@ void* IO_bulk_thread(void* device) {
     measure_t m;
 
     while (datachan_device_is_enabled(dev)) {
+        // get the bulk to be written
+        uint8_t out_buffer[GENERIC_REPORT_SIZE - 1];
+        datachan_dequeue_request(dev, out_buffer);
+        
+        // write to the device
+        data_size = datachan_raw_write(dev, out_buffer, GENERIC_REPORT_SIZE - 1);
+        
+        // read from the device
         data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
 
         // deserialize the received measure only if it really is a valid measure
