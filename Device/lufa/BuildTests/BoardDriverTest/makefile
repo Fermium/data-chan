@@ -12,7 +12,7 @@
 # compiler.
 
 # Path to the LUFA library core
-LUFA_PATH := ../../LUFA/
+LUFA_PATH := ../../lufa/LUFA/
 
 # Build test cannot be run with multiple parallel jobs
 .NOTPARALLEL:

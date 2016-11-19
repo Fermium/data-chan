@@ -9,7 +9,7 @@
 # Static anlysis of the entire LUFA source tree, using the free cross-platform "cppcheck" tool.
 
 # Path to the LUFA library core
-LUFA_PATH := ../../LUFA/
+LUFA_PATH := ../../lufa/LUFA/
 
 CPPCHECK_EXCLUDES := FATFs/            \
                      PetiteFATFs/      \
