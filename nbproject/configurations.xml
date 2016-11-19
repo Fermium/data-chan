@@ -565,1597 +565,1597 @@
       </item>
       <item path="Device/Bootstrap/GenericHID.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Build/HID_EEPROM_Loader/HID_EEPROM_Loader.c"
+      <item path="Device/lufa/LUFA/Build/HID_EEPROM_Loader/HID_EEPROM_Loader.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DeviceTemplate/Descriptors.c"
+      <item path="Device/lufa/LUFA/CodeTemplates/DeviceTemplate/Descriptors.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DeviceTemplate/Descriptors.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DeviceTemplate/Descriptors.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DeviceTemplate/DeviceApplication.c"
+      <item path="Device/lufa/LUFA/CodeTemplates/DeviceTemplate/DeviceApplication.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DeviceTemplate/DeviceApplication.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DeviceTemplate/DeviceApplication.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DriverStubs/Board.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DriverStubs/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DriverStubs/Buttons.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DriverStubs/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DriverStubs/Dataflash.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DriverStubs/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DriverStubs/Joystick.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DriverStubs/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/DriverStubs/LEDs.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/DriverStubs/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/HostTemplate/HostApplication.c"
+      <item path="Device/lufa/LUFA/CodeTemplates/HostTemplate/HostApplication.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/HostTemplate/HostApplication.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/HostTemplate/HostApplication.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/CodeTemplates/LUFAConfig.h"
+      <item path="Device/lufa/LUFA/CodeTemplates/LUFAConfig.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/ArchitectureSpecific.h"
+      <item path="Device/lufa/LUFA/Common/ArchitectureSpecific.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/Architectures.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Common/Architectures.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/Attributes.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Common/Attributes.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/BoardTypes.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Common/BoardTypes.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/Common.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Common/Common.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/CompilerSpecific.h"
+      <item path="Device/lufa/LUFA/Common/CompilerSpecific.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Common/Endianness.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Common/Endianness.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/ADAFRUITU4/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/ADAFRUITU4/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/ADAFRUITU4/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/ADAFRUITU4/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/ATAVRUSBRF01/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BENITO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BENITO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BENITO/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BENITO/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BENITO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BENITO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BIGMULTIO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BIGMULTIO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BIGMULTIO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BIGMULTIO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BLACKCAT/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BLACKCAT/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BLACKCAT/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BLACKCAT/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUI/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUI/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUI/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUI/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUMBLEB/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUMBLEB/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUMBLEB/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUMBLEB/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUMBLEB/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUMBLEB/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/BUMBLEB/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/BUMBLEB/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/CULV3/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/CULV3/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/CULV3/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/CULV3/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/CULV3/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/CULV3/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/DUCE/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/DUCE/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/DUCE/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/DUCE/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/EVK527/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/EVK527/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/EVK527/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/EVK527/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/EVK527/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/EVK527/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/EVK527/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/EVK527/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/EVK527/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/EVK527/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/JMDBU2/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/JMDBU2/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/JMDBU2/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/JMDBU2/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/JMDBU2/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/JMDBU2/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/LEONARDO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/LEONARDO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/LEONARDO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/LEONARDO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MAXIMUS/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MAXIMUS/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MAXIMUS/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MAXIMUS/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICRO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICRO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICRO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICRO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROPENDOUS/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROPENDOUS/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROPENDOUS/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROPENDOUS/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROPENDOUS/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROPENDOUS/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROSIN162/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROSIN162/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROSIN162/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROSIN162/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MICROSIN162/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MICROSIN162/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MINIMUS/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MINIMUS/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MINIMUS/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MINIMUS/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MINIMUS/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MINIMUS/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MULTIO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MULTIO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/MULTIO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/MULTIO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX162/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX162/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX162/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX162/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX162/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX162/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX32U4/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX32U4/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX32U4/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX32U4/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEX32U4/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEX32U4/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXISPMK2/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/OLIMEXT32U4/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/RZUSBSTICK/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/RZUSBSTICK/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/RZUSBSTICK/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/RZUSBSTICK/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/SPARKFUN8U2/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/SPARKFUN8U2/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/SPARKFUN8U2/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/SPARKFUN8U2/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STANGE_ISP/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STANGE_ISP/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STANGE_ISP/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STANGE_ISP/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STANGE_ISP/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STANGE_ISP/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK525/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK525/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK525/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK525/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK525/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK525/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK525/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK525/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK525/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK525/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK526/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK526/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK526/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK526/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK526/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK526/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK526/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK526/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/STK526/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/STK526/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/TEENSY/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/TEENSY/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/TEENSY/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/TEENSY/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/TUL/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/TUL/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/TUL/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/TUL/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/TUL/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/TUL/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/U2S/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/U2S/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/U2S/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/U2S/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/U2S/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/U2S/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/UDIP/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/UDIP/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/UDIP/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/UDIP/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/UDIP/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/UDIP/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/UNO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/UNO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/UNO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/UNO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USB2AX/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USB2AX/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USB2AX/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USB2AX/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USB2AX/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USB2AX/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBFOO/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBFOO/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBFOO/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBFOO/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBFOO/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBFOO/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBKEY/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBKEY/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBKEY/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBKEY/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBKEY/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBKEY/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBKEY/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBKEY/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBKEY/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBKEY/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBTINYMKII/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBTINYMKII/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBTINYMKII/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBTINYMKII/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/USBTINYMKII/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/USBTINYMKII/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/XPLAIN/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/XPLAIN/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/XPLAIN/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/XPLAIN/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/XPLAIN/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/XPLAIN/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/XPLAINED_MINI/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/XPLAINED_MINI/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/XPLAINED_MINI/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/XPLAINED_MINI/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/YUN/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/YUN/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/AVR8/YUN/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/AVR8/YUN/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Board.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Drivers/Board/Board.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/LEDs.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Drivers/Board/LEDs.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Temperature.c"
+      <item path="Device/lufa/LUFA/Drivers/Board/Temperature.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/Temperature.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/Temperature.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1100/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1100/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1100/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1100/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1100/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1100/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1100/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1100/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1101/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1101/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1101/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1101/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1101/Joystick.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1101/Joystick.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1101/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1101/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1104/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1104/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1104/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1104/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/EVK1104/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/EVK1104/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/UC3/UC3A3_XPLAINED/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/A3BU_XPLAINED/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Dataflash.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/Dataflash.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/B1_XPLAINED/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/Board.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/Board.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/Buttons.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/Buttons.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/LEDs.h"
+      <item path="Device/lufa/LUFA/Drivers/Board/XMEGA/C3_XPLAINED/LEDs.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Misc/AT45DB321C.h"
+      <item path="Device/lufa/LUFA/Drivers/Misc/AT45DB321C.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Misc/AT45DB642D.h"
+      <item path="Device/lufa/LUFA/Drivers/Misc/AT45DB642D.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Misc/RingBuffer.h"
+      <item path="Device/lufa/LUFA/Drivers/Misc/RingBuffer.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Misc/TerminalCodes.h"
+      <item path="Device/lufa/LUFA/Drivers/Misc/TerminalCodes.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/ADC.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/ADC.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/ADC_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/ADC_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/SPI_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/SPI_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/SerialSPI_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/SerialSPI_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/SPI.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/SPI.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/Serial.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/Serial.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/SerialSPI.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/SerialSPI.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/TWI.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/TWI.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/SPI_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/SPI_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/SerialSPI_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/SerialSPI_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/Serial_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/Peripheral/XMEGA/TWI_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/AndroidAccessoryClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/AndroidAccessoryClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/AudioClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/AudioClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/CDCClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/CDCClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/AndroidAccessoryClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/AndroidAccessoryClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/AudioClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/AudioClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/CDCClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/CDCClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/HIDClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/HIDClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/HIDParser.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/HIDParser.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/HIDParser.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/HIDParser.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/HIDReportData.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/HIDReportData.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/MIDIClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/MIDIClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/MassStorageClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/MassStorageClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/PrinterClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/PrinterClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/RNDISClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/RNDISClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Common/StillImageClassCommon.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Common/StillImageClassCommon.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/AudioClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/AudioClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/AudioClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/CDCClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/CDCClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/CDCClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/HIDClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/HIDClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/HIDClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/MIDIClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/MassStorageClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/PrinterClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Device/RNDISClassDevice.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/HIDClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/HIDClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/AndroidAccessoryClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/AudioClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/AudioClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/AudioClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/AudioClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/CDCClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/CDCClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/CDCClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/CDCClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/HIDClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/HIDClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/HIDClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/HIDClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/MIDIClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/MIDIClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/MIDIClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/MassStorageClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/PrinterClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/PrinterClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/PrinterClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/RNDISClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/RNDISClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/RNDISClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/StillImageClassHost.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/Host/StillImageClassHost.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/Host/StillImageClassHost.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/MIDIClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/MIDIClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/MassStorageClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/MassStorageClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/PrinterClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/PrinterClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/RNDISClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/RNDISClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Class/StillImageClass.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Class/StillImageClass.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/OTG_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/OTG_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_R.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_Control_W.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Template/Template_Endpoint_RW.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/Template/Template_Pipe_RW.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/ConfigDescriptors.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/ConfigDescriptors.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/ConfigDescriptors.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/ConfigDescriptors.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Device.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Device.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/DeviceStandardReq.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/DeviceStandardReq.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/DeviceStandardReq.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/DeviceStandardReq.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Endpoint.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Endpoint.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/EndpointStream.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/EndpointStream.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Events.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Events.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Events.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Events.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Host.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Host.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/HostStandardReq.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/HostStandardReq.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/HostStandardReq.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/HostStandardReq.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/OTG.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/OTG.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/Pipe.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/Pipe.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/PipeStream.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/PipeStream.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/StdDescriptors.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/StdDescriptors.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/StdRequestType.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/StdRequestType.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Device_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Device_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Device_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Device_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/EndpointStream_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Endpoint_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Host_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Host_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Host_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Host_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/PipeStream_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Pipe_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_R.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_Control_W.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Template/Template_Endpoint_RW.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/Template/Template_Pipe_RW.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/USBController_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/USBController_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/USBController_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/UC3/USBInterrupt_UC3.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/USBController.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/USBController.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/USBInterrupt.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/USBInterrupt.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/USBMode.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/USBMode.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/USBTask.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/USBTask.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/USBTask.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/USBTask.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Device_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Host_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/PipeStream_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Pipe_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_R.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_Control_W.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/Template/Template_Endpoint_RW.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.h"
+      <item path="Device/lufa/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Drivers/USB/USB.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Drivers/USB/USB.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/Platform.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Platform/Platform.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/UC3/ClockManagement.h"
+      <item path="Device/lufa/LUFA/Platform/UC3/ClockManagement.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/UC3/Exception.S"
+      <item path="Device/lufa/LUFA/Platform/UC3/Exception.S"
             ex="false"
             tool="4"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/UC3/InterruptManagement.c"
+      <item path="Device/lufa/LUFA/Platform/UC3/InterruptManagement.c"
             ex="false"
             tool="0"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/UC3/InterruptManagement.h"
+      <item path="Device/lufa/LUFA/Platform/UC3/InterruptManagement.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Platform/XMEGA/ClockManagement.h"
+      <item path="Device/lufa/LUFA/Platform/XMEGA/ClockManagement.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Device/LUFA/Version.h" ex="false" tool="3" flavor2="0">
+      <item path="Device/lufa/LUFA/Version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Host/API/API.c" ex="false" tool="0" flavor2="0">
       </item>
