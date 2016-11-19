@@ -15,14 +15,18 @@ On a generic system you will need at least:
 * libusb-1.0-0-dev
 * libpthread-stubs0-dev (pre-installed on most systems)
 
+On Ubuntu/Debian run:
+
+```sh
+sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+```
+
 	 
 If you're using windows you will **also** need to install:
 
 * msys 1.0
 * [tdm-gcc](http://tdm-gcc.tdragon.net/)
 * [grep for windows](http://www.wingrep.com/)
-
-
 	
 Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other
 AVR microcontroller you will need a [USBASP](http://www.fischl.de/usbasp/) to program the microcontroller and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
