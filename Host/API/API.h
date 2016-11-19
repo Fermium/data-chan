@@ -28,7 +28,7 @@
 
 struct bulk_out_t {
     uint8_t *buffer;
-    struct bulk_out_t *prev;
+    struct bulk_out_t *next;
 };
 
 typedef struct {

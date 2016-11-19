@@ -111,6 +111,14 @@ void* IO_bulk_thread(void* device) {
     measure_t m;
 
     while (datachan_device_is_enabled(dev)) {
+        // get the bulk to be written
+        uint8_t out_buffer[GENERIC_REPORT_SIZE - 1];
+        datachan_dequeue_request(dev, out_buffer);
+        
+        // write to the device
+        data_size = datachan_raw_write(dev, out_buffer, GENERIC_REPORT_SIZE - 1);
+        
+        // read from the device
         data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
 
         // deserialize the received measure only if it really is a valid measure
@@ -119,13 +127,6 @@ void* IO_bulk_thread(void* device) {
             repack_measure(&m, data_in + 1);
             datachan_device_enqueue_measure(dev, (const measure_t*)&m);
         }
-        
-        // generate an empty report
-        uint8_t out_buffer[GENERIC_REPORT_SIZE - 1];
-        datachan_dequeue_request(dev, out_buffer);
-        
-        // write to the device
-        data_size = datachan_raw_write(dev, out_buffer, GENERIC_REPORT_SIZE - 1);
     }
 
     return NULL;

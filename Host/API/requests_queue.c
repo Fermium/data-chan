@@ -35,6 +35,27 @@
 void datachan_enqueue_request(datachan_device_t* dev, uint8_t* buf) {
     pthread_mutex_lock(&dev->requests_queue_mutex);
     
+    // copy the buffer
+    uint8_t* new_req = (uint8_t*)malloc(GENERIC_REPORT_SIZE - 1);
+    memcpy((void*)new_req, buf, GENERIC_REPORT_SIZE - 1);
+    
+    // create and populate the list element
+    struct bulk_out_t* new_out = (struct bulk_out_t*)malloc(sizeof(struct bulk_out_t));
+    new_out->buffer = new_req;
+    new_out->next = (struct bulk_out_t*)NULL;
+    
+    if (dev->requests_queue == (struct bulk_out_t*)NULL) {
+        dev->requests_queue = new_out;
+    } else {
+        // go to the end of the list
+        struct bulk_out_t* current_out = dev->requests_queue;
+        while (current_out->next != (struct bulk_out_t*)NULL)
+            current_out = current_out->next;
+        
+        // and append the new element
+        current_out->next = new_out;
+    }
+    
     pthread_mutex_unlock(&dev->requests_queue_mutex);
 }
 
@@ -47,7 +68,20 @@ void datachan_dequeue_request(datachan_device_t* dev, uint8_t* buf) {
     // try to replace the default packet
     pthread_mutex_lock(&dev->requests_queue_mutex);
     
-    
+    if (dev->requests_queue != (struct bulk_out_t*)NULL) {
+        // get the current bulk buffer to be returned
+        struct bulk_out_t* current_out = dev->requests_queue;
+        
+        // remove from the list the removed bulk buffer
+        dev->requests_queue = dev->requests_queue->next;
+        
+        // copy the buffer to be returned
+        memcpy(out_packet, current_out->buffer, GENERIC_REPORT_SIZE - 1);
+        
+        // remove memory
+        free((void*)current_out->buffer);
+        free((void*)current_out);
+    }
     
     pthread_mutex_unlock(&dev->requests_queue_mutex);
     
