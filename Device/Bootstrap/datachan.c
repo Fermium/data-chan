@@ -102,13 +102,13 @@ void datachan_generate_report(uint8_t* DataArray)
             // the measure is going to be removed from memory
             free((void*)data_to_be_sent); // save space!
         }// async requests manager
-        /*else if (cmd_queue != (struct request_t*)NULL) {
+        else if (cmd_queue != (struct request_t*)NULL) {
             // point to the first byte after the response type
             uint8_t *response_builder = DataArray + 1;
 
             // get the async request to be fulfilled and remove it from the queue
             struct request_t* req = cmd_queue;
-            req->next = (struct request_t*)NULL;
+            //req->next = (struct request_t*)NULL;
             cmd_queue = cmd_queue->next;
 
             // flag the response as an async request response
@@ -125,12 +125,12 @@ void datachan_generate_report(uint8_t* DataArray)
             Process_Async(buffer);
 
             // apply the generated response
-            memcpy((void*)response_builder, buffer, sizeof(buffer));
+            memcpy((void*)response_builder, (const void*)buffer, sizeof(buffer));
 
             // remove from the memory the fulfilled async command
             if (req->buffer != NULL) free((void*)req->buffer);
             free((void*)req);
-        } */
+        }
         else {
             DataArray[0] = ((uint8_t)NONE);
         }
