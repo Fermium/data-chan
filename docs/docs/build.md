@@ -15,8 +15,7 @@ On a generic system you will need at least:
 * libusb-1.0-0-dev
 * libpthread-stubs0-dev (pre-installed on most systems)
 
-__NOTE:__ gcc and avr-libc used versions are 4.9, but any other greater versions
-should do a better job (gcc 6 compatibility is mostly tested).
+__NOTE:__ gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).
 
 On Ubuntu/Debian run:
 
@@ -40,7 +39,6 @@ If you're using windows you will **also** need to install:
 * [tdm-gcc](http://tdm-gcc.tdragon.net/)
 * [grep for windows](http://www.wingrep.com/)
 
-Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other
-AVR microcontroller you will need a [USBASP](http://www.fischl.de/usbasp/) to program the microcontroller and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
+Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a [USBASP](http://www.fischl.de/usbasp/) to program the microcontroller and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
 
 Because you'll be able to use the pre-burned bootloader only once!

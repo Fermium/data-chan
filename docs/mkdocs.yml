@@ -7,5 +7,6 @@ pages:
 - Protocol: protocol.md
 - IN Packets:
     - Measure:    IN_packets/Measure.md
+- FAQs: faq.md
 
 theme: readthedocs
