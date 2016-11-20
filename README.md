@@ -1,34 +1,40 @@
-# data-chan
-An USB protocol used to send data acquired from physics instruments.
+# Data-chan
 
-## Main points
-The protocol is designed to be:
-<ul>
-    <li>minimal</li>
-    <li>fast</li>
-    <li>configurable</li>
-</ul>
+Data chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.
+
+At the current time it can transfer over 800 measures every second.
+
+It makes usage of [LUFA](http://www.fourwalledcubicle.com/LUFA.php) on the device side and [Libusb](http://www.libusb.org/) on the host.
+
+The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.
+
+It's tought to be:
+
+* Minimal
+* Fast 
+* Configurable
+
+##Features:
+
+* Broad compatibility with MacOS/Windows/Linux
+* Bindings for most of the major programming languages
+* Do not require user interaction to install the required drivers
+* Small resource footprint on the MCU
+* Portable to other devices compatible with the LUFA library (and it's forks)
 
 ## Compatibility
 The Host API are compatible with (almost) any operating system, because they are
 based on pthread and libusb.
 
 Official compatibility list is:
-<ul>
-    <li>Windows XP or later</li>
-    <li>Linux kernel 2.6 or upper</li>
-    <li>FreeBSD 9.0 or later</li>
-    <li>MacOS 10.8 or later</li>
-</ul>
 
-On any other system that supports libusb1.0 you may need to install a generic libusb
-driver to have your device working.
+* Windows XP or later
+* Linux kernel 2.6 or later
+* FreeBSD 9.0 or later
+* MacOS 10.8 or later
 
-## Speed
-At the current state the protocol, implemented in an ATmega32u4 MCU
-(source code located under the Device directory) the protocol can transfer
-more than 800 measures/s.
+On any other system that supports libusb1.0 you may need to install a generic libusb driver to have your device working.
 
-## Documentation
-As the protocol must be simple and highly configurable, everything you'll ever
-need is [documented](https://neroreflex.github.io/data-chan/)!
+## Docs
+
+Check out the [DOCS](https://neroreflex.github.io/data-chan/) for more info.

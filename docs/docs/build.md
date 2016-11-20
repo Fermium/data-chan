@@ -1,28 +1,38 @@
 # Build
 
-The entire project can be compiled with the "make all" command, even on windows, but it requires a lot of software!
+The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies!
 
 
 ## Environment
 
 On a generic system you will need at least:
-<ul>
-make
-	<li>gcc-avr</li>
-	<li>avr-libc</li>
-	<li>gcc</li>
-	<li>g++</li>
-	<li>libusb-1.0-0-dev</li>
-	<li>libpthread-stubs0-dev (pre-installed on most systems)</li>
-</ul>
+
+* make
+* gcc-avr (somewhere called avr-gcc)
+* avr-libc 
+* gcc
+* g++
+* libusb-1.0-0-dev
+* libpthread-stubs0-dev (pre-installed on most systems)
+
+On Ubuntu/Debian run:
+
+```sh
+sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+```
+
+On MacOS if you use Homebrew you have to tap an external repo:
+```sh
+brew tap osx-cross/avr
+brew install avr-libc avr-gcc gcc libusb 
+```
+
 	 
-If you're using windows you will __also__ need to install:
-<ul>
-	<li>msys 1.0</li>
-	<li>[tdm-gcc](http://tdm-gcc.tdragon.net/)</li>
-	<li>[grep for windows](http://www.wingrep.com/)</li>
-</ul>
+If you're using windows you will **also** need to install:
+
+* msys 1.0
+* [tdm-gcc](http://tdm-gcc.tdragon.net/)
+* [grep for windows](http://www.wingrep.com/)
 	
-Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other
-AVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be
-unable to operate again once the first write!
+Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other
+AVR microcontroller you will need a [USBASP](http://www.fischl.de/usbasp/) to program the microcontroller and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.

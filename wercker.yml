@@ -1,14 +1,21 @@
 # docker box definition
-box: java
+box: ubuntu:xenial
 
 # defining the dev pipeline
 build:
   steps:
     - install-packages:
-        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make ruby
     - script:
-        name: Building Project
+        name: Initialize git submodules
+        code: git submodule update --init --recursive
+    - script:
+        name: Build Project
         code: make all
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_API_TOKEN
+
 deploy :
   steps :
     - install-packages:
@@ -53,4 +60,3 @@ deploy :
           git add .
           git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
           git push --quiet &> /dev/null
-

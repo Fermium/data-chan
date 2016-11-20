@@ -1,54 +1,40 @@
 # Protocol
 
-The protocol can be customized starting from the very USB basics.
+The protocol can be customized starting from the very USB basics, it's minimun entity is a packet.
 
-The protocol minimum entity is a packet.
+The protocol itself makes **huge** usage of the *GENERIC_REPORT_SIZE* macro which defines the number of bytes in each USB packet.
 
-The protocol makes __HUGE__ usage of the __GENERIC_REPORT_SIZE__ macro,
-that macro defines the number of bytes in each USB packet.
-
-The data-chan protocol uses *little-endian* then serializing data larger than one byte.
+The Data-chan protocol uses *little-endian* before serializing data larger than one byte.
 
 
 ## Packets Structure
 
 Both IN and OUT packets are formed this way:
 
-<table border="1">
-	<tr>
-		<td>byte</td>
-		<td>first</td>
-		<td>following</td>
-		<td>last</td>
-	</tr>
-	<tr>
-		<td>desc</td>
-		<td>type</td>
-		<td>data</td>
-		<td>CRC-8</td>
-	</tr>
-</table>
+| first byte | following bytes | last byte|
+| --- | --- | --- |
+| type | data | CRC-8 |
 
-The first byte contains the packet type: how data is used depends on the very first byte.
+The first bytes is the one that controls how the data is used.
 
-Each packet ends with the last byte used for the CRC code (standard 8 bits).
+From the host perspective there are two types of packets:
 
-From the host perspective there are two types of packets IN packets and OUT packets.
+* IN packets
+* OUT packets.
 
 
-## IN packets
+#### IN packets
 
 An incoming packet can be flagged as either one of these types:
-<ul>
-	<li>00h => NONE</li>
-	<li>01h => CMD_RESPONSE</li>
-	<li>03h => MEASURE</li>
-</ul>
-	
-When the packets is flagged as NONE it must be ignored.
 
-By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,
-which can't decode packets.
+* 00h => NONE
+* 01h => CMD_RESPONSE
+* 03h => MEASURE
+
+	
+Packets flagged with NONE must be ignored.
+
+By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.
 
 When the device is active every type of packet will be used.
 
