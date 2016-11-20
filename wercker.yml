@@ -23,7 +23,7 @@ deploy :
     - script:
         name: Downloading PIP
         code: |-
-          curl -O https://bootstrap.pypa.io/get-pip.py
+          wget https://bootstrap.pypa.io/get-pip.py
           sudo python get-pip.py
     - script:
         name: Testing Python

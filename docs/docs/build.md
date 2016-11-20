@@ -27,9 +27,12 @@ sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip op
 On MacOS if you use Homebrew you have to tap an external repo:
 ```sh
 brew tap osx-cross/avr
-brew install avr-libc avr-gcc gcc libusb
+brew install avr-libc avr-gcc libusb
 ```
-
+__NOTE:__ On MacOS if you don't have installed XCode you will *also* need to:
+```sh
+brew install gcc
+```
 
 If you're using windows you will **also** need to install:
 
