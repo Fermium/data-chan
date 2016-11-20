@@ -13,7 +13,7 @@ A MEASURE packet has the data field formed this way:
 		<td>13 to 14</td>
 	</tr>
 	<tr>
-		<td>type (8bits)</td>
+		<td>type</td>
 		<td>byte (8bits)</td>
 		<td>byte (8bits)</td>
 		<td>float (32bits)</td>

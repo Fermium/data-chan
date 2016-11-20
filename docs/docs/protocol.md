@@ -9,12 +9,11 @@ That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte
 
 The Data-chan protocol uses *little-endian* while serializing data larger than one byte.
 
-
 ## Packets Structure
 
 Both IN and OUT packets are formed this way:
 
-<table>
+<table border="1">
 	<tr>
 		<td>Position</td>
 		<td>first byte</td>
@@ -43,7 +42,7 @@ From the host perspective there are two types of packets:
 * OUT packets.
 
 
-#### IN packets
+#### IN Packets
 
 An incoming packet can be flagged as either one of these types:
 
@@ -58,5 +57,30 @@ By default every packet will be flagged as NONE, thus avoiding sending data to t
 
 When the device is active every type of packet will be used.
 
-A MEASURE description can be found [here](IN_packets/Measure.md),
-whereas a CMD_RESPONSE description can be read [here]().
+A MEASURE description can be found [here](IN_packets/measure.md),
+
+#### OUT Packets
+
+An outgoing packet can be:
+
+* 00h => NONE
+* 01h => CMD_REQUEST
+* 03h => CMD_ASYNC_REQUEST
+
+Packets flagged with NONE must be ignored, even if theirs CRC is valid.
+
+A CMD_REQUEST description can be found [here](OUT_packets/request.md).
+
+#### Async requests
+
+To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read
+the [Async](async.md) chapter.
+
+#### Tips & Tricks
+
+Any outgoing packet has the last bit of the first byte set to 1, whereas any
+incoming packet has the last bit of the first byte set to zero.
+
+A NONE packet definition does exists in both: IN and OUT packets.
+
+__NOTICE THAT:__ This fact can be used to detect bad packets!

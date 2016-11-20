@@ -33,8 +33,7 @@
 // commands codes
 #define ENABLE_TRANSMISSION     0x01
 #define DISABLE_TRANSMISSION    0x02
-#define GET_CONFIG_FLAG         0x03
-#define SET_CONFIG_FLAG         0x04
+#define SET_CONFIG_FLAG         0x03
 
 // request/response codes
 #define NONE                    0x00 // this is nothing. Nothing to send or receive to/from the device disabled
