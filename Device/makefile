@@ -19,7 +19,6 @@ all:
 %:
 	@echo Executing \"make $@\" on all LUFA library elements.
 	@echo
-	$(MAKE) -C lufa/LUFA $@
 	$(MAKE) -C Bootstrap $@
 	@echo
 	@echo LUFA \"make $@\" operation complete.
