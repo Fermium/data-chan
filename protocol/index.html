@@ -55,7 +55,7 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../build/">Building</a>
+        <a class="" href="../build/">Build</a>
         
     </li>
 <li>
@@ -69,8 +69,6 @@
                 <li class="toctree-l3"><a href="#protocol">Protocol</a></li>
                 
                     <li><a class="toctree-l4" href="#packets-structure">Packets Structure</a></li>
-                
-                    <li><a class="toctree-l4" href="#in-packets">IN packets</a></li>
                 
             
             </ul>
@@ -118,6 +116,9 @@
     <li>Protocol</li>
     <li class="wy-breadcrumbs-aside">
       
+        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/protocol.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
   <hr/>
@@ -126,43 +127,52 @@
             <div class="section">
               
                 <h1 id="protocol">Protocol</h1>
-<p>The protocol can be customized starting from the very USB basics.</p>
-<p>The protocol minimum entity is a packet.</p>
-<p>The protocol makes <strong>HUGE</strong> usage of the <strong>GENERIC_REPORT_SIZE</strong> macro,
-that macro defines the number of bytes in each USB packet.</p>
-<p>The data-chan protocol uses <em>little-endian</em> then serializing data larger than one byte.</p>
+<p>The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.</p>
+<p>The protocol itself makes <strong>huge</strong> usage of the <strong>GENERIC_REPORT_SIZE</strong> macro which defines the number of bytes, minus one, in each USB packet.</p>
+<p>That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte
+(the +1) is used for the CRC-8!</p>
+<p>The Data-chan protocol uses <em>little-endian</em> while serializing data larger than one byte.</p>
 <h2 id="packets-structure">Packets Structure</h2>
 <p>Both IN and OUT packets are formed this way:</p>
-<table border="1">
+<table>
     <tr>
-        <td>byte</td>
-        <td>first</td>
-        <td>following</td>
-        <td>last</td>
+        <td>Position</td>
+        <td>first byte</td>
+        <td>following bytes</td>
+        <td>last byte</td>
     </tr>
     <tr>
-        <td>desc</td>
-        <td>type</td>
+        <td>Description</td>
+    <td>type</td>
         <td>data</td>
         <td>CRC-8</td>
     </tr>
+    <tr>
+        <td>Offset</td>
+    <td>0</td>
+        <td>1</td>
+        <td>GENERIC_REPORT_SIZE</td>
+    </tr>
 </table>
 
-<p>The first byte contains the packet type: how data is used depends on the very first byte.</p>
-<p>Each packet ends with the last byte used for the CRC code (standard 8 bits).</p>
-<p>From the host perspective there are two types of packets IN packets and OUT packets.</p>
-<h2 id="in-packets">IN packets</h2>
-<p>An incoming packet can be flagged as either one of these types:
+<p>The first bytes is the one that controls how the data is used.</p>
+<p>From the host perspective there are two types of packets:</p>
 <ul>
-    <li>00h =&gt; NONE</li>
-    <li>01h =&gt; CMD_RESPONSE</li>
-    <li>03h =&gt; MEASURE</li>
-</ul></p>
-<p>When the packets is flagged as NONE it must be ignored.</p>
-<p>By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,
-which can't decode packets.</p>
+<li>IN packets</li>
+<li>OUT packets.</li>
+</ul>
+<h4 id="in-packets">IN packets</h4>
+<p>An incoming packet can be flagged as either one of these types:</p>
+<ul>
+<li>00h =&gt; NONE</li>
+<li>02h =&gt; CMD_ASYNC_RESPONSE</li>
+<li>04h =&gt; MEASURE</li>
+</ul>
+<p>Packets flagged with NONE must be ignored, even if theirs CRC is valid.</p>
+<p>By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.</p>
 <p>When the device is active every type of packet will be used.</p>
-<p>A MEASURE description can be found <a href="../IN_packets/Measure/">here</a>, whereas a CMD_RESPONSE description can be read <a href="">here</a>.</p>
+<p>A MEASURE description can be found <a href="../IN_packets/Measure/">here</a>,
+whereas a CMD_RESPONSE description can be read <a href="">here</a>.</p>
               
             </div>
           </div>
@@ -173,7 +183,7 @@ which can't decode packets.</p>
         <a href="../IN_packets/Measure/" class="btn btn-neutral float-right" title="Measure">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../build/" class="btn btn-neutral" title="Building"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../build/" class="btn btn-neutral" title="Build"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -197,6 +207,8 @@ which can't decode packets.</p>
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/NeroReflex/data-chan" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../build/" style="color: #fcfcfc;">&laquo; Previous</a></span>

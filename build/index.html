@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Building - data-chan</title>
+  <title>Build - data-chan</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Building";
+    var mkdocs_page_name = "Build";
     var mkdocs_page_input_path = "build.md";
     var mkdocs_page_url = "/build/";
   </script>
@@ -55,7 +55,7 @@
           
             <li>
     <li class="toctree-l1 current">
-        <a class="current" href="./">Building</a>
+        <a class="current" href="./">Build</a>
         
             <ul>
             
@@ -113,8 +113,11 @@
     
       
     
-    <li>Building</li>
+    <li>Build</li>
     <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/build.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -124,27 +127,42 @@
             <div class="section">
               
                 <h1 id="build">Build</h1>
-<p>The entire project can be compiled with the "make all" command, even on windows, but it requires a lot of software!</p>
+<p>The entire project can be compiled with the <code>make all</code> command, even on windows, but it requires a lot of dependencies!</p>
 <h2 id="environment">Environment</h2>
-<p>On a generic system you will need at least:
+<p>On a generic system you will need at least:</p>
 <ul>
-make
-    <li>gcc-avr</li>
-    <li>avr-libc</li>
-    <li>gcc</li>
-    <li>g++</li>
-    <li>libusb-1.0-0-dev</li>
-    <li>libpthread-stubs0-dev (pre-installed on most systems)</li>
-</ul></p>
-<p>If you're using windows you will <strong>also</strong> need to install:
+<li>make</li>
+<li>gcc-avr (somewhere called avr-gcc)</li>
+<li>avr-libc</li>
+<li>gcc</li>
+<li>g++</li>
+<li>libusb-1.0-0-dev</li>
+<li>libpthread-stubs0-dev (pre-installed on most systems)</li>
+</ul>
+<p><strong>NOTE:</strong> gcc and avr-libc used versions are 4.9, but any other greater versions
+should do a better job (gcc 6 compatibility is mostly tested).</p>
+<p>On Ubuntu/Debian run:</p>
+<pre><code class="sh">sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+</code></pre>
+
+<p>On MacOS if you use Homebrew you have to tap an external repo:</p>
+<pre><code class="sh">brew tap osx-cross/avr
+brew install avr-libc avr-gcc libusb
+</code></pre>
+
+<p><strong>NOTE:</strong> On MacOS if you don't have installed XCode you will <em>also</em> need to:</p>
+<pre><code class="sh">brew install gcc
+</code></pre>
+
+<p>If you're using windows you will <strong>also</strong> need to install:</p>
 <ul>
-    <li>msys 1.0</li>
-    <li><a href="http://tdm-gcc.tdragon.net/">tdm-gcc</a></li>
-    <li><a href="http://www.wingrep.com/">grep for windows</a></li>
-</ul></p>
-<p>Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other
-AVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be
-unable to operate again once the first write!</p>
+<li>msys 1.0</li>
+<li><a href="http://tdm-gcc.tdragon.net/">tdm-gcc</a></li>
+<li><a href="http://www.wingrep.com/">grep for windows</a></li>
+</ul>
+<p>Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other
+AVR microcontroller you will need a <a href="http://www.fischl.de/usbasp/">USBASP</a> to program the microcontroller and <a href="http://www.nongnu.org/avrdude/">AVRDUDE</a> to drive it.</p>
+<p>Because you'll be able to use the pre-burned bootloader only once!</p>
               
             </div>
           </div>
@@ -179,6 +197,8 @@ unable to operate again once the first write!</p>
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/NeroReflex/data-chan" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>

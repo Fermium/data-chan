@@ -2,82 +2,137 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Data-Chan\n\n\nData-chan is either a protocol and a collection of subroutines to use the protocol.\n\n\nData-chan is used to send physics measures from a generic device\nto the PC using native USB, \nNOT AN UGLY SERIAL-\nUSB IC!\n\n\nDue to the diversity of electronics devices and needs the protocol is designed to be:\n\n\n * simple and minimal\n * fast\n * costomizable\n\n\n\nAtmel AVR\n\n\nOn this repository you can find the device client program for the atmega32u4 and other AVR microcontrollers.\n\n\nHave you prepared your arduino nano pro?\n\n\nMeasures and Commands\n\n\nReceiving measures from a generic USB device is the main goal a data-chan.\n\n\nWe all know that physics devices needs command and configuration to properly operate,\nto fulfill this need data-chan can send two types of commands to the target device:\n\n\n * protocol-specific commands\n * free commands", 
+            "text": "Data-chan\n\n\nData chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.\n\n\nIt makes usage of \nlufa\n on the device side and \nLibusb\n on the host.\n\n\nThe framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.\n\n\nIt's tought to be:\n\n\n\n\nMinimal\n\n\nFast \n\n\nConfigurable\n\n\n\n\nFeatures\n\n\n\n\nBroad compatibility with MacOS/Windows/Linux\n\n\nBindings for most of the major programming languages\n\n\nDo not require user interaction to install the required drivers\n\n\nSmall resource footprint on the MCU\n\n\nPortable to other devices compatible with the LUFA library (and it's forks)\n\n\n\n\nFAQ\n\n\nIn what way is the native usb in Data-chan better than an serial-usb IC?\n\n\nFirst of all, those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easly available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the \nFTDIgate\n and the many signing problems in other \nbadly supported ICs\n.\nThird, most of the time they require drivers. \n\n\nWhy is the native usb Data-chan better than USB-CDC?\n\n\nUsb-CDC\n are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed... It's messy.\n\n\nShould I use Data-chan for [insert project name here]?\n\n\nData-chan is a well-defined protocol for a specific usage in datalogging instruments. If you can apply the same logic to your project, why not.\n\n\nWhich device can i use for testing?\n\n\nAnd \nArduino Nano\n programmed with an \nUSBASP\n and \nAVRDUDE\n will do.\n\n\nWARNING:\n Data-chan will break the bootloader!.\n\n\nWhat drivers does Data-chan use?\n\n\nIt use \nWinusb\n on windows, and included generic vendor-specific class driers on MacOS and Linux.\n\n\nI a beginner, should i use it?\n\n\nMost definitively not.\n\n\nI found a bug\n\n\nSubmit an issue!", 
             "title": "Home"
         }, 
         {
             "location": "/#data-chan", 
-            "text": "Data-chan is either a protocol and a collection of subroutines to use the protocol.  Data-chan is used to send physics measures from a generic device\nto the PC using native USB,  NOT AN UGLY SERIAL- USB IC!  Due to the diversity of electronics devices and needs the protocol is designed to be:   * simple and minimal\n * fast\n * costomizable", 
-            "title": "Data-Chan"
+            "text": "Data chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.  It makes usage of  lufa  on the device side and  Libusb  on the host.  The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.  It's tought to be:   Minimal  Fast   Configurable", 
+            "title": "Data-chan"
         }, 
         {
-            "location": "/#atmel-avr", 
-            "text": "On this repository you can find the device client program for the atmega32u4 and other AVR microcontrollers.  Have you prepared your arduino nano pro?", 
-            "title": "Atmel AVR"
+            "location": "/#features", 
+            "text": "Broad compatibility with MacOS/Windows/Linux  Bindings for most of the major programming languages  Do not require user interaction to install the required drivers  Small resource footprint on the MCU  Portable to other devices compatible with the LUFA library (and it's forks)", 
+            "title": "Features"
         }, 
         {
-            "location": "/#measures-and-commands", 
-            "text": "Receiving measures from a generic USB device is the main goal a data-chan.  We all know that physics devices needs command and configuration to properly operate,\nto fulfill this need data-chan can send two types of commands to the target device:   * protocol-specific commands\n * free commands", 
-            "title": "Measures and Commands"
+            "location": "/#faq", 
+            "text": "", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/#in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic", 
+            "text": "First of all, those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easly available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the  FTDIgate  and the many signing problems in other  badly supported ICs .\nThird, most of the time they require drivers.", 
+            "title": "In what way is the native usb in Data-chan better than an serial-usb IC?"
+        }, 
+        {
+            "location": "/#why-is-the-native-usb-data-chan-better-than-usb-cdc", 
+            "text": "Usb-CDC  are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed... It's messy.", 
+            "title": "Why is the native usb Data-chan better than USB-CDC?"
+        }, 
+        {
+            "location": "/#should-i-use-data-chan-for-insert-project-name-here", 
+            "text": "Data-chan is a well-defined protocol for a specific usage in datalogging instruments. If you can apply the same logic to your project, why not.", 
+            "title": "Should I use Data-chan for [insert project name here]?"
+        }, 
+        {
+            "location": "/#which-device-can-i-use-for-testing", 
+            "text": "And  Arduino Nano  programmed with an  USBASP  and  AVRDUDE  will do.  WARNING:  Data-chan will break the bootloader!.", 
+            "title": "Which device can i use for testing?"
+        }, 
+        {
+            "location": "/#what-drivers-does-data-chan-use", 
+            "text": "It use  Winusb  on windows, and included generic vendor-specific class driers on MacOS and Linux.", 
+            "title": "What drivers does Data-chan use?"
+        }, 
+        {
+            "location": "/#i-a-beginner-should-i-use-it", 
+            "text": "Most definitively not.", 
+            "title": "I a beginner, should i use it?"
+        }, 
+        {
+            "location": "/#i-found-a-bug", 
+            "text": "Submit an issue!", 
+            "title": "I found a bug"
         }, 
         {
             "location": "/build/", 
-            "text": "Build\n\n\nThe entire project can be compiled with the \"make all\" command, even on windows, but it requires a lot of software!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\nmake\n    \ngcc-avr\n\n    \navr-libc\n\n    \ngcc\n\n    \ng++\n\n    \nlibusb-1.0-0-dev\n\n    \nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n    \nmsys 1.0\n\n    \ntdm-gcc\n\n    \ngrep for windows\n\n\n\n\nEither if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be\nunable to operate again once the first write!", 
-            "title": "Building"
+            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions\nshould do a better job (gcc 6 compatibility is mostly tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will \nalso\n need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nEither if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other\nAVR microcontroller you will need a \nUSBASP\n to program the microcontroller and \nAVRDUDE\n to drive it.\n\n\nBecause you'll be able to use the pre-burned bootloader only once!", 
+            "title": "Build"
         }, 
         {
             "location": "/build/#build", 
-            "text": "The entire project can be compiled with the \"make all\" command, even on windows, but it requires a lot of software!", 
+            "text": "The entire project can be compiled with the  make all  command, even on windows, but it requires a lot of dependencies!", 
             "title": "Build"
         }, 
         {
             "location": "/build/#environment", 
-            "text": "On a generic system you will need at least: \nmake\n     gcc-avr \n     avr-libc \n     gcc \n     g++ \n     libusb-1.0-0-dev \n     libpthread-stubs0-dev (pre-installed on most systems)   If you're using windows you will  also  need to install: \n     msys 1.0 \n     tdm-gcc \n     grep for windows   Either if you are using Linux, Mac OSX or Windows, if you plan to use the Atmega332U4 or any other\nAVR microcontroller you have to install avrdude and buy an usbasp device, because the bootloader will be\nunable to operate again once the first write!", 
+            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions\nshould do a better job (gcc 6 compatibility is mostly tested).  On Ubuntu/Debian run:  sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will  also  need to:  brew install gcc  If you're using windows you will  also  need to install:   msys 1.0  tdm-gcc  grep for windows   Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other\nAVR microcontroller you will need a  USBASP  to program the microcontroller and  AVRDUDE  to drive it.  Because you'll be able to use the pre-burned bootloader only once!", 
             "title": "Environment"
         }, 
         {
             "location": "/protocol/", 
-            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics.\n\n\nThe protocol minimum entity is a packet.\n\n\nThe protocol makes \nHUGE\n usage of the \nGENERIC_REPORT_SIZE\n macro,\nthat macro defines the number of bytes in each USB packet.\n\n\nThe data-chan protocol uses \nlittle-endian\n then serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nbyte\n\n        \nfirst\n\n        \nfollowing\n\n        \nlast\n\n    \n\n    \n\n        \ndesc\n\n        \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n\n\n\n\nThe first byte contains the packet type: how data is used depends on the very first byte.\n\n\nEach packet ends with the last byte used for the CRC code (standard 8 bits).\n\n\nFrom the host perspective there are two types of packets IN packets and OUT packets.\n\n\nIN packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n    \n00h =\n NONE\n\n    \n01h =\n CMD_RESPONSE\n\n    \n03h =\n MEASURE\n\n\n\n\nWhen the packets is flagged as NONE it must be ignored.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,\nwhich can't decode packets.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n, whereas a CMD_RESPONSE description can be read \nhere\n.", 
+            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics, it's minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\nwhereas a CMD_RESPONSE description can be read \nhere\n.", 
             "title": "Protocol"
         }, 
         {
             "location": "/protocol/#protocol", 
-            "text": "The protocol can be customized starting from the very USB basics.  The protocol minimum entity is a packet.  The protocol makes  HUGE  usage of the  GENERIC_REPORT_SIZE  macro,\nthat macro defines the number of bytes in each USB packet.  The data-chan protocol uses  little-endian  then serializing data larger than one byte.", 
+            "text": "The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.  The protocol itself makes  huge  usage of the  GENERIC_REPORT_SIZE  macro which defines the number of bytes, minus one, in each USB packet.  That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!  The Data-chan protocol uses  little-endian  while serializing data larger than one byte.", 
             "title": "Protocol"
         }, 
         {
             "location": "/protocol/#packets-structure", 
-            "text": "Both IN and OUT packets are formed this way:  \n     \n         byte \n         first \n         following \n         last \n     \n     \n         desc \n         type \n         data \n         CRC-8 \n       The first byte contains the packet type: how data is used depends on the very first byte.  Each packet ends with the last byte used for the CRC code (standard 8 bits).  From the host perspective there are two types of packets IN packets and OUT packets.", 
+            "text": "Both IN and OUT packets are formed this way:  \n     \n         Position \n         first byte \n         following bytes \n         last byte \n     \n     \n         Description \n     type \n         data \n         CRC-8 \n     \n     \n         Offset \n     0 \n         1 \n         GENERIC_REPORT_SIZE \n       The first bytes is the one that controls how the data is used.  From the host perspective there are two types of packets:   IN packets  OUT packets.", 
             "title": "Packets Structure"
         }, 
         {
             "location": "/protocol/#in-packets", 
-            "text": "An incoming packet can be flagged as either one of these types: \n     00h =  NONE \n     01h =  CMD_RESPONSE \n     03h =  MEASURE   When the packets is flagged as NONE it must be ignored.  By default every packet will be flagged as NONE, thus avoiding sending data to the Operating System,\nwhich can't decode packets.  When the device is active every type of packet will be used.  A MEASURE description can be found  here , whereas a CMD_RESPONSE description can be read  here .", 
+            "text": "An incoming packet can be flagged as either one of these types:   00h =  NONE  02h =  CMD_ASYNC_RESPONSE  04h =  MEASURE   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.  When the device is active every type of packet will be used.  A MEASURE description can be found  here ,\nwhereas a CMD_RESPONSE description can be read  here .", 
             "title": "IN packets"
         }, 
         {
             "location": "/IN_packets/Measure/", 
-            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype (8bits)\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n    \n00h =\n NONREALTIME\n\n    \n01h =\n OFFSET_REALTIME\n\n    \n02h =\n REALTIME\n\n    \n03h =\n PROGRESSIVE\n\n\n\n\nType\n\n\nIn a NONREALTIME measure time and millis fields are unused, the host will replace their values\nwith the timestamp and millis upon receipt.\n\n\nIn a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.\n\n\nIn a REALTIME measure time and millis contains the correct values.\n\n\nIn a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nThe channel field starts from 1, this means that an instrument can have 255 possible channels:\nfrom 1 to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveils the used unit of measurement, according to the following list:\n\n\n    \n0 =\n metre\n\n    \n1 =\n ampere\n\n    \n2 =\n volt\n\n    \n3 =\n coulomb\n\n    \n4 =\n watt\n\n    \n5 =\n kilogram\n\n    \n6 =\n kelvin\n\n    \n7 =\n candela\n\n    \n8 =\n mole\n\n    \n9 =\n hertz\n\n    \n10 =\n radian\n\n    \n11 =\n steradian\n\n    \n12 =\n newton\n\n    \n13 =\n pascal\n\n    \n14 =\n joule\n\n    \n15 =\n farad\n\n    \n16 =\n ohm\n\n    \n17 =\n siemens\n\n    \n18 =\n weber\n\n    \n19 =\n tesla\n\n    \n20 =\n henry\n\n    \n21 =\n lumen\n\n    \n22 =\n lux\n\n    \n23 =\n becquerel\n\n    \n24 =\n gray\n\n    \n25 =\n sievert\n\n    \n26 =\n katal\n\n\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.", 
+            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype (8bits)\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n\n\n00h =\n NONREALTIME\n\n\n01h =\n OFFSET_REALTIME\n\n\n02h =\n REALTIME\n\n\n03h =\n PROGRESSIVE\n\n\n\n\nTypes\n\n\nNONREALTIME\n\n\nIn a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.\n\n\nOFFSET_REALTIME\n\n\nIn a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.\n\n\nREALTIME\n\n\nIn a REALTIME measure time and millis contains the correct values.\n\n\nThis is useful if you have a long-running system with it's own \nRTC\n that may have only occasional connection to the host.\n\n\nPROGRESSIVE\n\n\nIn a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nChannels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.\n\n\nThe channel numeration starts from 1 and goes up to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:\n\n\n\n\n0 =\n meter\n\n\n1 =\n ampere\n\n\n2 =\n volt\n\n\n3 =\n coulomb\n\n\n4 =\n watt\n\n\n5 =\n kilogram\n\n\n6 =\n kelvin\n\n\n7 =\n candela\n\n\n8 =\n mole\n\n\n9 =\n hertz\n\n\n10 =\n radian\n\n\n11 =\n steradian\n\n\n12 =\n newton\n\n\n13 =\n pascal\n\n\n14 =\n joule\n\n\n15 =\n farad\n\n\n16 =\n ohm\n\n\n17 =\n siemens\n\n\n18 =\n weber\n\n\n19 =\n tesla\n\n\n20 =\n henry\n\n\n21 =\n lumen\n\n\n22 =\n lux\n\n\n23 =\n becquerel\n\n\n24 =\n gray\n\n\n25 =\n sievert\n\n\n26 =\n katal\n\n\n\n\nThe measurement should always be in the expected basic unit of measurement of the \nSI system\n.\n\n\nExample: If you are measuring Volts, use Volts; not millivolts or kilovolts.\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.\n\n\nHeck: that means you can use them to do everything you want!", 
             "title": "Measure"
         }, 
         {
             "location": "/IN_packets/Measure/#measure", 
-            "text": "A MEASURE packet has the data field formed this way:  \n     \n         bytes \n         0 \n         1 \n         2 to 6 \n         7 \n         8 to 12 \n         13 to 14 \n     \n     \n         type (8bits) \n         byte (8bits) \n         byte (8bits) \n         float (32bits) \n         byte (8bits) \n         big int (32bits) \n         small int (16bits) \n     \n     \n         descr \n         type \n         channel \n         value \n         mu \n         timestamp \n         millis \n       Allowed measure types are: \n     00h =  NONREALTIME \n     01h =  OFFSET_REALTIME \n     02h =  REALTIME \n     03h =  PROGRESSIVE", 
+            "text": "A MEASURE packet has the data field formed this way:  \n     \n         bytes \n         0 \n         1 \n         2 to 6 \n         7 \n         8 to 12 \n         13 to 14 \n     \n     \n         type (8bits) \n         byte (8bits) \n         byte (8bits) \n         float (32bits) \n         byte (8bits) \n         big int (32bits) \n         small int (16bits) \n     \n     \n         descr \n         type \n         channel \n         value \n         mu \n         timestamp \n         millis \n       Allowed measure types are:   00h =  NONREALTIME  01h =  OFFSET_REALTIME  02h =  REALTIME  03h =  PROGRESSIVE", 
             "title": "Measure"
         }, 
         {
-            "location": "/IN_packets/Measure/#type", 
-            "text": "In a NONREALTIME measure time and millis fields are unused, the host will replace their values\nwith the timestamp and millis upon receipt.  In a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.  In a REALTIME measure time and millis contains the correct values.  In a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.", 
-            "title": "Type"
+            "location": "/IN_packets/Measure/#types", 
+            "text": "", 
+            "title": "Types"
+        }, 
+        {
+            "location": "/IN_packets/Measure/#nonrealtime", 
+            "text": "In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.", 
+            "title": "NONREALTIME"
+        }, 
+        {
+            "location": "/IN_packets/Measure/#offset_realtime", 
+            "text": "In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.", 
+            "title": "OFFSET_REALTIME"
+        }, 
+        {
+            "location": "/IN_packets/Measure/#realtime", 
+            "text": "In a REALTIME measure time and millis contains the correct values.  This is useful if you have a long-running system with it's own  RTC  that may have only occasional connection to the host.", 
+            "title": "REALTIME"
+        }, 
+        {
+            "location": "/IN_packets/Measure/#progressive", 
+            "text": "In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.", 
+            "title": "PROGRESSIVE"
         }, 
         {
             "location": "/IN_packets/Measure/#channel", 
-            "text": "The channel field is used to identify the channel that has generated the measure.  The channel field starts from 1, this means that an instrument can have 255 possible channels:\nfrom 1 to 255.", 
+            "text": "The channel field is used to identify the channel that has generated the measure.  Channels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.  The channel numeration starts from 1 and goes up to 255.", 
             "title": "Channel"
         }, 
         {
             "location": "/IN_packets/Measure/#unit-of-measurement", 
-            "text": "The Unit of Measurement field is a byte that reveils the used unit of measurement, according to the following list: \n     0 =  metre \n     1 =  ampere \n     2 =  volt \n     3 =  coulomb \n     4 =  watt \n     5 =  kilogram \n     6 =  kelvin \n     7 =  candela \n     8 =  mole \n     9 =  hertz \n     10 =  radian \n     11 =  steradian \n     12 =  newton \n     13 =  pascal \n     14 =  joule \n     15 =  farad \n     16 =  ohm \n     17 =  siemens \n     18 =  weber \n     19 =  tesla \n     20 =  henry \n     21 =  lumen \n     22 =  lux \n     23 =  becquerel \n     24 =  gray \n     25 =  sievert \n     26 =  katal   The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.", 
+            "text": "The Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:   0 =  meter  1 =  ampere  2 =  volt  3 =  coulomb  4 =  watt  5 =  kilogram  6 =  kelvin  7 =  candela  8 =  mole  9 =  hertz  10 =  radian  11 =  steradian  12 =  newton  13 =  pascal  14 =  joule  15 =  farad  16 =  ohm  17 =  siemens  18 =  weber  19 =  tesla  20 =  henry  21 =  lumen  22 =  lux  23 =  becquerel  24 =  gray  25 =  sievert  26 =  katal   The measurement should always be in the expected basic unit of measurement of the  SI system .  Example: If you are measuring Volts, use Volts; not millivolts or kilovolts.  The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.  Heck: that means you can use them to do everything you want!", 
             "title": "Unit of Measurement"
         }
     ]

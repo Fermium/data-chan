@@ -55,7 +55,7 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../../build/">Building</a>
+        <a class="" href="../../build/">Build</a>
         
     </li>
 <li>
@@ -80,7 +80,7 @@
             
                 <li class="toctree-l3"><a href="#measure">Measure</a></li>
                 
-                    <li><a class="toctree-l4" href="#type">Type</a></li>
+                    <li><a class="toctree-l4" href="#types">Types</a></li>
                 
                     <li><a class="toctree-l4" href="#channel">Channel</a></li>
                 
@@ -124,6 +124,9 @@
     <li>Measure</li>
     <li class="wy-breadcrumbs-aside">
       
+        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/IN_packets/Measure.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
   <hr/>
@@ -163,55 +166,62 @@
     </tr>
 </table>
 
-<p>Allowed measure types are:
+<p>Allowed measure types are:</p>
 <ul>
-    <li>00h =&gt; NONREALTIME</li>
-    <li>01h =&gt; OFFSET_REALTIME</li>
-    <li>02h =&gt; REALTIME</li>
-    <li>03h =&gt; PROGRESSIVE</li>
-</ul></p>
-<h2 id="type">Type</h2>
-<p>In a NONREALTIME measure time and millis fields are unused, the host will replace their values
-with the timestamp and millis upon receipt.</p>
-<p>In a OFFSET_REALTIME measure time and millis both refers to the moment of measures beginning.</p>
+<li>00h =&gt; NONREALTIME</li>
+<li>01h =&gt; OFFSET_REALTIME</li>
+<li>02h =&gt; REALTIME</li>
+<li>03h =&gt; PROGRESSIVE</li>
+</ul>
+<h2 id="types">Types</h2>
+<h5 id="nonrealtime">NONREALTIME</h5>
+<p>In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.</p>
+<h5 id="offset_realtime">OFFSET_REALTIME</h5>
+<p>In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.</p>
+<h5 id="realtime">REALTIME</h5>
 <p>In a REALTIME measure time and millis contains the correct values.</p>
-<p>In a PROGRESSIVE measure millis:time contains a progressive number used to indexing the measure.</p>
+<p>This is useful if you have a long-running system with it's own <a href="https://en.wikipedia.org/wiki/Real-time_clock">RTC</a> that may have only occasional connection to the host.</p>
+<h5 id="progressive">PROGRESSIVE</h5>
+<p>In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.</p>
 <h2 id="channel">Channel</h2>
 <p>The channel field is used to identify the channel that has generated the measure.</p>
-<p>The channel field starts from 1, this means that an instrument can have 255 possible channels:
-from 1 to 255.</p>
+<p>Channels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.</p>
+<p>The channel numeration starts from 1 and goes up to 255.</p>
 <h2 id="unit-of-measurement">Unit of Measurement</h2>
-<p>The Unit of Measurement field is a byte that reveils the used unit of measurement, according to the following list:
+<p>The Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:</p>
 <ul>
-    <li>0 =&gt; metre</li>
-    <li>1 =&gt; ampere</li>
-    <li>2 =&gt; volt</li>
-    <li>3 =&gt; coulomb</li>
-    <li>4 =&gt; watt</li>
-    <li>5 =&gt; kilogram</li>
-    <li>6 =&gt; kelvin</li>
-    <li>7 =&gt; candela</li>
-    <li>8 =&gt; mole</li>
-    <li>9 =&gt; hertz</li>
-    <li>10 =&gt; radian</li>
-    <li>11 =&gt; steradian</li>
-    <li>12 =&gt; newton</li>
-    <li>13 =&gt; pascal</li>
-    <li>14 =&gt; joule</li>
-    <li>15 =&gt; farad</li>
-    <li>16 =&gt; ohm</li>
-    <li>17 =&gt; siemens</li>
-    <li>18 =&gt; weber</li>
-    <li>19 =&gt; tesla</li>
-    <li>20 =&gt; henry</li>
-    <li>21 =&gt; lumen</li>
-    <li>22 =&gt; lux</li>
-    <li>23 =&gt; becquerel</li>
-    <li>24 =&gt; gray</li>
-    <li>25 =&gt; sievert</li>
-    <li>26 =&gt; katal</li>
-</ul></p>
+<li>0 =&gt; meter</li>
+<li>1 =&gt; ampere</li>
+<li>2 =&gt; volt</li>
+<li>3 =&gt; coulomb</li>
+<li>4 =&gt; watt</li>
+<li>5 =&gt; kilogram</li>
+<li>6 =&gt; kelvin</li>
+<li>7 =&gt; candela</li>
+<li>8 =&gt; mole</li>
+<li>9 =&gt; hertz</li>
+<li>10 =&gt; radian</li>
+<li>11 =&gt; steradian</li>
+<li>12 =&gt; newton</li>
+<li>13 =&gt; pascal</li>
+<li>14 =&gt; joule</li>
+<li>15 =&gt; farad</li>
+<li>16 =&gt; ohm</li>
+<li>17 =&gt; siemens</li>
+<li>18 =&gt; weber</li>
+<li>19 =&gt; tesla</li>
+<li>20 =&gt; henry</li>
+<li>21 =&gt; lumen</li>
+<li>22 =&gt; lux</li>
+<li>23 =&gt; becquerel</li>
+<li>24 =&gt; gray</li>
+<li>25 =&gt; sievert</li>
+<li>26 =&gt; katal</li>
+</ul>
+<p>The measurement should always be in the expected basic unit of measurement of the <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI system</a>.</p>
+<p>Example: If you are measuring Volts, use Volts; not millivolts or kilovolts.</p>
 <p>The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.</p>
+<p>Heck: that means you can use them to do everything you want!</p>
               
             </div>
           </div>
@@ -244,6 +254,8 @@ from 1 to 255.</p>
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/NeroReflex/data-chan" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../../protocol/" style="color: #fcfcfc;">&laquo; Previous</a></span>
