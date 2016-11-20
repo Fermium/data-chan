@@ -51,7 +51,7 @@
 		#define VENDOR_OUT_EPADDR              (ENDPOINT_DIR_OUT | 4)
 
 		/** Size in bytes of the Bulk Vendor data endpoints. */
-		#define VENDOR_IO_EPSIZE               GENERIC_REPORT_SIZE
+		#define VENDOR_IO_EPSIZE               GENERIC_REPORT_SIZE + 1
 
 	/* Type Defines: */
 		/** Type define for the device configuration descriptor structure. This must be defined in the
@@ -95,4 +95,3 @@
 		                                    ATTR_WARN_UNUSED_RESULT ATTR_NON_NULL_PTR_ARG(3);
 
 #endif
-

@@ -52,9 +52,9 @@ In a OFFSET_REALTIME measure time and millis refers to the moment the dataloggin
 
 ##### REALTIME
 
-In a REALTIME measure time and millis contains the correct values. 
+In a REALTIME measure time and millis contains the correct values.
 
-This is useful if you have a long-running system with it's own [RTC](https://en.wikipedia.org/wiki/Real-time_clock) that may have only occasional connection to the host. 
+This is useful if you have a long-running system with it's own [RTC](https://en.wikipedia.org/wiki/Real-time_clock) that may have only occasional connection to the host.
 
 ##### PROGRESSIVE
 
@@ -101,8 +101,10 @@ The Unit of Measurement field is a byte that reveals the used unit of measuremen
 * 25 => sievert
 * 26 => katal
 
-The measurement should always be in the expected basic unit of measurement of the [SI system](https://en.wikipedia.org/wiki/International_System_of_Units). 
+The measurement should always be in the expected basic unit of measurement of the [SI system](https://en.wikipedia.org/wiki/International_System_of_Units).
 
-Example: If you are measuring Volts, use Volts; not millivolts or kilovolts. 
+Example: If you are measuring Volts, use Volts; not millivolts or kilovolts.
 
 The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.
+
+Heck: that means you can use them to do everything you want!

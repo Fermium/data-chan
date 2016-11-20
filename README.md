@@ -1,17 +1,17 @@
 # Data-chan
 
-Data chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.
+Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.
 
 At the current time it can transfer over 800 measures every second.
 
 It makes usage of [LUFA](http://www.fourwalledcubicle.com/LUFA.php) on the device side and [Libusb](http://www.libusb.org/) on the host.
 
-The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.
+The framework is though for physics instruments with a slow sample rate, and allow to receive measures and send commands.
 
-It's tought to be:
+It's thought to be:
 
 * Minimal
-* Fast 
+* Fast
 * Configurable
 
 ##Features:
@@ -36,5 +36,5 @@ Official compatibility list is:
 On any other system that supports libusb1.0 you may need to install a generic libusb driver to have your device working.
 
 ## Docs
-
-Check out the [DOCS](https://neroreflex.github.io/data-chan/) for more info.
+Documentation is kept up-to-date with the master branch.
+Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!

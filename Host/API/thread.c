@@ -36,10 +36,10 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
     if ((dev == (datachan_device_t*)NULL) || (data == (uint8_t*)NULL))
         return 0;
 
-    int bytes_transferred = 0, result = 0;;
+    int bytes_transferred = 0, result = 0xFF;
 
     // create a private safe buffer
-    uint8_t data_in[GENERIC_REPORT_SIZE];
+    uint8_t data_in[GENERIC_REPORT_SIZE + 1];
 
     // perform the data transmission
     pthread_mutex_lock(&dev->handler_mutex);
@@ -54,12 +54,12 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
     pthread_mutex_unlock(&dev->handler_mutex);
 
     // check for the CRC
-    if ((bytes_transferred == GENERIC_REPORT_SIZE) && (!CRC_check(data_in, GENERIC_REPORT_SIZE - 1, data_in[GENERIC_REPORT_SIZE - 1])))
+    if ((bytes_transferred != (GENERIC_REPORT_SIZE + 1)) || (!CRC_check(data_in, GENERIC_REPORT_SIZE, data_in[GENERIC_REPORT_SIZE])))
         bytes_transferred = 0;
 
     // copy the result on the unsafe buffer (on success)
-    if ((result == 0) && (bytes_transferred > 0))
-        memcpy((void*)data, (const void*)data_in, bytes_transferred - 1);
+    if ((result == 0) && (bytes_transferred >= GENERIC_REPORT_SIZE))
+        memcpy((void*)data, (const void*)data_in, GENERIC_REPORT_SIZE);
     else if (bytes_transferred != 0)
         bytes_transferred = 0;
 
@@ -73,15 +73,15 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
     int bytes_transferred = 0, result = 0;
 
     // avoid buffer overflow during memcpy
-    data_length = (data_length > (GENERIC_REPORT_SIZE-1)) ? GENERIC_REPORT_SIZE-1 : data_length;
+    data_length = (data_length > (GENERIC_REPORT_SIZE)) ? GENERIC_REPORT_SIZE : data_length;
 
     // zero everything unused and copy the buffer
-    uint8_t data_out[GENERIC_REPORT_SIZE];
+    uint8_t data_out[GENERIC_REPORT_SIZE + 1];
     memset((void*)data_out, 0, sizeof(data_out));
     memcpy((void*)data_out, data, data_length);
 
     // append the CRC byte for error catching purpose
-    data_out[GENERIC_REPORT_SIZE - 1] = CRC_calc(data_out, GENERIC_REPORT_SIZE - 1);
+    data_out[GENERIC_REPORT_SIZE] = CRC_calc(data_out, GENERIC_REPORT_SIZE);
 
     // perform the data transmission
     pthread_mutex_lock(&dev->handler_mutex);
@@ -106,18 +106,18 @@ void* IO_bulk_thread(void* device) {
         pthread_exit(NULL);
 
     datachan_device_t* dev = (datachan_device_t*)device;
-    uint8_t data_in[GENERIC_REPORT_SIZE];
+    uint8_t data_in[GENERIC_REPORT_SIZE + 1];
     int data_size;
     measure_t m;
 
     while (datachan_device_is_enabled(dev)) {
         // get the bulk to be written
-        uint8_t out_buffer[GENERIC_REPORT_SIZE - 1];
+        uint8_t out_buffer[GENERIC_REPORT_SIZE];
         datachan_dequeue_request(dev, out_buffer);
-        
+
         // write to the device
-        data_size = datachan_raw_write(dev, out_buffer, GENERIC_REPORT_SIZE - 1);
-        
+        data_size = datachan_raw_write(dev, out_buffer, sizeof(out_buffer));
+
         // read from the device
         data_size = datachan_raw_read((datachan_device_t*)dev, data_in);
 

@@ -45,7 +45,6 @@ int main(void)
 {
 	SetupHardware();
 
-	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
 	GlobalInterruptEnable();
 
 	for (;;)
@@ -106,7 +105,7 @@ void SetupHardware(void)
 /** Event handler for the USB_Connect event. This indicates that the device is enumerating via the status LEDs. */
 void EVENT_USB_Device_Connect(void)
 {
-	
+
 }
 
 /** Event handler for the USB_Disconnect event. This indicates that the device is no longer connected to a host via
@@ -114,7 +113,7 @@ void EVENT_USB_Device_Connect(void)
  */
 void EVENT_USB_Device_Disconnect(void)
 {
-	
+	datachan_sudden_disconnection();
 }
 
 /** Event handler for the USB_ConfigurationChanged event. This is fired when the host set the current configuration

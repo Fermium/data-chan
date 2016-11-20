@@ -1,13 +1,14 @@
 #include "../API/API.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
-int main() {
+int main(int argc, char** argv) {
     //initialize everything
     datachan_init();
     printf("Device transmission initialization success!\n\n");
-	
+
     // try to acquire a device
     datachan_acquire_result_t scan_result = datachan_device_acquire();
     if (scan_result.result == success) {
@@ -23,26 +24,27 @@ int main() {
 
         // sleep one second
         sleep(1);
-        
+
         // enable data transmission
         if (datachan_device_disable(device))
             printf("\nDevice disabled\n");
         else
             printf("\nTransmission error!\n");
-	
+
         int i = datachan_device_enqueued_measures(device);
         printf("Read %d measures in about 1 second", i);
         while (i--) {
             measure_t* data_out = datachan_device_dequeue_measure(device);
-            
-            if (data_out != (measure_t*)NULL) {
-                    printf("\n\nMeasure: \n");
-                    printf("Value: %f", data_out->value);
+
+            if ((argc > 1) && (strcmp(argv[1], "-s") == 0)) {
+              if (data_out != (measure_t*)NULL) {
+                      printf("\n\nMeasure: \n");
+                      printf("Value: %f", data_out->value);
+              }
             }
-            
             free((void*)data_out);
         }
-        
+
         // release the device handler
         printf("\n\nreleasing the device...\n");
         datachan_device_release(&device);
@@ -53,24 +55,24 @@ int main() {
             case uninitialized:
                 printf("Uninitialized library");
                 break;
-			
+
             case not_found_or_inaccessible:
                 printf("A compatible device could not be found or open");
                 break;
-			
+
             case cannot_claim:
                 printf("The device control cannot be claimed");
                 break;
-				
+
             case malloc_fail:
                 printf("Memory allocation error");
                 break;
-			
+
             default:
                 printf("Unknown error");
         }
     }
-	
+
     // shutdown everything
     datachan_shutdown();
     printf("\nDevice transmission shutdown\n");
