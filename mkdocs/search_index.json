@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Data-chan\n\n\nData chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.\n\n\nIt makes usage of \nlufa\n on the device side and \nLibusb\n on the host.\n\n\nThe framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.\n\n\nIt's tought to be:\n\n\n\n\nMinimal\n\n\nFast \n\n\nConfigurable\n\n\n\n\nFeatures\n\n\n\n\nBroad compatibility with MacOS/Windows/Linux\n\n\nBindings for most of the major programming languages\n\n\nDo not require user interaction to install the required drivers\n\n\nSmall resource footprint on the MCU\n\n\nPortable to other devices compatible with the LUFA library (and it's forks)\n\n\n\n\nFAQ\n\n\nIn what way is the native usb in Data-chan better than an serial-usb IC?\n\n\nFirst of all, those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easly available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the \nFTDIgate\n and the many signing problems in other \nbadly supported ICs\n.\nThird, most of the time they require drivers. \n\n\nWhy is the native usb Data-chan better than USB-CDC?\n\n\nUsb-CDC\n are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed... It's messy.\n\n\nShould I use Data-chan for [insert project name here]?\n\n\nData-chan is a well-defined protocol for a specific usage in datalogging instruments. If you can apply the same logic to your project, why not.\n\n\nWhich device can i use for testing?\n\n\nAnd \nArduino Nano\n programmed with an \nUSBASP\n and \nAVRDUDE\n will do.\n\n\nWARNING:\n Data-chan will break the bootloader!.\n\n\nWhat drivers does Data-chan use?\n\n\nIt use \nWinusb\n on windows, and included generic vendor-specific class driers on MacOS and Linux.\n\n\nI a beginner, should i use it?\n\n\nMost definitively not.\n\n\nI found a bug\n\n\nSubmit an issue!", 
+            "text": "Data-chan\n\n\nData-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.\n\n\nIt makes usage of \nlufa\n on the device side and \nLibusb\n on the host.\n\n\nThe framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.\n\n\nIt's thought to be:\n\n\n\n\nMinimal\n\n\nFast \n\n\nConfigurable\n\n\n\n\nFeatures\n\n\n\n\nBroad compatibility with MacOS/Windows/Linux\n\n\nBindings for most of the major programming languages\n\n\nDo not require user interaction to install the required drivers\n\n\nSmall resource footprint on the MCU\n\n\nPortable to other devices compatible with the LUFA library (and it's forks)\n\n\n\n\nFAQ\n\n\nCheck out the \nFAQs", 
             "title": "Home"
         }, 
         {
             "location": "/#data-chan", 
-            "text": "Data chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.  It makes usage of  lufa  on the device side and  Libusb  on the host.  The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.  It's tought to be:   Minimal  Fast   Configurable", 
+            "text": "Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.  It makes usage of  lufa  on the device side and  Libusb  on the host.  The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.  It's thought to be:   Minimal  Fast   Configurable", 
             "title": "Data-chan"
         }, 
         {
@@ -17,47 +17,57 @@
         }, 
         {
             "location": "/#faq", 
+            "text": "Check out the  FAQs", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/faq/", 
+            "text": "FAQ\n\n\nIn what way is the native usb in Data-chan better than an serial-usb IC?\n\n\nThose ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easily available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the \nFTDIgate\n and the many signing problems in other \nbadly supported ICs\n.\nThird, most of the time they require drivers, rarely available cross-platform.\n\n\nWhy is the native usb Data-chan better than USB-CDC?\n\n\nUsb-CDC\n are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed. It's messy.\n\n\nShould I use Data-chan for [insert project name here]?\n\n\nData-chan is a well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics. If you can apply the same logic to your project, why not.\n\n\nWhich device can I use for testing?\n\n\nAnd \nArduino Nano\n programmed with an \nUSBASP\n and \nAVRDUDE\n will do.\n\n\nWARNING:\n Data-chan will break the bootloader!\n\n\nWhat drivers does Data-chan use?\n\n\nIt use \nWinusb\n on Windows, and included generic vendor-specific class drivers on MacOS and Linux.\n\n\nI a beginner, should I use it?\n\n\nDepends. It's not made to work with the Arduino environment. \n\n\nI found a bug\n\n\nSubmit an issue!", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/faq/#faq", 
             "text": "", 
             "title": "FAQ"
         }, 
         {
-            "location": "/#in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic", 
-            "text": "First of all, those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easly available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the  FTDIgate  and the many signing problems in other  badly supported ICs .\nThird, most of the time they require drivers.", 
+            "location": "/faq/#in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic", 
+            "text": "Those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easily available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the  FTDIgate  and the many signing problems in other  badly supported ICs .\nThird, most of the time they require drivers, rarely available cross-platform.", 
             "title": "In what way is the native usb in Data-chan better than an serial-usb IC?"
         }, 
         {
-            "location": "/#why-is-the-native-usb-data-chan-better-than-usb-cdc", 
-            "text": "Usb-CDC  are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed... It's messy.", 
+            "location": "/faq/#why-is-the-native-usb-data-chan-better-than-usb-cdc", 
+            "text": "Usb-CDC  are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed. It's messy.", 
             "title": "Why is the native usb Data-chan better than USB-CDC?"
         }, 
         {
-            "location": "/#should-i-use-data-chan-for-insert-project-name-here", 
-            "text": "Data-chan is a well-defined protocol for a specific usage in datalogging instruments. If you can apply the same logic to your project, why not.", 
+            "location": "/faq/#should-i-use-data-chan-for-insert-project-name-here", 
+            "text": "Data-chan is a well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics. If you can apply the same logic to your project, why not.", 
             "title": "Should I use Data-chan for [insert project name here]?"
         }, 
         {
-            "location": "/#which-device-can-i-use-for-testing", 
-            "text": "And  Arduino Nano  programmed with an  USBASP  and  AVRDUDE  will do.  WARNING:  Data-chan will break the bootloader!.", 
-            "title": "Which device can i use for testing?"
+            "location": "/faq/#which-device-can-i-use-for-testing", 
+            "text": "And  Arduino Nano  programmed with an  USBASP  and  AVRDUDE  will do.  WARNING:  Data-chan will break the bootloader!", 
+            "title": "Which device can I use for testing?"
         }, 
         {
-            "location": "/#what-drivers-does-data-chan-use", 
-            "text": "It use  Winusb  on windows, and included generic vendor-specific class driers on MacOS and Linux.", 
+            "location": "/faq/#what-drivers-does-data-chan-use", 
+            "text": "It use  Winusb  on Windows, and included generic vendor-specific class drivers on MacOS and Linux.", 
             "title": "What drivers does Data-chan use?"
         }, 
         {
-            "location": "/#i-a-beginner-should-i-use-it", 
-            "text": "Most definitively not.", 
-            "title": "I a beginner, should i use it?"
+            "location": "/faq/#i-a-beginner-should-i-use-it", 
+            "text": "Depends. It's not made to work with the Arduino environment.", 
+            "title": "I a beginner, should I use it?"
         }, 
         {
-            "location": "/#i-found-a-bug", 
+            "location": "/faq/#i-found-a-bug", 
             "text": "Submit an issue!", 
             "title": "I found a bug"
         }, 
         {
             "location": "/build/", 
-            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions\nshould do a better job (gcc 6 compatibility is mostly tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will \nalso\n need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nEither if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other\nAVR microcontroller you will need a \nUSBASP\n to program the microcontroller and \nAVRDUDE\n to drive it.\n\n\nBecause you'll be able to use the pre-burned bootloader only once!", 
+            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will \nalso\n need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nEither if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a \nUSBASP\n to program the microcontroller and \nAVRDUDE\n to drive it.\n\n\nBecause you'll be able to use the pre-burned bootloader only once!", 
             "title": "Build"
         }, 
         {
@@ -67,7 +77,7 @@
         }, 
         {
             "location": "/build/#environment", 
-            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions\nshould do a better job (gcc 6 compatibility is mostly tested).  On Ubuntu/Debian run:  sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will  also  need to:  brew install gcc  If you're using windows you will  also  need to install:   msys 1.0  tdm-gcc  grep for windows   Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other\nAVR microcontroller you will need a  USBASP  to program the microcontroller and  AVRDUDE  to drive it.  Because you'll be able to use the pre-burned bootloader only once!", 
+            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).  On Ubuntu/Debian run:  sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will  also  need to:  brew install gcc  If you're using windows you will  also  need to install:   msys 1.0  tdm-gcc  grep for windows   Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a  USBASP  to program the microcontroller and  AVRDUDE  to drive it.  Because you'll be able to use the pre-burned bootloader only once!", 
             "title": "Environment"
         }, 
         {

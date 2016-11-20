@@ -66,6 +66,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="faq/">FAQ</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="build/">Build</a>
         
     </li>
@@ -129,10 +136,10 @@
             <div class="section">
               
                 <h1 id="data-chan">Data-chan</h1>
-<p>Data chan is an USB framework/protocol for comunication between Atmel AVR devices (mainly Atmega 32u4) and a PC.</p>
+<p>Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.</p>
 <p>It makes usage of <a href="http://www.fourwalledcubicle.com/LUFA.php">lufa</a> on the device side and <a href="http://www.libusb.org/">Libusb</a> on the host.</p>
 <p>The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.</p>
-<p>It's tought to be:</p>
+<p>It's thought to be:</p>
 <ul>
 <li>Minimal</li>
 <li>Fast </li>
@@ -147,23 +154,7 @@
 <li>Portable to other devices compatible with the LUFA library (and it's forks)</li>
 </ul>
 <h2 id="faq">FAQ</h2>
-<h4 id="in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic">In what way is the native usb in Data-chan better than an serial-usb IC?</h4>
-<p>First of all, those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easly available. 
-Second, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the <a href="https://hackaday.com/tag/ftdi-gate/">FTDIgate</a> and the many signing problems in other <a href="https://tzapu.com/making-ch340-ch341-serial-adapters-work-under-el-capitan-os-x/">badly supported ICs</a>.
-Third, most of the time they require drivers. </p>
-<h4 id="why-is-the-native-usb-data-chan-better-than-usb-cdc">Why is the native usb Data-chan better than USB-CDC?</h4>
-<p><a href="https://en.wikipedia.org/wiki/USB_communications_device_class">Usb-CDC</a> are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed... It's messy.</p>
-<h4 id="should-i-use-data-chan-for-insert-project-name-here">Should I use Data-chan for [insert project name here]?</h4>
-<p>Data-chan is a well-defined protocol for a specific usage in datalogging instruments. If you can apply the same logic to your project, why not.</p>
-<h4 id="which-device-can-i-use-for-testing">Which device can i use for testing?</h4>
-<p>And <a href="https://www.arduino.cc/en/Main/ArduinoBoardNano">Arduino Nano</a> programmed with an <a href="http://www.fischl.de/usbasp/">USBASP</a> and <a href="http://www.nongnu.org/avrdude/">AVRDUDE</a> will do.</p>
-<p><strong>WARNING:</strong> Data-chan will break the bootloader!.</p>
-<h4 id="what-drivers-does-data-chan-use">What drivers does Data-chan use?</h4>
-<p>It use <a href="https://msdn.microsoft.com/it-it/library/windows/hardware/ff540196(v=vs.85).aspx">Winusb</a> on windows, and included generic vendor-specific class driers on MacOS and Linux.</p>
-<h4 id="i-a-beginner-should-i-use-it">I a beginner, should i use it?</h4>
-<p>Most definitively not.</p>
-<h4 id="i-found-a-bug">I found a bug</h4>
-<p><a href="https://github.com/NeroReflex/data-chan/issues/new">Submit an issue!</a></p>
+<p>Check out the <a href="faq/">FAQs</a></p>
               
             </div>
           </div>
@@ -171,7 +162,7 @@ Third, most of the time they require drivers. </p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="build/" class="btn btn-neutral float-right" title="Build">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="faq/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -201,7 +192,7 @@ Third, most of the time they require drivers. </p>
       
       
       
-        <span style="margin-left: 15px"><a href="build/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="faq/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -212,5 +203,5 @@ Third, most of the time they require drivers. </p>
 
 <!--
 MkDocs version : 0.16.0
-Build Date UTC : 2016-11-20 14:48:41
+Build Date UTC : 2016-11-20 22:48:35
 -->
