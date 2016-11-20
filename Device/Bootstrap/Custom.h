@@ -32,5 +32,6 @@ void Process_Async(uint8_t*);
 void Event_Init(void);
 void Event_Connected(void);
 void Event_Disconnected(void);
+void MainRoutine(void);
 
 #endif // __CUSTOM__

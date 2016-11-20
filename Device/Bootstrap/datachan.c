@@ -86,9 +86,8 @@ void datachan_generate_report(uint8_t* DataArray)
     DataArray[0] = (uint8_t)NONE;
 
     if (hostListening) {
-        // testing purpouse ONLY!
-        enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
 
+      //if (datachan_output_enabled())datachan_register_measure(new_nonrealtime_measure(0xFF, 1, 169.754699f));
         // get the next measure to be sent over USB
         measure_t* data_to_be_sent = dequeue_measure(&FIFO);
 
@@ -232,4 +231,12 @@ void datachan_process_report(uint8_t* DataArray)
     } else if (DataArray[0] == NONE) {
         // nothing to do here!
     }
+}
+
+bool datachan_output_enabled(void) {
+  return hostListening;
+}
+
+void datachan_register_measure(measure_t *m) {
+  enqueue_measure(&FIFO, m);
 }

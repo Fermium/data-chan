@@ -47,12 +47,11 @@ int main(void)
 
 	GlobalInterruptEnable();
 
-	for (;;)
-	{
+	for (;;) {
 		USB_USBTask();
 
 		uint8_t ReceivedData[VENDOR_IO_EPSIZE];
-		memset(ReceivedData, 0x00, sizeof(ReceivedData));
+		//memset(ReceivedData, 0x00, sizeof(ReceivedData));
 
 		Endpoint_SelectEndpoint(VENDOR_OUT_EPADDR);
 		if (Endpoint_IsOUTReceived())
@@ -62,6 +61,9 @@ int main(void)
 
 			// custom algorithm to parse request data
 			datachan_process_report(ReceivedData);
+
+			// do the main job (user defined)
+			MainRoutine();
 
 			// custom algorithm to generate measure/response data
 			datachan_generate_report(ReceivedData);

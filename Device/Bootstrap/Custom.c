@@ -23,7 +23,6 @@ void Process_Async(uint8_t* data) {
     data is the content of the packet minus the CRC, the CMD_ASYNC_RESPONSE,
     and the ID.... so data have (GENERIC_REPORT_SIZE - 1 - 4) size
   */
-
 }
 
 void Event_Connected(void) {
@@ -35,5 +34,11 @@ void Event_Disconnected(void) {
 }
 
 void Event_Init(void) {
-  
+
+}
+
+void MainRoutine(void) {
+  // An example of measure generation :)
+  if (datachan_output_enabled())
+    datachan_register_measure(new_nonrealtime_measure(0xFF, 1, 169.754699f));
 }
