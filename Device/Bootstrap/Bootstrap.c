@@ -36,7 +36,8 @@
 
 #define  INCLUDE_FROM_BULKVENDOR_C
 #include "BulkVendor.h"
-#include "CustomUSB.h"
+#include "datachan.h"
+#include "datachan.h"
 
 /** Main program entry point. This routine configures the hardware required by the application, then
  *  enters a loop to run the application tasks in sequence.
@@ -98,14 +99,14 @@ void SetupHardware(void)
 	/* USB Hardware Initialization */
 	USB_Init();
 
-    /* Protocol initialization */
-    datachan_init();
+  /* Protocol initialization */
+  datachan_init();
 }
 
 /** Event handler for the USB_Connect event. This indicates that the device is enumerating via the status LEDs. */
 void EVENT_USB_Device_Connect(void)
 {
-
+	Event_Connected();
 }
 
 /** Event handler for the USB_Disconnect event. This indicates that the device is no longer connected to a host via
@@ -114,6 +115,7 @@ void EVENT_USB_Device_Connect(void)
 void EVENT_USB_Device_Disconnect(void)
 {
 	datachan_sudden_disconnection();
+	Event_Disconnected();
 }
 
 /** Event handler for the USB_ConfigurationChanged event. This is fired when the host set the current configuration

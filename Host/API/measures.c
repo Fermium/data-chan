@@ -49,13 +49,27 @@ void repack_measure(measure_t* out, uint8_t* in) {
     memcpy((void*)&out->mu, (const void*)in, sizeof(out->mu));
     in += sizeof(out->mu);
 
-    // ..time...
-    memcpy((void*)&out->time, (const void*)in, sizeof(out->time));
-    in += sizeof(out->time);
+		if (out->type != NONREALTIME) {
+		    // ..time...
+		    memcpy((void*)&out->time, (const void*)in, sizeof(out->time));
+		    in += sizeof(out->time);
 
-    // ..millis...
-    memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
-    in += sizeof(out->millis);
+		    // ..millis...
+		    memcpy((void*)&out->millis, (const void*)in, sizeof(out->millis));
+		    in += sizeof(out->millis);
+	  } else {
+			long            ms; // Milliseconds
+			time_t          s;  // Seconds
+			struct timespec spec;
+
+			// get the UNIX time and millis
+			clock_gettime(CLOCK_REALTIME, &spec);
+			s  = spec.tv_sec;
+			ms = round(spec.tv_nsec / 1.0e6);
+
+			out->time = s;
+			out->millis = ms;
+	  }
 }
 
 void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m) {
@@ -65,20 +79,6 @@ void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m)
     // copy the measure in a safe place
     measure_t* measure_copy = (measure_t*)malloc(sizeof(measure_t));
     memcpy((void*)measure_copy, (const void*)m, sizeof(measure_t));
-
-    if (measure_copy->type == NONREALTIME) {
-        long            ms; // Milliseconds
-        time_t          s;  // Seconds
-        struct timespec spec;
-
-        // get the UNIX time and millis
-        clock_gettime(CLOCK_REALTIME, &spec);
-        s  = spec.tv_sec;
-        ms = round(spec.tv_nsec / 1.0e6);
-
-        measure_copy->time = s;
-        measure_copy->millis = ms;
-    }
 
     // lock on the queue and perform the insertion
     pthread_mutex_lock(&dev->measures_queue_mutex);
