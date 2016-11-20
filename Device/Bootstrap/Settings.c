@@ -1,17 +1,17 @@
 /**
 	data-chan physic through USB
 	Copyright (C) 2016  Benato Denis
-	
+
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
-	
+
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-	
+
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -34,7 +34,7 @@ memory_block_t* getSetting(uint32_t entry, uint8_t channel) {
 		if ((current->entry->entry == entry) && (current->entry->channel == channel)) {
 			memcpy((void*)&value, (const void*)&current->entry->setting, sizeof(memory_block_t));
 			found = true;
-		} 
+		}
 		// search the setting for the global channel (as failback)
 		else if ((current->entry->entry == entry) && (current->entry->channel == 0)) {
 			memcpy((void*)&value, (const void*)&current->entry->setting, sizeof(memory_block_t));
@@ -47,7 +47,7 @@ memory_block_t* getSetting(uint32_t entry, uint8_t channel) {
 
 	// return the setting if found
 	if ((found) || (foundFailback)) return &value;
-	
+
 	// by default NULL is returned
 	return (memory_block_t*)NULL;
 }

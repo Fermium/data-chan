@@ -19,8 +19,9 @@
 #include "../../Protocol/measure_functions.h"
 #include "../../Protocol/data_management_functions.h"
 #include "BulkVendor.h"
-#include "CustomUSB.h"
+#include "datachan.h"
 #include "Settings.h"
+#include "Custom.h"
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
@@ -44,13 +45,15 @@ void unpack_measure(measure_t* in, uint8_t* out) {
     memcpy(out, (const void*)&in->mu, sizeof(in->mu));
     out += sizeof(in->mu);
 
-    // ..time...
-    memcpy((out), (const void*)&in->time, sizeof(in->time));
-    out += sizeof(in->time);
+    if (in->type != NONREALTIME) {
+        // ..time...
+        memcpy((out), (const void*)&in->time, sizeof(in->time));
+        out += sizeof(in->time);
 
-    // ..millis...
-    memcpy((out), (const void*)&in->millis, sizeof(in->millis));
-    out += sizeof(in->millis);
+        // ..millis...
+        memcpy((out), (const void*)&in->millis, sizeof(in->millis));
+        out += sizeof(in->millis);
+    }
 }
 
 static struct request_t *cmd_queue;
@@ -62,6 +65,8 @@ void datachan_init(void) {
     FIFO.first = (struct fifo_queue_t *)NULL;
     FIFO.last = (struct fifo_queue_t *)NULL;
     hostListening = false;
+
+    Event_Init();
 }
 
 void datachan_sudden_disconnection(void) {
@@ -74,8 +79,8 @@ void datachan_sudden_disconnection(void) {
  */
 void datachan_generate_report(uint8_t* DataArray)
 {
-    // every unused byte will be 00
-    memset((void*)DataArray, 0x00, VENDOR_IO_EPSIZE);
+    // every unused byte will be NONE
+    memset((void*)DataArray, NONE, VENDOR_IO_EPSIZE);
 
     // by default nothing is sent
     DataArray[0] = (uint8_t)NONE;
@@ -84,8 +89,20 @@ void datachan_generate_report(uint8_t* DataArray)
         // testing purpouse ONLY!
         enqueue_measure(&FIFO, new_nonrealtime_measure(0xFF, 1, 169.754699f));
 
-        // async requests manager
-        /*if (cmd_queue != (struct request_t*)NULL) {
+        // get the next measure to be sent over USB
+        measure_t* data_to_be_sent = dequeue_measure(&FIFO);
+
+        if (data_to_be_sent != (measure_t*)NULL) {
+            // if any flag as present, else flag as 'bad data'
+            DataArray[0] = (uint8_t)MEASURE;
+
+            // serialize the measure (for safe transmission)
+            unpack_measure(data_to_be_sent, (DataArray + 1));
+
+            // the measure is going to be removed from memory
+            free((void*)data_to_be_sent); // save space!
+        }// async requests manager
+        /*else if (cmd_queue != (struct request_t*)NULL) {
             // point to the first byte after the response type
             uint8_t *response_builder = DataArray + 1;
 
@@ -102,10 +119,10 @@ void datachan_generate_report(uint8_t* DataArray)
             response_builder += sizeof(req->id);
 
             // generate the buffer response
-            uint8_t buffer[GENERIC_REPORT_SIZE - 1 - sizeof(req->id)];
+            uint8_t buffer[GENERIC_REPORT_SIZE - sizeof(req->id) - 1];
 
             // call the external function that will generate the response
-
+            Process_Async(buffer);
 
             // apply the generated response
             memcpy((void*)response_builder, buffer, sizeof(buffer));
@@ -113,20 +130,8 @@ void datachan_generate_report(uint8_t* DataArray)
             // remove from the memory the fulfilled async command
             if (req->buffer != NULL) free((void*)req->buffer);
             free((void*)req);
-        } else */
-        // get the next measure to be sent over USB
-        measure_t* data_to_be_sent = dequeue_measure(&FIFO);
-
-        if (data_to_be_sent != (measure_t*)NULL) {
-            // if any flag as present, else flag as 'bad data'
-            DataArray[0] = (uint8_t)MEASURE;
-
-            // serialize the measure (for safe transmission)
-            unpack_measure(data_to_be_sent, (DataArray + 1));
-
-            // the measure is going to be removed from memory
-            free((void*)data_to_be_sent); // save space!
-        } else {
+        } */
+        else {
             DataArray[0] = ((uint8_t)NONE);
         }
     }

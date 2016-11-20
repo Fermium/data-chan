@@ -3,10 +3,10 @@ repo_url: https://github.com/NeroReflex/data-chan
 
 pages:
 - Home: index.md
+- FAQ: faq.md
 - Build: build.md
 - Protocol: protocol.md
 - IN Packets:
     - Measure:    IN_packets/Measure.md
-- FAQs: faq.md
 
 theme: readthedocs
