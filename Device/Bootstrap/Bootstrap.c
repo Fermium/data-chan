@@ -37,7 +37,6 @@
 #define  INCLUDE_FROM_BULKVENDOR_C
 #include "BulkVendor.h"
 #include "datachan.h"
-#include "datachan.h"
 
 /** Main program entry point. This routine configures the hardware required by the application, then
  *  enters a loop to run the application tasks in sequence.
