@@ -42,21 +42,21 @@ Allowed measure types are:
 
 ## Types
 
-##### NONREALTIME
+#### NONREALTIME
 
 In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.
 
-##### OFFSET_REALTIME
+#### OFFSET_REALTIME
 
 In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.
 
-##### REALTIME
+#### REALTIME
 
 In a REALTIME measure time and millis contains the correct values.
 
 This is useful if you have a long-running system with it's own [RTC](https://en.wikipedia.org/wiki/Real-time_clock) that may have only occasional connection to the host.
 
-##### PROGRESSIVE
+#### PROGRESSIVE
 
 In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.
 

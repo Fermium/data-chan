@@ -1,11 +1,10 @@
 # Synchronous Requests
 
-A synchronous request is sent from the Host to the client, aka the Device and
-**must** be evaluated immediately after its receipt.
+A synchronous request is sent from the Host to the Client (the Device) and **must** be evaluated immediately after its reception.
 
-__NOTICE THAT:__ core parts of the specification is a synchronous request as you
-can be mathematically certain of the evaluation of every request sent and correctly
-received!
+__BEWARE:__ The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.
+
+## Packets structure
 
 The structure of a synchronous request packet is:
 
@@ -30,21 +29,22 @@ The structure of a synchronous request packet is:
   </tr>
 </table>
 
-Changing the request code the required action changes accordingly, read the
-following sections for the complete list of synchronous commands.
+Changing the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.
 
-## Enable Transmission
+## Synchronous commands
+
+#### Enable Transmission
 
 The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.
 
 Typically this is the first command sent to the Device.
 
-When using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.
+When using ENABLE_TRANSMISSION the bytes that follows are meaningless, and thus will be ignored.
 
-## Disable Transmission
+#### Disable Transmission
 
 The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.
 
 Typically this is the last command sent to the Device.
 
-When using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.
+When using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.
