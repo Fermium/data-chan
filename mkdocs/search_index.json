@@ -82,7 +82,7 @@
         }, 
         {
             "location": "/protocol/", 
-            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics, it's minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\nwhereas a CMD_RESPONSE description can be read \nhere\n.", 
+            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics, it's minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN Packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\n\n\nOUT Packets\n\n\nAn outgoing packet can be:\n\n\n\n\n00h =\n NONE\n\n\n01h =\n CMD_REQUEST\n\n\n03h =\n CMD_ASYNC_REQUEST\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nA CMD_REQUEST description can be found \nhere\n.\n\n\nAsync requests\n\n\nTo understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read\nthe \nAsync\n chapter.\n\n\nTips \n Tricks\n\n\nAny outgoing packet has the last bit of the first byte set to 1, whereas any\nincoming packet has the last bit of the first byte set to zero.\n\n\nA NONE packet definition does exists in both: IN and OUT packets.\n\n\nNOTICE THAT:\n This fact can be used to detect bad packets!", 
             "title": "Protocol"
         }, 
         {
@@ -97,53 +97,118 @@
         }, 
         {
             "location": "/protocol/#in-packets", 
-            "text": "An incoming packet can be flagged as either one of these types:   00h =  NONE  02h =  CMD_ASYNC_RESPONSE  04h =  MEASURE   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.  When the device is active every type of packet will be used.  A MEASURE description can be found  here ,\nwhereas a CMD_RESPONSE description can be read  here .", 
-            "title": "IN packets"
+            "text": "An incoming packet can be flagged as either one of these types:   00h =  NONE  02h =  CMD_ASYNC_RESPONSE  04h =  MEASURE   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.  When the device is active every type of packet will be used.  A MEASURE description can be found  here ,", 
+            "title": "IN Packets"
         }, 
         {
-            "location": "/IN_packets/Measure/", 
-            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype (8bits)\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n\n\n00h =\n NONREALTIME\n\n\n01h =\n OFFSET_REALTIME\n\n\n02h =\n REALTIME\n\n\n03h =\n PROGRESSIVE\n\n\n\n\nTypes\n\n\nNONREALTIME\n\n\nIn a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.\n\n\nOFFSET_REALTIME\n\n\nIn a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.\n\n\nREALTIME\n\n\nIn a REALTIME measure time and millis contains the correct values.\n\n\nThis is useful if you have a long-running system with it's own \nRTC\n that may have only occasional connection to the host.\n\n\nPROGRESSIVE\n\n\nIn a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nChannels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.\n\n\nThe channel numeration starts from 1 and goes up to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:\n\n\n\n\n0 =\n meter\n\n\n1 =\n ampere\n\n\n2 =\n volt\n\n\n3 =\n coulomb\n\n\n4 =\n watt\n\n\n5 =\n kilogram\n\n\n6 =\n kelvin\n\n\n7 =\n candela\n\n\n8 =\n mole\n\n\n9 =\n hertz\n\n\n10 =\n radian\n\n\n11 =\n steradian\n\n\n12 =\n newton\n\n\n13 =\n pascal\n\n\n14 =\n joule\n\n\n15 =\n farad\n\n\n16 =\n ohm\n\n\n17 =\n siemens\n\n\n18 =\n weber\n\n\n19 =\n tesla\n\n\n20 =\n henry\n\n\n21 =\n lumen\n\n\n22 =\n lux\n\n\n23 =\n becquerel\n\n\n24 =\n gray\n\n\n25 =\n sievert\n\n\n26 =\n katal\n\n\n\n\nThe measurement should always be in the expected basic unit of measurement of the \nSI system\n.\n\n\nExample: If you are measuring Volts, use Volts; not millivolts or kilovolts.\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.\n\n\nHeck: that means you can use them to do everything you want!", 
+            "location": "/protocol/#out-packets", 
+            "text": "An outgoing packet can be:   00h =  NONE  01h =  CMD_REQUEST  03h =  CMD_ASYNC_REQUEST   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  A CMD_REQUEST description can be found  here .", 
+            "title": "OUT Packets"
+        }, 
+        {
+            "location": "/protocol/#async-requests", 
+            "text": "To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read\nthe  Async  chapter.", 
+            "title": "Async requests"
+        }, 
+        {
+            "location": "/protocol/#tips-tricks", 
+            "text": "Any outgoing packet has the last bit of the first byte set to 1, whereas any\nincoming packet has the last bit of the first byte set to zero.  A NONE packet definition does exists in both: IN and OUT packets.  NOTICE THAT:  This fact can be used to detect bad packets!", 
+            "title": "Tips &amp; Tricks"
+        }, 
+        {
+            "location": "/async/", 
+            "text": "Asynchronous Requests\n\n\nAn asynchronous request is a request that the Host may, or may not send to the\nDevice and can be evaluated potentially at any time.\n\n\nEverything that is not core part in the specification, or user-defined is an\nasynchronous request.\n\n\nNOTICE THAT:\n only with time that tends to the infinite you have the mathematical\nproof of the execution of every asynchronous request sent.\n\n\nOUT Packets Structure\n\n\nThe structure of an OUT packet containing an async request is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_REQUEST\n\n    \nRequest ID\n\n    \nRequest Code\n\n    \nCode-Specific\n\n  \n\n\n\n\n\nIN Packets structure\n\n\nThe structure of an IN packet containing an async response is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_RESPONSE\n\n    \nRequest ID\n\n    \nResponse\n\n  \n\n\n\n\n\nImplementation\n\n\nThe \nRequest ID\n is a number, usually ascending that is used to recognize a response.\n\n\nEven if not in ascending or descending order, each async request \nMUST\n have\nits \nunique\n \nRequest ID\n!\n\n\nRequest Parse \n Response Generation\n\n\nWhen parsing an async request you have to keep in mind that it is formed by \nGENERIC_REPORT_SIZE -6\n bytes, whereas an async response can be made up of\n\nGENERIC_REPORT_SIZE -5\n bytes.\n\n\nThose size differences are given by the asymmetry of the two packets:\nonly the OUT packet contains the \nRequest Code\n, which is one byte large.", 
+            "title": "Async Request"
+        }, 
+        {
+            "location": "/async/#asynchronous-requests", 
+            "text": "An asynchronous request is a request that the Host may, or may not send to the\nDevice and can be evaluated potentially at any time.  Everything that is not core part in the specification, or user-defined is an\nasynchronous request.  NOTICE THAT:  only with time that tends to the infinite you have the mathematical\nproof of the execution of every asynchronous request sent.", 
+            "title": "Asynchronous Requests"
+        }, 
+        {
+            "location": "/async/#out-packets-structure", 
+            "text": "The structure of an OUT packet containing an async request is:  \n   \n     bytes \n     0 \n     4 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_REQUEST \n     Request ID \n     Request Code \n     Code-Specific", 
+            "title": "OUT Packets Structure"
+        }, 
+        {
+            "location": "/async/#in-packets-structure", 
+            "text": "The structure of an IN packet containing an async response is:  \n   \n     bytes \n     0 \n     4 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_RESPONSE \n     Request ID \n     Response", 
+            "title": "IN Packets structure"
+        }, 
+        {
+            "location": "/async/#implementation", 
+            "text": "The  Request ID  is a number, usually ascending that is used to recognize a response.  Even if not in ascending or descending order, each async request  MUST  have\nits  unique   Request ID !", 
+            "title": "Implementation"
+        }, 
+        {
+            "location": "/async/#request-parse-response-generation", 
+            "text": "When parsing an async request you have to keep in mind that it is formed by  GENERIC_REPORT_SIZE -6  bytes, whereas an async response can be made up of GENERIC_REPORT_SIZE -5  bytes.  Those size differences are given by the asymmetry of the two packets:\nonly the OUT packet contains the  Request Code , which is one byte large.", 
+            "title": "Request Parse &amp; Response Generation"
+        }, 
+        {
+            "location": "/IN_packets/measure/", 
+            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n\n\n00h =\n NONREALTIME\n\n\n01h =\n OFFSET_REALTIME\n\n\n02h =\n REALTIME\n\n\n03h =\n PROGRESSIVE\n\n\n\n\nTypes\n\n\nNONREALTIME\n\n\nIn a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.\n\n\nOFFSET_REALTIME\n\n\nIn a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.\n\n\nREALTIME\n\n\nIn a REALTIME measure time and millis contains the correct values.\n\n\nThis is useful if you have a long-running system with it's own \nRTC\n that may have only occasional connection to the host.\n\n\nPROGRESSIVE\n\n\nIn a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nChannels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.\n\n\nThe channel numeration starts from 1 and goes up to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:\n\n\n\n\n0 =\n meter\n\n\n1 =\n ampere\n\n\n2 =\n volt\n\n\n3 =\n coulomb\n\n\n4 =\n watt\n\n\n5 =\n kilogram\n\n\n6 =\n kelvin\n\n\n7 =\n candela\n\n\n8 =\n mole\n\n\n9 =\n hertz\n\n\n10 =\n radian\n\n\n11 =\n steradian\n\n\n12 =\n newton\n\n\n13 =\n pascal\n\n\n14 =\n joule\n\n\n15 =\n farad\n\n\n16 =\n ohm\n\n\n17 =\n siemens\n\n\n18 =\n weber\n\n\n19 =\n tesla\n\n\n20 =\n henry\n\n\n21 =\n lumen\n\n\n22 =\n lux\n\n\n23 =\n becquerel\n\n\n24 =\n gray\n\n\n25 =\n sievert\n\n\n26 =\n katal\n\n\n\n\nThe measurement should always be in the expected basic unit of measurement of the \nSI system\n.\n\n\nExample: If you are measuring Volts, use Volts; not millivolts or kilovolts.\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.\n\n\nHeck: that means you can use them to do everything you want!", 
             "title": "Measure"
         }, 
         {
-            "location": "/IN_packets/Measure/#measure", 
-            "text": "A MEASURE packet has the data field formed this way:  \n     \n         bytes \n         0 \n         1 \n         2 to 6 \n         7 \n         8 to 12 \n         13 to 14 \n     \n     \n         type (8bits) \n         byte (8bits) \n         byte (8bits) \n         float (32bits) \n         byte (8bits) \n         big int (32bits) \n         small int (16bits) \n     \n     \n         descr \n         type \n         channel \n         value \n         mu \n         timestamp \n         millis \n       Allowed measure types are:   00h =  NONREALTIME  01h =  OFFSET_REALTIME  02h =  REALTIME  03h =  PROGRESSIVE", 
+            "location": "/IN_packets/measure/#measure", 
+            "text": "A MEASURE packet has the data field formed this way:  \n     \n         bytes \n         0 \n         1 \n         2 to 6 \n         7 \n         8 to 12 \n         13 to 14 \n     \n     \n         type \n         byte (8bits) \n         byte (8bits) \n         float (32bits) \n         byte (8bits) \n         big int (32bits) \n         small int (16bits) \n     \n     \n         descr \n         type \n         channel \n         value \n         mu \n         timestamp \n         millis \n       Allowed measure types are:   00h =  NONREALTIME  01h =  OFFSET_REALTIME  02h =  REALTIME  03h =  PROGRESSIVE", 
             "title": "Measure"
         }, 
         {
-            "location": "/IN_packets/Measure/#types", 
+            "location": "/IN_packets/measure/#types", 
             "text": "", 
             "title": "Types"
         }, 
         {
-            "location": "/IN_packets/Measure/#nonrealtime", 
+            "location": "/IN_packets/measure/#nonrealtime", 
             "text": "In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.", 
             "title": "NONREALTIME"
         }, 
         {
-            "location": "/IN_packets/Measure/#offset_realtime", 
+            "location": "/IN_packets/measure/#offset_realtime", 
             "text": "In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.", 
             "title": "OFFSET_REALTIME"
         }, 
         {
-            "location": "/IN_packets/Measure/#realtime", 
+            "location": "/IN_packets/measure/#realtime", 
             "text": "In a REALTIME measure time and millis contains the correct values.  This is useful if you have a long-running system with it's own  RTC  that may have only occasional connection to the host.", 
             "title": "REALTIME"
         }, 
         {
-            "location": "/IN_packets/Measure/#progressive", 
+            "location": "/IN_packets/measure/#progressive", 
             "text": "In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.", 
             "title": "PROGRESSIVE"
         }, 
         {
-            "location": "/IN_packets/Measure/#channel", 
+            "location": "/IN_packets/measure/#channel", 
             "text": "The channel field is used to identify the channel that has generated the measure.  Channels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.  The channel numeration starts from 1 and goes up to 255.", 
             "title": "Channel"
         }, 
         {
-            "location": "/IN_packets/Measure/#unit-of-measurement", 
+            "location": "/IN_packets/measure/#unit-of-measurement", 
             "text": "The Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:   0 =  meter  1 =  ampere  2 =  volt  3 =  coulomb  4 =  watt  5 =  kilogram  6 =  kelvin  7 =  candela  8 =  mole  9 =  hertz  10 =  radian  11 =  steradian  12 =  newton  13 =  pascal  14 =  joule  15 =  farad  16 =  ohm  17 =  siemens  18 =  weber  19 =  tesla  20 =  henry  21 =  lumen  22 =  lux  23 =  becquerel  24 =  gray  25 =  sievert  26 =  katal   The measurement should always be in the expected basic unit of measurement of the  SI system .  Example: If you are measuring Volts, use Volts; not millivolts or kilovolts.  The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.  Heck: that means you can use them to do everything you want!", 
             "title": "Unit of Measurement"
+        }, 
+        {
+            "location": "/OUT_packets/request/", 
+            "text": "Synchronous Requests\n\n\nA synchronous request is sent from the Host to the client, aka the Device and\n\nmust\n be evaluated immediately after its receipt.\n\n\nNOTICE THAT:\n core parts of the specification is a synchronous request as you\ncan be mathematically certain of the evaluation of every request sent and correctly\nreceived!\n\n\nThe structure of a synchronous request packet is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_REQUEST\n\n    \nrequest code\n\n    \n ??? \n\n  \n\n\n\n\n\nChanging the request code the required action changes accordingly, read the\nfollowing sections for the complete list of synchronous commands.\n\n\nEnable Transmission\n\n\nThe ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.\n\n\nTypically this is the first command sent to the Device.\n\n\nWhen using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.\n\n\nDisable Transmission\n\n\nThe DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.\n\n\nTypically this is the last command sent to the Device.\n\n\nWhen using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "title": "Sync Request"
+        }, 
+        {
+            "location": "/OUT_packets/request/#synchronous-requests", 
+            "text": "A synchronous request is sent from the Host to the client, aka the Device and must  be evaluated immediately after its receipt.  NOTICE THAT:  core parts of the specification is a synchronous request as you\ncan be mathematically certain of the evaluation of every request sent and correctly\nreceived!  The structure of a synchronous request packet is:  \n   \n     bytes \n     0 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_REQUEST \n     request code \n      ???  \n     Changing the request code the required action changes accordingly, read the\nfollowing sections for the complete list of synchronous commands.", 
+            "title": "Synchronous Requests"
+        }, 
+        {
+            "location": "/OUT_packets/request/#enable-transmission", 
+            "text": "The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.  Typically this is the first command sent to the Device.  When using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "title": "Enable Transmission"
+        }, 
+        {
+            "location": "/OUT_packets/request/#disable-transmission", 
+            "text": "The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.  Typically this is the last command sent to the Device.  When using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "title": "Disable Transmission"
         }
     ]
 }

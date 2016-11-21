@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Protocol - data-chan</title>
+  <title>Async Request - data-chan</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Protocol";
-    var mkdocs_page_input_path = "protocol.md";
-    var mkdocs_page_url = "/protocol/";
+    var mkdocs_page_name = "Async Request";
+    var mkdocs_page_input_path = "async.md";
+    var mkdocs_page_url = "/async/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -68,24 +68,30 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Protocol</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#protocol">Protocol</a></li>
-                
-                    <li><a class="toctree-l4" href="#packets-structure">Packets Structure</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../protocol/">Protocol</a>
         
     </li>
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../async/">Async Request</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Async Request</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#asynchronous-requests">Asynchronous Requests</a></li>
+                
+                    <li><a class="toctree-l4" href="#out-packets-structure">OUT Packets Structure</a></li>
+                
+                    <li><a class="toctree-l4" href="#in-packets-structure">IN Packets structure</a></li>
+                
+                    <li><a class="toctree-l4" href="#implementation">Implementation</a></li>
+                
+                    <li><a class="toctree-l4" href="#request-parse-response-generation">Request Parse &amp; Response Generation</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -142,10 +148,10 @@
     
       
     
-    <li>Protocol</li>
+    <li>Async Request</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/protocol.md"
+        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/async.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -155,69 +161,71 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="protocol">Protocol</h1>
-<p>The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.</p>
-<p>The protocol itself makes <strong>huge</strong> usage of the <strong>GENERIC_REPORT_SIZE</strong> macro which defines the number of bytes, minus one, in each USB packet.</p>
-<p>That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte
-(the +1) is used for the CRC-8!</p>
-<p>The Data-chan protocol uses <em>little-endian</em> while serializing data larger than one byte.</p>
-<h2 id="packets-structure">Packets Structure</h2>
-<p>Both IN and OUT packets are formed this way:</p>
+                <h1 id="asynchronous-requests">Asynchronous Requests</h1>
+<p>An asynchronous request is a request that the Host may, or may not send to the
+Device and can be evaluated potentially at any time.</p>
+<p>Everything that is not core part in the specification, or user-defined is an
+asynchronous request.</p>
+<p><strong>NOTICE THAT:</strong> only with time that tends to the infinite you have the mathematical
+proof of the execution of every asynchronous request sent.</p>
+<h2 id="out-packets-structure">OUT Packets Structure</h2>
+<p>The structure of an OUT packet containing an async request is:</p>
 <table border="1">
-    <tr>
-        <td>Position</td>
-        <td>first byte</td>
-        <td>following bytes</td>
-        <td>last byte</td>
-    </tr>
-    <tr>
-        <td>Description</td>
-    <td>type</td>
-        <td>data</td>
-        <td>CRC-8</td>
-    </tr>
-    <tr>
-        <td>Offset</td>
+  <tr>
+    <td>bytes</td>
     <td>0</td>
-        <td>1</td>
-        <td>GENERIC_REPORT_SIZE</td>
-    </tr>
+    <td>4</td>
+    <td>1</td>
+    <td>any other</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>byte (8bits)</td>
+    <td>dword (32bits)</td>
+    <td>byte (8bits)</td>
+    <td> ??? </td>
+  </tr>
+  <tr>
+    <td>description</td>
+    <td>CMD_ASYNC_REQUEST</td>
+    <td>Request ID</td>
+    <td>Request Code</td>
+    <td>Code-Specific</td>
+  </tr>
 </table>
 
-<p>The first bytes is the one that controls how the data is used.</p>
-<p>From the host perspective there are two types of packets:</p>
-<ul>
-<li>IN packets</li>
-<li>OUT packets.</li>
-</ul>
-<h4 id="in-packets">IN Packets</h4>
-<p>An incoming packet can be flagged as either one of these types:</p>
-<ul>
-<li>00h =&gt; NONE</li>
-<li>02h =&gt; CMD_ASYNC_RESPONSE</li>
-<li>04h =&gt; MEASURE</li>
-</ul>
-<p>Packets flagged with NONE must be ignored, even if theirs CRC is valid.</p>
-<p>By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.</p>
-<p>When the device is active every type of packet will be used.</p>
-<p>A MEASURE description can be found <a href="../IN_packets/measure/">here</a>,</p>
-<h4 id="out-packets">OUT Packets</h4>
-<p>An outgoing packet can be:</p>
-<ul>
-<li>00h =&gt; NONE</li>
-<li>01h =&gt; CMD_REQUEST</li>
-<li>03h =&gt; CMD_ASYNC_REQUEST</li>
-</ul>
-<p>Packets flagged with NONE must be ignored, even if theirs CRC is valid.</p>
-<p>A CMD_REQUEST description can be found <a href="../OUT_packets/request/">here</a>.</p>
-<h4 id="async-requests">Async requests</h4>
-<p>To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read
-the <a href="../async/">Async</a> chapter.</p>
-<h4 id="tips-tricks">Tips &amp; Tricks</h4>
-<p>Any outgoing packet has the last bit of the first byte set to 1, whereas any
-incoming packet has the last bit of the first byte set to zero.</p>
-<p>A NONE packet definition does exists in both: IN and OUT packets.</p>
-<p><strong>NOTICE THAT:</strong> This fact can be used to detect bad packets!</p>
+<h2 id="in-packets-structure">IN Packets structure</h2>
+<p>The structure of an IN packet containing an async response is:</p>
+<table border="1">
+  <tr>
+    <td>bytes</td>
+    <td>0</td>
+    <td>4</td>
+    <td>any other</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>byte (8bits)</td>
+    <td>dword (32bits)</td>
+    <td> ??? </td>
+  </tr>
+  <tr>
+    <td>description</td>
+    <td>CMD_ASYNC_RESPONSE</td>
+    <td>Request ID</td>
+    <td>Response</td>
+  </tr>
+</table>
+
+<h2 id="implementation">Implementation</h2>
+<p>The <em>Request ID</em> is a number, usually ascending that is used to recognize a response.</p>
+<p>Even if not in ascending or descending order, each async request <strong>MUST</strong> have
+its <strong>unique</strong> <em>Request ID</em>!</p>
+<h2 id="request-parse-response-generation">Request Parse &amp; Response Generation</h2>
+<p>When parsing an async request you have to keep in mind that it is formed by <strong>GENERIC_REPORT_SIZE -6</strong> bytes, whereas an async response can be made up of
+<strong>GENERIC_REPORT_SIZE -5</strong> bytes.</p>
+<p>Those size differences are given by the asymmetry of the two packets:
+only the OUT packet contains the <em>Request Code</em>, which is one byte large.</p>
               
             </div>
           </div>
@@ -225,10 +233,10 @@ incoming packet has the last bit of the first byte set to zero.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../async/" class="btn btn-neutral float-right" title="Async Request">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../IN_packets/measure/" class="btn btn-neutral float-right" title="Measure">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../build/" class="btn btn-neutral" title="Build"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../protocol/" class="btn btn-neutral" title="Protocol"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -256,10 +264,10 @@ incoming packet has the last bit of the first byte set to zero.</p>
           <a href="https://github.com/NeroReflex/data-chan" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../build/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../protocol/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../async/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../IN_packets/measure/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
