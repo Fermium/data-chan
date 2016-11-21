@@ -1,7 +1,7 @@
 # Build
 
-The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies!
-
+The entire project can be compiled with the `make all` command, even on windows,
+but it requires a lot of dependencies!
 
 ## Environment
 
@@ -39,6 +39,7 @@ If you're using windows you will **also** need to install:
 * [tdm-gcc](http://tdm-gcc.tdragon.net/)
 * [grep for windows](http://www.wingrep.com/)
 
-Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a [USBASP](http://www.fischl.de/usbasp/) to program the microcontroller and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
+If you are planning to use the Atmega32u4 or any other AVR microcontroller,
+you will need an [USBASP](http://www.fischl.de/usbasp/) to program the MCU and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
 
-Because you'll be able to use the pre-burned bootloader only once!
+You'll be able to use the bootloader shipped with your device only once!
