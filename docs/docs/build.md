@@ -1,7 +1,7 @@
 # Build
 
-The entire project can be compiled with the `make all` command, even on windows,
-but it requires a lot of dependencies!
+The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies!
+
 
 ## Environment
 
@@ -24,11 +24,14 @@ sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip op
 ```
 
 On MacOS if you use Homebrew you have to tap an external repo:
+
 ```sh
 brew tap osx-cross/avr
 brew install avr-libc avr-gcc libusb
 ```
+
 __NOTE:__ On MacOS if you don't have installed XCode you will *also* need to:
+
 ```sh
 brew install gcc
 ```
@@ -39,7 +42,6 @@ If you're using windows you will **also** need to install:
 * [tdm-gcc](http://tdm-gcc.tdragon.net/)
 * [grep for windows](http://www.wingrep.com/)
 
-If you are planning to use the Atmega32u4 or any other AVR microcontroller,
-you will need an [USBASP](http://www.fischl.de/usbasp/) to program the MCU and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
+If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an [USBASP](http://www.fischl.de/usbasp/) to program the MCU and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
 
-You'll be able to use the bootloader shipped with your device only once!
+You'll be able to use the firmware bootloader shipped with your device only once!

@@ -3,27 +3,21 @@
 
 #### In what way is the native usb in Data-chan better than an serial-usb IC?
 
-Firstly, those ICs are expensive:
-allowing you to use the integrated USB hardware in an Atmega32u4, and many others
-MCU, will save moneys from additional components.
+Those ICs are expensive. The usasge of the integrated USB hardware in an Atmega32u4 (or other compatible MCUs) it's more cost-effective.
 
-Secondly, they do not work that well:
-there have been many problems in the past such as the [FTDIgate](https://hackaday.com/tag/ftdi-gate/) and many signing problems in other [badly supported ICs](https://tzapu.com/making-ch340-ch341-serial-adapters-work-under-el-capitan-os-x/).
+Secondly, serial-usb ICs do not work that well. There have been many reported problems in the past such as the [FTDIgate](https://hackaday.com/tag/ftdi-gate/) and numerous driver signing problems in other [badly supported ICs](https://tzapu.com/making-ch340-ch341-serial-adapters-work-under-el-capitan-os-x/).
 
-Thirdly, most of the time they require custom drivers:
-most of the times those drivers are not supporting many different Operating Systems,
-and when they do, they are not kept up-to-date!
+Thirdly, most of the time they require custom drivers that may not be available across the most common operative systems (and when they do often they are not kept up-to-date).
 
 #### Why is the native usb Data-chan better than USB-CDC?
 
-[USB-CDC](https://en.wikipedia.org/wiki/USB_communications_device_class) are most of the times claimed by the kernel on modern OSes. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be claimed by the application. It's messy.
+[USB-CDC](https://en.wikipedia.org/wiki/USB_communications_device_class) are most of the times claimed by the kernel on modern operating systems. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be claimed by the application (requiring roots rights). It's messy.
 
 #### Should I use Data-chan for [insert project name here]?
 
 Data-chan is a simple and well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics.
 
-If you can apply the same logic to your project, and you want to use low-cost
-and low-resources devices, while reaching high-speed performance... why not?
+If you can apply the same logic to your project, and you want to use low-cost and low-resources devices, while reaching high-speed performance... why not?
 
 #### Which device can I use for testing and/or development?
 
@@ -39,21 +33,17 @@ In any other OS, generic vendor-specific class drivers, bundled with the OS are 
 
 #### How does Data-chan performs?
 
-Using an ATmega32u4 with the shipped *Device* code you can transfer, each second,
-a number of IN packets that vary between 800 and 860.
+Using an ATmega32u4 with the shipped *Device* code you can transfer, each second, a number of IN packets that varies between 800 and 860.
 
-Since each packet is (by default) 64 bytes long, and every IN packet is followed
-by an OUT packet you can transfer data up to 54kb/s in download and 54kb/s in upload!
+Each packet is (by default) 64 bytes long and followed by an OUT packet. With this configuration you'll be able to transfer data up to 54kb/s in download and 54kb/s in upload!
 
-Heck, with a sample rate of 200kHz (the fastest you can use within an ATmega32u4)
-you can only generate about 15kb of data each second!
+Heck, with a sample rate of 200kHz (the fastest you can use with the integrated ADC in an Atmega32u4) you can only generate about 15kb of data each second!
 
-Tests are conducted with a MacOS 10.12 and Linux 4.7 kernel using the provided Tester
-program.
+The tests are conducted on MacOS 10.12 and Linux 4.7 kernel using the provided tester program.
 
 #### I a beginner, should I use it?
 
-Depends. It's not made to work with beginners-like boards as the Arduino UNO or the Arduino Duemilanove.
+Depends. It's not made to work with beginners-like boards as the Arduino UNO or the Arduino Duemilanove or with the Arduino software environment.
 
 #### I have found a bug
 
