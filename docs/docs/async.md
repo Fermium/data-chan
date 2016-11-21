@@ -1,13 +1,10 @@
 # Asynchronous Requests
 
-An asynchronous request is a request that the Host may, or may not send to the
-Device and can be evaluated potentially at any time.
+An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.
 
-Everything that is not core part in the specification, or user-defined is an
-asynchronous request.
+Every request if not otherwise noted in the specifications (or differently defined by the user), is an asynchronous request.
 
-__NOTICE THAT:__ only with time that tends to the infinite you have the mathematical
-proof of the execution of every asynchronous request sent.
+__NOTICE:__ You would need infinite time to have the mathematical proof of the execution of an asynchronous request.
 
 ## OUT Packets Structure
 
@@ -62,17 +59,14 @@ The structure of an IN packet containing an async response is:
   </tr>
 </table>
 
-## Implementation
+## Request ID
 
-The *Request ID* is a number, usually ascending that is used to recognize a response.
+The *Request ID* is a number (that should to be increasing) used to identify the response.
 
-Even if not in ascending or descending order, each async request __MUST__ have
-its __unique__ *Request ID*!
+Even if the *Request IDs* are not ordered, they must be unique to each request.
 
-## Request Parse & Response Generation
+## Request Parsing & Response Generation
 
-When parsing an async request you have to keep in mind that it is formed by **GENERIC_REPORT_SIZE -6** bytes, whereas an async response can be made up of
-**GENERIC_REPORT_SIZE -5** bytes.
+When parsing an async request you have to keep in mind that it is formed by **GENERIC_REPORT_SIZE -6** bytes, whereas an async response can be made up of **GENERIC_REPORT_SIZE -5** bytes.
 
-Those size differences are given by the asymmetry of the two packets:
-only the OUT packet contains the *Request Code*, which is one byte large.
+Those size differences are given by the asymmetry in the lenght of the two packets: only the OUT packet contains the *Request Code*, which is one byte long.
