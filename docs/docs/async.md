@@ -2,7 +2,7 @@
 
 An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.
 
-Every request if not otherwise noted in the specifications, excluding the requests of the core protocol or requests differently defined by the user), is an asynchronous request.
+Every request, excluding the requests of the core protocol, is an asynchronous request.
 
 __NOTICE:__ You would need infinite time to have the mathematical proof of the execution of an asynchronous request.
 
