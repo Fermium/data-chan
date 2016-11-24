@@ -39,7 +39,7 @@ The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmissi
 
 Typically this is the first command sent to the Device.
 
-When using ENABLE_TRANSMISSION the bytes that follows are meaningless, and thus will be ignored.
+When using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.
 
 #### Disable Transmission
 

@@ -61,7 +61,7 @@ The structure of an IN packet containing an async response is:
 
 ## Request ID
 
-The *Request ID* is a number (that should to be increasing) used to identify the response.
+The *Request ID* is a number (that should be increasing) used to identify the response.
 
 Even if the *Request IDs* are not ordered, they must be unique to each request.
 
@@ -69,4 +69,4 @@ Even if the *Request IDs* are not ordered, they must be unique to each request.
 
 When parsing an async request you have to keep in mind that it is formed by **GENERIC_REPORT_SIZE -6** bytes, whereas an async response can be made up of **GENERIC_REPORT_SIZE -5** bytes.
 
-Those size differences are given by the asymmetry in the lenght of the two packets: only the OUT packet contains the *Request Code*, which is one byte long.
+Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the *Request Code*, which is one byte long.
