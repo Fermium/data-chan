@@ -1,6 +1,6 @@
 # Protocol
 
-The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.
+The protocol can be customized starting from the very USB basics. Its minimum entity is a packet.
 
 The protocol itself makes **huge** usage of the __GENERIC_REPORT_SIZE__ macro which defines the number of bytes, minus one, in each USB packet.
 
@@ -51,7 +51,7 @@ An incoming packet can be flagged as either one of these types:
 * 04h => MEASURE
 
 
-Packets flagged with NONE must be ignored, even if theirs CRC is valid.
+Packets flagged with NONE must be ignored, even if their CRC is valid.
 
 By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.
 
@@ -67,20 +67,18 @@ An outgoing packet can be:
 * 01h => CMD_REQUEST
 * 03h => CMD_ASYNC_REQUEST
 
-Packets flagged with NONE must be ignored, even if theirs CRC is valid.
+Packets flagged with NONE must be ignored, even if their CRC is valid.
 
 A CMD_REQUEST description can be found [here](OUT_packets/request.md).
 
 #### Async requests
 
-To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read
-the [Async](async.md) chapter.
+To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read the [Async](async.md) chapter.
 
 #### Tips & Tricks
 
-Any outgoing packet has the last bit of the first byte set to 1, whereas any
-incoming packet has the last bit of the first byte set to zero.
+Any outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.
 
-A NONE packet definition does exists in both: IN and OUT packets.
+A NONE packet definition does exist in both: IN and OUT packets.
 
 __NOTICE THAT:__ This fact can be used to detect bad packets!

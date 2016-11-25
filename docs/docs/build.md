@@ -1,6 +1,6 @@
 # Build
 
-The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies!
+The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies.
 
 
 ## Environment
@@ -30,13 +30,13 @@ brew tap osx-cross/avr
 brew install avr-libc avr-gcc libusb
 ```
 
-__NOTE:__ On MacOS if you don't have installed XCode you will *also* need to:
+__NOTE:__ On MacOS if you don't have installed XCode you will need to:
 
 ```sh
 brew install gcc
 ```
 
-If you're using windows you will **also** need to install:
+If you're using windows you will need to install:
 
 * msys 1.0
 * [tdm-gcc](http://tdm-gcc.tdragon.net/)
