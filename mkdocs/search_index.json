@@ -2,17 +2,17 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Data-chan\n\n\nData-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.\n\n\nIt makes usage of \nlufa\n on the device side and \nLibusb\n on the host.\n\n\nThe framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.\n\n\nIt's thought to be:\n\n\n\n\nMinimal\n\n\nFast \n\n\nConfigurable\n\n\n\n\nFeatures\n\n\n\n\nBroad compatibility with MacOS/Windows/Linux\n\n\nBindings for most of the major programming languages\n\n\nDo not require user interaction to install the required drivers\n\n\nSmall resource footprint on the MCU\n\n\nPortable to other devices compatible with the LUFA library (and it's forks)\n\n\n\n\nFAQ\n\n\nCheck out the \nFAQs", 
+            "text": "Data-chan\n\n\nData-chan is a USB framework/protocol for communication between Atmel AVR devices (primarily Atmega 32u4) and a PC.\n\n\nIt makes usage of \nlufa\n on the device side and \nLibusb\n on the host.\n\n\nThe framework's though for data-logging instruments with a slow sample rate, and allow to receive data and to send commands.\n\n\nIt's designed to be:\n\n\n\n\nMinimal\n\n\nFast \n\n\nConfigurable\n\n\n\n\nFeatures\n\n\n\n\nBroad compatibility with MacOS/Windows/Linux/OpenBSD\n\n\nBindings for most of the major programming languages\n\n\nDo not require user interaction to install the required drivers\n\n\nSmall resource footprint on the MCU\n\n\nPortable to other devices compatible with the LUFA library (and it's forks)\n\n\n\n\nFAQ\n\n\nCheck out the \nFAQs", 
             "title": "Home"
         }, 
         {
             "location": "/#data-chan", 
-            "text": "Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.  It makes usage of  lufa  on the device side and  Libusb  on the host.  The framework it's though for datalogging instruments with a slow sample rate, and allow to receive data and to send commands.  It's thought to be:   Minimal  Fast   Configurable", 
+            "text": "Data-chan is a USB framework/protocol for communication between Atmel AVR devices (primarily Atmega 32u4) and a PC.  It makes usage of  lufa  on the device side and  Libusb  on the host.  The framework's though for data-logging instruments with a slow sample rate, and allow to receive data and to send commands.  It's designed to be:   Minimal  Fast   Configurable", 
             "title": "Data-chan"
         }, 
         {
             "location": "/#features", 
-            "text": "Broad compatibility with MacOS/Windows/Linux  Bindings for most of the major programming languages  Do not require user interaction to install the required drivers  Small resource footprint on the MCU  Portable to other devices compatible with the LUFA library (and it's forks)", 
+            "text": "Broad compatibility with MacOS/Windows/Linux/OpenBSD  Bindings for most of the major programming languages  Do not require user interaction to install the required drivers  Small resource footprint on the MCU  Portable to other devices compatible with the LUFA library (and it's forks)", 
             "title": "Features"
         }, 
         {
@@ -22,7 +22,7 @@
         }, 
         {
             "location": "/faq/", 
-            "text": "FAQ\n\n\nIn what way is the native usb in Data-chan better than an serial-usb IC?\n\n\nThose ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easily available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the \nFTDIgate\n and the many signing problems in other \nbadly supported ICs\n.\nThird, most of the time they require drivers, rarely available cross-platform.\n\n\nWhy is the native usb Data-chan better than USB-CDC?\n\n\nUsb-CDC\n are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed. It's messy.\n\n\nShould I use Data-chan for [insert project name here]?\n\n\nData-chan is a well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics. If you can apply the same logic to your project, why not.\n\n\nWhich device can I use for testing?\n\n\nAnd \nArduino Nano\n programmed with an \nUSBASP\n and \nAVRDUDE\n will do.\n\n\nWARNING:\n Data-chan will break the bootloader!\n\n\nWhat drivers does Data-chan use?\n\n\nIt use \nWinusb\n on Windows, and included generic vendor-specific class drivers on MacOS and Linux.\n\n\nI a beginner, should I use it?\n\n\nDepends. It's not made to work with the Arduino environment. \n\n\nI found a bug\n\n\nSubmit an issue!", 
+            "text": "FAQ\n\n\nIn what way is the native USB in Data-chan better than a serial-USB IC?\n\n\nThose ICs are expensive. The usage of the integrated USB hardware in an Atmega32u4 (or other compatible MCUs) it's more cost-effective.\n\n\nSecondly, serial-USB ICs do not work that well. There have been many reported problems in the past such as the \nFTDIgate\n and numerous driver signing problems in other \nbadly supported ICs\n.\n\n\nThirdly, most of the time they require custom drivers that may not be available across the most common operative systems (and when they do often they are not kept up-to-date).\n\n\nWhy is the native USB Data-chan better than USB-CDC?\n\n\nUSB-CDC\n are most of the times claimed by the kernel on modern operating systems. If you use something as an RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be claimed by the application (requiring roots rights). It's messy.\n\n\nShould I use Data-chan for [insert project name here]?\n\n\nData-chan is a simple and well-defined protocol for a specific usage in data logging instruments, mostly in the field of physics.\n\n\nIf you can apply the same logic to your project, and you want to use low-cost devices while reaching high-speed performance... why not?\n\n\nWhich device can I use for testing and/or development?\n\n\nAn \nArduino Nano\n programmed with an \nUSBASP\n and \nAVRDUDE\n will do the job.\n\n\nWARNING:\n Data-chan will break the bootloader shipped with the Arduino Nano!\n\n\nWhat drivers does Data-chan use?\n\n\nIt uses \nWinusb\n on Windows.\n\n\nIn any other OS, generic vendor-specific class drivers, bundled with the OS are used.\n\n\nHow does Data-chan performs?\n\n\nUsing an ATmega32u4 with the shipped \nDevice\n code you can transfer, each second, a number of IN packets that varies between 800 and 860.\n\n\nEach packet is (by default) 64 bytes long and followed by an OUT packet. With this configuration, you'll be able to transfer data up to 54kb/s in download and 54kb/s in upload!\n\n\nHeck, with a sample rate of 200kHz (the fastest you can use with the integrated ADC in an Atmega32u4) you can only generate about 15kb of data each second!\n\n\nThe tests are conducted on MacOS 10.12 and Linux 4.7 kernel using the provided tester program.\n\n\nI a beginner, should I use it?\n\n\nDepends. It's not made to work with beginner-friendly boards as the Arduino UNO or the Arduino Duemilanove or with the Arduino software environment.\n\n\nI have found a bug\n\n\nSubmit an issue!", 
             "title": "FAQ"
         }, 
         {
@@ -31,63 +31,68 @@
             "title": "FAQ"
         }, 
         {
-            "location": "/faq/#in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic", 
-            "text": "Those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easily available. \nSecond, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the  FTDIgate  and the many signing problems in other  badly supported ICs .\nThird, most of the time they require drivers, rarely available cross-platform.", 
-            "title": "In what way is the native usb in Data-chan better than an serial-usb IC?"
+            "location": "/faq/#in-what-way-is-the-native-usb-in-data-chan-better-than-a-serial-usb-ic", 
+            "text": "Those ICs are expensive. The usage of the integrated USB hardware in an Atmega32u4 (or other compatible MCUs) it's more cost-effective.  Secondly, serial-USB ICs do not work that well. There have been many reported problems in the past such as the  FTDIgate  and numerous driver signing problems in other  badly supported ICs .  Thirdly, most of the time they require custom drivers that may not be available across the most common operative systems (and when they do often they are not kept up-to-date).", 
+            "title": "In what way is the native USB in Data-chan better than a serial-USB IC?"
         }, 
         {
             "location": "/faq/#why-is-the-native-usb-data-chan-better-than-usb-cdc", 
-            "text": "Usb-CDC  are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed. It's messy.", 
-            "title": "Why is the native usb Data-chan better than USB-CDC?"
+            "text": "USB-CDC  are most of the times claimed by the kernel on modern operating systems. If you use something as an RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be claimed by the application (requiring roots rights). It's messy.", 
+            "title": "Why is the native USB Data-chan better than USB-CDC?"
         }, 
         {
             "location": "/faq/#should-i-use-data-chan-for-insert-project-name-here", 
-            "text": "Data-chan is a well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics. If you can apply the same logic to your project, why not.", 
+            "text": "Data-chan is a simple and well-defined protocol for a specific usage in data logging instruments, mostly in the field of physics.  If you can apply the same logic to your project, and you want to use low-cost devices while reaching high-speed performance... why not?", 
             "title": "Should I use Data-chan for [insert project name here]?"
         }, 
         {
-            "location": "/faq/#which-device-can-i-use-for-testing", 
-            "text": "And  Arduino Nano  programmed with an  USBASP  and  AVRDUDE  will do.  WARNING:  Data-chan will break the bootloader!", 
-            "title": "Which device can I use for testing?"
+            "location": "/faq/#which-device-can-i-use-for-testing-andor-development", 
+            "text": "An  Arduino Nano  programmed with an  USBASP  and  AVRDUDE  will do the job.  WARNING:  Data-chan will break the bootloader shipped with the Arduino Nano!", 
+            "title": "Which device can I use for testing and/or development?"
         }, 
         {
             "location": "/faq/#what-drivers-does-data-chan-use", 
-            "text": "It use  Winusb  on Windows, and included generic vendor-specific class drivers on MacOS and Linux.", 
+            "text": "It uses  Winusb  on Windows.  In any other OS, generic vendor-specific class drivers, bundled with the OS are used.", 
             "title": "What drivers does Data-chan use?"
         }, 
         {
+            "location": "/faq/#how-does-data-chan-performs", 
+            "text": "Using an ATmega32u4 with the shipped  Device  code you can transfer, each second, a number of IN packets that varies between 800 and 860.  Each packet is (by default) 64 bytes long and followed by an OUT packet. With this configuration, you'll be able to transfer data up to 54kb/s in download and 54kb/s in upload!  Heck, with a sample rate of 200kHz (the fastest you can use with the integrated ADC in an Atmega32u4) you can only generate about 15kb of data each second!  The tests are conducted on MacOS 10.12 and Linux 4.7 kernel using the provided tester program.", 
+            "title": "How does Data-chan performs?"
+        }, 
+        {
             "location": "/faq/#i-a-beginner-should-i-use-it", 
-            "text": "Depends. It's not made to work with the Arduino environment.", 
+            "text": "Depends. It's not made to work with beginner-friendly boards as the Arduino UNO or the Arduino Duemilanove or with the Arduino software environment.", 
             "title": "I a beginner, should I use it?"
         }, 
         {
-            "location": "/faq/#i-found-a-bug", 
+            "location": "/faq/#i-have-found-a-bug", 
             "text": "Submit an issue!", 
-            "title": "I found a bug"
+            "title": "I have found a bug"
         }, 
         {
             "location": "/build/", 
-            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies!\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will \nalso\n need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will \nalso\n need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nEither if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a \nUSBASP\n to program the microcontroller and \nAVRDUDE\n to drive it.\n\n\nBecause you'll be able to use the pre-burned bootloader only once!", 
+            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies.\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nIf you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an \nUSBASP\n to program the MCU and \nAVRDUDE\n to drive it.\n\n\nYou'll be able to use the firmware bootloader shipped with your device only once!", 
             "title": "Build"
         }, 
         {
             "location": "/build/#build", 
-            "text": "The entire project can be compiled with the  make all  command, even on windows, but it requires a lot of dependencies!", 
+            "text": "The entire project can be compiled with the  make all  command, even on windows, but it requires a lot of dependencies.", 
             "title": "Build"
         }, 
         {
             "location": "/build/#environment", 
-            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).  On Ubuntu/Debian run:  sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will  also  need to:  brew install gcc  If you're using windows you will  also  need to install:   msys 1.0  tdm-gcc  grep for windows   Either if you are using Linux, MacOS or Windows, if you plan to use the Atmega32u4 or any other AVR microcontroller you will need a  USBASP  to program the microcontroller and  AVRDUDE  to drive it.  Because you'll be able to use the pre-burned bootloader only once!", 
+            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).  On Ubuntu/Debian run:  sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will need to:  brew install gcc  If you're using windows you will need to install:   msys 1.0  tdm-gcc  grep for windows   If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an  USBASP  to program the MCU and  AVRDUDE  to drive it.  You'll be able to use the firmware bootloader shipped with your device only once!", 
             "title": "Environment"
         }, 
         {
             "location": "/protocol/", 
-            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics, it's minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN Packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\n\n\nOUT Packets\n\n\nAn outgoing packet can be:\n\n\n\n\n00h =\n NONE\n\n\n01h =\n CMD_REQUEST\n\n\n03h =\n CMD_ASYNC_REQUEST\n\n\n\n\nPackets flagged with NONE must be ignored, even if theirs CRC is valid.\n\n\nA CMD_REQUEST description can be found \nhere\n.\n\n\nAsync requests\n\n\nTo understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read\nthe \nAsync\n chapter.\n\n\nTips \n Tricks\n\n\nAny outgoing packet has the last bit of the first byte set to 1, whereas any\nincoming packet has the last bit of the first byte set to zero.\n\n\nA NONE packet definition does exists in both: IN and OUT packets.\n\n\nNOTICE THAT:\n This fact can be used to detect bad packets!", 
+            "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics. Its minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN Packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if their CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\n\n\nOUT Packets\n\n\nAn outgoing packet can be:\n\n\n\n\n00h =\n NONE\n\n\n01h =\n CMD_REQUEST\n\n\n03h =\n CMD_ASYNC_REQUEST\n\n\n\n\nPackets flagged with NONE must be ignored, even if their CRC is valid.\n\n\nA CMD_REQUEST description can be found \nhere\n.\n\n\nAsync requests\n\n\nTo understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read the \nAsync\n chapter.\n\n\nTips \n Tricks\n\n\nAny outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.\n\n\nA NONE packet definition does exist in both: IN and OUT packets.\n\n\nNOTICE THAT:\n This fact can be used to detect bad packets!", 
             "title": "Protocol"
         }, 
         {
             "location": "/protocol/#protocol", 
-            "text": "The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.  The protocol itself makes  huge  usage of the  GENERIC_REPORT_SIZE  macro which defines the number of bytes, minus one, in each USB packet.  That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!  The Data-chan protocol uses  little-endian  while serializing data larger than one byte.", 
+            "text": "The protocol can be customized starting from the very USB basics. Its minimum entity is a packet.  The protocol itself makes  huge  usage of the  GENERIC_REPORT_SIZE  macro which defines the number of bytes, minus one, in each USB packet.  That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!  The Data-chan protocol uses  little-endian  while serializing data larger than one byte.", 
             "title": "Protocol"
         }, 
         {
@@ -97,32 +102,32 @@
         }, 
         {
             "location": "/protocol/#in-packets", 
-            "text": "An incoming packet can be flagged as either one of these types:   00h =  NONE  02h =  CMD_ASYNC_RESPONSE  04h =  MEASURE   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.  When the device is active every type of packet will be used.  A MEASURE description can be found  here ,", 
+            "text": "An incoming packet can be flagged as either one of these types:   00h =  NONE  02h =  CMD_ASYNC_RESPONSE  04h =  MEASURE   Packets flagged with NONE must be ignored, even if their CRC is valid.  By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.  When the device is active every type of packet will be used.  A MEASURE description can be found  here ,", 
             "title": "IN Packets"
         }, 
         {
             "location": "/protocol/#out-packets", 
-            "text": "An outgoing packet can be:   00h =  NONE  01h =  CMD_REQUEST  03h =  CMD_ASYNC_REQUEST   Packets flagged with NONE must be ignored, even if theirs CRC is valid.  A CMD_REQUEST description can be found  here .", 
+            "text": "An outgoing packet can be:   00h =  NONE  01h =  CMD_REQUEST  03h =  CMD_ASYNC_REQUEST   Packets flagged with NONE must be ignored, even if their CRC is valid.  A CMD_REQUEST description can be found  here .", 
             "title": "OUT Packets"
         }, 
         {
             "location": "/protocol/#async-requests", 
-            "text": "To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read\nthe  Async  chapter.", 
+            "text": "To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read the  Async  chapter.", 
             "title": "Async requests"
         }, 
         {
             "location": "/protocol/#tips-tricks", 
-            "text": "Any outgoing packet has the last bit of the first byte set to 1, whereas any\nincoming packet has the last bit of the first byte set to zero.  A NONE packet definition does exists in both: IN and OUT packets.  NOTICE THAT:  This fact can be used to detect bad packets!", 
+            "text": "Any outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.  A NONE packet definition does exist in both: IN and OUT packets.  NOTICE THAT:  This fact can be used to detect bad packets!", 
             "title": "Tips &amp; Tricks"
         }, 
         {
             "location": "/async/", 
-            "text": "Asynchronous Requests\n\n\nAn asynchronous request is a request that the Host may, or may not send to the\nDevice and can be evaluated potentially at any time.\n\n\nEverything that is not core part in the specification, or user-defined is an\nasynchronous request.\n\n\nNOTICE THAT:\n only with time that tends to the infinite you have the mathematical\nproof of the execution of every asynchronous request sent.\n\n\nOUT Packets Structure\n\n\nThe structure of an OUT packet containing an async request is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_REQUEST\n\n    \nRequest ID\n\n    \nRequest Code\n\n    \nCode-Specific\n\n  \n\n\n\n\n\nIN Packets structure\n\n\nThe structure of an IN packet containing an async response is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_RESPONSE\n\n    \nRequest ID\n\n    \nResponse\n\n  \n\n\n\n\n\nImplementation\n\n\nThe \nRequest ID\n is a number, usually ascending that is used to recognize a response.\n\n\nEven if not in ascending or descending order, each async request \nMUST\n have\nits \nunique\n \nRequest ID\n!\n\n\nRequest Parse \n Response Generation\n\n\nWhen parsing an async request you have to keep in mind that it is formed by \nGENERIC_REPORT_SIZE -6\n bytes, whereas an async response can be made up of\n\nGENERIC_REPORT_SIZE -5\n bytes.\n\n\nThose size differences are given by the asymmetry of the two packets:\nonly the OUT packet contains the \nRequest Code\n, which is one byte large.", 
+            "text": "Asynchronous Requests\n\n\nAn asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.\n\n\nEvery request, excluding the requests of the core protocol, is an asynchronous request.\n\n\nNOTICE:\n You would need infinite time to have the mathematical proof of the execution of an asynchronous request.\n\n\nOUT Packets Structure\n\n\nThe structure of an OUT packet containing an async request is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_REQUEST\n\n    \nRequest ID\n\n    \nRequest Code\n\n    \nCode-Specific\n\n  \n\n\n\n\n\nIN Packets structure\n\n\nThe structure of an IN packet containing an async response is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_RESPONSE\n\n    \nRequest ID\n\n    \nResponse\n\n  \n\n\n\n\n\nRequest ID\n\n\nThe \nRequest ID\n is a number (that should be increasing) used to identify the response.\n\n\nEven if the \nRequest IDs\n are not ordered, they must be unique to each request.\n\n\nRequest Parsing \n Response Generation\n\n\nWhen parsing an async request you have to keep in mind that it is formed by \nGENERIC_REPORT_SIZE -6\n bytes, whereas an async response can be made up of \nGENERIC_REPORT_SIZE -5\n bytes.\n\n\nThose size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the \nRequest Code\n, which is one byte long.", 
             "title": "Async Request"
         }, 
         {
             "location": "/async/#asynchronous-requests", 
-            "text": "An asynchronous request is a request that the Host may, or may not send to the\nDevice and can be evaluated potentially at any time.  Everything that is not core part in the specification, or user-defined is an\nasynchronous request.  NOTICE THAT:  only with time that tends to the infinite you have the mathematical\nproof of the execution of every asynchronous request sent.", 
+            "text": "An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.  Every request, excluding the requests of the core protocol, is an asynchronous request.  NOTICE:  You would need infinite time to have the mathematical proof of the execution of an asynchronous request.", 
             "title": "Asynchronous Requests"
         }, 
         {
@@ -136,18 +141,18 @@
             "title": "IN Packets structure"
         }, 
         {
-            "location": "/async/#implementation", 
-            "text": "The  Request ID  is a number, usually ascending that is used to recognize a response.  Even if not in ascending or descending order, each async request  MUST  have\nits  unique   Request ID !", 
-            "title": "Implementation"
+            "location": "/async/#request-id", 
+            "text": "The  Request ID  is a number (that should be increasing) used to identify the response.  Even if the  Request IDs  are not ordered, they must be unique to each request.", 
+            "title": "Request ID"
         }, 
         {
-            "location": "/async/#request-parse-response-generation", 
-            "text": "When parsing an async request you have to keep in mind that it is formed by  GENERIC_REPORT_SIZE -6  bytes, whereas an async response can be made up of GENERIC_REPORT_SIZE -5  bytes.  Those size differences are given by the asymmetry of the two packets:\nonly the OUT packet contains the  Request Code , which is one byte large.", 
-            "title": "Request Parse &amp; Response Generation"
+            "location": "/async/#request-parsing-response-generation", 
+            "text": "When parsing an async request you have to keep in mind that it is formed by  GENERIC_REPORT_SIZE -6  bytes, whereas an async response can be made up of  GENERIC_REPORT_SIZE -5  bytes.  Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the  Request Code , which is one byte long.", 
+            "title": "Request Parsing &amp; Response Generation"
         }, 
         {
             "location": "/IN_packets/measure/", 
-            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n\n\n00h =\n NONREALTIME\n\n\n01h =\n OFFSET_REALTIME\n\n\n02h =\n REALTIME\n\n\n03h =\n PROGRESSIVE\n\n\n\n\nTypes\n\n\nNONREALTIME\n\n\nIn a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.\n\n\nOFFSET_REALTIME\n\n\nIn a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.\n\n\nREALTIME\n\n\nIn a REALTIME measure time and millis contains the correct values.\n\n\nThis is useful if you have a long-running system with it's own \nRTC\n that may have only occasional connection to the host.\n\n\nPROGRESSIVE\n\n\nIn a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nChannels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.\n\n\nThe channel numeration starts from 1 and goes up to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:\n\n\n\n\n0 =\n meter\n\n\n1 =\n ampere\n\n\n2 =\n volt\n\n\n3 =\n coulomb\n\n\n4 =\n watt\n\n\n5 =\n kilogram\n\n\n6 =\n kelvin\n\n\n7 =\n candela\n\n\n8 =\n mole\n\n\n9 =\n hertz\n\n\n10 =\n radian\n\n\n11 =\n steradian\n\n\n12 =\n newton\n\n\n13 =\n pascal\n\n\n14 =\n joule\n\n\n15 =\n farad\n\n\n16 =\n ohm\n\n\n17 =\n siemens\n\n\n18 =\n weber\n\n\n19 =\n tesla\n\n\n20 =\n henry\n\n\n21 =\n lumen\n\n\n22 =\n lux\n\n\n23 =\n becquerel\n\n\n24 =\n gray\n\n\n25 =\n sievert\n\n\n26 =\n katal\n\n\n\n\nThe measurement should always be in the expected basic unit of measurement of the \nSI system\n.\n\n\nExample: If you are measuring Volts, use Volts; not millivolts or kilovolts.\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.\n\n\nHeck: that means you can use them to do everything you want!", 
+            "text": "Measure\n\n\nA MEASURE packet has the data field formed this way:\n\n\n\n    \n\n        \nbytes\n\n        \n0\n\n        \n1\n\n        \n2 to 6\n\n        \n7\n\n        \n8 to 12\n\n        \n13 to 14\n\n    \n\n    \n\n        \ntype\n\n        \nbyte (8bits)\n\n        \nbyte (8bits)\n\n        \nfloat (32bits)\n\n        \nbyte (8bits)\n\n        \nbig int (32bits)\n\n        \nsmall int (16bits)\n\n    \n\n    \n\n        \ndescr\n\n        \ntype\n\n        \nchannel\n\n        \nvalue\n\n        \nmu\n\n        \ntimestamp\n\n        \nmillis\n\n    \n\n\n\n\n\nAllowed measure types are:\n\n\n\n\n00h =\n NONREALTIME\n\n\n01h =\n OFFSET_REALTIME\n\n\n02h =\n REALTIME\n\n\n03h =\n PROGRESSIVE\n\n\n\n\nTypes\n\n\nNONREALTIME\n\n\nIn a NONREALTIME measure both time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.\n\n\nOFFSET_REALTIME\n\n\nIn an OFFSET_REALTIME measure time and millis refers to the moment the data-logging procedure started.\n\n\nREALTIME\n\n\nIn a REALTIME measure both time and millis contains the correct values.\n\n\nThis is useful if you have a long-running system with it's own \nRTC\n that may have a infrequent connection to the host.\n\n\nPROGRESSIVE\n\n\nIn a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.\n\n\nChannel\n\n\nThe channel field is used to identify the channel that has generated the measure.\n\n\nChannels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.\n\n\nThe channel numeration starts from 1 and goes up to 255.\n\n\nUnit of Measurement\n\n\nThe Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:\n\n\n\n\n0 =\n meter\n\n\n1 =\n ampere\n\n\n2 =\n volt\n\n\n3 =\n coulomb\n\n\n4 =\n watt\n\n\n5 =\n kilogram\n\n\n6 =\n kelvin\n\n\n7 =\n candela\n\n\n8 =\n mole\n\n\n9 =\n hertz\n\n\n10 =\n radian\n\n\n11 =\n steradian\n\n\n12 =\n newton\n\n\n13 =\n pascal\n\n\n14 =\n joule\n\n\n15 =\n farad\n\n\n16 =\n ohm\n\n\n17 =\n siemens\n\n\n18 =\n weber\n\n\n19 =\n tesla\n\n\n20 =\n henry\n\n\n21 =\n lumen\n\n\n22 =\n lux\n\n\n23 =\n becquerel\n\n\n24 =\n gray\n\n\n25 =\n sievert\n\n\n26 =\n katal\n\n\n\n\nThe measurement should always be in the expected basic unit of measurement of the \nSI system\n.\n\n\nExample: If you are measuring Volts, use Volts; not millivolts or kilovolts.\n\n\nThe last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.\n\n\nHeck: that means you can use them to do everything you want!", 
             "title": "Measure"
         }, 
         {
@@ -162,17 +167,17 @@
         }, 
         {
             "location": "/IN_packets/measure/#nonrealtime", 
-            "text": "In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.", 
+            "text": "In a NONREALTIME measure both time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.", 
             "title": "NONREALTIME"
         }, 
         {
             "location": "/IN_packets/measure/#offset_realtime", 
-            "text": "In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.", 
+            "text": "In an OFFSET_REALTIME measure time and millis refers to the moment the data-logging procedure started.", 
             "title": "OFFSET_REALTIME"
         }, 
         {
             "location": "/IN_packets/measure/#realtime", 
-            "text": "In a REALTIME measure time and millis contains the correct values.  This is useful if you have a long-running system with it's own  RTC  that may have only occasional connection to the host.", 
+            "text": "In a REALTIME measure both time and millis contains the correct values.  This is useful if you have a long-running system with it's own  RTC  that may have a infrequent connection to the host.", 
             "title": "REALTIME"
         }, 
         {
@@ -192,22 +197,32 @@
         }, 
         {
             "location": "/OUT_packets/request/", 
-            "text": "Synchronous Requests\n\n\nA synchronous request is sent from the Host to the client, aka the Device and\n\nmust\n be evaluated immediately after its receipt.\n\n\nNOTICE THAT:\n core parts of the specification is a synchronous request as you\ncan be mathematically certain of the evaluation of every request sent and correctly\nreceived!\n\n\nThe structure of a synchronous request packet is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_REQUEST\n\n    \nrequest code\n\n    \n ??? \n\n  \n\n\n\n\n\nChanging the request code the required action changes accordingly, read the\nfollowing sections for the complete list of synchronous commands.\n\n\nEnable Transmission\n\n\nThe ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.\n\n\nTypically this is the first command sent to the Device.\n\n\nWhen using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.\n\n\nDisable Transmission\n\n\nThe DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.\n\n\nTypically this is the last command sent to the Device.\n\n\nWhen using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "text": "Synchronous Requests\n\n\nA synchronous request is sent from the Host to the Client (the Device) and \nmust\n be evaluated immediately after its reception.\n\n\nBEWARE:\n The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.\n\n\nPackets structure\n\n\nThe structure of a synchronous request packet is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_REQUEST\n\n    \nrequest code\n\n    \n ??? \n\n  \n\n\n\n\n\nChanging the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.\n\n\nSynchronous commands\n\n\nEnable Transmission\n\n\nThe ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.\n\n\nTypically this is the first command sent to the Device.\n\n\nWhen using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.\n\n\nDisable Transmission\n\n\nThe DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.\n\n\nTypically this is the last command sent to the Device.\n\n\nWhen using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.", 
             "title": "Sync Request"
         }, 
         {
             "location": "/OUT_packets/request/#synchronous-requests", 
-            "text": "A synchronous request is sent from the Host to the client, aka the Device and must  be evaluated immediately after its receipt.  NOTICE THAT:  core parts of the specification is a synchronous request as you\ncan be mathematically certain of the evaluation of every request sent and correctly\nreceived!  The structure of a synchronous request packet is:  \n   \n     bytes \n     0 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_REQUEST \n     request code \n      ???  \n     Changing the request code the required action changes accordingly, read the\nfollowing sections for the complete list of synchronous commands.", 
+            "text": "A synchronous request is sent from the Host to the Client (the Device) and  must  be evaluated immediately after its reception.  BEWARE:  The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.", 
             "title": "Synchronous Requests"
         }, 
         {
+            "location": "/OUT_packets/request/#packets-structure", 
+            "text": "The structure of a synchronous request packet is:  \n   \n     bytes \n     0 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_REQUEST \n     request code \n      ???  \n     Changing the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.", 
+            "title": "Packets structure"
+        }, 
+        {
+            "location": "/OUT_packets/request/#synchronous-commands", 
+            "text": "", 
+            "title": "Synchronous commands"
+        }, 
+        {
             "location": "/OUT_packets/request/#enable-transmission", 
-            "text": "The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.  Typically this is the first command sent to the Device.  When using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "text": "The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.  Typically this is the first command sent to the Device.  When using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.", 
             "title": "Enable Transmission"
         }, 
         {
             "location": "/OUT_packets/request/#disable-transmission", 
-            "text": "The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.  Typically this is the last command sent to the Device.  When using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.", 
+            "text": "The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.  Typically this is the last command sent to the Device.  When using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.", 
             "title": "Disable Transmission"
         }
     ]

@@ -86,9 +86,9 @@
                 
                     <li><a class="toctree-l4" href="#in-packets-structure">IN Packets structure</a></li>
                 
-                    <li><a class="toctree-l4" href="#implementation">Implementation</a></li>
+                    <li><a class="toctree-l4" href="#request-id">Request ID</a></li>
                 
-                    <li><a class="toctree-l4" href="#request-parse-response-generation">Request Parse &amp; Response Generation</a></li>
+                    <li><a class="toctree-l4" href="#request-parsing-response-generation">Request Parsing &amp; Response Generation</a></li>
                 
             
             </ul>
@@ -162,12 +162,9 @@
             <div class="section">
               
                 <h1 id="asynchronous-requests">Asynchronous Requests</h1>
-<p>An asynchronous request is a request that the Host may, or may not send to the
-Device and can be evaluated potentially at any time.</p>
-<p>Everything that is not core part in the specification, or user-defined is an
-asynchronous request.</p>
-<p><strong>NOTICE THAT:</strong> only with time that tends to the infinite you have the mathematical
-proof of the execution of every asynchronous request sent.</p>
+<p>An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.</p>
+<p>Every request, excluding the requests of the core protocol, is an asynchronous request.</p>
+<p><strong>NOTICE:</strong> You would need infinite time to have the mathematical proof of the execution of an asynchronous request.</p>
 <h2 id="out-packets-structure">OUT Packets Structure</h2>
 <p>The structure of an OUT packet containing an async request is:</p>
 <table border="1">
@@ -217,15 +214,12 @@ proof of the execution of every asynchronous request sent.</p>
   </tr>
 </table>
 
-<h2 id="implementation">Implementation</h2>
-<p>The <em>Request ID</em> is a number, usually ascending that is used to recognize a response.</p>
-<p>Even if not in ascending or descending order, each async request <strong>MUST</strong> have
-its <strong>unique</strong> <em>Request ID</em>!</p>
-<h2 id="request-parse-response-generation">Request Parse &amp; Response Generation</h2>
-<p>When parsing an async request you have to keep in mind that it is formed by <strong>GENERIC_REPORT_SIZE -6</strong> bytes, whereas an async response can be made up of
-<strong>GENERIC_REPORT_SIZE -5</strong> bytes.</p>
-<p>Those size differences are given by the asymmetry of the two packets:
-only the OUT packet contains the <em>Request Code</em>, which is one byte large.</p>
+<h2 id="request-id">Request ID</h2>
+<p>The <em>Request ID</em> is a number (that should be increasing) used to identify the response.</p>
+<p>Even if the <em>Request IDs</em> are not ordered, they must be unique to each request.</p>
+<h2 id="request-parsing-response-generation">Request Parsing &amp; Response Generation</h2>
+<p>When parsing an async request you have to keep in mind that it is formed by <strong>GENERIC_REPORT_SIZE -6</strong> bytes, whereas an async response can be made up of <strong>GENERIC_REPORT_SIZE -5</strong> bytes.</p>
+<p>Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the <em>Request Code</em>, which is one byte long.</p>
               
             </div>
           </div>

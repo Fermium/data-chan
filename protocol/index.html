@@ -156,7 +156,7 @@
             <div class="section">
               
                 <h1 id="protocol">Protocol</h1>
-<p>The protocol can be customized starting from the very USB basics, it's minimum entity is a packet.</p>
+<p>The protocol can be customized starting from the very USB basics. Its minimum entity is a packet.</p>
 <p>The protocol itself makes <strong>huge</strong> usage of the <strong>GENERIC_REPORT_SIZE</strong> macro which defines the number of bytes, minus one, in each USB packet.</p>
 <p>That means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte
 (the +1) is used for the CRC-8!</p>
@@ -197,7 +197,7 @@
 <li>02h =&gt; CMD_ASYNC_RESPONSE</li>
 <li>04h =&gt; MEASURE</li>
 </ul>
-<p>Packets flagged with NONE must be ignored, even if theirs CRC is valid.</p>
+<p>Packets flagged with NONE must be ignored, even if their CRC is valid.</p>
 <p>By default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.</p>
 <p>When the device is active every type of packet will be used.</p>
 <p>A MEASURE description can be found <a href="../IN_packets/measure/">here</a>,</p>
@@ -208,15 +208,13 @@
 <li>01h =&gt; CMD_REQUEST</li>
 <li>03h =&gt; CMD_ASYNC_REQUEST</li>
 </ul>
-<p>Packets flagged with NONE must be ignored, even if theirs CRC is valid.</p>
+<p>Packets flagged with NONE must be ignored, even if their CRC is valid.</p>
 <p>A CMD_REQUEST description can be found <a href="../OUT_packets/request/">here</a>.</p>
 <h4 id="async-requests">Async requests</h4>
-<p>To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read
-the <a href="../async/">Async</a> chapter.</p>
+<p>To understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read the <a href="../async/">Async</a> chapter.</p>
 <h4 id="tips-tricks">Tips &amp; Tricks</h4>
-<p>Any outgoing packet has the last bit of the first byte set to 1, whereas any
-incoming packet has the last bit of the first byte set to zero.</p>
-<p>A NONE packet definition does exists in both: IN and OUT packets.</p>
+<p>Any outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.</p>
+<p>A NONE packet definition does exist in both: IN and OUT packets.</p>
 <p><strong>NOTICE THAT:</strong> This fact can be used to detect bad packets!</p>
               
             </div>

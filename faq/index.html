@@ -61,19 +61,21 @@
             
                 <li class="toctree-l3"><a href="#faq">FAQ</a></li>
                 
-                    <li><a class="toctree-l4" href="#in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic">In what way is the native usb in Data-chan better than an serial-usb IC?</a></li>
+                    <li><a class="toctree-l4" href="#in-what-way-is-the-native-usb-in-data-chan-better-than-a-serial-usb-ic">In what way is the native USB in Data-chan better than a serial-USB IC?</a></li>
                 
-                    <li><a class="toctree-l4" href="#why-is-the-native-usb-data-chan-better-than-usb-cdc">Why is the native usb Data-chan better than USB-CDC?</a></li>
+                    <li><a class="toctree-l4" href="#why-is-the-native-usb-data-chan-better-than-usb-cdc">Why is the native USB Data-chan better than USB-CDC?</a></li>
                 
                     <li><a class="toctree-l4" href="#should-i-use-data-chan-for-insert-project-name-here">Should I use Data-chan for [insert project name here]?</a></li>
                 
-                    <li><a class="toctree-l4" href="#which-device-can-i-use-for-testing">Which device can I use for testing?</a></li>
+                    <li><a class="toctree-l4" href="#which-device-can-i-use-for-testing-andor-development">Which device can I use for testing and/or development?</a></li>
                 
                     <li><a class="toctree-l4" href="#what-drivers-does-data-chan-use">What drivers does Data-chan use?</a></li>
                 
+                    <li><a class="toctree-l4" href="#how-does-data-chan-performs">How does Data-chan performs?</a></li>
+                
                     <li><a class="toctree-l4" href="#i-a-beginner-should-i-use-it">I a beginner, should I use it?</a></li>
                 
-                    <li><a class="toctree-l4" href="#i-found-a-bug">I found a bug</a></li>
+                    <li><a class="toctree-l4" href="#i-have-found-a-bug">I have found a bug</a></li>
                 
             
             </ul>
@@ -167,23 +169,30 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="faq">FAQ</h2>
-<h4 id="in-what-way-is-the-native-usb-in-data-chan-better-than-an-serial-usb-ic">In what way is the native usb in Data-chan better than an serial-usb IC?</h4>
-<p>Those ICs are expensive. With Data-chan you can use the integrated hardware in an Atmega32u4 with is easily available. 
-Second, they do not work that well. They require custom drivers most of the times, and there have been so many problems in the past such as the <a href="https://hackaday.com/tag/ftdi-gate/">FTDIgate</a> and the many signing problems in other <a href="https://tzapu.com/making-ch340-ch341-serial-adapters-work-under-el-capitan-os-x/">badly supported ICs</a>.
-Third, most of the time they require drivers, rarely available cross-platform.</p>
-<h4 id="why-is-the-native-usb-data-chan-better-than-usb-cdc">Why is the native usb Data-chan better than USB-CDC?</h4>
-<p><a href="https://en.wikipedia.org/wiki/USB_communications_device_class">Usb-CDC</a> are most of the times claimed by the kernel on modern OS. If you use something as a RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be guessed. It's messy.</p>
+                <h1 id="faq">FAQ</h1>
+<h4 id="in-what-way-is-the-native-usb-in-data-chan-better-than-a-serial-usb-ic">In what way is the native USB in Data-chan better than a serial-USB IC?</h4>
+<p>Those ICs are expensive. The usage of the integrated USB hardware in an Atmega32u4 (or other compatible MCUs) it's more cost-effective.</p>
+<p>Secondly, serial-USB ICs do not work that well. There have been many reported problems in the past such as the <a href="https://hackaday.com/tag/ftdi-gate/">FTDIgate</a> and numerous driver signing problems in other <a href="https://tzapu.com/making-ch340-ch341-serial-adapters-work-under-el-capitan-os-x/">badly supported ICs</a>.</p>
+<p>Thirdly, most of the time they require custom drivers that may not be available across the most common operative systems (and when they do often they are not kept up-to-date).</p>
+<h4 id="why-is-the-native-usb-data-chan-better-than-usb-cdc">Why is the native USB Data-chan better than USB-CDC?</h4>
+<p><a href="https://en.wikipedia.org/wiki/USB_communications_device_class">USB-CDC</a> are most of the times claimed by the kernel on modern operating systems. If you use something as an RS232-over-CDC it will be claimed by the kernel and mapped to a serial device which will then need to be claimed by the application (requiring roots rights). It's messy.</p>
 <h4 id="should-i-use-data-chan-for-insert-project-name-here">Should I use Data-chan for [insert project name here]?</h4>
-<p>Data-chan is a well-defined protocol for a specific usage in datalogging instruments, mostly in the field of physics. If you can apply the same logic to your project, why not.</p>
-<h4 id="which-device-can-i-use-for-testing">Which device can I use for testing?</h4>
-<p>And <a href="https://www.arduino.cc/en/Main/ArduinoBoardNano">Arduino Nano</a> programmed with an <a href="http://www.fischl.de/usbasp/">USBASP</a> and <a href="http://www.nongnu.org/avrdude/">AVRDUDE</a> will do.</p>
-<p><strong>WARNING:</strong> Data-chan will break the bootloader!</p>
+<p>Data-chan is a simple and well-defined protocol for a specific usage in data logging instruments, mostly in the field of physics.</p>
+<p>If you can apply the same logic to your project, and you want to use low-cost devices while reaching high-speed performance... why not?</p>
+<h4 id="which-device-can-i-use-for-testing-andor-development">Which device can I use for testing and/or development?</h4>
+<p>An <a href="https://www.arduino.cc/en/Main/ArduinoBoardNano">Arduino Nano</a> programmed with an <a href="http://www.fischl.de/usbasp/">USBASP</a> and <a href="http://www.nongnu.org/avrdude/">AVRDUDE</a> will do the job.</p>
+<p><strong>WARNING:</strong> Data-chan will break the bootloader shipped with the Arduino Nano!</p>
 <h4 id="what-drivers-does-data-chan-use">What drivers does Data-chan use?</h4>
-<p>It use <a href="https://msdn.microsoft.com/it-it/library/windows/hardware/ff540196(v=vs.85).aspx">Winusb</a> on Windows, and included generic vendor-specific class drivers on MacOS and Linux.</p>
+<p>It uses <a href="https://msdn.microsoft.com/it-it/library/windows/hardware/ff540196(v=vs.85).aspx">Winusb</a> on Windows.</p>
+<p>In any other OS, generic vendor-specific class drivers, bundled with the OS are used.</p>
+<h4 id="how-does-data-chan-performs">How does Data-chan performs?</h4>
+<p>Using an ATmega32u4 with the shipped <em>Device</em> code you can transfer, each second, a number of IN packets that varies between 800 and 860.</p>
+<p>Each packet is (by default) 64 bytes long and followed by an OUT packet. With this configuration, you'll be able to transfer data up to 54kb/s in download and 54kb/s in upload!</p>
+<p>Heck, with a sample rate of 200kHz (the fastest you can use with the integrated ADC in an Atmega32u4) you can only generate about 15kb of data each second!</p>
+<p>The tests are conducted on MacOS 10.12 and Linux 4.7 kernel using the provided tester program.</p>
 <h4 id="i-a-beginner-should-i-use-it">I a beginner, should I use it?</h4>
-<p>Depends. It's not made to work with the Arduino environment. </p>
-<h4 id="i-found-a-bug">I found a bug</h4>
+<p>Depends. It's not made to work with beginner-friendly boards as the Arduino UNO or the Arduino Duemilanove or with the Arduino software environment.</p>
+<h4 id="i-have-found-a-bug">I have found a bug</h4>
 <p><a href="https://github.com/NeroReflex/data-chan/issues/new">Submit an issue!</a></p>
               
             </div>

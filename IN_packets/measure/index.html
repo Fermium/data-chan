@@ -203,14 +203,14 @@
 <li>03h =&gt; PROGRESSIVE</li>
 </ul>
 <h2 id="types">Types</h2>
-<h5 id="nonrealtime">NONREALTIME</h5>
-<p>In a NONREALTIME measure time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.</p>
-<h5 id="offset_realtime">OFFSET_REALTIME</h5>
-<p>In a OFFSET_REALTIME measure time and millis refers to the moment the datalogging procedure started.</p>
-<h5 id="realtime">REALTIME</h5>
-<p>In a REALTIME measure time and millis contains the correct values.</p>
-<p>This is useful if you have a long-running system with it's own <a href="https://en.wikipedia.org/wiki/Real-time_clock">RTC</a> that may have only occasional connection to the host.</p>
-<h5 id="progressive">PROGRESSIVE</h5>
+<h4 id="nonrealtime">NONREALTIME</h4>
+<p>In a NONREALTIME measure both time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.</p>
+<h4 id="offset_realtime">OFFSET_REALTIME</h4>
+<p>In an OFFSET_REALTIME measure time and millis refers to the moment the data-logging procedure started.</p>
+<h4 id="realtime">REALTIME</h4>
+<p>In a REALTIME measure both time and millis contains the correct values.</p>
+<p>This is useful if you have a long-running system with it's own <a href="https://en.wikipedia.org/wiki/Real-time_clock">RTC</a> that may have a infrequent connection to the host.</p>
+<h4 id="progressive">PROGRESSIVE</h4>
 <p>In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.</p>
 <h2 id="channel">Channel</h2>
 <p>The channel field is used to identify the channel that has generated the measure.</p>

@@ -109,9 +109,9 @@
             
                 <li class="toctree-l3"><a href="#synchronous-requests">Synchronous Requests</a></li>
                 
-                    <li><a class="toctree-l4" href="#enable-transmission">Enable Transmission</a></li>
+                    <li><a class="toctree-l4" href="#packets-structure">Packets structure</a></li>
                 
-                    <li><a class="toctree-l4" href="#disable-transmission">Disable Transmission</a></li>
+                    <li><a class="toctree-l4" href="#synchronous-commands">Synchronous commands</a></li>
                 
             
             </ul>
@@ -162,11 +162,9 @@
             <div class="section">
               
                 <h1 id="synchronous-requests">Synchronous Requests</h1>
-<p>A synchronous request is sent from the Host to the client, aka the Device and
-<strong>must</strong> be evaluated immediately after its receipt.</p>
-<p><strong>NOTICE THAT:</strong> core parts of the specification is a synchronous request as you
-can be mathematically certain of the evaluation of every request sent and correctly
-received!</p>
+<p>A synchronous request is sent from the Host to the Client (the Device) and <strong>must</strong> be evaluated immediately after its reception.</p>
+<p><strong>BEWARE:</strong> The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.</p>
+<h2 id="packets-structure">Packets structure</h2>
 <p>The structure of a synchronous request packet is:</p>
 <table border="1">
   <tr>
@@ -189,16 +187,16 @@ received!</p>
   </tr>
 </table>
 
-<p>Changing the request code the required action changes accordingly, read the
-following sections for the complete list of synchronous commands.</p>
-<h2 id="enable-transmission">Enable Transmission</h2>
+<p>Changing the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.</p>
+<h2 id="synchronous-commands">Synchronous commands</h2>
+<h4 id="enable-transmission">Enable Transmission</h4>
 <p>The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.</p>
 <p>Typically this is the first command sent to the Device.</p>
-<p>When using ENABLE_TRANSMISSION following bytes are meaningless, and thus ignored.</p>
-<h2 id="disable-transmission">Disable Transmission</h2>
+<p>When using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.</p>
+<h4 id="disable-transmission">Disable Transmission</h4>
 <p>The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.</p>
 <p>Typically this is the last command sent to the Device.</p>
-<p>When using DISABLE_TRANSMISSION following bytes are meaningless, and thus ignored.</p>
+<p>When using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.</p>
               
             </div>
           </div>
