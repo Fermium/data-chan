@@ -20,7 +20,7 @@ __NOTE:__ gcc and avr-libc used versions are 4.9, but any other greater versions
 On Ubuntu/Debian run:
 
 ```sh
-sudo apt install pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make
+sudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr
 ```
 
 On MacOS if you use Homebrew you have to tap an external repo:
