@@ -2,6 +2,15 @@
 
 The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies.
 
+At some point of the project lifetime lufa has to be fetched using submodule:
+
+```sh
+git submodule update --init --recursive
+make all -j2
+```
+
+The -j2 flag is used to speed-up compilation time on multicore processors.
+
 
 ## Environment
 
