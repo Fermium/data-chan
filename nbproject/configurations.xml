@@ -18,6 +18,9 @@
           <in>requests_queue.c</in>
           <in>thread.c</in>
         </df>
+        <df name="CPP_API">
+          <in>Device.cpp</in>
+        </df>
         <df name="Tester">
           <in>main.c</in>
         </df>
@@ -30,6 +33,7 @@
       <itemPath>nbproject/private/launcher.properties</itemPath>
       <itemPath>makefile</itemPath>
     </logicalFolder>
+    <itemPath>Host/CPP_API/makefile</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -44,7 +48,8 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <flagsDictionary>
-        <element flagsID="0" commonFlags="-std=gnu99 -g"/>
+        <element flagsID="0" commonFlags="-std=c++11"/>
+        <element flagsID="1" commonFlags="-std=gnu99 -g"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
@@ -54,6 +59,11 @@
           <buildCommand>${MAKE} -f makefile</buildCommand>
           <cleanCommand>${MAKE} -f makefile clean</cleanCommand>
           <executablePath>Host\Tester\Tester.exe</executablePath>
+          <ccTool>
+            <preprocessorList>
+              <Elem>__HOST__</Elem>
+            </preprocessorList>
+          </ccTool>
         </makeTool>
         <preBuild>
           <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
@@ -67,7 +77,7 @@
       <item path="Device/Bootstrap/Descriptors.c" ex="false" tool="0" flavor2="2">
       </item>
       <item path="Host/API/API.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
           <preprocessorList>
             <Elem>__HOST__</Elem>
           </preprocessorList>
@@ -76,35 +86,39 @@
       <item path="Host/API/CustomUSB.c" ex="false" tool="0" flavor2="2">
       </item>
       <item path="Host/API/device_handler.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
           <preprocessorList>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
       </item>
       <item path="Host/API/measures.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
           <preprocessorList>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
       </item>
       <item path="Host/API/requests_queue.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
           <preprocessorList>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
       </item>
       <item path="Host/API/thread.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
           <preprocessorList>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
       </item>
+      <item path="Host/CPP_API/Device.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
       <item path="Host/Tester/main.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="0">
+        <cTool flags="1">
         </cTool>
       </item>
       <folder path="0/Host/Tester">
