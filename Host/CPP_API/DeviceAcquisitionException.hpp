@@ -16,23 +16,24 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICE_HPP
-#define DEVICE_HPP
+#ifndef DEVICEACQUISITIONEXCEPTION_HPP
+#define DEVICEACQUISITIONEXCEPTION_HPP
 
-#include "../API/API.h"
-#include "DeviceAcquisitionException.hpp"
 #include <cstddef>
+#include <exception>
 
 namespace DataChan {
-    
-    class Device {
-        Device();
+    class DeviceAcquisitionException : public std::exception {
+    public:
+        DeviceAcquisitionException(const char* err_str);
+        const char* what() noexcept {
+            return this->errStr;
+        };
         
     private:
-        datachan_device_t *dev = (datachan_device_t *)NULL;
+        const char* errStr;
     };
-    
 }
 
-#endif /* DEVICE_HPP */
+#endif /* DEVICEACQUISITIONEXCEPTION_HPP */
 

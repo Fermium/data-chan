@@ -20,6 +20,9 @@ LD_FLAGS     =
 # Default target
 all:
 
+debug: all
+release: all
+
 flash: all
 	avrdude -C./avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:$(TARGET).hex:i
 

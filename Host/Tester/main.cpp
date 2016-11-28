@@ -1,4 +1,4 @@
-#include "../API/API.h"
+#include "../CPP_API/Device.hpp"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

@@ -45,8 +45,10 @@ void datachan_init() {
     if (!datachan_is_initialized()) {
     // init libusb
     if (libusb_init(&ctx) == 0)  {
+#ifdef DEBUG
         if (datachan_is_initialized())
             libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_INFO);
+#endif // DEBUG
         }
     }
 }

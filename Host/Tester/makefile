@@ -1,25 +1,29 @@
 TARGET = Tester
-LIBS = -L../API -lDataChan -lusb-1.0 -lpthread -lm
-CC = gcc
-CFLAGS = -std=gnu99 -g -Wall -D__HOST__ -O0 
+LIBS = -L../CPP_API -lCPPDataChan -L../API -lDataChan -lusb-1.0 -lpthread -lm
+CXX = g++
+CFLAGS = -std=c++11 -Wall -D__HOST__
 # -O2 is to be used only on release 
 # -fPIC generates a warning....
 
-.PHONY: default all clean
+.PHONY: default all clean debug release
 
 default: $(TARGET)
 all: default
+debug: CFLAGS += -DDEBUG -g -O0
+debug: all
+release: CFLAGS += -O3
+release: all
 
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
+OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
+HEADERS = $(wildcard *.hpp)
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp $(HEADERS)
+	$(CXX) $(CFLAGS) -c $< -o $@
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) -Wall $(OBJECTS) -o $@ $(LIBS)
+	$(CXX) -Wall $(OBJECTS) -o $@ $(LIBS)
 
 clean:
 	-rm -f *.o
