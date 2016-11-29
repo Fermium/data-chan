@@ -43,6 +43,7 @@
       <itemPath>makefile</itemPath>
     </logicalFolder>
     <itemPath>Host/CPP_API/makefile</itemPath>
+    <itemPath>Documentation/placeholder</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -84,6 +85,8 @@
       <item path="Device/Bootstrap/CustomUSB.c" ex="false" tool="0" flavor2="2">
       </item>
       <item path="Device/Bootstrap/Descriptors.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="Documentation/placeholder" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Host/API/API.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">

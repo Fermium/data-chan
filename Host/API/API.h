@@ -90,7 +90,7 @@ typedef struct {
 #define TIMEOUT_MS              1000
 
 /*
- *      Initialize and shutdown the library
+ *      Initialize and shutdown the library: lib_init.c
  */
 
 bool datachan_is_initialized(void);
@@ -98,14 +98,14 @@ void datachan_init(void);
 void datachan_shutdown(void);
 
 /*
- *      Acquire the device (detaching stub OS drivers)
+ *      Acquire the device (detaching stub OS drivers): device_management.c
  */
 
 datachan_acquire_result_t datachan_device_acquire(void);
 void datachan_device_release(datachan_device_t**);
 
 /*
- *      Enable/Disable the device output (IN packets)
+ *      Enable/Disable the device output (IN packets): device_enabler.c
  */
 
 bool datachan_device_enable(datachan_device_t*);
@@ -113,19 +113,19 @@ bool datachan_device_is_enabled(datachan_device_t*);
 bool datachan_device_disable(datachan_device_t*);
 
 /*
- *      Enqueue generic buffer (OUT packet content)
+ *      Enqueue generic buffer (OUT packet content): requests_queue.c
  */
 
 void datachan_enqueue_request(datachan_device_t*, uint8_t*);
 void datachan_dequeue_request(datachan_device_t*, uint8_t*);
 
 /*
- *      Simple genaration of OUT packets
+ *      Simple genaration of OUT packets: commands.c
  */
 void datachan_send_sync_command(datachan_device_t*, uint8_t, uint8_t*, uint8_t);
 
 /*
- *      Measures functions
+ *      Measures functions: measures.c
  */
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);

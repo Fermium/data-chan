@@ -1,10 +1,9 @@
 CPPLIB_TARGET = libCPPDataChan.a
 CXX = g++
 CFLAGS = -std=c++11 -Wall
-# -O2 is to be used only on release 
-# -fPIC generates a warning....
+LUFA_PATH    = ../../Device/lufa/LUFA
 
-.PHONY: default all clean debug release
+.PHONY: default all clean debug release documentation
 
 default: $(CPPLIB_TARGET)
 all: default
@@ -12,6 +11,9 @@ debug: CFLAGS += -DDEBUG -g -O0
 debug: all
 release: CFLAGS += -O3
 release: all
+
+documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
+documentation: doxygen
 
 OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
 HEADERS = $(wildcard *.hpp)
@@ -30,3 +32,4 @@ clean:
 
 flash: all
 
+include $(LUFA_PATH)/Build/lufa_doxygen.mk
