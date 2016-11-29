@@ -35,11 +35,16 @@ deploy :
         name: Installing MkDocs
         code: sudo pip install mkdocs
     - script:
-        name: Building Documentation
+        name: Building MkDocs Documentation
         code: |-
           cd docs
           mkdocs build
           cd ../
+    - script:
+        name: Building Doxygen Documentation
+        code: |-
+          make documentation
+          cp -rf Documentation docs/site/Doxygen
     - script:
         name: Configure git
         code: |-
