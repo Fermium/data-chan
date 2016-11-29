@@ -26,6 +26,10 @@
 #include "../../Protocol/measure.h"
 #include "../../Protocol/data_management.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct bulk_out_t {
     uint8_t *buffer;
     struct bulk_out_t *next;
@@ -101,5 +105,9 @@ void repack_measure(measure_t* out, uint8_t* in);
 
 datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
 void datachan_device_cleanup(datachan_device_t* dev);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __API_H__

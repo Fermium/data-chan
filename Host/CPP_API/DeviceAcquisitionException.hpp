@@ -22,6 +22,10 @@
 #include <cstddef>
 #include <exception>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 namespace DataChan {
     class DeviceAcquisitionException : public std::exception {
     public:
@@ -34,6 +38,10 @@ namespace DataChan {
         const char* errStr;
     };
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DEVICEACQUISITIONEXCEPTION_HPP */
 

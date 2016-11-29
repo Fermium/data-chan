@@ -23,6 +23,10 @@
 #include "DeviceAcquisitionException.hpp"
 #include <cstddef>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 namespace DataChan {
     
     class Device {
@@ -33,6 +37,10 @@ namespace DataChan {
     };
     
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DEVICE_HPP */
 

@@ -50,7 +50,8 @@
       </toolsSet>
       <flagsDictionary>
         <element flagsID="0" commonFlags="-std=c++11"/>
-        <element flagsID="1" commonFlags="-std=gnu99 -g"/>
+        <element flagsID="1" commonFlags="-std=gnu99"/>
+        <element flagsID="2" commonFlags="-std=gnu99 -g"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
@@ -60,11 +61,6 @@
           <buildCommand>${MAKE} -f makefile</buildCommand>
           <cleanCommand>${MAKE} -f makefile clean</cleanCommand>
           <executablePath>Host\Tester\Tester.exe</executablePath>
-          <ccTool>
-            <preprocessorList>
-              <Elem>__HOST__</Elem>
-            </preprocessorList>
-          </ccTool>
         </makeTool>
         <preBuild>
           <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
@@ -119,11 +115,11 @@
         </ccTool>
       </item>
       <item path="Host/Tester/main.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="1">
+        <cTool flags="2">
         </cTool>
       </item>
-      <item path="Host/Tester/main.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool flags="1">
+      <item path="Host/Tester/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
         </ccTool>
       </item>
       <folder path="0/Host/Tester">

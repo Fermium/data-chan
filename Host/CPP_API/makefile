@@ -1,6 +1,6 @@
 TARGET = libCPPDataChan.a
 CXX = g++
-CFLAGS = -std=c++11 -Wall -D__HOST__
+CFLAGS = -std=c++11 -Wall
 # -O2 is to be used only on release 
 # -fPIC generates a warning....
 

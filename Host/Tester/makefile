@@ -1,7 +1,7 @@
 TARGET = Tester
 LIBS = -L../CPP_API -lCPPDataChan -L../API -lDataChan -lusb-1.0 -lpthread -lm
 CXX = g++
-CFLAGS = -std=c++11 -Wall -D__HOST__
+CFLAGS = -std=c++11 -Wall
 # -O2 is to be used only on release 
 # -fPIC generates a warning....
 
