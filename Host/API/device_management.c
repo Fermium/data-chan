@@ -18,8 +18,6 @@
 
 #include "../../config.h"
 #include "API.h"
-#include "../../Protocol/measure_functions.h"
-#include "../../Protocol/data_management_functions.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,38 +26,8 @@
 #include <math.h>
 #include <sys/time.h>
 
-#if defined(__MACH__)
-	#include <malloc/malloc.h>
-#else
-    #include <malloc.h>
-#endif
-
-static libusb_context* ctx = (libusb_context*)NULL;
-
-bool datachan_is_initialized() {
-    return (ctx != (libusb_context*)NULL);
-}
-
-void datachan_init() {
-    // no double init
-    if (!datachan_is_initialized()) {
-    // init libusb
-    if (libusb_init(&ctx) == 0)  {
-#ifdef DEBUG
-        if (datachan_is_initialized())
-            libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_INFO);
-#endif // DEBUG
-        }
-    }
-}
-
-void datachan_shutdown(void) {
-    // usb shutdown
-    libusb_exit(ctx);
-
-    // avoid dangling pointer
-    ctx = (libusb_context*)NULL;
-}
+// defined in lib_init.c
+extern libusb_context* ctx;
 
 datachan_acquire_result_t datachan_device_acquire(void) {
     datachan_acquire_result_t res;
@@ -102,34 +70,4 @@ void datachan_device_release(datachan_device_t** dev) {
 
     // avoid dangling pointer
     *dev = (datachan_device_t*)NULL;
-}
-
-void datachan_device_set_config(datachan_device_t* dev, uint32_t entry, uint8_t channel, void* data, uint16_t data_size) {
-    //this is the data buffer
-    uint8_t cmd[GENERIC_REPORT_SIZE] = { CMD_REQUEST, SET_CONFIG_FLAG };
-    uint8_t *cmd_builder_buffer = cmd + 2;
-
-    // fill unused space with zeroes (minus two because cmd_builder_buffer points to cmd[2])
-    memset(cmd_builder_buffer, 0, sizeof(cmd) - 2);
-
-    // write the setting ID
-    memcpy((void*)cmd_builder_buffer, (const void*)&entry, sizeof(entry));
-    cmd_builder_buffer += sizeof(entry);
-
-    // write the destination channel
-    memcpy((void*)cmd_builder_buffer, (const void*)&channel, sizeof(channel));
-    cmd_builder_buffer += sizeof(channel);
-
-    // prevent buffer overflow (10 means: CMD_REQUEST(1), SET_CONFIG_FLAG(1), entry(4), channel(1), data_size(2), CRC(1) )
-    data_size = (data_size > (GENERIC_REPORT_SIZE - 10)) ? GENERIC_REPORT_SIZE - 10 : data_size;
-
-    // write the data length
-    memcpy((void*)cmd_builder_buffer, (const void*)&data_size, sizeof(data_size));
-    cmd_builder_buffer += sizeof(data_size);
-
-    // write the data
-    memcpy((void*)cmd_builder_buffer, (const void*)data, data_size);
-
-    // enqueue the config cmd
-    datachan_enqueue_request(dev, cmd);
 }

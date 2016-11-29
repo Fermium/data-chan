@@ -26,7 +26,6 @@
 #include <math.h>
 #include <sys/time.h>
 
-
 bool datachan_device_is_enabled(datachan_device_t* dev) {
     if (dev == (datachan_device_t*)NULL)
         return false;
@@ -40,7 +39,6 @@ bool datachan_device_is_enabled(datachan_device_t* dev) {
     return enabled;
 }
 
-
 bool datachan_device_disable(datachan_device_t* dev) {
     if (dev == (datachan_device_t*)NULL)
         return false;
@@ -48,11 +46,8 @@ bool datachan_device_disable(datachan_device_t* dev) {
     bool enabled = datachan_device_is_enabled(dev);
 
     if (enabled) {
-        // generate the enable command
-        uint8_t cmd[] = { CMD_REQUEST, DISABLE_TRANSMISSION };
-
-        // write the command on the USB bus and if the result is good the device will be disabled
-        datachan_enqueue_request(dev, cmd);
+        // write the DISABLE_TRANSMISSION command on the USB bus to disable the device
+        datachan_send_sync_command(dev, DISABLE_TRANSMISSION, (uint8_t*)NULL, 0);
         
         // if this point is reached the communication will fall in few millis
         enabled = false;
@@ -79,11 +74,8 @@ bool datachan_device_enable(datachan_device_t* dev) {
     bool enabled = datachan_device_is_enabled(dev);
 
     if (!enabled) {
-        // generate the enable command
-        uint8_t cmd[] = { CMD_REQUEST, ENABLE_TRANSMISSION };
-
-        // write the command on the USB bus
-        datachan_enqueue_request(dev, cmd);
+        // write the ENABLE_TRANSMISSION command on the USB bus to enable the device
+        datachan_send_sync_command(dev, ENABLE_TRANSMISSION, (uint8_t*)NULL, 0);
 
         // report the result
         enabled = (pthread_create(

@@ -120,6 +120,11 @@ void datachan_enqueue_request(datachan_device_t*, uint8_t*);
 void datachan_dequeue_request(datachan_device_t*, uint8_t*);
 
 /*
+ *      Simple genaration of OUT packets
+ */
+void datachan_send_sync_command(datachan_device_t*, uint8_t, uint8_t*, uint8_t);
+
+/*
  *      Measures functions
  */
 
