@@ -16,8 +16,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICEACQUISITIONEXCEPTION_HPP
-#define DEVICEACQUISITIONEXCEPTION_HPP
+#ifndef NODEVICEEXCEPTION_HPP
+#define NODEVICEEXCEPTION_HPP
 
 #include <cstddef>
 #include <exception>
@@ -27,13 +27,10 @@ extern "C" {
 #endif
 
 namespace DataChan {
-    class DeviceAcquisitionException : public std::exception {
+    class NoDeviceException : public std::exception {
     public:
-        DeviceAcquisitionException(const char* err_str);
+        NoDeviceException();
         const char* what() noexcept;
-        
-    private:
-        const char* errStr;
     };
 }
 
@@ -41,11 +38,5 @@ namespace DataChan {
 }
 #endif
 
-const char ACQUISITION_ERR_UNINITIALIZED_LIB[] = "Uninitialized library\0";
-const char ACQUISITION_ERR_NO_DEVICE[] = "A compatible device could not be found or open\0";
-const char ACQUISITION_ERR_CANNOT_CLAIM[] = "The device control cannot be claimed\0";
-const char ACQUISITION_ERR_BAD_MALLOC[] = "The device control cannot be claimed\0";
-const char ACQUISITION_ERR_UNKNOWN[] = "Unknown error\0";
-
-#endif /* DEVICEACQUISITIONEXCEPTION_HPP */
+#endif /* NODEVICEEXCEPTION_HPP */
 

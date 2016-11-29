@@ -21,7 +21,7 @@
 
 using namespace DataChan;
 
-Device::Device() {
+Device::Device(void) {
     // attempt to open the device
     datachan_acquire_result_t scan_result = datachan_device_acquire();
     
@@ -41,6 +41,39 @@ Device::Device() {
     }
 }
 
-Device::~Device() {
-    datachan_device_release(&this->dev);
+Device::~Device(void) {
+    if (this->dev != (datachan_device_t*)NULL)
+        datachan_device_release(&this->dev);
+}
+
+void Device::Enable(void) {
+    //check for device
+    if (this->dev == (datachan_device_t*)NULL)
+        throw new NoDeviceException();
+    
+    datachan_device_enable(this->dev);
+}
+
+void Device::Disable(void) {
+    //check for device
+    if (this->dev == (datachan_device_t*)NULL)
+        throw new NoDeviceException();
+    
+    datachan_device_disable(this->dev);
+}
+
+bool Device::IsEnabled(void) {
+    //check for device
+    if (this->dev == (datachan_device_t*)NULL)
+        throw new NoDeviceException();
+    
+    return datachan_device_is_enabled(this->dev);
+}
+
+uint32_t Device::CountEnqueuedMeasures() {
+    //check for device
+    if (this->dev == (datachan_device_t*)NULL)
+        throw new NoDeviceException();
+    
+    return datachan_device_enqueued_measures(this->dev);
 }

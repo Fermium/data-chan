@@ -20,6 +20,9 @@
         </df>
         <df name="CPP_API">
           <in>Device.cpp</in>
+          <in>DeviceAcquisitionException.cpp</in>
+          <in>NoDeviceException.cpp</in>
+          <in>NoDeviceException.hpp</in>
         </df>
         <df name="Tester">
           <in>main.c</in>
@@ -50,17 +53,21 @@
       </toolsSet>
       <flagsDictionary>
         <element flagsID="0" commonFlags="-std=c++11"/>
-        <element flagsID="1" commonFlags="-std=gnu99"/>
-        <element flagsID="2" commonFlags="-std=gnu99 -g"/>
+        <element flagsID="1" commonFlags="-std=gnu99 -g"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} -f makefile</buildCommand>
+          <buildCommand>${MAKE} -f makefile debug</buildCommand>
           <cleanCommand>${MAKE} -f makefile clean</cleanCommand>
           <executablePath>Host\Tester\Tester.exe</executablePath>
+          <ccTool>
+            <preprocessorList>
+              <Elem>DEBUG</Elem>
+            </preprocessorList>
+          </ccTool>
         </makeTool>
         <preBuild>
           <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
@@ -76,6 +83,7 @@
       <item path="Host/API/API.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
+            <Elem>DEBUG</Elem>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
@@ -85,6 +93,7 @@
       <item path="Host/API/device_handler.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
+            <Elem>DEBUG</Elem>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
@@ -92,6 +101,7 @@
       <item path="Host/API/measures.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
+            <Elem>DEBUG</Elem>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
@@ -99,6 +109,7 @@
       <item path="Host/API/requests_queue.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
+            <Elem>DEBUG</Elem>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
@@ -106,6 +117,7 @@
       <item path="Host/API/thread.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
+            <Elem>DEBUG</Elem>
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
@@ -114,8 +126,17 @@
         <ccTool flags="0">
         </ccTool>
       </item>
+      <item path="Host/CPP_API/DeviceAcquisitionException.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Host/CPP_API/NoDeviceException.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Host/CPP_API/NoDeviceException.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Host/Tester/main.c" ex="false" tool="0" flavor2="3">
-        <cTool flags="2">
+        <cTool flags="1">
         </cTool>
       </item>
       <item path="Host/Tester/main.cpp" ex="false" tool="1" flavor2="8">

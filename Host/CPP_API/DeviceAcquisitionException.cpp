@@ -16,42 +16,15 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICE_HPP
-#define DEVICE_HPP
-
-#include "../API/API.h"
 #include "DeviceAcquisitionException.hpp"
-#include "NoDeviceException.hpp"
-#include <cstddef>
-#include <stdint.h>
-#include <stdbool.h>
-#include <libusb-1.0/libusb.h>
-#include <pthread.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+using namespace DataChan;
 
-namespace DataChan {
-    
-    class Device {
-        Device(void);
-        virtual ~Device(void);
-        void Enable(void);
-        void Disable(void);
-        bool IsEnabled(void);
-        uint32_t CountEnqueuedMeasures();
-        measure_t* GetEnqueuedMeasure();
-        
-    private:
-        datachan_device_t *dev = (datachan_device_t *)NULL;
-    };
-    
+DeviceAcquisitionException::DeviceAcquisitionException(const char* err_str) {
+    // store the pointer to the message
+    this->errStr = err_str;
 }
 
-#ifdef __cplusplus
+const char* DeviceAcquisitionException::what() noexcept {
+    return this->errStr;
 }
-#endif
-
-#endif /* DEVICE_HPP */
-
