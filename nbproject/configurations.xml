@@ -13,6 +13,7 @@
         <df name="API">
           <in>API.c</in>
           <in>CustomUSB.c</in>
+          <in>device_enabler.c</in>
           <in>device_handler.c</in>
           <in>measures.c</in>
           <in>requests_queue.c</in>
@@ -22,7 +23,6 @@
           <in>Device.cpp</in>
           <in>DeviceAcquisitionException.cpp</in>
           <in>NoDeviceException.cpp</in>
-          <in>NoDeviceException.hpp</in>
         </df>
         <df name="Tester">
           <in>main.c</in>
@@ -90,6 +90,14 @@
       </item>
       <item path="Host/API/CustomUSB.c" ex="false" tool="0" flavor2="2">
       </item>
+      <item path="Host/API/device_enabler.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <preprocessorList>
+            <Elem>DEBUG</Elem>
+            <Elem>__HOST__</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
       <item path="Host/API/device_handler.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
@@ -129,11 +137,13 @@
       <item path="Host/CPP_API/DeviceAcquisitionException.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="Host/CPP_API/NoDeviceException.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Host/CPP_API/NoDeviceException.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Host/CPP_API/NoDeviceException.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
       <item path="Host/Tester/main.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">

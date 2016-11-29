@@ -106,7 +106,7 @@ void datachan_device_release(datachan_device_t** dev) {
 
 void datachan_device_set_config(datachan_device_t* dev, uint32_t entry, uint8_t channel, void* data, uint16_t data_size) {
     //this is the data buffer
-    uint8_t cmd[GENERIC_REPORT_SIZE-1] = { CMD_REQUEST, SET_CONFIG_FLAG };
+    uint8_t cmd[GENERIC_REPORT_SIZE] = { CMD_REQUEST, SET_CONFIG_FLAG };
     uint8_t *cmd_builder_buffer = cmd + 2;
 
     // fill unused space with zeroes (minus two because cmd_builder_buffer points to cmd[2])
@@ -132,79 +132,4 @@ void datachan_device_set_config(datachan_device_t* dev, uint32_t entry, uint8_t 
 
     // enqueue the config cmd
     datachan_enqueue_request(dev, cmd);
-}
-
-bool datachan_device_is_enabled(datachan_device_t* dev) {
-    if (dev == (datachan_device_t*)NULL)
-        return false;
-
-    bool enabled;
-
-    pthread_mutex_lock(&dev->enabled_mutex);
-    enabled = dev->enabled;
-    pthread_mutex_unlock(&dev->enabled_mutex);
-
-    return enabled;
-}
-
-void* IO_bulk_thread(void* device);
-bool datachan_device_enable(datachan_device_t* dev) {
-    if (dev == (datachan_device_t*)NULL)
-        return false;
-
-    bool enabled = datachan_device_is_enabled(dev);
-
-    if (!enabled) {
-        // generate the enable command
-        uint8_t cmd[] = { CMD_REQUEST, ENABLE_TRANSMISSION };
-
-        // write the command on the USB bus
-        datachan_enqueue_request(dev, cmd);
-
-        // report the result
-        enabled = (pthread_create(
-                (pthread_t *)&dev->reader,
-                (const pthread_attr_t *)&dev->reader_attr,
-                &IO_bulk_thread,
-                (void*)dev
-            ) == 0);
-
-        // save the status
-        pthread_mutex_lock(&dev->enabled_mutex);
-        dev->enabled = enabled;
-        pthread_mutex_unlock(&dev->enabled_mutex);
-    }
-
-    // is the device enabled now?
-    return enabled;
-}
-
-bool datachan_device_disable(datachan_device_t* dev) {
-    if (dev == (datachan_device_t*)NULL)
-        return false;
-
-    bool enabled = datachan_device_is_enabled(dev);
-
-    if (enabled) {
-        // generate the enable command
-        uint8_t cmd[] = { CMD_REQUEST, DISABLE_TRANSMISSION };
-
-        // write the command on the USB bus and if the result is good the device will be disabled
-        datachan_enqueue_request(dev, cmd);
-        
-        // if this point is reached the communication will fall in few millis
-        enabled = false;
-
-        // the next call to is_enabled will fail (even on the thread)
-        pthread_mutex_lock(&dev->enabled_mutex);
-        dev->enabled = enabled;
-        pthread_mutex_unlock(&dev->enabled_mutex);
-
-        // so... let's just wait for the thread to gracefully stop
-        void *data = NULL;
-        pthread_join((pthread_t)dev->reader, &data);
-    }
-
-    // is the device enabled now?
-    return !enabled;
 }
