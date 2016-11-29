@@ -31,6 +31,7 @@ namespace DataChan {
     
     class Device {
         Device();
+        virtual ~Device();
         
     private:
         datachan_device_t *dev = (datachan_device_t *)NULL;

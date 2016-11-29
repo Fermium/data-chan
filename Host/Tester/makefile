@@ -1,4 +1,4 @@
-TARGET = Tester
+TEST_TARGET = Tester
 LIBS = -L../CPP_API -lCPPDataChan -L../API -lDataChan -lusb-1.0 -lpthread -lm
 CXX = g++
 CFLAGS = -std=c++11 -Wall
@@ -7,7 +7,7 @@ CFLAGS = -std=c++11 -Wall
 
 .PHONY: default all clean debug release
 
-default: $(TARGET)
+default: $(TEST_TARGET)
 all: default
 debug: CFLAGS += -DDEBUG -g -O0
 debug: all
@@ -20,14 +20,14 @@ HEADERS = $(wildcard *.hpp)
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
-.PRECIOUS: $(TARGET) $(OBJECTS)
+.PRECIOUS: $(TEST_TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
+$(TEST_TARGET): $(OBJECTS)
 	$(CXX) -Wall $(OBJECTS) -o $@ $(LIBS)
 
 clean:
 	-rm -f *.o
 	-rm -f *.exe
-	-rm -f $(TARGET)
+	-rm -f $(TEST_TARGET)
 
 flash: all

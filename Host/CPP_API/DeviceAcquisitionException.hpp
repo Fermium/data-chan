@@ -43,5 +43,11 @@ namespace DataChan {
 }
 #endif
 
+const char ACQUISITION_ERR_UNINITIALIZED_LIB[] = "Uninitialized library";
+const char ACQUISITION_ERR_NO_DEVICE[] = "A compatible device could not be found or open";
+const char ACQUISITION_ERR_CANNOT_CLAIM[] = "The device control cannot be claimed";
+const char ACQUISITION_ERR_BAD_MALLOC[] = "The device control cannot be claimed";
+const char ACQUISITION_ERR_UNKNOWN[] = "Unknown error";
+
 #endif /* DEVICEACQUISITIONEXCEPTION_HPP */
 

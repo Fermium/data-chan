@@ -1,4 +1,4 @@
-TARGET = libDataChan.a
+CLIB_TARGET = libDataChan.a
 CC = gcc
 CFLAGS = -std=gnu99 -Wall -D__HOST__
 # -O2 is to be used only on release 
@@ -6,7 +6,7 @@ CFLAGS = -std=gnu99 -Wall -D__HOST__
 
 .PHONY: default all clean debug release
 
-default: $(TARGET)
+default: $(CLIB_TARGET)
 all: default
 debug: CFLAGS += -DDEBUG -g -O0
 debug: all
@@ -19,10 +19,10 @@ HEADERS = $(wildcard *.h)
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PRECIOUS: $(TARGET) $(OBJECTS)
+.PRECIOUS: $(CLIB_TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
-	ar rsc $(TARGET) $(OBJECTS)
+$(CLIB_TARGET): $(OBJECTS)
+	ar rsc $(CLIB_TARGET) $(OBJECTS)
 
 clean:
 	-rm -f *.o

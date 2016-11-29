@@ -29,14 +29,18 @@ Device::Device() {
         // get the device handler
         this->dev = scan_result.device;
     } else if (scan_result.result == uninitialized) {
-        throw new DeviceAcquisitionException("Uninitialized library");
+        throw new DeviceAcquisitionException(ACQUISITION_ERR_UNINITIALIZED_LIB);
     } else if (scan_result.result == not_found_or_inaccessible) {
-        throw new DeviceAcquisitionException("A compatible device could not be found or open");
+        throw new DeviceAcquisitionException(ACQUISITION_ERR_NO_DEVICE);
     } else if (scan_result.result == cannot_claim) {
-        throw new DeviceAcquisitionException("The device control cannot be claimed");
+        throw new DeviceAcquisitionException(ACQUISITION_ERR_CANNOT_CLAIM);
     } else if (scan_result.result == malloc_fail) {
-        throw new DeviceAcquisitionException("Memory allocation error");
+        throw new DeviceAcquisitionException(ACQUISITION_ERR_BAD_MALLOC);
     } else {
-        throw new DeviceAcquisitionException("Unknown error");
+        throw new DeviceAcquisitionException(ACQUISITION_ERR_UNKNOWN);
     }
+}
+
+Device::~Device() {
+    datachan_device_release(&this->dev);
 }

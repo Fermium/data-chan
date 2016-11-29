@@ -1,4 +1,4 @@
-TARGET = libCPPDataChan.a
+CPPLIB_TARGET = libCPPDataChan.a
 CXX = g++
 CFLAGS = -std=c++11 -Wall
 # -O2 is to be used only on release 
@@ -6,7 +6,7 @@ CFLAGS = -std=c++11 -Wall
 
 .PHONY: default all clean debug release
 
-default: $(TARGET)
+default: $(CPPLIB_TARGET)
 all: default
 debug: CFLAGS += -DDEBUG -g -O0
 debug: all
@@ -19,10 +19,10 @@ HEADERS = $(wildcard *.hpp)
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
-.PRECIOUS: $(TARGET) $(OBJECTS)
+.PRECIOUS: $(CPPLIB_TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
-	ar rsc $(TARGET) $(OBJECTS)
+$(CPPLIB_TARGET): $(OBJECTS)
+	ar rsc $(CPPLIB_TARGET) $(OBJECTS)
 
 clean:
 	-rm -f *.o
