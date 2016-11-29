@@ -70,10 +70,18 @@ bool Device::IsEnabled(void) {
     return datachan_device_is_enabled(this->dev);
 }
 
-uint32_t Device::CountEnqueuedMeasures() {
+uint32_t Device::CountEnqueuedMeasures(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
         throw new NoDeviceException();
     
     return datachan_device_enqueued_measures(this->dev);
+}
+
+measure_t* Device::GetEnqueuedMeasure(void) {
+    //check for device
+    if (this->dev == (datachan_device_t*)NULL)
+        throw new NoDeviceException();
+    
+    return (measure_t*)NULL;
 }

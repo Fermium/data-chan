@@ -63,6 +63,13 @@ typedef struct {
     struct bulk_out_t *requests_queue;
 } datachan_device_t;
 
+/*
+ *      Struct helpers
+ */
+
+datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
+void datachan_device_cleanup(datachan_device_t* dev);
+
 typedef enum {
     uninitialized = 0x00,
     not_found_or_inaccessible,
@@ -82,29 +89,45 @@ typedef struct {
 #define USB_OUT_ENDPOINT        0x04
 #define TIMEOUT_MS              1000
 
+/*
+ *      Initialize and shutdown the library
+ */
+
 bool datachan_is_initialized(void);
 void datachan_init(void);
 void datachan_shutdown(void);
 
-void datachan_enqueue_request(datachan_device_t*, uint8_t*);
-void datachan_dequeue_request(datachan_device_t*, uint8_t*);
+/*
+ *      Acquire the device (detaching stub OS drivers)
+ */
+
+datachan_acquire_result_t datachan_device_acquire(void);
+void datachan_device_release(datachan_device_t**);
+
+/*
+ *      Enable/Disable the device output (IN packets)
+ */
 
 bool datachan_device_enable(datachan_device_t*);
 bool datachan_device_is_enabled(datachan_device_t*);
 bool datachan_device_disable(datachan_device_t*);
 
-datachan_acquire_result_t datachan_device_acquire(void);
-void datachan_device_release(datachan_device_t**);
-void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
+/*
+ *      Enqueue generic buffer (OUT packet content)
+ */
+
+void datachan_enqueue_request(datachan_device_t*, uint8_t*);
+void datachan_dequeue_request(datachan_device_t*, uint8_t*);
+
+/*
+ *      Measures functions
+ */
 
 void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
 measure_t* datachan_device_dequeue_measure(datachan_device_t*);
 int32_t datachan_device_enqueued_measures(datachan_device_t*);
 
-void repack_measure(measure_t* out, uint8_t* in);
-
-datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
-void datachan_device_cleanup(datachan_device_t* dev);
+void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
 
 #ifdef __cplusplus
 }

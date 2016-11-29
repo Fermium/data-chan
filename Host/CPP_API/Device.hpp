@@ -40,8 +40,8 @@ namespace DataChan {
         void Enable(void);
         void Disable(void);
         bool IsEnabled(void);
-        uint32_t CountEnqueuedMeasures();
-        measure_t* GetEnqueuedMeasure();
+        uint32_t CountEnqueuedMeasures(void);
+        measure_t* GetEnqueuedMeasure(void);
         
     private:
         datachan_device_t *dev = (datachan_device_t *)NULL;

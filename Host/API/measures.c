@@ -26,6 +26,9 @@
 #include <math.h>
 #include <sys/time.h>
 
+// for repack_measure prototype
+#include "../../Protocol/measure.h"
+
 #if defined(__MACH__)
 	#include <malloc/malloc.h>
 #else

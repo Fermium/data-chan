@@ -15,6 +15,7 @@
           <in>CustomUSB.c</in>
           <in>device_enabler.c</in>
           <in>device_handler.c</in>
+          <in>device_struct_handler.c</in>
           <in>measures.c</in>
           <in>requests_queue.c</in>
           <in>thread.c</in>
@@ -99,6 +100,14 @@
         </cTool>
       </item>
       <item path="Host/API/device_handler.c" ex="false" tool="0" flavor2="3">
+        <cTool flags="1">
+          <preprocessorList>
+            <Elem>DEBUG</Elem>
+            <Elem>__HOST__</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="Host/API/device_struct_handler.c" ex="false" tool="0" flavor2="3">
         <cTool flags="1">
           <preprocessorList>
             <Elem>DEBUG</Elem>
