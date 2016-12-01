@@ -10,6 +10,11 @@
 
 all:
 
+clean:
+	rm -rf Documentation/C_API
+	rm -rf Documentation/CPP_API
+	rm -rf Documentation/Bootstrap
+
 %:
 	@echo working on data-chan....
 	@echo
