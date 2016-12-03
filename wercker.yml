@@ -35,7 +35,9 @@ build:
           swig -version
     - script:
         name: Installing node packages
-        code: npm install -g node-gyp express nan
+        code: |-
+          npm config set prefix /usr/local
+          npm install -g node-gyp -g express -g nan
     - script:
         name: Build Project
         code: make debug
