@@ -95,3 +95,5 @@ jspm_packages
 
 # node-gyp
 *_wrap.cxx
+Host/node_binding/binding.gyp
+Host/node_binding/binding.gype
