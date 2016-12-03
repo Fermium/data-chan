@@ -11,6 +11,10 @@
 all:
 
 %:
+	@echo fetching submodules
+	git submodule update --recursive --remote
+	@echo updating submodules
+	git submodule update --recursive --remote
 	@echo working on data-chan....
 	@echo
 	$(MAKE) -C Device $@
