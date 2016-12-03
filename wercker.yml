@@ -10,16 +10,6 @@ build:
         name: Initialize git submodules
         code: git submodule update --init --recursive
     - script:
-        name: Installing swig
-        code: |-
-          git clone https://github.com/swig/swig.git
-          cd swig
-          ./autogen.sh
-          sudo mkdir /swig
-          ./configure --prefix=/swig
-          make
-          sudo make install
-    - script:
         name: Installing node.js
         code: |-
            export NODE_VER=6.9.1
@@ -29,9 +19,23 @@ build:
            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
            source $HOME/.nvm/nvm.sh
            echo 'source $HOME/.nvm/nvm.sh' | sudo tee -a /etc/profile
+           echo "Node Package Manager: $(npm --version)"
+           echo "Node: $(node --version)"
+           echo "Node Version Manager: $(nvm --version)"
+           node -e "console.log(process.versions.v8);"
     - script:
-        name: Installing node-gyp
-        code: npm install -g express node-gyp
+        name: Installing Swig
+        code: |-
+          git clone https://github.com/swig/swig.git
+          cd swig
+          ./autogen.sh
+          sudo mkdir /swig
+          ./configure --prefix=/swig
+          make
+          sudo make install
+    - script:
+        name: Installing node packages
+        code: npm install
     - script:
         name: Build Project
         code: make debug
