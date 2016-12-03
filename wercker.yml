@@ -17,8 +17,9 @@ build:
            sudo bash nodesource_setup.sh
            sudo apt-get install -y nodejs
            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-           source $HOME/.nvm/nvm.sh
-           echo 'source $HOME/.nvm/nvm.sh' | sudo tee -a /etc/profile
+           export NVM_DIR="/root/.nvm"
+           [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+           nvm install $NODE_VER && nvm alias default $NODE_VER nvm use default
            echo "Node Package Manager: $(npm --version)"
            echo "Node: $(node --version)"
            echo "Node Version Manager: $(nvm --version)"
@@ -36,8 +37,7 @@ build:
     - script:
         name: Installing node packages
         code: |-
-          npm config set prefix /usr/local
-          npm install -g node-gyp -g express -g nan
+          cd Host/node_binding && npm install
     - script:
         name: Build Project
         code: make debug
