@@ -16,24 +16,14 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Measure.hpp"
+#include "InvalidMeasureException.hpp"
 
 using namespace DataChan;
 
-Measure::Measure(measure_t *nativeMeasure) {
-    if (nativeMeasure == (measure_t*)NULL)
-        throw new InvalidMeasureException();
-    
-    // wrap the measure from native format to the managed format
-    this->type = (Measure::Type)nativeMeasure->type;
-    this->measurementUnit = (Measure::MeasurementUnit)nativeMeasure->mu;
-}
-
-Measure::Measure(const Measure& orig) {
+InvalidMeasureException::InvalidMeasureException() {
     
 }
 
-Measure::~Measure() {
-    
+const char* InvalidMeasureException::what() noexcept {
+    return "Invalid or empty measure";
 }
-

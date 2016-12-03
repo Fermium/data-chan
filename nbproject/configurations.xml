@@ -27,6 +27,8 @@
         <df name="CPP_API">
           <in>Device.cpp</in>
           <in>DeviceAcquisitionException.cpp</in>
+          <in>InvalidMeasureException.cpp</in>
+          <in>InvalidMeasureException.hpp</in>
           <in>Measure.cpp</in>
           <in>Measure.hpp</in>
           <in>NoDeviceException.cpp</in>
@@ -190,6 +192,16 @@
             flavor2="8">
         <ccTool flags="0">
         </ccTool>
+      </item>
+      <item path="Host/CPP_API/InvalidMeasureException.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="Host/CPP_API/InvalidMeasureException.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="Host/CPP_API/Measure.cpp" ex="false" tool="1" flavor2="0">
       </item>

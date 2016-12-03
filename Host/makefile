@@ -21,6 +21,7 @@ all:
 	@echo
 	$(MAKE) -C API $@
 	$(MAKE) -C CPP_API $@
+	$(MAKE) -C node_binding $@
 	$(MAKE) -C Tester $@
 	@echo
 	@echo host-side data-chan \"make $@\" operation complete.

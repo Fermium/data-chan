@@ -5,10 +5,13 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar maven gcc g++ gcc-avr avr-libc binutils-avr make ruby
+        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make swig nodejs npm
     - script:
         name: Initialize git submodules
         code: git submodule update --init --recursive
+    - script:
+        name: Installing node-gyp
+        code: sudo npm install -g node-gyp
     - script:
         name: Build Project
         code: make debug

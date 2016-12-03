@@ -19,9 +19,12 @@
 #ifndef MEASURE_HPP
 #define MEASURE_HPP
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "../API/API.h"
-#include "DeviceAcquisitionException.hpp"
-#include "NoDeviceException.hpp"
+#include "InvalidMeasureException.hpp"
 #include <cstddef>
 #include <stdint.h>
 #include <stdbool.h>
@@ -41,11 +44,46 @@ namespace DataChan {
             Progressive     = PROGRESSIVE,
             Realtime        = REALTIME
         };
+        
+        enum MeasurementUnit {
+            Meter = 0x00,
+            Ampere = 0x01,
+            Volt = 0x02,
+            Coulomb = 3,
+            Watt = 4,
+            Kilogram = 5,
+            Kelvin = 6,
+            Candela = 7,
+            Mole = 8,
+            Hertz = 9,
+            Radian = 10,
+            Steradian = 11,
+            Newton = 12,
+            Pascal = 13,
+            Joule = 14,
+            Farad = 15,
+            Ohm = 16,
+            Siemens = 17,
+            Weber = 18,
+            Tesla = 19,
+            Henry = 20,
+            Lumen = 21,
+            Lux = 22,
+            Becquerel = 23,
+            Gray = 24,
+            Sievert = 25,
+            Katal = 26,
+        };
 
     private:
         Measure::Type type;
+        Measure::MeasurementUnit measurementUnit;
     };
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MEASURE_HPP */
 

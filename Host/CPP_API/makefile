@@ -29,6 +29,7 @@ $(CPPLIB_TARGET): $(OBJECTS)
 clean:
 	-rm -f *.o
 	-rm -f *.a
+	-rm -rf ../../Documentation/CPP_API
 
 flash: all
 

@@ -29,6 +29,7 @@ $(CLIB_TARGET): $(OBJECTS)
 clean:
 	-rm -f *.o
 	-rm -f *.a
+	-rm -rf ../../Documentation/C_API
 
 flash: all
 

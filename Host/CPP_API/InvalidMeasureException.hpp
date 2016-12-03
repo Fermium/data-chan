@@ -16,24 +16,29 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Measure.hpp"
+#ifndef INVALIDMEASUREEXCEPTION_HPP
+#define INVALIDMEASUREEXCEPTION_HPP
 
-using namespace DataChan;
+#include <cstddef>
+#include <exception>
 
-Measure::Measure(measure_t *nativeMeasure) {
-    if (nativeMeasure == (measure_t*)NULL)
-        throw new InvalidMeasureException();
-    
-    // wrap the measure from native format to the managed format
-    this->type = (Measure::Type)nativeMeasure->type;
-    this->measurementUnit = (Measure::MeasurementUnit)nativeMeasure->mu;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+namespace DataChan {
+    class InvalidMeasureException : public std::exception {
+    public:
+        InvalidMeasureException();
+        const char* what() noexcept;
+    private:
+
+    };
 }
 
-Measure::Measure(const Measure& orig) {
-    
+#ifdef __cplusplus
 }
+#endif
 
-Measure::~Measure() {
-    
-}
+#endif /* INVALIDMEASUREEXCEPTION_HPP */
 
