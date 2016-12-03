@@ -37,3 +37,7 @@ Host/Tester/Tester
 
 #eclipse bloat
 .settings/
+/build/
+
+#node.js bad things
+/Host/node_binding/build/
