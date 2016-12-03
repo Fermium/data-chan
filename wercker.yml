@@ -27,11 +27,10 @@ build:
            sudo apt-get install -y nodejs
            curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
            bash install_nvm.sh
-           source ~/.nvm/nvm.sh
-           ~/.nvm/bin/nvm install 6.9.1
-           ~/.nvm/bin/nvm alias default 6.9.1
-           ~/.nvm/bin/nvm use default
            source ~/.bashrc
+           nvm install 6.9.1
+           nvm alias default 6.9.1
+           nvm use default
     - script:
         name: Installing node-gyp
         code: sudo npm install -g express node-gyp
