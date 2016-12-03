@@ -31,6 +31,7 @@ build:
            ~/.nvm/bin/nvm install 6.9.1
            ~/.nvm/bin/nvm alias default 6.9.1
            ~/.nvm/bin/nvm use default
+           source ~/.bashrc
     - script:
         name: Installing node-gyp
         code: sudo npm install -g express node-gyp
