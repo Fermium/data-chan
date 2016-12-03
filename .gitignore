@@ -94,4 +94,4 @@ jspm_packages
 .yarn-integrity
 
 # node-gyp
-*.cxx
+*_wrap.cxx
