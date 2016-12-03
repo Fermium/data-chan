@@ -16,43 +16,22 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICE_HPP
-#define DEVICE_HPP
-
-#include "../API/API.h"
-#include "DeviceAcquisitionException.hpp"
-#include "NoDeviceException.hpp"
 #include "Measure.hpp"
-#include <cstddef>
-#include <stdint.h>
-#include <stdbool.h>
-#include <libusb-1.0/libusb.h>
-#include <pthread.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+using namespace DataChan;
 
-namespace DataChan {
+Measure::Measure(measure_t *nativeMeasure) {
+    /*if (nativeMeasure == (measure_t*)NULL)
+        throw new */
     
-    class Device {
-        Device(void);
-        virtual ~Device(void);
-        void Enable(void);
-        void Disable(void);
-        bool IsEnabled(void);
-        uint32_t CountEnqueuedMeasures(void);
-        Measure* GetEnqueuedMeasure(void);
-        
-    private:
-        datachan_device_t *dev = (datachan_device_t *)NULL;
-    };
+    this->type = (Measure::Type)nativeMeasure->type;
+}
+
+Measure::Measure(const Measure& orig) {
     
 }
 
-#ifdef __cplusplus
+Measure::~Measure() {
+    
 }
-#endif
-
-#endif /* DEVICE_HPP */
 

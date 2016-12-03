@@ -17,7 +17,8 @@
 */
 
 #include "Device.hpp"
-
+#include <string.h>
+#include <stdlib.h>
 
 using namespace DataChan;
 
@@ -78,10 +79,23 @@ uint32_t Device::CountEnqueuedMeasures(void) {
     return datachan_device_enqueued_measures(this->dev);
 }
 
-measure_t* Device::GetEnqueuedMeasure(void) {
+Measure* Device::GetEnqueuedMeasure(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
         throw new NoDeviceException();
     
-    return (measure_t*)NULL;
+    // this variable is loaded onto the stack
+    measure_t staticMeasure;
+    
+    // read the measure (value is on the heap)
+    measure_t* measure = datachan_device_dequeue_measure(this->dev);
+    
+    // copy the measure from the heap to the stack
+    memcpy((void*)&staticMeasure, (const void*)measure, sizeof(measure_t));
+
+    // deallocate memory from the heap (avoid memory leaks)
+    free((void*)measure);
+    
+    // create and return the managed measure structure
+    return new Measure(&staticMeasure);
 }
