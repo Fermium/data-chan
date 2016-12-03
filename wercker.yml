@@ -31,10 +31,6 @@ build:
              curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
              source $HOME/.nvm/nvm.sh
              echo 'source $HOME/.nvm/nvm.sh' | sudo tee -a /etc/profile
-             echo "Node Package Manager: $(npm --version)"
-             echo "Node: $(node --version)"
-             echo "Node Version Manager: $(nvm --version)"
-             echo Node V8: $(node -e "console.log(process.versions.v8)")
     - script:
         name: Installing node packages
         code: |-
