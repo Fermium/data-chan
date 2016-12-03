@@ -1,3 +1,5 @@
+################################ C/C++ 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -28,18 +30,18 @@
 *.out
 *.app
 
-# Linux shit
+################################ Linux
 *~
 
-# Netbeast bloat
+################################ Netbeast
 /nbproject/private
 Host/Tester/Tester
 
-#eclipse bloat
+################################ Eclipse
 .settings/
 /build/
 
-################################ node.js bad things
+################################ Node.js
 
 /Host/node_binding/build/
 
@@ -90,3 +92,6 @@ jspm_packages
 
 # Yarn Integrity file
 .yarn-integrity
+
+# node-gyp
+*.cxx

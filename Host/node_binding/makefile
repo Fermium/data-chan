@@ -1,5 +1,5 @@
 SWIG_MODULE_FILE = ../DataChan.i
-SWIG 			 = /swig/bin/swig
+SWIG 			 = swig
 
 .PHONY: default all clean debug release documentation
 
