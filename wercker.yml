@@ -5,13 +5,35 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make swig nodejs npm
+        packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential
     - script:
         name: Initialize git submodules
         code: git submodule update --init --recursive
     - script:
+        name: Installing swig
+        code: |-
+          git clone git clone https://github.com/swig/swig.git
+          cd swig
+          ./autogen.sh
+          sudo mkdir /swig
+          ./configure --prefix=/swig
+          make
+          sudo make install
+    - script:
+        name: Installing node.js
+        code: |-
+           curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+           sudo bash nodesource_setup.sh
+           sudo apt-get install -y nodejs
+           curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
+           bash install_nvm.sh
+           source ~/.profile
+           nvm install 6.9.1
+           nvm alias default 6.9.1
+           nvm use default
+    - script:
         name: Installing node-gyp
-        code: sudo npm install -g node-gyp
+        code: sudo npm install -g express node-gyp
     - script:
         name: Build Project
         code: make debug
@@ -22,7 +44,7 @@ build:
 deploy :
   steps :
     - install-packages:
-        packages: git openssl pkg-config libssl-dev python wget zlib1g-dev unzip openssh-client rsync doxygen
+        packages: git openssl pkg-config libssl-dev python wget unzip openssh-client rsync doxygen
     - script:
         name: Downloading PIP
         code: |-
