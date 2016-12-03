@@ -1,0 +1,28 @@
+{
+  "name": "data-chan",
+  "version": "1.0.0",
+  "description": "A comunication framework between an Atmega32u4 and a pc",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.14.0",
+    "node-gyp": "^3.4.0"
+  },
+  "scripts": {
+    "test": "make debug",
+    "exec": "exec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeroReflex/data-chan.git"
+  },
+  "author": "Denis Benato",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/NeroReflex/data-chan/issues"
+  },
+  "homepage": "https://github.com/NeroReflex/data-chan#readme"
+}

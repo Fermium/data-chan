@@ -10,8 +10,8 @@ clean:
 default: $(SWIG_MODULE_FILE)
 	$(SWIG) -javascript -node -c++ $(SWIG_MODULE_FILE)
 	mv ../DataChan_wrap.cxx ./DataChan_wrap.cxx
-	node-gyp configure
-	node-gyp build
+	npm run exec -- node-gyp configure
+	npm run exec -- node-gyp build
 
 all: default
 debug: all
