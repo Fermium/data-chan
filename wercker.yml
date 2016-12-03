@@ -35,7 +35,7 @@ build:
           swig -version
     - script:
         name: Installing node packages
-        code: npm install -g node-gyp express
+        code: npm install -g node-gyp express nan
     - script:
         name: Build Project
         code: make debug
