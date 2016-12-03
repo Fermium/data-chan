@@ -31,8 +31,7 @@ extern "C" {
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
 
-namespace DataChan {
-    class Measure {
+class Measure {
     public:
         Measure(measure_t *nativeMeasure);
         Measure(const Measure& orig);
@@ -78,8 +77,8 @@ namespace DataChan {
     private:
         Measure::Type type;
         Measure::MeasurementUnit measurementUnit;
-    };
-}
+};
+
 
 #ifdef __cplusplus
 }

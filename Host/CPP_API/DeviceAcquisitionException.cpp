@@ -18,8 +18,6 @@
 
 #include "DeviceAcquisitionException.hpp"
 
-using namespace DataChan;
-
 DeviceAcquisitionException::DeviceAcquisitionException(const char* err_str) {
     // store the pointer to the message
     this->errStr = err_str;

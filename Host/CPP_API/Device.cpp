@@ -20,8 +20,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-using namespace DataChan;
-
 Device::Device(void) {
     // attempt to open the device
     datachan_acquire_result_t scan_result = datachan_device_acquire();
@@ -30,15 +28,15 @@ Device::Device(void) {
         // get the device handler
         this->dev = scan_result.device;
     } else if (scan_result.result == uninitialized) {
-        throw new DeviceAcquisitionException(ACQUISITION_ERR_UNINITIALIZED_LIB);
+        throw /*new*/ DeviceAcquisitionException(ACQUISITION_ERR_UNINITIALIZED_LIB);
     } else if (scan_result.result == not_found_or_inaccessible) {
-        throw new DeviceAcquisitionException(ACQUISITION_ERR_NO_DEVICE);
+        throw /*new*/ DeviceAcquisitionException(ACQUISITION_ERR_NO_DEVICE);
     } else if (scan_result.result == cannot_claim) {
-        throw new DeviceAcquisitionException(ACQUISITION_ERR_CANNOT_CLAIM);
+        throw /*new*/ DeviceAcquisitionException(ACQUISITION_ERR_CANNOT_CLAIM);
     } else if (scan_result.result == malloc_fail) {
-        throw new DeviceAcquisitionException(ACQUISITION_ERR_BAD_MALLOC);
+        throw /*new*/ DeviceAcquisitionException(ACQUISITION_ERR_BAD_MALLOC);
     } else {
-        throw new DeviceAcquisitionException(ACQUISITION_ERR_UNKNOWN);
+        throw /*new*/ DeviceAcquisitionException(ACQUISITION_ERR_UNKNOWN);
     }
 }
 
@@ -50,7 +48,7 @@ Device::~Device(void) {
 void Device::Enable(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
-        throw new NoDeviceException();
+        throw /*new*/ NoDeviceException();
     
     datachan_device_enable(this->dev);
 }
@@ -58,7 +56,7 @@ void Device::Enable(void) {
 void Device::Disable(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
-        throw new NoDeviceException();
+        throw /*new*/ NoDeviceException();
     
     datachan_device_disable(this->dev);
 }
@@ -66,7 +64,7 @@ void Device::Disable(void) {
 bool Device::IsEnabled(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
-        throw new NoDeviceException();
+        throw /*new*/ NoDeviceException();
     
     return datachan_device_is_enabled(this->dev);
 }
@@ -74,7 +72,7 @@ bool Device::IsEnabled(void) {
 uint32_t Device::CountEnqueuedMeasures(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
-        throw new NoDeviceException();
+        throw /*new*/ NoDeviceException();
     
     return datachan_device_enqueued_measures(this->dev);
 }
@@ -82,7 +80,7 @@ uint32_t Device::CountEnqueuedMeasures(void) {
 Measure* Device::GetEnqueuedMeasure(void) {
     //check for device
     if (this->dev == (datachan_device_t*)NULL)
-        throw new NoDeviceException();
+        throw /*new*/ NoDeviceException();
     
     // this variable is loaded onto the stack
     measure_t staticMeasure;

@@ -32,23 +32,19 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-namespace DataChan {
     
-    class Device {
-        Device(void);
-        virtual ~Device(void);
-        void Enable(void);
-        void Disable(void);
-        bool IsEnabled(void);
-        uint32_t CountEnqueuedMeasures(void);
-        Measure* GetEnqueuedMeasure(void);
-        
-    private:
-        datachan_device_t *dev = (datachan_device_t *)NULL;
-    };
+class Device {
+    Device(void);
+    virtual ~Device(void);
+    void Enable(void);
+    void Disable(void);
+    bool IsEnabled(void);
+    uint32_t CountEnqueuedMeasures(void);
+    Measure* GetEnqueuedMeasure(void);
     
-}
+private:
+   datachan_device_t *dev = (datachan_device_t *)NULL;
+};
 
 #ifdef __cplusplus
 }

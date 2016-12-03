@@ -25,6 +25,8 @@
           <in>thread.c</in>
         </df>
         <df name="CPP_API">
+          <in>DataChan.cpp</in>
+          <in>DataChan.h</in>
           <in>Device.cpp</in>
           <in>DeviceAcquisitionException.cpp</in>
           <in>InvalidMeasureException.cpp</in>
@@ -181,6 +183,10 @@
             <Elem>__HOST__</Elem>
           </preprocessorList>
         </cTool>
+      </item>
+      <item path="Host/CPP_API/DataChan.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Host/CPP_API/DataChan.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Host/CPP_API/Device.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">

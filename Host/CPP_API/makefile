@@ -1,6 +1,6 @@
 CPPLIB_TARGET = libCPPDataChan.a
 CXX = g++
-CFLAGS = -std=c++11 -Wall
+CFLAGS = -std=c++11 -Wall -fPIC
 LUFA_PATH    = ../../Device/lufa/LUFA
 
 .PHONY: default all clean debug release documentation

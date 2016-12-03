@@ -26,15 +26,11 @@
 extern "C" {
 #endif
 
-namespace DataChan {
-    class InvalidMeasureException : public std::exception {
+class InvalidMeasureException : public std::exception {
     public:
         InvalidMeasureException();
         const char* what() noexcept;
-    private:
-
-    };
-}
+};
 
 #ifdef __cplusplus
 }

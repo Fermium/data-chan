@@ -1,6 +1,6 @@
 CLIB_TARGET = libDataChan.a
 CC = gcc
-CFLAGS = -std=gnu99 -Wall -D__HOST__
+CFLAGS = -std=gnu99 -Wall -fPIC -D__HOST__
 LUFA_PATH    = ../../Device/lufa/LUFA
 
 .PHONY: default all clean debug release documentation

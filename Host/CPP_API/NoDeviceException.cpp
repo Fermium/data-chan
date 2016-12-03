@@ -18,8 +18,6 @@
 
 #include "NoDeviceException.hpp"
 
-using namespace DataChan;
-
 NoDeviceException::NoDeviceException() {
     
 }

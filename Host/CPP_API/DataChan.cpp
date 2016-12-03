@@ -16,22 +16,23 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Measure.hpp"
+#include "../API/API.h"
+#include "DataChan.hpp"
 
-Measure::Measure(measure_t *nativeMeasure) {
-    if (nativeMeasure == (measure_t*)NULL)
-        throw new InvalidMeasureException();
-    
-    // wrap the measure from native format to the managed format
-    this->type = (Measure::Type)nativeMeasure->type;
-    this->measurementUnit = (Measure::MeasurementUnit)nativeMeasure->mu;
+DataChan::DataChan() {
 }
 
-Measure::Measure(const Measure& orig) {
-    
+DataChan::~DataChan() {
 }
 
-Measure::~Measure() {
-    
+void DataChan::Init() {
+    datachan_init();
 }
 
+void DataChan::Shutdown() {
+    return datachan_shutdown();
+}
+
+bool DataChan::Initialized() {
+    return datachan_is_initialized();
+}

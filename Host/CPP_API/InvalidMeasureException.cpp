@@ -18,8 +18,6 @@
 
 #include "InvalidMeasureException.hpp"
 
-using namespace DataChan;
-
 InvalidMeasureException::InvalidMeasureException() {
     
 }

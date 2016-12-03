@@ -26,16 +26,14 @@
 extern "C" {
 #endif
 
-namespace DataChan {
-    class DeviceAcquisitionException : public std::exception {
+class DeviceAcquisitionException : public std::exception {
     public:
         DeviceAcquisitionException(const char* err_str);
         const char* what() noexcept;
         
     private:
         const char* errStr;
-    };
-}
+};
 
 #ifdef __cplusplus
 }

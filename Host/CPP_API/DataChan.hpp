@@ -16,22 +16,27 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Measure.hpp"
+#ifndef DATACHAN_H
+#define DATACHAN_H
 
-Measure::Measure(measure_t *nativeMeasure) {
-    if (nativeMeasure == (measure_t*)NULL)
-        throw new InvalidMeasureException();
-    
-    // wrap the measure from native format to the managed format
-    this->type = (Measure::Type)nativeMeasure->type;
-    this->measurementUnit = (Measure::MeasurementUnit)nativeMeasure->mu;
-}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-Measure::Measure(const Measure& orig) {
-    
-}
+class DataChan {
+public:
+    static void Init();
+    static void Shutdown();
+    static bool Initialized();
+    DataChan();
+    virtual ~DataChan();
+private:
 
-Measure::~Measure() {
-    
+};
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* DATACHAN_H */
 
