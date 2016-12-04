@@ -6,6 +6,8 @@ LUFA_PATH    = ../../Device/lufa/LUFA
 .PHONY: default all clean debug release documentation
 
 default: $(CLIB_TARGET)
+	$(MAKE) -C ./examples $@
+
 all: default
 debug: CFLAGS += -DDEBUG -g -O0
 debug: all

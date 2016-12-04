@@ -1,7 +1,7 @@
 TEST_TARGET = Tester
-LIBS = -L../CPP_API -lCPPDataChan -L../API -lDataChan -lusb-1.0 -lpthread -lm
-CXX = g++
-CFLAGS = -std=c++11 -Wall
+LIBS = -L../../../API -lDataChan -lusb-1.0 -lpthread -lm
+CXX = gcc
+CFLAGS = -std=gnu99 -Wall
 
 .PHONY: default all clean debug release documentation
 
@@ -12,10 +12,10 @@ debug: all
 release: CFLAGS += -O3
 release: all
 
-OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
-HEADERS = $(wildcard *.hpp)
+OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
+HEADERS = $(wildcard *.h)
 
-%.o: %.cpp $(HEADERS)
+%.o: %.c $(HEADERS)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 .PRECIOUS: $(TEST_TARGET) $(OBJECTS)

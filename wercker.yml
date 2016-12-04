@@ -8,7 +8,9 @@ build:
         packages: byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
     - script:
         name: Initialize git submodules
-        code: chmod +x fetch_submodules.sh && ./fetch_submodules.sh
+        code: |-
+           git submodule update --recursive --remote
+           git submodule update --recursive --remote
     - script:
         name: Installing node.js
         code: |-
