@@ -7,9 +7,13 @@ datachan_lib.datachan_init();
 var scan_result = datachan_lib.datachan_device_acquire();
 if (scan_result.result == datachan_lib.success) {
     console.log('Device opened!');
+
+    var dev = scan_result.device;
+
+    datachan_lib.datachan_device_release(dev);
 } else {
     console.log('Error opening the device: ');
-	console.log(scan_result.result);
+    console.log(scan_result.result);
 }
 
 // it is important to call this

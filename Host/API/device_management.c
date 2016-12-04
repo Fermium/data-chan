@@ -54,20 +54,17 @@ datachan_acquire_result_t datachan_device_acquire(void) {
     return res;
 }
 
-void datachan_device_release(datachan_device_t** dev) {
-    if ((dev == (datachan_device_t**)NULL) || (*dev == (datachan_device_t*)NULL))
+void datachan_device_release(datachan_device_t* dev) {
+    if ((dev == (datachan_device_t*)NULL) || (dev == (datachan_device_t*)NULL))
         return;
 
     // make sure the device won't send precious data to the OS
-    datachan_device_disable(*dev);
+    datachan_device_disable(dev);
 
     // lock the device (wait for the last operation to finish and prevent usage of device))
-    pthread_mutex_lock(&(**dev).handler_mutex);
-    libusb_close((**dev).handler);
+    pthread_mutex_lock(&dev->handler_mutex);
+    libusb_close(dev->handler);
 
     // device structure clean
-    datachan_device_cleanup(*dev);
-
-    // avoid dangling pointer
-    *dev = (datachan_device_t*)NULL;
+    datachan_device_cleanup(dev);
 }

@@ -5,11 +5,14 @@ pages:
 - Home: index.md
 - FAQ: faq.md
 - Build: build.md
+- Library usage:
+    - Getting Started: library_usage/get_started.md
 - Protocol: protocol.md
 - Async Request: async.md
 - IN Packets:
     - Measure:    IN_packets/measure.md
 - OUT Packets:
     - Sync Request:    OUT_packets/request.md
+- API Documentation: API_Documentation.md
 
 theme: readthedocs

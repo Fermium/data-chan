@@ -102,7 +102,7 @@ void datachan_shutdown(void);
  */
 
 datachan_acquire_result_t datachan_device_acquire(void);
-void datachan_device_release(datachan_device_t**);
+void datachan_device_release(datachan_device_t*);
 
 /*
  *      Enable/Disable the device output (IN packets): device_enabler.c

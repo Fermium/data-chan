@@ -42,7 +42,10 @@ Device::Device(void) {
 
 Device::~Device(void) {
     if (this->dev != (datachan_device_t*)NULL)
-        datachan_device_release(&this->dev);
+        datachan_device_release(this->dev);
+
+    // avoid dangling pointer
+	this->dev = (datachan_device_t*)NULL;
 }
 
 void Device::Enable(void) {

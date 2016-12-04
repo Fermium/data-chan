@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
         // sleep one second
         sleep(1);
 
-        // enable data transmission
+        // disable data transmission
         if (datachan_device_disable(device))
             printf("\nDevice disabled\n");
         else
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
         // release the device handler
         printf("\n\nreleasing the device...\n");
-        datachan_device_release(&device);
+        datachan_device_release(device);
     } else {
         printf("Something went wrong :(\n\n");
 

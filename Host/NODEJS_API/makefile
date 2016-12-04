@@ -18,6 +18,7 @@ binding.gyp : binding.gyp.in
 default: binding.gyp
 	$(SWIG) -javascript -node -c++ $(SWIG_MODULE_FILE)
 	mv ../DataChan_wrap.cxx ./DataChan_wrap.cxx
+	npm install
 	npm run exec -- node-gyp configure
 	npm run exec -- node-gyp build
 
