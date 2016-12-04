@@ -35,7 +35,7 @@
 
 ################################ Netbeast
 /nbproject/private
-Host/Tester/Tester
+/Host/Tester/Tester
 
 ################################ Eclipse
 .settings/
@@ -72,7 +72,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+/Host/NODEJS_API/build/
 
 # Dependency directories
 node_modules
@@ -95,5 +95,5 @@ jspm_packages
 
 # node-gyp
 *_wrap.cxx
-Host/node_binding/binding.gyp
-Host/node_binding/binding.gype
+Host/NODEJS_API/binding.gyp
+Host/NODEJS_API/binding.gype
