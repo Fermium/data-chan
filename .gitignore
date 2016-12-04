@@ -97,3 +97,7 @@ jspm_packages
 *_wrap.cxx
 Host/NODEJS_API/binding.gyp
 Host/NODEJS_API/binding.gype
+
+# Pyhon binding auto-generated
+Host/PYTHON_API/*.py
+Host/PYTHON_API/*.pyc
