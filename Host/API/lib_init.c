@@ -54,6 +54,10 @@ void datachan_init() {
 }
 
 void datachan_shutdown(void) {
+	// check for uninitialized lib call to avoid segmentation fault
+	if (!datachan_is_initialized())
+        return;
+
     // usb shutdown
     libusb_exit(ctx);
 
