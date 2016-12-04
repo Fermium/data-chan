@@ -37,7 +37,7 @@ build:
     - script:
         name: Installing node packages
         code: |-
-          cd Host/node_binding && npm install
+          cd Host/NODEJS_API && npm install
     - script:
         name: Build Project
         code: make debug
