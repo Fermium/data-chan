@@ -8,8 +8,10 @@ var scan_result = datachan_lib.datachan_device_acquire();
 if (scan_result.result == datachan_lib.success) {
     console.log('Device opened!');
 
+	// this is the device you acquired
     var dev = scan_result.device;
 
+	// release the device
     datachan_lib.datachan_device_release(dev);
 } else {
     console.log('Error opening the device: ');

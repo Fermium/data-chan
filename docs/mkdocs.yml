@@ -5,14 +5,16 @@ pages:
 - Home: index.md
 - FAQ: faq.md
 - Build: build.md
-- Library usage:
+- Library API:
     - Getting Started: library_usage/get_started.md
-- Protocol: protocol.md
-- Async Request: async.md
-- IN Packets:
-    - Measure:    IN_packets/measure.md
-- OUT Packets:
-    - Sync Request:    OUT_packets/request.md
-- API Documentation: API_Documentation.md
+    - API Documentation: API_Documentation.md
+- Protocol: 
+    - Specifications: protocol.md
+    - IN Packets:
+        - Measure:    IN_packets/measure.md
+        - Async Response: IN_packets/async_response.md
+    - OUT Packets:
+        - Sync Request:    OUT_packets/sync_request.md
+        - Async Request:    OUT_packets/async_request.md
 
 theme: readthedocs
