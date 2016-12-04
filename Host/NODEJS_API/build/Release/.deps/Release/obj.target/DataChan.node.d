@@ -1,0 +1,1 @@
+cmd_Release/obj.target/DataChan.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=DataChan.node -o Release/obj.target/DataChan.node -Wl,--start-group Release/obj.target/DataChan/DataChan_wrap.o -Wl,--end-group -L/home/denis/data-chan/Host/NODEJS_API/../API -lDataChan -lusb-1.0 -lpthread -lm

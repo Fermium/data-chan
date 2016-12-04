@@ -5,7 +5,7 @@ The entire project can be compiled with the `make all` command, even on windows,
 At some point of the project lifetime lufa has to be fetched using submodule:
 
 ```sh
-git submodule update --init --recursive
+chmod +x fetch_submodules.sh && ./fetch_submodules.sh
 make all -j2
 ```
 

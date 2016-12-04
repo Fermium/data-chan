@@ -7,7 +7,9 @@ ABS_POSITION 		=$(shell pwd)
 clean:
 	-rm -rf build
 	-rm -f DataChan_wrap.cxx
+	-rm -f ../DataChan_wrap.cxx
 	-rm -f binding.gyp
+	-rm -f binding.gype
 
 binding.gyp : binding.gyp.in
 	cp binding.gyp.in binding.gyp
