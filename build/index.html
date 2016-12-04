@@ -157,6 +157,12 @@
               
                 <h1 id="build">Build</h1>
 <p>The entire project can be compiled with the <code>make all</code> command, even on windows, but it requires a lot of dependencies.</p>
+<p>At some point of the project lifetime lufa has to be fetched using submodule:</p>
+<pre><code class="sh">chmod +x fetch_submodules.sh &amp;&amp; ./fetch_submodules.sh
+make all -j2
+</code></pre>
+
+<p>The -j2 flag is used to speed-up compilation time on multicore processors.</p>
 <h2 id="environment">Environment</h2>
 <p>On a generic system you will need at least:</p>
 <ul>
