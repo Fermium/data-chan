@@ -1,6 +1,6 @@
 SWIG_MODULE_FILE 	= ../DataChan.i
-SWIG 			= swig
-ABS_POSITION 		=$(shell pwd)
+SWIG 				= swig
+ABS_POSITION 		= $(shell pwd)
 
 .PHONY: default all clean debug release documentation
 
@@ -10,6 +10,7 @@ clean:
 	-rm -f ../DataChan_wrap.cxx
 	-rm -f binding.gyp
 	-rm -f binding.gype
+#	-rm -rf node_modules
 
 binding.gyp : binding.gyp.in
 	cp binding.gyp.in binding.gyp

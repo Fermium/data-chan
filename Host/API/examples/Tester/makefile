@@ -27,6 +27,7 @@ clean:
 	-rm -f *.o
 	-rm -f *.exe
 	-rm -f $(TEST_TARGET)
+	-rm -f Tester
 
 flash: all
 

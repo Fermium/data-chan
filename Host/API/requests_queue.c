@@ -73,7 +73,7 @@ void datachan_dequeue_request(datachan_device_t* dev, uint8_t* buf) {
         struct bulk_out_t* current_out = dev->requests_queue;
         
         // remove from the list the removed bulk buffer
-        dev->requests_queue = dev->requests_queue->next;
+        dev->requests_queue = ((struct bulk_out_t*)dev->requests_queue)->next;
         
         // copy the buffer to be returned
         memcpy(out_packet, current_out->buffer, GENERIC_REPORT_SIZE - 1);

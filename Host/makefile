@@ -5,6 +5,7 @@ all:
 	@echo
 	$(MAKE) -C API $@
 	$(MAKE) -C CPP_API $@
-	$(MAKE) -C NODEJS_API $@
+	-$(MAKE) -C NODEJS_API $@
+	-$(MAKE) -C PYTHON_API $@
 	@echo
 	@echo host-side data-chan \"make $@\" operation complete.

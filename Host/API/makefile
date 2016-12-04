@@ -32,6 +32,7 @@ clean:
 	-rm -f *.o
 	-rm -f *.a
 	-rm -rf ../../Documentation/C_API
+	$(MAKE) -C examples clean
 
 flash: all
 

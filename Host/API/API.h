@@ -30,10 +30,12 @@
 extern "C" {
 #endif
 
+#if defined(__HOST__)
 struct bulk_out_t {
     uint8_t *buffer;
     struct bulk_out_t *next;
 };
+#endif
 
 typedef struct {
     // mutexes attributes
@@ -60,7 +62,7 @@ typedef struct {
     bool enabled;
     
     // The requests queue
-    struct bulk_out_t *requests_queue;
+    void *requests_queue;
 } datachan_device_t;
 
 /*

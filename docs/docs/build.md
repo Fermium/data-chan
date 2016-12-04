@@ -11,7 +11,6 @@ make all -j2
 
 The -j2 flag is used to speed-up compilation time on multicore processors.
 
-
 ## Environment
 
 On a generic system you will need at least:
