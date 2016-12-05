@@ -18,7 +18,9 @@ echo installing swig
 apt-get install -y byacc flex #necessary to build swig
 apt-get install -y libpcre3 libpcre3-dev #perl regex
 git clone https://github.com/arfoll/swig.git
-./autogen.sh && ./configure
+cd swig
+chmod +x autogen.sh && ./autogen.sh
+./configure
 make && make install
 cd ../ && rm -rf swig
 
@@ -39,5 +41,7 @@ apt-get install -y nodejs
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 export NVM_DIR="/root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm install $NODE_VER && nvm alias default $NODE_VER nvm use default
+nvm install $NODE_VER
+nvm alias default $NODE_VER
+nvm use default
 
