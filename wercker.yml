@@ -15,16 +15,12 @@ build:
            chmod +x fetch_submodules.sh
            ./fetch_submodules.sh
     - script:
-        name: Installing node.js
+        name: Printing software version
         code: |-
-           export NODE_VER=6.9.1
-           curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-           sudo bash nodesource_setup.sh
-           sudo apt-get install -y nodejs
-           curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-           export NVM_DIR="/root/.nvm"
-           [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-           nvm install $NODE_VER && nvm alias default $NODE_VER nvm use default
+           echo "Linux version: $(uname -a)"
+           echo "gcc version: $(gcc -v)"
+           echo "g++ version: $(g++ -v)"
+           echo "Swig version: $(swig -version)"
            echo "Node Package Manager: $(npm --version)"
            echo "Node: $(node --version)"
            echo "Node Version Manager: $(nvm --version)"
