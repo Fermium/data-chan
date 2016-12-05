@@ -2,10 +2,9 @@
 
 The entire project can be compiled with the `make all` command, even on windows, but it requires a lot of dependencies.
 
-At some point of the project lifetime lufa has to be fetched using submodule:
-
 ```sh
-chmod +x fetch_submodules.sh && ./fetch_submodules.sh
+git clone git@github.com:NeroReflex/data-chan.git
+git submodule update --init --recursive #fetch the Lufa submodule
 make all -j2
 ```
 
@@ -53,3 +52,18 @@ If you're using windows you will need to install:
 If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an [USBASP](http://www.fischl.de/usbasp/) to program the MCU and [AVRDUDE](http://www.nongnu.org/avrdude/) to drive it.
 
 You'll be able to use the firmware bootloader shipped with your device only once!
+
+## Vagrant development Environment
+
+For convenience a Vagrant development environment is provided. It's based on Ubuntu Xenial and preconfigured with everything you need to develop on linux.
+
+After having installed [Vagrant](https://www.vagrantup.com/downloads.html) and [Virtualbox](https://www.virtualbox.org/wiki/Downloads) run:
+
+```sh
+git clone git@github.com:NeroReflex/data-chan.git
+git submodule update --init --recursive #fetch the Lufa submodule
+vagrant up
+vagrant ssh
+cd data-chan
+make -j2
+```

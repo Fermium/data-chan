@@ -101,3 +101,7 @@ Host/NODEJS_API/binding.gype
 # Pyhon binding auto-generated
 Host/PYTHON_API/*.py
 Host/PYTHON_API/*.pyc
+
+################################ Vagrant
+
+.vagrant/

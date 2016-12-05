@@ -23,6 +23,7 @@ It's thought to be:
 * Portable to other devices compatible with the LUFA library (and it's forks)
 
 ## Compatibility
+
 The Host API are compatible with (almost) any operating system, because they are
 based on pthread and libusb.
 
