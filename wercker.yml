@@ -27,7 +27,8 @@ build:
     - script:
         name: Installing Swig
         code: |-
-          chmod +x install_swig.sh && ./install_swig.sh
+          sudo chmod +x install_swig.sh
+          sudo ./install_swig.sh
           swig -version
     - script:
         name: Build Project
