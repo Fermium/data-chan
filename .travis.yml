@@ -14,7 +14,9 @@ matrix:
     node_js:
       - '6'
     
-    
+before_install:
+- git submodule update --init --recursive
+
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap osx-cross/avr && brew update
   ; fi
@@ -22,8 +24,8 @@ install:
   fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo chmod +x setup_env.sh && sudo ./setup_env.sh
   ; fi
+  
 script:
-- chmod +x fetch_submodules.sh && ./fetch_submodules.sh
 - make release
 
 
