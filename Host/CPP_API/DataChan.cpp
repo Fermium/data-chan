@@ -30,7 +30,7 @@ void DataChan::Init() {
 }
 
 void DataChan::Shutdown() {
-    return datachan_shutdown();
+    datachan_shutdown();
 }
 
 bool DataChan::Initialized() {
