@@ -27,6 +27,7 @@ addons:
       - autoconf
       - gcc-avr
       - avr-libc
+      - binutils-avr
       - wget
       - curl
       - make
