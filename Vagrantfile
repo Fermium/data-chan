@@ -52,7 +52,6 @@ Vagrant.configure(2) do |config|
      
      bash /vagrant/scripts/print-versions.sh
      
-     
      echo "The box is ready. Now simply run \"vagrant ssh\" to connect!"
      
    SHELL

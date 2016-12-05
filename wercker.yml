@@ -11,7 +11,7 @@ build:
         code: sudo bash scripts/install-swig.sh
     - script:
         name: Installing node.js
-        code: bash scripts/install-node.sh
+        code: sudo bash scripts/install-node.sh
     - script:
         name: Initialize git submodules
         code: git submodule update --init --recursive
