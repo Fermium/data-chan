@@ -93,9 +93,9 @@ vagrant up
 vagrant ssh
 ```
 
-At this point you are ready to [build](#building) data-chan:
+At this point you are ready to [Checkout](#get-the-source) the source code and [build](#building) data-chan.
 
 ```sh
-cd data-chan #symbolic link to /mnt/data-chan
+cd data-chan #symbolic link to /vagrant
 make
 ```

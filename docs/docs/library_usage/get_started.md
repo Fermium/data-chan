@@ -1,4 +1,5 @@
 # Getting Started
+
 The library itself is really easy to use, you just need to remember to initialize the system at the beginning of your program and to shutdown the library before exiting :)
 
 In order to have a *working* device you have to:
@@ -10,14 +11,16 @@ In order to have a *working* device you have to:
 You will be provided with code examples in the example directory of every API
 binding:
 
-| API        	| c       	|
+| Dir       	| lang     	|
 |------------	|---------	|
+| API        	| C       	|
 | CPP_API    	| C++     	|
 | NODEJS_API 	| node.js 	|
 | PYTHON_API 	| python  	|
 
 
 ## Initialize the library
+
 The library initialization is __very__ important.
 
 You __cannot__ acquire a device until you have called the initializer function.
@@ -26,6 +29,7 @@ Initializing the library setup the low-level libusb and possibly many others str
 
 
 ## Shutdown the library
+
 The library shutdown importance is __unknown__.
 
 Avoid library shutdown may lead to the host system in a bad state or with memory leaks: you __should__ never forget to shutdown the library.
