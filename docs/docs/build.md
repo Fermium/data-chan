@@ -4,7 +4,7 @@ The entire project can be compiled with the `make debug` or `make release` comma
 
 ## Get the source
 
-The first thing you  have to do is checking out the source
+Get the source
 
 ```sh
 git clone git@github.com:NeroReflex/data-chan.git && cd data-chan
@@ -17,14 +17,14 @@ Between those two commands you can checkout another branch:
 git checkout develop # before fetching LUFA switch to the unstable branch
 ```
 
-Remember to checkout the new branch *before* updating submodules.
+Remember to checkout the new branch *before* updating the submodules.
 
 ## Building
 
 With a build environment ready you can compile the source code with:
 
 ```sh
-cd data-chan     # if you are not inside the source directory
+cd data-chan     # into the repo directory
 make release -j2 # j2 flag is used to speed-up compilation time
 ```
 
@@ -57,7 +57,7 @@ On MacOS if you use Homebrew you have to tap an external repo:
 
 ```sh
 brew tap osx-cross/avr
-brew install avr-libc49 avr-gcc49 libusb
+brew install avr-libc avr-gcc libusb
 ```
 
 __NOTE:__ On MacOS if you want to build the node.js plugin you __have to__ install XCode!
@@ -96,6 +96,6 @@ vagrant ssh
 At this point you are ready to [build](#building) data-chan:
 
 ```sh
-cd data-chan
+cd data-chan #symbolic link to /mnt/data-chan
 make
 ```

@@ -12,12 +12,6 @@ Vagrant.configure(2) do |config|
   # your network.
    config.vm.network "public_network"
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-   config.vm.synced_folder "./", "/vagrant/data-chan"
-
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
    config.vm.provider "virtualbox" do |vb|
@@ -39,45 +33,28 @@ Vagrant.configure(2) do |config|
    config.vm.provision "shell", inline: <<-SHELL
      echo "Installing software"
      sudo apt-get update
-     sudo apt-get -y  install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
+     sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
      
      
      echo "Installing Swig"
-     git clone https://github.com/arfoll/swig.git
-     cd swig
-     ./autogen.sh
-     ./configure
-     make
-     sudo make install
-     cd ../ && rm -rf swig
-     swig -version
+     sudo bash /vagrant/scripts/install-swig.sh
      
      
      echo "Installing NodeJS"
-     export NODE_VER=6
-     curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-     sudo bash nodesource_setup.sh
-     sudo apt-get install -y nodejs
-     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-     export NVM_DIR="/root/.nvm"
-     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-     nvm install $NODE_VER && nvm alias default $NODE_VER nvm use default
-     
-     echo "Installing pip and mkdocs"
-     wget https://bootstrap.pypa.io/get-pip.py
-     sudo python get-pip.py
-     rm get-pip.py
-     sudo pip install mkdocs
+     sudo bash /vagrant/scripts/install-node.sh
 
      
-     echo "Node Package Manager: $(npm --version)"
-     echo "Node: $(node --version)"
-     echo "Node Version Manager: $(nvm --version)"
-     echo Node V8: $(node -e "console.log(process.versions.v8)")
+     echo "Installing pip and mkdocs"
+     sudo bash  /vagrant/scripts/install-mkdocs.sh
+        
+     # link volume to home user folder
+     ln -s /vagrant data-chan
+     
+     bash /vagrant/scripts/print-versions.sh
+     
      
      echo "The box is ready. Now simply run \"vagrant ssh\" to connect!"
-     echo "You can use \"vagrant suspend\" to pause, \"vagrant resume\" to resume"
-     echo "When you've finished, you can \"vagrant halt\" or even \"vagrant destroy\""
+     
    SHELL
    
    
