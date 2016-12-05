@@ -7,13 +7,14 @@ build:
     - install-packages:
         packages: ruby
     - script:
+        name: Preparing the environment
+        code: sudo chmod +x setup_env.sh && ./setup_env.sh
+    - script:
         name: Initialize git submodules
         code: |-
            chmod +x fetch_submodules.sh
            ./fetch_submodules.sh
     - script:
-        name: Preparing the environment
-        code: sudo chmod +x setup_env.sh && ./setup_env.sh
         name: Installing node.js
         code: |-
            export NODE_VER=6.9.1
