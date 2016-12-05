@@ -39,7 +39,7 @@ datachan_acquire_result_t datachan_device_acquire(void) {
         libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, USB_VID, USB_PID);
 
         if (handle != (libusb_device_handle*)NULL) {
-            libusb_set_auto_detach_kernel_driver(handle, 1);
+            //libusb_set_auto_detach_kernel_driver(handle, 1);
 
             // setting the configuration 1 means selecting the corresponding bConfigurationValue
             if (libusb_claim_interface(handle, USB_USED_INTERFACE) == 0) {
