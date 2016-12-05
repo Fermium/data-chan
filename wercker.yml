@@ -24,9 +24,7 @@ build:
            nvm use default
     - script:
         name: Initialize git submodules
-        code: |-
-           chmod +x fetch_submodules.sh
-           ./fetch_submodules.sh
+        code: git submodule update --init --recursive
     - script:
         name: Printing software version
         code: |-
@@ -41,10 +39,10 @@ build:
     - script:
         name: Build Project
         code: make debug
+        
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_API_TOKEN
-
 deploy :
   steps :
     - install-packages:
