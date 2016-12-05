@@ -29,7 +29,7 @@ extern "C" {
 class NoDeviceException : public std::exception {
     public:
         NoDeviceException();
-        const char* what() noexcept;
+        const char* what();
 };
 
 #ifdef __cplusplus

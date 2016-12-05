@@ -23,6 +23,6 @@ DeviceAcquisitionException::DeviceAcquisitionException(const char* err_str) {
     this->errStr = err_str;
 }
 
-const char* DeviceAcquisitionException::what() noexcept {
+const char* DeviceAcquisitionException::what() {
     return this->errStr;
 }

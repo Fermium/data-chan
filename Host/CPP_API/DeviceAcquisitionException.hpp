@@ -29,7 +29,7 @@ extern "C" {
 class DeviceAcquisitionException : public std::exception {
     public:
         DeviceAcquisitionException(const char* err_str);
-        const char* what() noexcept;
+        const char* what();
         
     private:
         const char* errStr;
