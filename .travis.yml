@@ -35,5 +35,4 @@ script:
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9
-    on_success: always
   email: false
