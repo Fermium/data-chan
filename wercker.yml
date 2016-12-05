@@ -35,7 +35,7 @@ build:
            echo "Node Package Manager: $(npm --version)"
            echo "Node: $(node --version)"
            echo "Node Version Manager: $(nvm --version)"
-           echo Node V8: $(node -e "console.log(process.versions.v8)")
+           echo "Node V8: $(node -e \"console.log(process.versions.v8)\")"
     - script:
         name: Build Project
         code: make debug

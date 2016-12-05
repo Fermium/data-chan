@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
    config.vm.provision "shell", inline: <<-SHELL
      echo "Installing software"
      sudo apt-get update
-     sudo apt-get -y  install byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
+     sudo apt-get -y  install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
      
      
      echo "Installing Swig"
@@ -63,13 +63,21 @@ Vagrant.configure(2) do |config|
      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
      nvm install $NODE_VER && nvm alias default $NODE_VER nvm use default
      
+     echo "Installing pip and mkdocs"
+     wget https://bootstrap.pypa.io/get-pip.py
+     sudo python get-pip.py
+     rm get-pip.py
+     sudo pip install mkdocs
+
      
      echo "Node Package Manager: $(npm --version)"
      echo "Node: $(node --version)"
      echo "Node Version Manager: $(nvm --version)"
      echo Node V8: $(node -e "console.log(process.versions.v8)")
      
-     echo "The box is ready. Have fun!"
+     echo "The box is ready. Now simply run \"vagrant ssh\" to connect!"
+     echo "You can use \"vagrant suspend\" to pause, \"vagrant resume\" to resume"
+     echo "When you've finished, you can \"vagrant halt\" or even \"vagrant destroy\""
    SHELL
    
    

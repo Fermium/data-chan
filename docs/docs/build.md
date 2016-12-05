@@ -65,5 +65,5 @@ git submodule update --init --recursive #fetch the Lufa submodule
 vagrant up
 vagrant ssh
 cd data-chan
-make -j2
+make
 ```
