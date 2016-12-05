@@ -39,5 +39,5 @@ install:
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo chmod +x install_swig.sh && sudo ./install_swig.sh ; fi
-  - git submodule update --init --recursive
+  - chmod +x fetch_submodules.sh && ./fetch_submodules.sh
   - make release
