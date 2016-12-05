@@ -34,6 +34,5 @@ script:
 - make release
 
 notifications:
-  email: false
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9
   on_success: always
