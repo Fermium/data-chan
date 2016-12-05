@@ -12,24 +12,11 @@ matrix:
     addons:
       apt:
         packages:
-          - pkg-config
-          - wget  
-          - curl 
-          - unzip
-          - tar
-          - autogen
-          - autoconf
-          - build-essential 
-          - gcc 
-          - g++ 
           - gcc-avr 
           - avr-libc 
           - binutils-avr
           - avrdude 
           - libusb-1.0-0-dev 
-          - zlib1g-dev 
-          - python 
-          - python-dev
   - os: osx
     osx_image: xcode7.3.1
     node_js:
