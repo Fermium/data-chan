@@ -18,5 +18,3 @@ all:
 	@echo
 	@echo \"make $@\" operation complete on data-chan.
 
-get-deps:
-	
