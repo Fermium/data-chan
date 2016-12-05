@@ -5,13 +5,15 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-        packages: byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
+        packages: ruby
     - script:
         name: Initialize git submodules
         code: |-
            chmod +x fetch_submodules.sh
            ./fetch_submodules.sh
     - script:
+        name: Preparing the environment
+        code: sudo chmod +x setup_env.sh && ./setup_env.sh
         name: Installing node.js
         code: |-
            export NODE_VER=6.9.1
