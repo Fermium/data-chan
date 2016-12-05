@@ -85,7 +85,7 @@ It's based on Ubuntu Xenial and preconfigured with everything you need to develo
 
 1. Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html):
-1. [Checkout](#get-the-source) the source code
+1. Get the [Vagrantfile](https://raw.githubusercontent.com/NeroReflex/data-chan/master/Vagrantfile) using wget
 1. Start Vagrant
 
 ```sh
@@ -93,9 +93,5 @@ vagrant up
 vagrant ssh
 ```
 
-At this point you are ready to [build](#building) data-chan:
+At this point you are ready to [Checkout](#get-the-source) the source code and [build](#building) data-chan.
 
-```sh
-cd data-chan
-make -j2
-```
