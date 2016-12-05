@@ -30,12 +30,6 @@ build:
            echo "Node Version Manager: $(nvm --version)"
            echo Node V8: $(node -e "console.log(process.versions.v8)")
     - script:
-        name: Installing Swig
-        code: |-
-          sudo chmod +x install_swig.sh
-          sudo ./install_swig.sh
-          swig -version
-    - script:
         name: Build Project
         code: make debug
   after-steps:
