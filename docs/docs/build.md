@@ -57,7 +57,7 @@ On MacOS if you use Homebrew you have to tap an external repo:
 
 ```sh
 brew tap osx-cross/avr
-brew install avr-libc avr-gcc libusb
+brew install avr-libc49 avr-gcc49 libusb
 ```
 
 __NOTE:__ On MacOS if you want to build the node.js plugin you __have to__ install XCode!
