@@ -27,3 +27,4 @@ all: default
 debug: all
 release: all
 flash: all
+documentation:

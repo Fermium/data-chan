@@ -43,4 +43,4 @@ clean:
 
 all: default
 flash: all
-documentation: all
+documentation:
