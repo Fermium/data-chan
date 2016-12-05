@@ -29,7 +29,7 @@ extern "C" {
 class InvalidMeasureException : public std::exception {
     public:
         InvalidMeasureException();
-        const char* what() noexcept;
+        const char* what();
 };
 
 #ifdef __cplusplus

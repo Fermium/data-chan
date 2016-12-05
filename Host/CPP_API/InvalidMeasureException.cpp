@@ -22,6 +22,6 @@ InvalidMeasureException::InvalidMeasureException() {
     
 }
 
-const char* InvalidMeasureException::what() noexcept {
+const char* InvalidMeasureException::what() {
     return "Invalid or empty measure";
 }

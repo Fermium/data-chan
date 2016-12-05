@@ -22,6 +22,6 @@ NoDeviceException::NoDeviceException() {
     
 }
 
-const char* NoDeviceException::what() noexcept {
+const char* NoDeviceException::what() {
     return "Called a device operation while the device was closed";
 }
