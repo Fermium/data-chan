@@ -16,7 +16,6 @@ before_install:
 
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install swig node gcc-avr48 avr-libc48 && curl https://www.npmjs.org/install.sh | sh  ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo chmod +x install_node.sh  && sudo ./install_node.sh ; fi
 
 script:
   - chmod +x fetch_submodules.sh && ./fetch_submodules.sh
