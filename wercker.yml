@@ -27,13 +27,7 @@ build:
     - script:
         name: Installing Swig
         code: |-
-          git clone https://github.com/arfoll/swig.git
-          cd swig
-          ./autogen.sh
-          ./configure
-          make
-          sudo make install
-          cd ../ && rm -rf swig
+          chmod +x install_swig.sh && ./install_swig.sh
           swig -version
     - script:
         name: Build Project
