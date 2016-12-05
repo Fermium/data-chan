@@ -22,7 +22,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y nodejs ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export NVM_DIR="/root/.nvm" ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then . $NVM_DIR/nvm.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nvm install $NODE_VER ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nvm alias default $NODE_VER ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nvm use default ; fi
