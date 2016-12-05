@@ -43,7 +43,7 @@ class Device {
     Measure* GetEnqueuedMeasure(void);
     
 private:
-   datachan_device_t *dev = (datachan_device_t *)NULL;
+   datachan_device_t *dev;
 };
 
 #ifdef __cplusplus

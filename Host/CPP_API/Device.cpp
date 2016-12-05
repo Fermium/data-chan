@@ -21,6 +21,8 @@
 #include <stdlib.h>
 
 Device::Device(void) {
+    this->dev = (datachan_device_t *)NULL;
+
     // attempt to open the device
     datachan_acquire_result_t scan_result = datachan_device_acquire();
     
