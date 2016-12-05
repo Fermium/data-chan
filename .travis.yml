@@ -12,10 +12,10 @@ matrix:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; sudo apt-get install -y byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; sudo chmod +x setup_env.sh && sudo ./setup_env.sh      ; fi
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install swig node && curl https://www.npmjs.org/install.sh | sh  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install swig node  gcc-avr avr-libc binutils-avr && curl https://www.npmjs.org/install.sh | sh  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo chmod +x install_swig.sh && sudo ./install_swig.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo chmod +x install_node.sh  && sudo ./install_node.sh ; fi
 
