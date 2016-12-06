@@ -31,20 +31,20 @@ Vagrant.configure(2) do |config|
   
   ###############################################################
    config.vm.provision "shell", inline: <<-SHELL
-     echo "Installing software"
+     printf "\n\nInstalling software\n"
      sudo apt-get update
      sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client tar gcc g++ gcc-avr avr-libc avrdude binutils-avr make autogen autoconf curl build-essential
      
      
-     echo "Installing Swig"
+     printf "\n\nInstalling Swig\n"
      sudo bash /vagrant/scripts/install-swig.sh
      
      
-     echo "Installing NodeJS"
+     printf "\n\nInstalling NodeJS\n"
      sudo bash /vagrant/scripts/install-node.sh
 
      
-     echo "Installing pip and mkdocs"
+     printf "\n\nInstalling pip and mkdocs\n"
      sudo bash  /vagrant/scripts/install-mkdocs.sh
         
      # link volume to home user folder
@@ -52,7 +52,7 @@ Vagrant.configure(2) do |config|
      
      bash /vagrant/scripts/print-versions.sh
      
-     echo "The box is ready. Now simply run \"vagrant ssh\" to connect!"
+     printf "\n\n\n\nThe box is ready. Now simply run \"vagrant ssh\" to connect!\n"
      
    SHELL
    
