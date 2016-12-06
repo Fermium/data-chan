@@ -35,7 +35,7 @@
 
 ################################ Netbeast
 /nbproject/private
-/Host/API/Tester/Tester
+Host/API/Tester/Tester
 
 ################################ Eclipse
 .settings/
@@ -43,7 +43,7 @@
 
 ################################ Node.js
 
-/Host/node_binding/build/
+Host/node_binding/build/
 
 # Logs
 logs
@@ -72,7 +72,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-/Host/NODEJS_API/build/
+Host/NODEJS_API/build/
 
 # Dependency directories
 node_modules
@@ -94,13 +94,13 @@ jspm_packages
 .yarn-integrity
 
 # node-gyp
-*_wrap.cxx
-/Host/NODEJS_API/binding.gyp
-/Host/NODEJS_API/binding.gype
+Host/NODEJS_API/*_wrap.cxx
+Host/NODEJS_API/binding.gyp
+Host/NODEJS_API/binding.gype
 
 # Pyhon binding auto-generated
-/Host/PYTHON_API/*.py
-/Host/PYTHON_API/*.pyc
+Host/PYTHON_API/*.py
+Host/PYTHON_API/*.pyc
 
 ################################ Vagrant
 
