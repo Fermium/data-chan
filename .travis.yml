@@ -22,8 +22,9 @@ before_install:
 - git submodule update --init --recursive
 
 install:
+- travis_wait 30
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap osx-cross/avr && brew update ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install swig avr-gcc49 avr-libc49 --verbose  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install swig avr-gcc49 avr-libc49  ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-swig.sh ; fi
   
 script:
