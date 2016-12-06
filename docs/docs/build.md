@@ -97,5 +97,5 @@ At this point you are ready [build](#building) data-chan:
 
 ```sh
 cd data-chan #symbolic link to /vagrant
-make -j2
+make release -j2
 ```
