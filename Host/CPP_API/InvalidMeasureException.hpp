@@ -22,19 +22,11 @@
 #include <cstddef>
 #include <exception>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 class InvalidMeasureException : public std::exception {
     public:
         InvalidMeasureException();
         const char* what();
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* INVALIDMEASUREEXCEPTION_HPP */
 

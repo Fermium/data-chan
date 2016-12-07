@@ -19,10 +19,6 @@
 #ifndef DATACHAN_H
 #define DATACHAN_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 class DataChan {
 public:
     static void Init();
@@ -33,10 +29,6 @@ public:
 private:
 
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* DATACHAN_H */
 

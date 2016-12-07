@@ -22,10 +22,6 @@
 #include <cstddef>
 #include <exception>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 class DeviceAcquisitionException : public std::exception {
     public:
         DeviceAcquisitionException(const char* err_str);
@@ -34,10 +30,6 @@ class DeviceAcquisitionException : public std::exception {
     private:
         const char* errStr;
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 const char ACQUISITION_ERR_UNINITIALIZED_LIB[] = "Uninitialized library\0";
 const char ACQUISITION_ERR_NO_DEVICE[] = "A compatible device could not be found or open\0";

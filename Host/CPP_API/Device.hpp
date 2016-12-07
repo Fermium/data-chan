@@ -29,10 +29,6 @@
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-    
 class Device {
     Device(void);
     virtual ~Device(void);
@@ -45,10 +41,6 @@ class Device {
 private:
    datachan_device_t *dev;
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* DEVICE_HPP */
 

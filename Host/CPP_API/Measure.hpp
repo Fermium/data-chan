@@ -19,10 +19,6 @@
 #ifndef MEASURE_HPP
 #define MEASURE_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "../API/API.h"
 #include "InvalidMeasureException.hpp"
 #include <cstddef>
@@ -78,11 +74,6 @@ class Measure {
         Measure::Type type;
         Measure::MeasurementUnit measurementUnit;
 };
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* MEASURE_HPP */
 

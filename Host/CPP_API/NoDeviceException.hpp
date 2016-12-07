@@ -22,19 +22,11 @@
 #include <cstddef>
 #include <exception>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 class NoDeviceException : public std::exception {
     public:
         NoDeviceException();
         const char* what();
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* NODEVICEEXCEPTION_HPP */
 
