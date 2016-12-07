@@ -30,7 +30,9 @@
 #include "../../Protocol/measure.h"
 
 #if defined(__MACH__)
-	#include <malloc/malloc.h>
+    #include <mach/clock.h>
+    #include <mach/mach.h>
+    #include <malloc/malloc.h>
 #else
     #include <malloc.h>
 #endif

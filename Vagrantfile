@@ -29,6 +29,20 @@ Vagrant.configure(2) do |config|
      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "65"]
    end
   
+  # Enable USB Controller on VirtualBox
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--usb", "on"]
+    vb.customize ["modifyvm", :id, "--usbehci", "on"]
+  end
+
+  # Implement determined configuration attributes
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["usbfilter", "add", "0",
+        "--target", :id,
+        "--name", "datachan tester",
+        "--product", "datachan tester"]
+  end
+  
   ###############################################################
    config.vm.provision "shell", inline: <<-SHELL
      printf "\n\nInstalling software\n"
