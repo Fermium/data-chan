@@ -15,6 +15,7 @@ matrix:
           - binutils-avr
           - libusb-1.0-0-dev 
   - os: osx
+    osx_image: xcode8.2	
     node_js:
       - '6'
     
