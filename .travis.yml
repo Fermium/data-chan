@@ -1,10 +1,11 @@
 language: node_js
-node_js:
-  - '6'
-  - node
+
 
 matrix:
   include:
+  - node_js:
+    - '6'
+    - node
   - os: linux
     dist: trusty
     sudo: required
