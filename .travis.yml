@@ -1,20 +1,25 @@
 language: node_js
-node_js:
-  - '6'
-  - node
-  
+
+addons:
+  apt:
+    packages:
+      - gcc-avr 
+      - avr-libc 
+      - binutils-avr
+      - libusb-1.0-0-dev
+
 matrix:
   include:
   - os: linux
     dist: trusty
     sudo: required
-    addons:
-      apt:
-        packages:
-          - gcc-avr 
-          - avr-libc 
-          - binutils-avr
-          - libusb-1.0-0-dev 
+    node_js:
+      - '6'
+  - os: linux
+    dist: trusty
+    sudo: required
+    node_js:
+      - node 
   - os: osx
     osx_image: xcode8.2	
     node_js:
