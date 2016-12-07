@@ -1,13 +1,13 @@
 language: node_js
+node_js:
+  - '6'
+  - node
 
 matrix:
   include:
   - os: linux
     dist: trusty
     sudo: required
-    node_js:
-      - '6'
-      - node
     addons:
       apt:
         packages:
@@ -17,8 +17,7 @@ matrix:
           - libusb-1.0-0-dev 
   - os: osx
     osx_image: xcode8.2	
-    node_js:
-      - '6'
+
     
 before_install:
 - git submodule update --init --recursive
