@@ -43,6 +43,13 @@ Vagrant.configure(2) do |config|
         "--product", "datachan tester"]
   end
   
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["usbfilter", "add", "1",
+        "--target", :id,
+        "--name", "USBasp",
+        "--product", "USBasp"]
+  end
+
   ###############################################################
    config.vm.provision "shell", inline: <<-SHELL
      printf "\n\nInstalling software\n"

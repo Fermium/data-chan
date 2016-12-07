@@ -79,7 +79,7 @@ void repack_measure(measure_t* out, uint8_t* in) {
                             ts.tv_nsec = mts.tv_nsec;
                         #else
                             clock_gettime(CLOCK_REALTIME, &ts);
-                        #endif;
+                        #endif
 			s  = ts.tv_sec;
 			ms = round(ts.tv_nsec / 1.0e6);
 
