@@ -1,6 +1,21 @@
-CLIB_TARGET = libDataChan.a
+CLIB_FLAG = -shared
+CLIB_TARGET = libDataChan
+ifeq ($(OS),Windows_NT)
+	CLIB_TARGET := $(CLIB_TARGET).dll
+else
+	UNAME := $(shell uname)
+	ifeq ($(UNAME), Linux)
+		CLIB_TARGET := $(CLIB_TARGET).so
+	endif
+	ifeq ($(UNAME), Darwin)
+		CLIB_FLAG = -dynamiclib
+		CLIB_TARGET := $(CLIB_TARGET).dylib
+	endif
+endif
+
 CC = gcc
 CFLAGS = -std=gnu99 -Wall -fPIC -D__HOST__
+LIBS = -lusb-1.0 -lpthread -lm
 LUFA_PATH    = ../../Device/lufa/LUFA
 
 .PHONY: default all clean debug release documentation
@@ -26,9 +41,10 @@ HEADERS = $(wildcard *.h)
 .PRECIOUS: $(CLIB_TARGET) $(OBJECTS)
 
 $(CLIB_TARGET): $(OBJECTS)
-	ar rsc $(CLIB_TARGET) $(OBJECTS)
+	gcc $(CLIB_FLAG) -o $(CLIB_TARGET) $(OBJECTS) $(LIBS)
 
 clean:
+	-rm -f $(CLIB_TARGET)
 	-rm -f *.o
 	-rm -f *.a
 	-rm -rf ../../Documentation/C_API

@@ -44,7 +44,7 @@ Vagrant.configure(2) do |config|
   end
   
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["usbfilter", "add", "1",
+    vb.customize ["usbfilter", "add", "0",
         "--target", :id,
         "--name", "USBasp",
         "--product", "USBasp"]

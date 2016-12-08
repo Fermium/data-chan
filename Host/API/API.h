@@ -1,4 +1,4 @@
-/**
+/*
 	data-chan physic through USB
 	Copyright (C) 2016  Benato Denis
 
@@ -91,19 +91,58 @@ typedef struct {
 #define USB_OUT_ENDPOINT        0x04
 #define TIMEOUT_MS              1000
 
+
 /*
  *      Initialize and shutdown the library: lib_init.c
  */
 
+/**
+ * @brief Check library status
+ * 
+ * Check if the library has been initialized and was not
+ * shutdown before this function call.
+ * 
+ * @return TRUE if the library is in a working state
+ */
 bool datachan_is_initialized(void);
+
+/**
+ * @brief Initialize the library
+ *
+ * Initialize the library and its underlying components.
+ * This function __must__ be called before any other function,
+ * except datachan_is_initialized().
+ *
+ * @see datachan_is_initialized
+ */
 void datachan_init(void);
+
+/**
+ * @brief Shutdown the library
+ *
+ * Shutdown the library and its underlying components.
+ * This function __should__ be called just before the main
+ * program exit.
+ */
 void datachan_shutdown(void);
 
+
 /*
- *      Acquire the device (detaching stub OS drivers): device_management.c
+ *      Acquire the device: device_management.c
  */
 
+/**
+ * @brief Logically acquire a device
+ *
+ * Acquire a device with the specified VID and PID:
+ * it is necessary that the OS provides permission,
+ * in order to access and use an USB device.
+ *
+ * @return the result of the operation and, on succes, a pointer to the device structure
+ */
 datachan_acquire_result_t datachan_device_acquire(void);
+
+
 void datachan_device_release(datachan_device_t*);
 
 /*

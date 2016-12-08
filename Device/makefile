@@ -22,3 +22,4 @@ all:
 	$(MAKE) -C Bootstrap $@
 	@echo
 	@echo LUFA \"make $@\" operation complete.
+

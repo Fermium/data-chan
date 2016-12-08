@@ -1,5 +1,5 @@
 TEST_TARGET = Tester
-LIBS = -L../../../API -lDataChan -lusb-1.0 -lpthread -lm
+LIBS = -L../../../API -lDataChan
 CXX = gcc
 CFLAGS = -std=gnu99 -Wall
 
