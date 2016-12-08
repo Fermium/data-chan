@@ -1,3 +1,5 @@
+include ../../flow.mk
+
 CLIB_FLAG = -shared
 CLIB_TARGET = libDataChan
 ifeq ($(OS),Windows_NT)
@@ -13,8 +15,7 @@ else
 	endif
 endif
 
-CC = gcc
-CFLAGS = -std=gnu99 -Wall -fPIC -D__HOST__
+CFLAGS += -D__HOST__
 LIBS = -lusb-1.0 -lpthread -lm
 LUFA_PATH    = ../../Device/lufa/LUFA
 
@@ -41,7 +42,7 @@ HEADERS = $(wildcard *.h)
 .PRECIOUS: $(CLIB_TARGET) $(OBJECTS)
 
 $(CLIB_TARGET): $(OBJECTS)
-	gcc $(CLIB_FLAG) -o $(CLIB_TARGET) $(OBJECTS) $(LIBS)
+	$(CC) $(CLIB_FLAG) -o $(CLIB_TARGET) $(OBJECTS) $(LIBS)
 
 clean:
 	-rm -f $(CLIB_TARGET)

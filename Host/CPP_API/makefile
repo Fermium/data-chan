@@ -1,6 +1,6 @@
+include ../../flow.mk
+
 CPPLIB_TARGET = libCPPDataChan.a
-CXX = g++
-CFLAGS = -Wall -fPIC
 LUFA_PATH    = ../../Device/lufa/LUFA
 
 .PHONY: default all clean debug release documentation
@@ -19,7 +19,7 @@ OBJECTS = $(patsubst %.cpp, %.o, $(wildcard *.cpp))
 HEADERS = $(wildcard *.hpp)
 
 %.o: %.cpp $(HEADERS)
-	$(CXX) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PRECIOUS: $(CPPLIB_TARGET) $(OBJECTS)
 

@@ -1,9 +1,10 @@
+include ../../flow.mk
+
 ADDON				= _DataChan.so
 SWIG_MODULE_FILE 	= ../DataChan.i
 SWIG 				= swig
 ABS_POSITION 		= $(shell pwd)
-CC = gcc
-CFLAGS = -std=gnu99 -Wall -fPIC -D__HOST__
+#CFLAGS += -D__HOST__
 LIBS = -L../API -lDataChan -lusb-1.0 -lpthread -lm
 PYTHON_LIB			= -lpython2.7
 PYTHON_INCLUDE 		= -I/usr/include/python2.7
@@ -16,15 +17,15 @@ DataChan_wrap.c:
 	mv ../DataChan.py ./DataChan.py
 
 DataChan_wrap.o: DataChan_wrap.c
-	$(CC) $(CFLAGS) -c DataChan_wrap.c $(PYTHON_INCLUDE) -o DataChan_wrap.o
+	$(PYTHON_CC) $(PYTHON_FLAGS) -c DataChan_wrap.c $(PYTHON_INCLUDE) -o DataChan_wrap.o
 
 default: DataChan_wrap.o
-	$(CC) -Wall -shared DataChan_wrap.o $(OBJECTS) $(LIBS) $(PYTHON_LIB) -o $(ADDON)
+	$(PYTHON_CC) -shared DataChan_wrap.o $(OBJECTS) $(LIBS) $(PYTHON_LIB) -o $(ADDON)
 	make -C examples import
 
-debug: CFLAGS += -DDEBUG -g -O0
+debug: PYTHON_FLAGS += -DDEBUG -g -O0
 debug: all
-release: CFLAGS += -O3
+release: PYTHON_FLAGS += -O3
 release: all
 
 clean:
