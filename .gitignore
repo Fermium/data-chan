@@ -98,6 +98,7 @@ Host/NODEJS_API/binding.gyp
 Host/NODEJS_API/binding.gype
 
 # Pyhon binding auto-generated
+Host/PYTHON_API/*_wrap.c
 Host/PYTHON_API/*.py
 Host/PYTHON_API/*.pyc
 
