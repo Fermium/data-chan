@@ -1,13 +1,10 @@
 include ../../flow.mk
 
-ADDON				= _DataChan.so
+ADDON				= _DataChan.$(SHARED_LIB_EXT)
 SWIG_MODULE_FILE 	= ../DataChan.i
 SWIG 				= swig
 ABS_POSITION 		= $(shell pwd)
-#CFLAGS += -D__HOST__
 LIBS = -L../API -lDataChan -lusb-1.0 -lpthread -lm
-PYTHON_LIB			= -lpython2.7
-PYTHON_INCLUDE 		= -I/usr/include/python2.7
 
 .PHONY: default all clean debug release documentation
 
@@ -20,7 +17,7 @@ DataChan_wrap.o: DataChan_wrap.c
 	$(PYTHON_CC) $(PYTHON_FLAGS) -c DataChan_wrap.c $(PYTHON_INCLUDE) -o DataChan_wrap.o
 
 default: DataChan_wrap.o
-	$(PYTHON_CC) -shared DataChan_wrap.o $(OBJECTS) $(LIBS) $(PYTHON_LIB) -o $(ADDON)
+	$(PYTHON_CC) $(SHARED_LIB_FLAG) DataChan_wrap.o $(OBJECTS) $(LIBS) $(PYTHON_LIB) -o $(ADDON)
 	make -C examples import
 
 debug: PYTHON_FLAGS += -DDEBUG -g -O0

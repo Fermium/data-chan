@@ -1,19 +1,7 @@
 include ../../flow.mk
 
 CLIB_FLAG = -shared
-CLIB_TARGET = libDataChan
-ifeq ($(OS),Windows_NT)
-	CLIB_TARGET := $(CLIB_TARGET).dll
-else
-	UNAME := $(shell uname)
-	ifeq ($(UNAME), Linux)
-		CLIB_TARGET := $(CLIB_TARGET).so
-	endif
-	ifeq ($(UNAME), Darwin)
-		CLIB_FLAG = -dynamiclib
-		CLIB_TARGET := $(CLIB_TARGET).dylib
-	endif
-endif
+CLIB_TARGET = libDataChan.$(SHARED_LIB_EXT)
 
 CFLAGS += -D__HOST__
 LIBS = -lusb-1.0 -lpthread -lm
@@ -42,7 +30,7 @@ HEADERS = $(wildcard *.h)
 .PRECIOUS: $(CLIB_TARGET) $(OBJECTS)
 
 $(CLIB_TARGET): $(OBJECTS)
-	$(CC) $(CLIB_FLAG) -o $(CLIB_TARGET) $(OBJECTS) $(LIBS)
+	$(CC) $(SHARED_LIB_FLAG) -o $(CLIB_TARGET) $(OBJECTS) $(LIBS)
 
 clean:
 	-rm -f $(CLIB_TARGET)
