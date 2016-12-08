@@ -5,7 +5,7 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-      packages: byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl build-essential ruby
+      packages: byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby
     - script:
         name: Installing Swig
         code: sudo bash scripts/install-swig.sh
