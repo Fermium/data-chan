@@ -35,7 +35,6 @@
 
 ################################ Netbeast
 /nbproject/private
-Host/API/Tester/Tester
 
 ################################ Eclipse
 .settings/
@@ -102,6 +101,12 @@ Host/NODEJS_API/binding.gype
 Host/PYTHON_API/*.py
 Host/PYTHON_API/*.pyc
 
-################################ Vagrant
+# Vagrant
 
 .vagrant/
+
+# Compiled documentation
+Documentation/
+
+# Compiled example
+Host/API/examples/Tester/Tester
