@@ -19,6 +19,46 @@
 #ifndef __API_H__
 #define __API_H__
 
+#ifdef _MSC_VER
+  #define _CRT_SECURE_NO_WARNINGS 1
+#endif
+
+#if _MSC_VER
+	//disable warnings on dll interface unexported
+	#pragma warning (disable : 4275)
+	//disable warnings on dll interface unexported
+	#pragma warning (disable : 4251)
+
+	//disable warnings on incomplete type sqlite3
+	#pragma warning (disable : 4150)
+	//disable warnings on 255 char debug symbols
+	#pragma warning (disable : 4786)
+	//disable warnings on extern before template instantiation
+	#pragma warning (disable : 4231)
+#endif
+
+
+#ifdef _WIN32
+	#ifdef DATACHAN_EXPORT
+		#define DATACHAN_API __declspec(dllexport)
+	#else
+		#define DATACHAN_API __declspec(dllimport)
+	#endif
+
+#else
+        #define DATACHAN_API
+#endif
+
+#if __GNUC__ >= 4
+	#ifdef DATACHAN_EXPORT
+		#define DLL_LOCAL __attribute__ ((visibility ("hidden")))
+	#else
+		#define DLL_LOCAL
+	#endif
+#else
+	#define DLL_LOCAL
+#endif
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <libusb-1.0/libusb.h>
@@ -69,16 +109,16 @@ typedef struct {
  *      Struct helpers
  */
 
-datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
-void datachan_device_cleanup(datachan_device_t* dev);
+DLL_LOCAL datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle);
+DLL_LOCAL void datachan_device_cleanup(datachan_device_t* dev);
 
 typedef enum {
-    uninitialized = 0x00,
-    not_found_or_inaccessible,
-    cannot_claim,
-    malloc_fail,
-    unknown,
-    success
+    uninitialized 				= 0x00,
+    not_found_or_inaccessible	= 0x01,
+    cannot_claim				= 0x02,
+    malloc_fail					= 0x03,
+    unknown						= 0x04,
+    success						= 0xFF,
 } search_result_t;
 
 typedef struct {
@@ -104,7 +144,7 @@ typedef struct {
  * 
  * @return TRUE if the library is in a working state
  */
-bool datachan_is_initialized(void);
+DATACHAN_API bool datachan_is_initialized(void);
 
 /**
  * @brief Initialize the library
@@ -115,7 +155,7 @@ bool datachan_is_initialized(void);
  *
  * @see datachan_is_initialized
  */
-void datachan_init(void);
+DATACHAN_API void datachan_init(void);
 
 /**
  * @brief Shutdown the library
@@ -124,7 +164,7 @@ void datachan_init(void);
  * This function __should__ be called just before the main
  * program exit.
  */
-void datachan_shutdown(void);
+DATACHAN_API void datachan_shutdown(void);
 
 
 /*
@@ -140,40 +180,40 @@ void datachan_shutdown(void);
  *
  * @return the result of the operation and, on succes, a pointer to the device structure
  */
-datachan_acquire_result_t datachan_device_acquire(void);
+DATACHAN_API datachan_acquire_result_t datachan_device_acquire(void);
 
 
-void datachan_device_release(datachan_device_t*);
+DATACHAN_API void datachan_device_release(datachan_device_t*);
 
 /*
  *      Enable/Disable the device output (IN packets): device_enabler.c
  */
 
-bool datachan_device_enable(datachan_device_t*);
-bool datachan_device_is_enabled(datachan_device_t*);
-bool datachan_device_disable(datachan_device_t*);
+DATACHAN_API bool datachan_device_enable(datachan_device_t*);
+DATACHAN_API bool datachan_device_is_enabled(datachan_device_t*);
+DATACHAN_API bool datachan_device_disable(datachan_device_t*);
 
 /*
  *      Enqueue generic buffer (OUT packet content): requests_queue.c
  */
 
-void datachan_enqueue_request(datachan_device_t*, uint8_t*);
-void datachan_dequeue_request(datachan_device_t*, uint8_t*);
+DATACHAN_API void datachan_enqueue_request(datachan_device_t*, uint8_t*);
+DATACHAN_API void datachan_dequeue_request(datachan_device_t*, uint8_t*);
 
 /*
  *      Simple genaration of OUT packets: commands.c
  */
-void datachan_send_sync_command(datachan_device_t*, uint8_t, uint8_t*, uint8_t);
+DATACHAN_API void datachan_send_sync_command(datachan_device_t*, uint8_t, uint8_t*, uint8_t);
 
 /*
  *      Measures functions: measures.c
  */
 
-void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
-measure_t* datachan_device_dequeue_measure(datachan_device_t*);
-int32_t datachan_device_enqueued_measures(datachan_device_t*);
+DLL_LOCAL void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
+DATACHAN_API measure_t* datachan_device_dequeue_measure(datachan_device_t*);
+DATACHAN_API int32_t datachan_device_enqueued_measures(datachan_device_t*);
 
-void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
+DATACHAN_API void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
 
 #ifdef __cplusplus
 }

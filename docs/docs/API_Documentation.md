@@ -4,12 +4,15 @@ API documentation is built directly from software source to provide the better
 documentation level possible.
 
 If you install doxygen you can build the documentation from the source code by yourself: this will provide you with the best possible documentation for your
-version of the data-chan software:
+version of the data-chan software.
+
+cd into the project directory and type
 
 ```sh
-chmod +x fetch_submodules.sh && ./fetch_submodules.sh
-make documentation
+make documentation -j2
 ```
+
+This will build the documentation.
 
 ## Online versions
 

@@ -1,5 +1,5 @@
-CC	= clang
-CXX	= clang++
+CC	= gcc
+CXX	= g++
 
 PYTHON_CC		= gcc
 PYTHON_FLAGS	= -fPIC
