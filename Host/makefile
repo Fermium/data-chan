@@ -1,4 +1,4 @@
-include ../flow.mk
+include ../DataChan.mk
 
 CLIB_FLAG = -shared
 CLIB_TARGET = libDataChan.$(SHARED_LIB_EXT)
@@ -41,6 +41,7 @@ clean:
 
 install: all
 	-mkdir $(INSTALL_DIR)
+	cp ../DataChan.mk $(INSTALL_DIR)/
 	-mkdir $(INSTALL_DIR)/lib
 	cp $(CLIB_TARGET) $(INSTALL_DIR)/lib/
 	-mkdir $(INSTALL_DIR)/include
