@@ -12,6 +12,7 @@ CXXFLAGS	= -Wall -fPIC
 SHARED_LIB_EXT	= .so
 SHARED_LIB_FLAG	= -shared
 
+INSTALL_DIR = /datachan
 
 SHARED_LIB_FLAG	= -shared
 ifeq ($(OS),Windows_NT)
@@ -19,6 +20,9 @@ ifeq ($(OS),Windows_NT)
 else
 	UNAME := $(shell uname)
 	ifeq ($(UNAME), Linux)
+		SHARED_LIB_EXT := so
+	endif
+	ifeq ($(UNAME), FreeBSD)
 		SHARED_LIB_EXT := so
 	endif
 	ifeq ($(UNAME), Darwin)

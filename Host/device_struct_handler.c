@@ -16,8 +16,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../../config.h"
-#include "API.h"
+#include "../config.h"
+#include "DataChan.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,6 +54,10 @@ datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
     // pthread attribute creation
     pthread_attr_init(&dev->reader_attr);
 
+    // start the command id counter from zero
+    dev->async_used_id = 0;
+
+    // initialize default mutex attributes
     pthread_mutexattr_init(&dev->mutex_attr);
 
     // pthread mutex
@@ -61,6 +65,7 @@ datachan_device_t* datachan_device_setup(libusb_device_handle* native_handle) {
     pthread_mutex_init(&dev->enabled_mutex, &dev->mutex_attr);
     pthread_mutex_init(&dev->handler_mutex, &dev->mutex_attr);
     pthread_mutex_init(&dev->requests_queue_mutex, &dev->mutex_attr);
+    pthread_mutex_init(&dev->async_used_id_mutex, &dev->mutex_attr);
 
     // enjoy the device
     return dev;
@@ -75,6 +80,7 @@ void datachan_device_cleanup(datachan_device_t* dev) {
     pthread_mutex_destroy(&dev->measures_queue_mutex);
     pthread_mutex_destroy(&dev->handler_mutex);
     pthread_mutex_destroy(&dev->requests_queue_mutex);
+    pthread_mutex_destroy(&dev->async_used_id_mutex);
 
     // remove the mutex attribute safely
     pthread_mutexattr_destroy(&dev->mutex_attr);
