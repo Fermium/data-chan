@@ -1,4 +1,4 @@
-################################ C/C++ 
+################################ C/C++
 
 # Compiled Object files
 *.slo
@@ -103,7 +103,7 @@ Host/PYTHON_API/*.py
 Host/PYTHON_API/*.pyc
 
 # Vagrant
-
+vagrant
 .vagrant/
 
 # Compiled documentation
