@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>C DataChan Host Library: datachan_device_t Struct Reference</title>
+<title>C DataChan Host Library: API.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">C DataChan Host Library
-   &#160;<span id="projectnumber">3941e00a467239d82ca45591b89cb1d5852fa476 (with uncommitted changes)</span>
+   &#160;<span id="projectnumber">521bb166d24f7fd1b18a4b8cc89c976b67b0cdd1 (with uncommitted changes)</span>
    </div>
    <div id="projectbrief">A library to talk with DataChan devices</div>
   </td>
@@ -53,195 +53,548 @@ $(document).ready(function(){initNavTree('a00003.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">datachan_device_t Struct Reference</div>  </div>
+<div class="title">API.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;API.h&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a73f97ff0fcf8c3a081143e3b310131e7"><td class="memItemLeft" align="right" valign="top">pthread_mutexattr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a73f97ff0fcf8c3a081143e3b310131e7">mutex_attr</a></td></tr>
-<tr class="separator:a73f97ff0fcf8c3a081143e3b310131e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d0699696875ee2227a28cb311788652"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a1d0699696875ee2227a28cb311788652">handler_mutex</a></td></tr>
-<tr class="separator:a1d0699696875ee2227a28cb311788652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf64fb772052d861db1065f499d0de9b"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#acf64fb772052d861db1065f499d0de9b">measures_queue_mutex</a></td></tr>
-<tr class="separator:acf64fb772052d861db1065f499d0de9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3701dcf6b2ecf360c40126e090082b29"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a3701dcf6b2ecf360c40126e090082b29">exitlock</a></td></tr>
-<tr class="separator:a3701dcf6b2ecf360c40126e090082b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6683152a1319c3be196bc47ac3c8378d"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a6683152a1319c3be196bc47ac3c8378d">enabled_mutex</a></td></tr>
-<tr class="separator:a6683152a1319c3be196bc47ac3c8378d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab641e38ffd191ae30acf864544eead48"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#ab641e38ffd191ae30acf864544eead48">requests_queue_mutex</a></td></tr>
-<tr class="separator:ab641e38ffd191ae30acf864544eead48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1c6a805bad07bba2b4014e57a0f485"><td class="memItemLeft" align="right" valign="top">libusb_device_handle *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a7e1c6a805bad07bba2b4014e57a0f485">handler</a></td></tr>
-<tr class="separator:a7e1c6a805bad07bba2b4014e57a0f485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1127c76bf2d473580dd6238c0c3f7944"><td class="memItemLeft" align="right" valign="top">managed_queue_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a1127c76bf2d473580dd6238c0c3f7944">measures_queue</a></td></tr>
-<tr class="separator:a1127c76bf2d473580dd6238c0c3f7944"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a270b21038ecd0d5f48c9adfc5774e14f"><td class="memItemLeft" align="right" valign="top">pthread_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a270b21038ecd0d5f48c9adfc5774e14f">reader</a></td></tr>
-<tr class="separator:a270b21038ecd0d5f48c9adfc5774e14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6290a7d55fc49d4ceb142ded0de2faab"><td class="memItemLeft" align="right" valign="top">pthread_attr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a6290a7d55fc49d4ceb142ded0de2faab">reader_attr</a></td></tr>
-<tr class="separator:a6290a7d55fc49d4ceb142ded0de2faab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a10bedbba50b247ec3f2134e65f6ea7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a4a10bedbba50b247ec3f2134e65f6ea7">enabled</a></td></tr>
-<tr class="separator:a4a10bedbba50b247ec3f2134e65f6ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b3d687f8f622449ec0f8e01ec010c3a"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a00001.html">bulk_out_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a0b3d687f8f622449ec0f8e01ec010c3a">requests_queue</a></td></tr>
-<tr class="separator:a0b3d687f8f622449ec0f8e01ec010c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;libusb-1.0/libusb.h&gt;</code><br />
+<code>#include &lt;pthread.h&gt;</code><br />
+<code>#include &quot;../../Protocol/measure.h&quot;</code><br />
+<code>#include &quot;../../Protocol/data_management.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html">datachan_device_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00001.html">datachan_acquire_result_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a3512bfcb5af3175065bda2c61ed21372"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a3512bfcb5af3175065bda2c61ed21372">USB_USED_INTERFACE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a3512bfcb5af3175065bda2c61ed21372"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef980ae2c0b39939ef1201ff2758d9b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#aef980ae2c0b39939ef1201ff2758d9b3">USB_IN_ENDPOINT</a>&#160;&#160;&#160;0x83</td></tr>
+<tr class="separator:aef980ae2c0b39939ef1201ff2758d9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3667df9f7754aee2bd0cf12fe877e985"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a3667df9f7754aee2bd0cf12fe877e985">USB_OUT_ENDPOINT</a>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:a3667df9f7754aee2bd0cf12fe877e985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53bb6ce0dbc843daa4ad914d78713ac2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a53bb6ce0dbc843daa4ad914d78713ac2">TIMEOUT_MS</a>&#160;&#160;&#160;1000</td></tr>
+<tr class="separator:a53bb6ce0dbc843daa4ad914d78713ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a0c311378969844a29fff15c59ff67e20"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20">search_result_t</a> { <br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20a8a255517f392ea86c344d3dd92164b3d">uninitialized</a> = 0x00, 
+<br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20a0f3453e53c7bb952e2d933a27ea6dbe8">not_found_or_inaccessible</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20af251dc1f5c8dab1489fe6d49215f0db4">cannot_claim</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20abb0968e1a067f85dc3489e6a3c8e68df">malloc_fail</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20a5b9f6d065e6e98483b3d3ed01f4f6cbe">unknown</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20ab8916948582bbb4902d6ad269064f7ef">success</a>
+<br />
+ }</td></tr>
+<tr class="separator:a0c311378969844a29fff15c59ff67e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7e8064d2b01b383770ba24c873cee526"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a7e8064d2b01b383770ba24c873cee526">datachan_device_setup</a> (libusb_device_handle *native_handle)</td></tr>
+<tr class="separator:a7e8064d2b01b383770ba24c873cee526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77cee0fdc0bd156deab31d5903ce2c3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a77cee0fdc0bd156deab31d5903ce2c3b">datachan_device_cleanup</a> (<a class="el" href="a00002.html">datachan_device_t</a> *dev)</td></tr>
+<tr class="separator:a77cee0fdc0bd156deab31d5903ce2c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad940be8915dfe7bfd66a31b26c4ad661"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#ad940be8915dfe7bfd66a31b26c4ad661">datachan_is_initialized</a> (void)</td></tr>
+<tr class="memdesc:ad940be8915dfe7bfd66a31b26c4ad661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check library status.  <a href="#ad940be8915dfe7bfd66a31b26c4ad661">More...</a><br /></td></tr>
+<tr class="separator:ad940be8915dfe7bfd66a31b26c4ad661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51b7aabad779d17c5724a695d2453734"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a51b7aabad779d17c5724a695d2453734">datachan_init</a> (void)</td></tr>
+<tr class="memdesc:a51b7aabad779d17c5724a695d2453734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the library.  <a href="#a51b7aabad779d17c5724a695d2453734">More...</a><br /></td></tr>
+<tr class="separator:a51b7aabad779d17c5724a695d2453734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8addc275a7e0116be193435934598784"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a8addc275a7e0116be193435934598784">datachan_shutdown</a> (void)</td></tr>
+<tr class="memdesc:a8addc275a7e0116be193435934598784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown the library.  <a href="#a8addc275a7e0116be193435934598784">More...</a><br /></td></tr>
+<tr class="separator:a8addc275a7e0116be193435934598784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a252637a71d7adfb5b1c98544e568783b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html">datachan_acquire_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a252637a71d7adfb5b1c98544e568783b">datachan_device_acquire</a> (void)</td></tr>
+<tr class="memdesc:a252637a71d7adfb5b1c98544e568783b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logically acquire a device.  <a href="#a252637a71d7adfb5b1c98544e568783b">More...</a><br /></td></tr>
+<tr class="separator:a252637a71d7adfb5b1c98544e568783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ba08226cfa5c2f88b4160e72aab578"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a71ba08226cfa5c2f88b4160e72aab578">datachan_device_release</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:a71ba08226cfa5c2f88b4160e72aab578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f3a9bf3b9ce71cbb8e8ec46dafa6151"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a9f3a9bf3b9ce71cbb8e8ec46dafa6151">datachan_device_enable</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:a9f3a9bf3b9ce71cbb8e8ec46dafa6151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d33ef85d0cf9697bef5ed85d485cf6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a8d33ef85d0cf9697bef5ed85d485cf6b">datachan_device_is_enabled</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:a8d33ef85d0cf9697bef5ed85d485cf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3914b849dc33772685f03c7481d5e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a5b3914b849dc33772685f03c7481d5e4">datachan_device_disable</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:a5b3914b849dc33772685f03c7481d5e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87789c47669b2b5fdc511f58ba43d9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#ab87789c47669b2b5fdc511f58ba43d9d">datachan_enqueue_request</a> (<a class="el" href="a00002.html">datachan_device_t</a> *, uint8_t *)</td></tr>
+<tr class="separator:ab87789c47669b2b5fdc511f58ba43d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fbb4cf60f91ddb1d09bd8fb53bc44e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a4fbb4cf60f91ddb1d09bd8fb53bc44e3">datachan_dequeue_request</a> (<a class="el" href="a00002.html">datachan_device_t</a> *, uint8_t *)</td></tr>
+<tr class="separator:a4fbb4cf60f91ddb1d09bd8fb53bc44e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9b17b85b0eca5a1c19d4ee417946d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a3a9b17b85b0eca5a1c19d4ee417946d8">datachan_send_sync_command</a> (<a class="el" href="a00002.html">datachan_device_t</a> *, uint8_t, uint8_t *, uint8_t)</td></tr>
+<tr class="separator:a3a9b17b85b0eca5a1c19d4ee417946d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc34d752f0229ec745e298699c71e40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a3fc34d752f0229ec745e298699c71e40">datachan_device_enqueue_measure</a> (<a class="el" href="a00002.html">datachan_device_t</a> *, const measure_t *)</td></tr>
+<tr class="separator:a3fc34d752f0229ec745e298699c71e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a104bbe9d24fa3200ed3e509c6f466"><td class="memItemLeft" align="right" valign="top">measure_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a31a104bbe9d24fa3200ed3e509c6f466">datachan_device_dequeue_measure</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:a31a104bbe9d24fa3200ed3e509c6f466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad08f2bb5eb215ccd2d7f028c24866b09"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#ad08f2bb5eb215ccd2d7f028c24866b09">datachan_device_enqueued_measures</a> (<a class="el" href="a00002.html">datachan_device_t</a> *)</td></tr>
+<tr class="separator:ad08f2bb5eb215ccd2d7f028c24866b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b92e8fcdc256e152aa2e0c0ef2fae70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a4b92e8fcdc256e152aa2e0c0ef2fae70">datachan_device_set_config</a> (<a class="el" href="a00002.html">datachan_device_t</a> *, uint32_t, uint8_t, void *, uint16_t)</td></tr>
+<tr class="separator:a4b92e8fcdc256e152aa2e0c0ef2fae70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="a4a10bedbba50b247ec3f2134e65f6ea7"></a>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a53bb6ce0dbc843daa4ad914d78713ac2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool datachan_device_t::enabled</td>
+          <td class="memname">#define TIMEOUT_MS&#160;&#160;&#160;1000</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a6683152a1319c3be196bc47ac3c8378d"></a>
+<a class="anchor" id="aef980ae2c0b39939ef1201ff2758d9b3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutex_t datachan_device_t::enabled_mutex</td>
+          <td class="memname">#define USB_IN_ENDPOINT&#160;&#160;&#160;0x83</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a3701dcf6b2ecf360c40126e090082b29"></a>
+<a class="anchor" id="a3667df9f7754aee2bd0cf12fe877e985"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutex_t datachan_device_t::exitlock</td>
+          <td class="memname">#define USB_OUT_ENDPOINT&#160;&#160;&#160;0x04</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a7e1c6a805bad07bba2b4014e57a0f485"></a>
+<a class="anchor" id="a3512bfcb5af3175065bda2c61ed21372"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">libusb_device_handle* datachan_device_t::handler</td>
+          <td class="memname">#define USB_USED_INTERFACE&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a1d0699696875ee2227a28cb311788652"></a>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="a0c311378969844a29fff15c59ff67e20"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutex_t datachan_device_t::handler_mutex</td>
+          <td class="memname">enum <a class="el" href="a00003.html#a0c311378969844a29fff15c59ff67e20">search_result_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20a8a255517f392ea86c344d3dd92164b3d"></a>uninitialized&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20a0f3453e53c7bb952e2d933a27ea6dbe8"></a>not_found_or_inaccessible&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20af251dc1f5c8dab1489fe6d49215f0db4"></a>cannot_claim&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20abb0968e1a067f85dc3489e6a3c8e68df"></a>malloc_fail&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20a5b9f6d065e6e98483b3d3ed01f4f6cbe"></a>unknown&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a0c311378969844a29fff15c59ff67e20ab8916948582bbb4902d6ad269064f7ef"></a>success&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a4fbb4cf60f91ddb1d09bd8fb53bc44e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_dequeue_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a1127c76bf2d473580dd6238c0c3f7944"></a>
+<a class="anchor" id="a252637a71d7adfb5b1c98544e568783b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">managed_queue_t datachan_device_t::measures_queue</td>
+          <td class="memname"><a class="el" href="a00001.html">datachan_acquire_result_t</a> datachan_device_acquire </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Logically acquire a device. </p>
+<p>Acquire a device with the specified VID and PID: it is necessary that the OS provides permission, in order to access and use an USB device.</p>
+<dl class="section return"><dt>Returns</dt><dd>the result of the operation and, on succes, a pointer to the device structure </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a77cee0fdc0bd156deab31d5903ce2c3b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_device_cleanup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="acf64fb772052d861db1065f499d0de9b"></a>
+<a class="anchor" id="a31a104bbe9d24fa3200ed3e509c6f466"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutex_t datachan_device_t::measures_queue_mutex</td>
+          <td class="memname">measure_t* datachan_device_dequeue_measure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a73f97ff0fcf8c3a081143e3b310131e7"></a>
+<a class="anchor" id="a5b3914b849dc33772685f03c7481d5e4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutexattr_t datachan_device_t::mutex_attr</td>
+          <td class="memname">bool datachan_device_disable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a270b21038ecd0d5f48c9adfc5774e14f"></a>
+<a class="anchor" id="a9f3a9bf3b9ce71cbb8e8ec46dafa6151"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_t datachan_device_t::reader</td>
+          <td class="memname">bool datachan_device_enable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a6290a7d55fc49d4ceb142ded0de2faab"></a>
+<a class="anchor" id="a3fc34d752f0229ec745e298699c71e40"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_attr_t datachan_device_t::reader_attr</td>
+          <td class="memname">void datachan_device_enqueue_measure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const measure_t *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a0b3d687f8f622449ec0f8e01ec010c3a"></a>
+<a class="anchor" id="ad08f2bb5eb215ccd2d7f028c24866b09"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="a00001.html">bulk_out_t</a>* datachan_device_t::requests_queue</td>
+          <td class="memname">int32_t datachan_device_enqueued_measures </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="ab641e38ffd191ae30acf864544eead48"></a>
+<a class="anchor" id="a8d33ef85d0cf9697bef5ed85d485cf6b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pthread_mutex_t datachan_device_t::requests_queue_mutex</td>
+          <td class="memname">bool datachan_device_is_enabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="a00004.html">API.h</a></li>
-</ul>
+<a class="anchor" id="a71ba08226cfa5c2f88b4160e72aab578"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_device_release </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b92e8fcdc256e152aa2e0c0ef2fae70"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_device_set_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e8064d2b01b383770ba24c873cee526"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00002.html">datachan_device_t</a>* datachan_device_setup </td>
+          <td>(</td>
+          <td class="paramtype">libusb_device_handle *&#160;</td>
+          <td class="paramname"><em>native_handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab87789c47669b2b5fdc511f58ba43d9d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_enqueue_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51b7aabad779d17c5724a695d2453734"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the library. </p>
+<p>Initialize the library and its underlying components. This function <b>must</b> be called before any other function, except <a class="el" href="a00003.html#ad940be8915dfe7bfd66a31b26c4ad661" title="Check library status. ">datachan_is_initialized()</a>.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00003.html#ad940be8915dfe7bfd66a31b26c4ad661" title="Check library status. ">datachan_is_initialized</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad940be8915dfe7bfd66a31b26c4ad661"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool datachan_is_initialized </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check library status. </p>
+<p>Check if the library has been initialized and was not shutdown before this function call.</p>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the library is in a working state </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a9b17b85b0eca5a1c19d4ee417946d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_send_sync_command </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">datachan_device_t</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8addc275a7e0116be193435934598784"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void datachan_shutdown </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Shutdown the library. </p>
+<p>Shutdown the library and its underlying components. This function <b>should</b> be called just before the main program exit. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="a00003.html">datachan_device_t</a></li>
+    <li class="navelem"><a class="el" href="a00003.html">API.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

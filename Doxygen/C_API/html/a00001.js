@@ -1,5 +1,5 @@
 var a00001 =
 [
-    [ "buffer", "a00001.html#a1f1d01bd5e8315013070a72a4ddc0508", null ],
-    [ "next", "a00001.html#a4aa95a365bd8e5193bfe512723f28628", null ]
+    [ "device", "a00001.html#a06dcf50bdcfa682bc736bee8fa950164", null ],
+    [ "result", "a00001.html#a36446ef98df4618608951cd39c5c0467", null ]
 ];

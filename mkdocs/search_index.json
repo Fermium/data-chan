@@ -72,23 +72,78 @@
         }, 
         {
             "location": "/build/", 
-            "text": "Build\n\n\nThe entire project can be compiled with the \nmake all\n command, even on windows, but it requires a lot of dependencies.\n\n\nAt some point of the project lifetime lufa has to be fetched using submodule:\n\n\nchmod +x fetch_submodules.sh \n ./fetch_submodules.sh\nmake all -j2\n\n\n\n\nThe -j2 flag is used to speed-up compilation time on multicore processors.\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you don't have installed XCode you will need to:\n\n\nbrew install gcc\n\n\n\n\nIf you're using windows you will need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n\n\ngrep for windows\n\n\n\n\nIf you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an \nUSBASP\n to program the MCU and \nAVRDUDE\n to drive it.\n\n\nYou'll be able to use the firmware bootloader shipped with your device only once!", 
+            "text": "Build\n\n\nThe entire project can be compiled with the \nmake debug\n or \nmake release\n command, even on windows, but it requires a lot of dependencies.\n\n\nGet the source\n\n\nGet the source\n\n\ngit clone https://github.com/NeroReflex/data-chan.git \n cd data-chan\ngit submodule update --init --recursive #fetch the LUFA submodule\n\n\n\n\nBetween those two commands you can checkout another branch:\n\n\ngit checkout develop # before fetching LUFA switch to the unstable branch\n\n\n\n\nRemember to checkout the new branch \nbefore\n updating the submodules.\n\n\nBuilding\n\n\nWith a build environment ready you can compile the source code with:\n\n\ncd data-chan     # into the repo directory\nmake release -j2 # j2 flag is used to speed-up compilation time\n\n\n\n\nSetting up a building environment can be a bit tedious.\n\n\nEnvironment\n\n\nOn a generic system you will need at least:\n\n\n\n\nmake\n\n\ngcc-avr (somewhere called avr-gcc)\n\n\navr-libc\n\n\ngcc\n\n\ng++\n\n\nlibusb-1.0-0-dev\n\n\nlibpthread-stubs0-dev (pre-installed on most systems)\n\n\nnpm\n\n\npython      (^2.7)\n\n\npython-dev  (^2.7)\n\n\n\n\nNOTE:\n gcc and avr-libc used versions are 4.8, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).\n\n\nOn Ubuntu/Debian run:\n\n\nsudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr pyhon python-dev\n\n\n\n\nOn MacOS if you use Homebrew you have to tap an external repo:\n\n\nbrew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb\n\n\n\n\nNOTE:\n On MacOS if you want to build the node.js plugin you \nhave to\n install XCode!\n\n\nThe other way is \nmanually\n excluding node.js from the build and use the GNU C/C++ Compiler:\n\n\nbrew install make gcc g++\n\n\n\n\nIf you're using windows you will need to install:\n\n\n\n\nmsys 1.0\n\n\ntdm-gcc\n - libusb-1.0-0-dev, libpthread-stubs0-dev\n\n\ngrep for windows\n\n\n\n\nIf you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an \nUSBASP\n to program the MCU and \nAVRDUDE\n to drive it.\n\n\nNote:\n You'll be able to use the firmware bootloader shipped with your device only once: read the \nfaq\n!\n\n\nVagrant Environment\n\n\nFor your convenience a Vagrant development environment is provided.\nIt's based on Ubuntu Xenial and preconfigured with everything you need to develop on linux.\n\n\n\n\nInstall \nVirtualbox\n\n\nInstall \nVagrant\n:\n\n\nCheckout\n the source code\n\n\nStart Vagrant\n\n\n\n\nvagrant up\nvagrant ssh\n\n\n\n\nAt this point you are ready \nbuild\n data-chan:\n\n\ncd data-chan #symbolic link to /vagrant\nmake release -j2", 
             "title": "Build"
         }, 
         {
             "location": "/build/#build", 
-            "text": "The entire project can be compiled with the  make all  command, even on windows, but it requires a lot of dependencies.  At some point of the project lifetime lufa has to be fetched using submodule:  chmod +x fetch_submodules.sh   ./fetch_submodules.sh\nmake all -j2  The -j2 flag is used to speed-up compilation time on multicore processors.", 
+            "text": "The entire project can be compiled with the  make debug  or  make release  command, even on windows, but it requires a lot of dependencies.", 
             "title": "Build"
         }, 
         {
+            "location": "/build/#get-the-source", 
+            "text": "Get the source  git clone https://github.com/NeroReflex/data-chan.git   cd data-chan\ngit submodule update --init --recursive #fetch the LUFA submodule  Between those two commands you can checkout another branch:  git checkout develop # before fetching LUFA switch to the unstable branch  Remember to checkout the new branch  before  updating the submodules.", 
+            "title": "Get the source"
+        }, 
+        {
+            "location": "/build/#building", 
+            "text": "With a build environment ready you can compile the source code with:  cd data-chan     # into the repo directory\nmake release -j2 # j2 flag is used to speed-up compilation time  Setting up a building environment can be a bit tedious.", 
+            "title": "Building"
+        }, 
+        {
             "location": "/build/#environment", 
-            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)   NOTE:  gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).  On Ubuntu/Debian run:  sudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you don't have installed XCode you will need to:  brew install gcc  If you're using windows you will need to install:   msys 1.0  tdm-gcc  grep for windows   If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an  USBASP  to program the MCU and  AVRDUDE  to drive it.  You'll be able to use the firmware bootloader shipped with your device only once!", 
+            "text": "On a generic system you will need at least:   make  gcc-avr (somewhere called avr-gcc)  avr-libc  gcc  g++  libusb-1.0-0-dev  libpthread-stubs0-dev (pre-installed on most systems)  npm  python      (^2.7)  python-dev  (^2.7)   NOTE:  gcc and avr-libc used versions are 4.8, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).  On Ubuntu/Debian run:  sudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr pyhon python-dev  On MacOS if you use Homebrew you have to tap an external repo:  brew tap osx-cross/avr\nbrew install avr-libc avr-gcc libusb  NOTE:  On MacOS if you want to build the node.js plugin you  have to  install XCode!  The other way is  manually  excluding node.js from the build and use the GNU C/C++ Compiler:  brew install make gcc g++  If you're using windows you will need to install:   msys 1.0  tdm-gcc  - libusb-1.0-0-dev, libpthread-stubs0-dev  grep for windows   If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an  USBASP  to program the MCU and  AVRDUDE  to drive it.  Note:  You'll be able to use the firmware bootloader shipped with your device only once: read the  faq !", 
             "title": "Environment"
+        }, 
+        {
+            "location": "/build/#vagrant-environment", 
+            "text": "For your convenience a Vagrant development environment is provided.\nIt's based on Ubuntu Xenial and preconfigured with everything you need to develop on linux.   Install  Virtualbox  Install  Vagrant :  Checkout  the source code  Start Vagrant   vagrant up\nvagrant ssh  At this point you are ready  build  data-chan:  cd data-chan #symbolic link to /vagrant\nmake release -j2", 
+            "title": "Vagrant Environment"
+        }, 
+        {
+            "location": "/library_usage/get_started/", 
+            "text": "Getting Started\n\n\nThe library itself is really easy to use, you just need to remember to initialize the system at the beginning of your program and to shutdown the library before exiting :)\n\n\nIn order to have a \nworking\n device you have to:\n\n\n\n\n\n\nInitialize the library\n\n\n\n\n\n\nShutdown the library\n\n\n\n\n\n\nYou will be provided with code examples in the example directory of every API\nbinding:\n\n\n\n\n\n\n\n\nDir\n\n\nlang\n\n\n\n\n\n\n\n\n\n\nAPI\n\n\nC\n\n\n\n\n\n\nCPP_API\n\n\nC++\n\n\n\n\n\n\nNODEJS_API\n\n\nnode.js\n\n\n\n\n\n\nPYTHON_API\n\n\npython\n\n\n\n\n\n\n\n\nInitialize the library\n\n\nThe library initialization is \nvery\n important.\n\n\nYou \ncannot\n acquire a device until you have called the initializer function.\n\n\nInitializing the library setup the low-level libusb and possibly many others structures.\n\n\nShutdown the library\n\n\nThe library shutdown importance is \nunknown\n.\n\n\nAvoid library shutdown may lead to the host system in a bad state or with memory leaks: you \nshould\n never forget to shutdown the library.\n\n\nShutting down the library cleans memory that was used during the program execution.", 
+            "title": "Getting Started"
+        }, 
+        {
+            "location": "/library_usage/get_started/#getting-started", 
+            "text": "The library itself is really easy to use, you just need to remember to initialize the system at the beginning of your program and to shutdown the library before exiting :)  In order to have a  working  device you have to:    Initialize the library    Shutdown the library    You will be provided with code examples in the example directory of every API\nbinding:     Dir  lang      API  C    CPP_API  C++    NODEJS_API  node.js    PYTHON_API  python", 
+            "title": "Getting Started"
+        }, 
+        {
+            "location": "/library_usage/get_started/#initialize-the-library", 
+            "text": "The library initialization is  very  important.  You  cannot  acquire a device until you have called the initializer function.  Initializing the library setup the low-level libusb and possibly many others structures.", 
+            "title": "Initialize the library"
+        }, 
+        {
+            "location": "/library_usage/get_started/#shutdown-the-library", 
+            "text": "The library shutdown importance is  unknown .  Avoid library shutdown may lead to the host system in a bad state or with memory leaks: you  should  never forget to shutdown the library.  Shutting down the library cleans memory that was used during the program execution.", 
+            "title": "Shutdown the library"
+        }, 
+        {
+            "location": "/API_Documentation/", 
+            "text": "API Documentation\n\n\nAPI documentation is built directly from software source to provide the better\ndocumentation level possible.\n\n\nIf you install doxygen you can build the documentation from the source code by yourself: this will provide you with the best possible documentation for your\nversion of the data-chan software:\n\n\nchmod +x fetch_submodules.sh \n ./fetch_submodules.sh\nmake documentation\n\n\n\n\nOnline versions\n\n\nThe API documentation you can find online is related to a specific git revision, which is the latest commit in the master branch.\n\n\nYou can read the the git commit hash of the documentation on the left side of the documentation title.\n\n\nC API\n\n\nThe C API is the core of the system. Every other API (like C++ or node.js) are built wrapping the C API.\n\n\nYou can find the C API documentation \nhere\n.", 
+            "title": "API Documentation"
+        }, 
+        {
+            "location": "/API_Documentation/#api-documentation", 
+            "text": "API documentation is built directly from software source to provide the better\ndocumentation level possible.  If you install doxygen you can build the documentation from the source code by yourself: this will provide you with the best possible documentation for your\nversion of the data-chan software:  chmod +x fetch_submodules.sh   ./fetch_submodules.sh\nmake documentation", 
+            "title": "API Documentation"
+        }, 
+        {
+            "location": "/API_Documentation/#online-versions", 
+            "text": "The API documentation you can find online is related to a specific git revision, which is the latest commit in the master branch.  You can read the the git commit hash of the documentation on the left side of the documentation title.", 
+            "title": "Online versions"
+        }, 
+        {
+            "location": "/API_Documentation/#c-api", 
+            "text": "The C API is the core of the system. Every other API (like C++ or node.js) are built wrapping the C API.  You can find the C API documentation  here .", 
+            "title": "C API"
         }, 
         {
             "location": "/protocol/", 
             "text": "Protocol\n\n\nThe protocol can be customized starting from the very USB basics. Its minimum entity is a packet.\n\n\nThe protocol itself makes \nhuge\n usage of the \nGENERIC_REPORT_SIZE\n macro which defines the number of bytes, minus one, in each USB packet.\n\n\nThat means VENDOR_IO_EPSIZE = GENERIC_REPORT_SIZE +1, where the last byte\n(the +1) is used for the CRC-8!\n\n\nThe Data-chan protocol uses \nlittle-endian\n while serializing data larger than one byte.\n\n\nPackets Structure\n\n\nBoth IN and OUT packets are formed this way:\n\n\n\n    \n\n        \nPosition\n\n        \nfirst byte\n\n        \nfollowing bytes\n\n        \nlast byte\n\n    \n\n    \n\n        \nDescription\n\n    \ntype\n\n        \ndata\n\n        \nCRC-8\n\n    \n\n    \n\n        \nOffset\n\n    \n0\n\n        \n1\n\n        \nGENERIC_REPORT_SIZE\n\n    \n\n\n\n\n\nThe first bytes is the one that controls how the data is used.\n\n\nFrom the host perspective there are two types of packets:\n\n\n\n\nIN packets\n\n\nOUT packets.\n\n\n\n\nIN Packets\n\n\nAn incoming packet can be flagged as either one of these types:\n\n\n\n\n00h =\n NONE\n\n\n02h =\n CMD_ASYNC_RESPONSE\n\n\n04h =\n MEASURE\n\n\n\n\nPackets flagged with NONE must be ignored, even if their CRC is valid.\n\n\nBy default every packet will be flagged as NONE, thus avoiding sending data to the operating system of the host which can't decode packets by itself.\n\n\nWhen the device is active every type of packet will be used.\n\n\nA MEASURE description can be found \nhere\n,\n\n\nOUT Packets\n\n\nAn outgoing packet can be:\n\n\n\n\n00h =\n NONE\n\n\n01h =\n CMD_REQUEST\n\n\n03h =\n CMD_ASYNC_REQUEST\n\n\n\n\nPackets flagged with NONE must be ignored, even if their CRC is valid.\n\n\nA CMD_REQUEST description can be found \nhere\n.\n\n\nAsync requests\n\n\nTo understand how CMD_ASYNC_REQUEST and CMD_ASYNC_RESPONSE work you should read the \nAsync\n chapter.\n\n\nTips \n Tricks\n\n\nAny outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.\n\n\nA NONE packet definition does exist in both: IN and OUT packets.\n\n\nNOTICE THAT:\n This fact can be used to detect bad packets!", 
-            "title": "Protocol"
+            "title": "Specifications"
         }, 
         {
             "location": "/protocol/#protocol", 
@@ -119,36 +174,6 @@
             "location": "/protocol/#tips-tricks", 
             "text": "Any outgoing packet has the last bit of the first byte set to 1, whereas Any incoming packet has the last bit of the first byte set to zero.  A NONE packet definition does exist in both: IN and OUT packets.  NOTICE THAT:  This fact can be used to detect bad packets!", 
             "title": "Tips &amp; Tricks"
-        }, 
-        {
-            "location": "/async/", 
-            "text": "Asynchronous Requests\n\n\nAn asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.\n\n\nEvery request, excluding the requests of the core protocol, is an asynchronous request.\n\n\nNOTICE:\n You would need infinite time to have the mathematical proof of the execution of an asynchronous request.\n\n\nOUT Packets Structure\n\n\nThe structure of an OUT packet containing an async request is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_REQUEST\n\n    \nRequest ID\n\n    \nRequest Code\n\n    \nCode-Specific\n\n  \n\n\n\n\n\nIN Packets structure\n\n\nThe structure of an IN packet containing an async response is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_RESPONSE\n\n    \nRequest ID\n\n    \nResponse\n\n  \n\n\n\n\n\nRequest ID\n\n\nThe \nRequest ID\n is a number (that should be increasing) used to identify the response.\n\n\nEven if the \nRequest IDs\n are not ordered, they must be unique to each request.\n\n\nRequest Parsing \n Response Generation\n\n\nWhen parsing an async request you have to keep in mind that it is formed by \nGENERIC_REPORT_SIZE -6\n bytes, whereas an async response can be made up of \nGENERIC_REPORT_SIZE -5\n bytes.\n\n\nThose size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the \nRequest Code\n, which is one byte long.", 
-            "title": "Async Request"
-        }, 
-        {
-            "location": "/async/#asynchronous-requests", 
-            "text": "An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.  Every request, excluding the requests of the core protocol, is an asynchronous request.  NOTICE:  You would need infinite time to have the mathematical proof of the execution of an asynchronous request.", 
-            "title": "Asynchronous Requests"
-        }, 
-        {
-            "location": "/async/#out-packets-structure", 
-            "text": "The structure of an OUT packet containing an async request is:  \n   \n     bytes \n     0 \n     4 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_REQUEST \n     Request ID \n     Request Code \n     Code-Specific", 
-            "title": "OUT Packets Structure"
-        }, 
-        {
-            "location": "/async/#in-packets-structure", 
-            "text": "The structure of an IN packet containing an async response is:  \n   \n     bytes \n     0 \n     4 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_RESPONSE \n     Request ID \n     Response", 
-            "title": "IN Packets structure"
-        }, 
-        {
-            "location": "/async/#request-id", 
-            "text": "The  Request ID  is a number (that should be increasing) used to identify the response.  Even if the  Request IDs  are not ordered, they must be unique to each request.", 
-            "title": "Request ID"
-        }, 
-        {
-            "location": "/async/#request-parsing-response-generation", 
-            "text": "When parsing an async request you have to keep in mind that it is formed by  GENERIC_REPORT_SIZE -6  bytes, whereas an async response can be made up of  GENERIC_REPORT_SIZE -5  bytes.  Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the  Request Code , which is one byte long.", 
-            "title": "Request Parsing &amp; Response Generation"
         }, 
         {
             "location": "/IN_packets/measure/", 
@@ -196,34 +221,74 @@
             "title": "Unit of Measurement"
         }, 
         {
-            "location": "/OUT_packets/request/", 
+            "location": "/IN_packets/async_response/", 
+            "text": "Asynchronous Requests\n\n\nThis chapter completes the \nasync request\n one.\n\n\nAn async respose maintains the ID of its corresponding request.\n\n\nPacket structure\n\n\nThe structure of an IN packet containing an async response is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_RESPONSE\n\n    \nRequest ID\n\n    \nResponse\n\n  \n\n\n\n\n\nRequest Parsing \n Response Generation\n\n\nWhen parsing an async request you have to keep in mind that it is formed by \nGENERIC_REPORT_SIZE -6\n bytes, whereas an async response can be made up of \nGENERIC_REPORT_SIZE -5\n bytes.\n\n\nThose size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the \nRequest Code\n, which is one byte long.", 
+            "title": "Async Response"
+        }, 
+        {
+            "location": "/IN_packets/async_response/#asynchronous-requests", 
+            "text": "This chapter completes the  async request  one.  An async respose maintains the ID of its corresponding request.", 
+            "title": "Asynchronous Requests"
+        }, 
+        {
+            "location": "/IN_packets/async_response/#packet-structure", 
+            "text": "The structure of an IN packet containing an async response is:  \n   \n     bytes \n     0 \n     4 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_RESPONSE \n     Request ID \n     Response", 
+            "title": "Packet structure"
+        }, 
+        {
+            "location": "/IN_packets/async_response/#request-parsing-response-generation", 
+            "text": "When parsing an async request you have to keep in mind that it is formed by  GENERIC_REPORT_SIZE -6  bytes, whereas an async response can be made up of  GENERIC_REPORT_SIZE -5  bytes.  Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the  Request Code , which is one byte long.", 
+            "title": "Request Parsing &amp; Response Generation"
+        }, 
+        {
+            "location": "/OUT_packets/sync_request/", 
             "text": "Synchronous Requests\n\n\nA synchronous request is sent from the Host to the Client (the Device) and \nmust\n be evaluated immediately after its reception.\n\n\nBEWARE:\n The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.\n\n\nPackets structure\n\n\nThe structure of a synchronous request packet is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_REQUEST\n\n    \nrequest code\n\n    \n ??? \n\n  \n\n\n\n\n\nChanging the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.\n\n\nSynchronous commands\n\n\nEnable Transmission\n\n\nThe ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.\n\n\nTypically this is the first command sent to the Device.\n\n\nWhen using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.\n\n\nDisable Transmission\n\n\nThe DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.\n\n\nTypically this is the last command sent to the Device.\n\n\nWhen using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.", 
             "title": "Sync Request"
         }, 
         {
-            "location": "/OUT_packets/request/#synchronous-requests", 
+            "location": "/OUT_packets/sync_request/#synchronous-requests", 
             "text": "A synchronous request is sent from the Host to the Client (the Device) and  must  be evaluated immediately after its reception.  BEWARE:  The core parts of the specification is implemented with synchronous requests, as there is mathematical certainty of the evaluation of every request sent and correctly received.", 
             "title": "Synchronous Requests"
         }, 
         {
-            "location": "/OUT_packets/request/#packets-structure", 
+            "location": "/OUT_packets/sync_request/#packets-structure", 
             "text": "The structure of a synchronous request packet is:  \n   \n     bytes \n     0 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_REQUEST \n     request code \n      ???  \n     Changing the request code the required action changes accordingly, read the following section for the complete list of synchronous commands.", 
             "title": "Packets structure"
         }, 
         {
-            "location": "/OUT_packets/request/#synchronous-commands", 
+            "location": "/OUT_packets/sync_request/#synchronous-commands", 
             "text": "", 
             "title": "Synchronous commands"
         }, 
         {
-            "location": "/OUT_packets/request/#enable-transmission", 
+            "location": "/OUT_packets/sync_request/#enable-transmission", 
             "text": "The ENABLE_TRANSMISSION code, defined as 01h, enables the OUT packets transmission.  Typically this is the first command sent to the Device.  When using ENABLE_TRANSMISSION the bytes that follow are meaningless, and thus will be ignored.", 
             "title": "Enable Transmission"
         }, 
         {
-            "location": "/OUT_packets/request/#disable-transmission", 
+            "location": "/OUT_packets/sync_request/#disable-transmission", 
             "text": "The DISABLE_TRANSMISSION code, defined as 02h, disables the OUT packets transmission.  Typically this is the last command sent to the Device.  When using DISABLE_TRANSMISSION the bytes that follows are meaningless, and thus ignored.", 
             "title": "Disable Transmission"
+        }, 
+        {
+            "location": "/OUT_packets/async_request/", 
+            "text": "Asynchronous Requests\n\n\nAn asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.\n\n\nEvery request, excluding the requests of the core protocol, is an asynchronous request.\n\n\nNOTICE:\n You would need infinite time to have the mathematical proof of the execution of an asynchronous request.\n\n\nPacket Structure\n\n\nThe structure of an OUT packet containing an async request is:\n\n\n\n  \n\n    \nbytes\n\n    \n0\n\n    \n4\n\n    \n1\n\n    \nany other\n\n  \n\n  \n\n    \ntype\n\n    \nbyte (8bits)\n\n    \ndword (32bits)\n\n    \nbyte (8bits)\n\n    \n ??? \n\n  \n\n  \n\n    \ndescription\n\n    \nCMD_ASYNC_REQUEST\n\n    \nRequest ID\n\n    \nRequest Code\n\n    \nCode-Specific\n\n  \n\n\n\n\n\nRequest ID\n\n\nThe \nRequest ID\n is a number (that should be increasing) used to identify the response.\n\n\nEven if the \nRequest IDs\n are not ordered, they must be unique to each request.", 
+            "title": "Async Request"
+        }, 
+        {
+            "location": "/OUT_packets/async_request/#asynchronous-requests", 
+            "text": "An asynchronous request is a request sent by the host to the Device that can be evaluated potentially at any time.  Every request, excluding the requests of the core protocol, is an asynchronous request.  NOTICE:  You would need infinite time to have the mathematical proof of the execution of an asynchronous request.", 
+            "title": "Asynchronous Requests"
+        }, 
+        {
+            "location": "/OUT_packets/async_request/#packet-structure", 
+            "text": "The structure of an OUT packet containing an async request is:  \n   \n     bytes \n     0 \n     4 \n     1 \n     any other \n   \n   \n     type \n     byte (8bits) \n     dword (32bits) \n     byte (8bits) \n      ???  \n   \n   \n     description \n     CMD_ASYNC_REQUEST \n     Request ID \n     Request Code \n     Code-Specific", 
+            "title": "Packet Structure"
+        }, 
+        {
+            "location": "/OUT_packets/async_request/#request-id", 
+            "text": "The  Request ID  is a number (that should be increasing) used to identify the response.  Even if the  Request IDs  are not ordered, they must be unique to each request.", 
+            "title": "Request ID"
         }
     ]
 }

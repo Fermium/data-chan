@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>C DataChan Host Library: datachan_acquire_result_t Struct Reference</title>
+<title>C DataChan Host Library: datachan_device_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">C DataChan Host Library
-   &#160;<span id="projectnumber">3941e00a467239d82ca45591b89cb1d5852fa476 (with uncommitted changes)</span>
+   &#160;<span id="projectnumber">521bb166d24f7fd1b18a4b8cc89c976b67b0cdd1 (with uncommitted changes)</span>
    </div>
    <div id="projectbrief">A library to talk with DataChan devices</div>
   </td>
@@ -55,7 +55,7 @@ $(document).ready(function(){initNavTree('a00002.html','');});
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">datachan_acquire_result_t Struct Reference</div>  </div>
+<div class="title">datachan_device_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -63,30 +63,170 @@ $(document).ready(function(){initNavTree('a00002.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a36446ef98df4618608951cd39c5c0467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00004.html#a0c311378969844a29fff15c59ff67e20">search_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a36446ef98df4618608951cd39c5c0467">result</a></td></tr>
-<tr class="separator:a36446ef98df4618608951cd39c5c0467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06dcf50bdcfa682bc736bee8fa950164"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00003.html">datachan_device_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a06dcf50bdcfa682bc736bee8fa950164">device</a></td></tr>
-<tr class="separator:a06dcf50bdcfa682bc736bee8fa950164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73f97ff0fcf8c3a081143e3b310131e7"><td class="memItemLeft" align="right" valign="top">pthread_mutexattr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a73f97ff0fcf8c3a081143e3b310131e7">mutex_attr</a></td></tr>
+<tr class="separator:a73f97ff0fcf8c3a081143e3b310131e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0699696875ee2227a28cb311788652"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a1d0699696875ee2227a28cb311788652">handler_mutex</a></td></tr>
+<tr class="separator:a1d0699696875ee2227a28cb311788652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf64fb772052d861db1065f499d0de9b"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#acf64fb772052d861db1065f499d0de9b">measures_queue_mutex</a></td></tr>
+<tr class="separator:acf64fb772052d861db1065f499d0de9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3701dcf6b2ecf360c40126e090082b29"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a3701dcf6b2ecf360c40126e090082b29">exitlock</a></td></tr>
+<tr class="separator:a3701dcf6b2ecf360c40126e090082b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6683152a1319c3be196bc47ac3c8378d"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a6683152a1319c3be196bc47ac3c8378d">enabled_mutex</a></td></tr>
+<tr class="separator:a6683152a1319c3be196bc47ac3c8378d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab641e38ffd191ae30acf864544eead48"><td class="memItemLeft" align="right" valign="top">pthread_mutex_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ab641e38ffd191ae30acf864544eead48">requests_queue_mutex</a></td></tr>
+<tr class="separator:ab641e38ffd191ae30acf864544eead48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1c6a805bad07bba2b4014e57a0f485"><td class="memItemLeft" align="right" valign="top">libusb_device_handle *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a7e1c6a805bad07bba2b4014e57a0f485">handler</a></td></tr>
+<tr class="separator:a7e1c6a805bad07bba2b4014e57a0f485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1127c76bf2d473580dd6238c0c3f7944"><td class="memItemLeft" align="right" valign="top">managed_queue_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a1127c76bf2d473580dd6238c0c3f7944">measures_queue</a></td></tr>
+<tr class="separator:a1127c76bf2d473580dd6238c0c3f7944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a270b21038ecd0d5f48c9adfc5774e14f"><td class="memItemLeft" align="right" valign="top">pthread_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a270b21038ecd0d5f48c9adfc5774e14f">reader</a></td></tr>
+<tr class="separator:a270b21038ecd0d5f48c9adfc5774e14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6290a7d55fc49d4ceb142ded0de2faab"><td class="memItemLeft" align="right" valign="top">pthread_attr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a6290a7d55fc49d4ceb142ded0de2faab">reader_attr</a></td></tr>
+<tr class="separator:a6290a7d55fc49d4ceb142ded0de2faab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a10bedbba50b247ec3f2134e65f6ea7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a4a10bedbba50b247ec3f2134e65f6ea7">enabled</a></td></tr>
+<tr class="separator:a4a10bedbba50b247ec3f2134e65f6ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45be253274e455d100259608fb45072e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#a45be253274e455d100259608fb45072e">requests_queue</a></td></tr>
+<tr class="separator:a45be253274e455d100259608fb45072e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="a06dcf50bdcfa682bc736bee8fa950164"></a>
+<a class="anchor" id="a4a10bedbba50b247ec3f2134e65f6ea7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00003.html">datachan_device_t</a>* datachan_acquire_result_t::device</td>
+          <td class="memname">bool datachan_device_t::enabled</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a36446ef98df4618608951cd39c5c0467"></a>
+<a class="anchor" id="a6683152a1319c3be196bc47ac3c8378d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00004.html#a0c311378969844a29fff15c59ff67e20">search_result_t</a> datachan_acquire_result_t::result</td>
+          <td class="memname">pthread_mutex_t datachan_device_t::enabled_mutex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3701dcf6b2ecf360c40126e090082b29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutex_t datachan_device_t::exitlock</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e1c6a805bad07bba2b4014e57a0f485"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">libusb_device_handle* datachan_device_t::handler</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1d0699696875ee2227a28cb311788652"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutex_t datachan_device_t::handler_mutex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1127c76bf2d473580dd6238c0c3f7944"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">managed_queue_t datachan_device_t::measures_queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acf64fb772052d861db1065f499d0de9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutex_t datachan_device_t::measures_queue_mutex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a73f97ff0fcf8c3a081143e3b310131e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutexattr_t datachan_device_t::mutex_attr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a270b21038ecd0d5f48c9adfc5774e14f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_t datachan_device_t::reader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6290a7d55fc49d4ceb142ded0de2faab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_attr_t datachan_device_t::reader_attr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a45be253274e455d100259608fb45072e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* datachan_device_t::requests_queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab641e38ffd191ae30acf864544eead48"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_mutex_t datachan_device_t::requests_queue_mutex</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -94,14 +234,14 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="a00004.html">API.h</a></li>
+<li><a class="el" href="a00003.html">API.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="a00002.html">datachan_acquire_result_t</a></li>
+    <li class="navelem"><a class="el" href="a00002.html">datachan_device_t</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>

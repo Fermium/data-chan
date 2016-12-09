@@ -68,7 +68,13 @@
             
                 <li class="toctree-l3"><a href="#build">Build</a></li>
                 
+                    <li><a class="toctree-l4" href="#get-the-source">Get the source</a></li>
+                
+                    <li><a class="toctree-l4" href="#building">Building</a></li>
+                
                     <li><a class="toctree-l4" href="#environment">Environment</a></li>
+                
+                    <li><a class="toctree-l4" href="#vagrant-environment">Vagrant Environment</a></li>
                 
             
             </ul>
@@ -77,20 +83,40 @@
 <li>
           
             <li>
+    <ul class="subnav">
+    <li><span>Library API</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../protocol/">Protocol</a>
+        <a class="" href="../library_usage/get_started/">Getting Started</a>
         
     </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../API_Documentation/">API Documentation</a>
+        
+    </li>
+
+        
+    </ul>
 <li>
           
             <li>
+    <ul class="subnav">
+    <li><span>Protocol</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../async/">Async Request</a>
+        <a class="" href="../protocol/">Specifications</a>
         
     </li>
-<li>
-          
-            <li>
+
+        
+            
     <ul class="subnav">
     <li><span>IN Packets</span></li>
 
@@ -102,19 +128,36 @@
     </li>
 
         
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../IN_packets/async_response/">Async Response</a>
+        
+    </li>
+
+        
     </ul>
-<li>
-          
-            <li>
+
+        
+            
     <ul class="subnav">
     <li><span>OUT Packets</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../OUT_packets/request/">Sync Request</a>
+        <a class="" href="../OUT_packets/sync_request/">Sync Request</a>
         
     </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../OUT_packets/async_request/">Async Request</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -156,13 +199,25 @@
             <div class="section">
               
                 <h1 id="build">Build</h1>
-<p>The entire project can be compiled with the <code>make all</code> command, even on windows, but it requires a lot of dependencies.</p>
-<p>At some point of the project lifetime lufa has to be fetched using submodule:</p>
-<pre><code class="sh">chmod +x fetch_submodules.sh &amp;&amp; ./fetch_submodules.sh
-make all -j2
+<p>The entire project can be compiled with the <code>make debug</code> or <code>make release</code> command, even on windows, but it requires a lot of dependencies.</p>
+<h2 id="get-the-source">Get the source</h2>
+<p>Get the source</p>
+<pre><code class="sh">git clone https://github.com/NeroReflex/data-chan.git &amp;&amp; cd data-chan
+git submodule update --init --recursive #fetch the LUFA submodule
 </code></pre>
 
-<p>The -j2 flag is used to speed-up compilation time on multicore processors.</p>
+<p>Between those two commands you can checkout another branch:</p>
+<pre><code class="sh">git checkout develop # before fetching LUFA switch to the unstable branch
+</code></pre>
+
+<p>Remember to checkout the new branch <em>before</em> updating the submodules.</p>
+<h2 id="building">Building</h2>
+<p>With a build environment ready you can compile the source code with:</p>
+<pre><code class="sh">cd data-chan     # into the repo directory
+make release -j2 # j2 flag is used to speed-up compilation time
+</code></pre>
+
+<p>Setting up a building environment can be a bit tedious.</p>
 <h2 id="environment">Environment</h2>
 <p>On a generic system you will need at least:</p>
 <ul>
@@ -173,10 +228,13 @@ make all -j2
 <li>g++</li>
 <li>libusb-1.0-0-dev</li>
 <li>libpthread-stubs0-dev (pre-installed on most systems)</li>
+<li>npm</li>
+<li>python      (^2.7)</li>
+<li>python-dev  (^2.7)</li>
 </ul>
-<p><strong>NOTE:</strong> gcc and avr-libc used versions are 4.9, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).</p>
+<p><strong>NOTE:</strong> gcc and avr-libc used versions are 4.8, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).</p>
 <p>On Ubuntu/Debian run:</p>
-<pre><code class="sh">sudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr
+<pre><code class="sh">sudo apt install make gcc g++ libusb-1.0-0-dev gcc-avr avr-libc binutils-avr pyhon python-dev
 </code></pre>
 
 <p>On MacOS if you use Homebrew you have to tap an external repo:</p>
@@ -184,18 +242,36 @@ make all -j2
 brew install avr-libc avr-gcc libusb
 </code></pre>
 
-<p><strong>NOTE:</strong> On MacOS if you don't have installed XCode you will need to:</p>
-<pre><code class="sh">brew install gcc
+<p><strong>NOTE:</strong> On MacOS if you want to build the node.js plugin you <strong>have to</strong> install XCode!</p>
+<p>The other way is <strong>manually</strong> excluding node.js from the build and use the GNU C/C++ Compiler:</p>
+<pre><code class="sh">brew install make gcc g++
 </code></pre>
 
 <p>If you're using windows you will need to install:</p>
 <ul>
-<li>msys 1.0</li>
-<li><a href="http://tdm-gcc.tdragon.net/">tdm-gcc</a></li>
+<li><a href="http://downloads.sourceforge.net/mingw/MSYS-1.0.11.exe">msys 1.0</a></li>
+<li><a href="http://tdm-gcc.tdragon.net/">tdm-gcc</a> - libusb-1.0-0-dev, libpthread-stubs0-dev</li>
 <li><a href="http://www.wingrep.com/">grep for windows</a></li>
 </ul>
 <p>If you are planning to use the Atmega32u4 or any other AVR microcontroller you will need an <a href="http://www.fischl.de/usbasp/">USBASP</a> to program the MCU and <a href="http://www.nongnu.org/avrdude/">AVRDUDE</a> to drive it.</p>
-<p>You'll be able to use the firmware bootloader shipped with your device only once!</p>
+<p><strong>Note:</strong> You'll be able to use the firmware bootloader shipped with your device only once: read the <a href="../faq/">faq</a>!</p>
+<h2 id="vagrant-environment">Vagrant Environment</h2>
+<p>For your convenience a Vagrant development environment is provided.
+It's based on Ubuntu Xenial and preconfigured with everything you need to develop on linux.</p>
+<ol>
+<li>Install <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a></li>
+<li>Install <a href="https://www.vagrantup.com/downloads.html">Vagrant</a>:</li>
+<li><a href="#get-the-source">Checkout</a> the source code</li>
+<li>Start Vagrant</li>
+</ol>
+<pre><code class="sh">vagrant up
+vagrant ssh
+</code></pre>
+
+<p>At this point you are ready <a href="#building">build</a> data-chan:</p>
+<pre><code class="sh">cd data-chan #symbolic link to /vagrant
+make release -j2
+</code></pre>
               
             </div>
           </div>
@@ -203,7 +279,7 @@ brew install avr-libc avr-gcc libusb
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../protocol/" class="btn btn-neutral float-right" title="Protocol">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../library_usage/get_started/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../faq/" class="btn btn-neutral" title="FAQ"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -237,7 +313,7 @@ brew install avr-libc avr-gcc libusb
         <span><a href="../faq/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../protocol/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../library_usage/get_started/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

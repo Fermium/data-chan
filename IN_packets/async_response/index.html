@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Measure - data-chan</title>
+  <title>Async Response - data-chan</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Measure";
-    var mkdocs_page_input_path = "IN_packets/measure.md";
-    var mkdocs_page_url = "/IN_packets/measure/";
+    var mkdocs_page_name = "Async Response";
+    var mkdocs_page_input_path = "IN_packets/async_response.md";
+    var mkdocs_page_url = "/IN_packets/async_response/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -107,28 +107,26 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Measure</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#measure">Measure</a></li>
-                
-                    <li><a class="toctree-l4" href="#types">Types</a></li>
-                
-                    <li><a class="toctree-l4" href="#channel">Channel</a></li>
-                
-                    <li><a class="toctree-l4" href="#unit-of-measurement">Unit of Measurement</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../measure/">Measure</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../async_response/">Async Response</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Async Response</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#asynchronous-requests">Asynchronous Requests</a></li>
+                
+                    <li><a class="toctree-l4" href="#packet-structure">Packet structure</a></li>
+                
+                    <li><a class="toctree-l4" href="#request-parsing-response-generation">Request Parsing &amp; Response Generation</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -191,10 +189,10 @@
         
       
     
-    <li>Measure</li>
+    <li>Async Response</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/IN_packets/measure.md"
+        <a href="https://github.com/NeroReflex/data-chan/edit/master/docs/IN_packets/async_response.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -204,94 +202,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="measure">Measure</h1>
-<p>A MEASURE packet has the data field formed this way:</p>
+                <h1 id="asynchronous-requests">Asynchronous Requests</h1>
+<p>This chapter completes the <a href="../../OUT_packets/async_request/">async request</a> one.</p>
+<p>An async respose maintains the ID of its corresponding request.</p>
+<h2 id="packet-structure">Packet structure</h2>
+<p>The structure of an IN packet containing an async response is:</p>
 <table border="1">
-    <tr>
-        <td>bytes</td>
-        <td>0</td>
-        <td>1</td>
-        <td>2 to 6</td>
-        <td>7</td>
-        <td>8 to 12</td>
-        <td>13 to 14</td>
-    </tr>
-    <tr>
-        <td>type</td>
-        <td>byte (8bits)</td>
-        <td>byte (8bits)</td>
-        <td>float (32bits)</td>
-        <td>byte (8bits)</td>
-        <td>big int (32bits)</td>
-        <td>small int (16bits)</td>
-    </tr>
-    <tr>
-        <td>descr</td>
-        <td>type</td>
-        <td>channel</td>
-        <td>value</td>
-        <td>mu</td>
-        <td>timestamp</td>
-        <td>millis</td>
-    </tr>
+  <tr>
+    <td>bytes</td>
+    <td>0</td>
+    <td>4</td>
+    <td>any other</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>byte (8bits)</td>
+    <td>dword (32bits)</td>
+    <td> ??? </td>
+  </tr>
+  <tr>
+    <td>description</td>
+    <td>CMD_ASYNC_RESPONSE</td>
+    <td>Request ID</td>
+    <td>Response</td>
+  </tr>
 </table>
 
-<p>Allowed measure types are:</p>
-<ul>
-<li>00h =&gt; NONREALTIME</li>
-<li>01h =&gt; OFFSET_REALTIME</li>
-<li>02h =&gt; REALTIME</li>
-<li>03h =&gt; PROGRESSIVE</li>
-</ul>
-<h2 id="types">Types</h2>
-<h4 id="nonrealtime">NONREALTIME</h4>
-<p>In a NONREALTIME measure both time and millis fields are unused, the host will replace their values with its timestamp and millis upon receipt.</p>
-<h4 id="offset_realtime">OFFSET_REALTIME</h4>
-<p>In an OFFSET_REALTIME measure time and millis refers to the moment the data-logging procedure started.</p>
-<h4 id="realtime">REALTIME</h4>
-<p>In a REALTIME measure both time and millis contains the correct values.</p>
-<p>This is useful if you have a long-running system with it's own <a href="https://en.wikipedia.org/wiki/Real-time_clock">RTC</a> that may have a infrequent connection to the host.</p>
-<h4 id="progressive">PROGRESSIVE</h4>
-<p>In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.</p>
-<h2 id="channel">Channel</h2>
-<p>The channel field is used to identify the channel that has generated the measure.</p>
-<p>Channels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.</p>
-<p>The channel numeration starts from 1 and goes up to 255.</p>
-<h2 id="unit-of-measurement">Unit of Measurement</h2>
-<p>The Unit of Measurement field is a byte that reveals the used unit of measurement, according to the following list:</p>
-<ul>
-<li>0 =&gt; meter</li>
-<li>1 =&gt; ampere</li>
-<li>2 =&gt; volt</li>
-<li>3 =&gt; coulomb</li>
-<li>4 =&gt; watt</li>
-<li>5 =&gt; kilogram</li>
-<li>6 =&gt; kelvin</li>
-<li>7 =&gt; candela</li>
-<li>8 =&gt; mole</li>
-<li>9 =&gt; hertz</li>
-<li>10 =&gt; radian</li>
-<li>11 =&gt; steradian</li>
-<li>12 =&gt; newton</li>
-<li>13 =&gt; pascal</li>
-<li>14 =&gt; joule</li>
-<li>15 =&gt; farad</li>
-<li>16 =&gt; ohm</li>
-<li>17 =&gt; siemens</li>
-<li>18 =&gt; weber</li>
-<li>19 =&gt; tesla</li>
-<li>20 =&gt; henry</li>
-<li>21 =&gt; lumen</li>
-<li>22 =&gt; lux</li>
-<li>23 =&gt; becquerel</li>
-<li>24 =&gt; gray</li>
-<li>25 =&gt; sievert</li>
-<li>26 =&gt; katal</li>
-</ul>
-<p>The measurement should always be in the expected basic unit of measurement of the <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI system</a>.</p>
-<p>Example: If you are measuring Volts, use Volts; not millivolts or kilovolts.</p>
-<p>The last five units codes (251, 252, 253, 254, 255) are application-reserved and how they are used depends on the device vendor.</p>
-<p>Heck: that means you can use them to do everything you want!</p>
+<h2 id="request-parsing-response-generation">Request Parsing &amp; Response Generation</h2>
+<p>When parsing an async request you have to keep in mind that it is formed by <strong>GENERIC_REPORT_SIZE -6</strong> bytes, whereas an async response can be made up of <strong>GENERIC_REPORT_SIZE -5</strong> bytes.</p>
+<p>Those size differences are given by the asymmetry in the length of the two packets: only the OUT packet contains the <em>Request Code</em>, which is one byte long.</p>
               
             </div>
           </div>
@@ -299,10 +238,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../async_response/" class="btn btn-neutral float-right" title="Async Response">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../OUT_packets/sync_request/" class="btn btn-neutral float-right" title="Sync Request">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../protocol/" class="btn btn-neutral" title="Specifications"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../measure/" class="btn btn-neutral" title="Measure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -330,10 +269,10 @@
           <a href="https://github.com/NeroReflex/data-chan" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../protocol/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../measure/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../async_response/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../OUT_packets/sync_request/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
