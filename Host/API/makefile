@@ -3,7 +3,7 @@ include ../../flow.mk
 CLIB_FLAG = -shared
 CLIB_TARGET = libDataChan.$(SHARED_LIB_EXT)
 
-CFLAGS += -D__HOST__
+CFLAGS += -DDATACHAN_EXPORT -D__HOST__ -DDATACHAN_CPP_EXPORT
 LIBS = -lusb-1.0 -lpthread -lm
 LUFA_PATH    = ../../Device/lufa/LUFA
 

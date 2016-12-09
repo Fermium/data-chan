@@ -21,8 +21,9 @@
 
 #include <cstddef>
 #include <exception>
+#include "DataChan.hpp"
 
-class NoDeviceException : public std::exception {
+DATACHAN_CPP_API class NoDeviceException : public std::exception {
     public:
         NoDeviceException();
         const char* what();

@@ -21,8 +21,9 @@
 
 #include <cstddef>
 #include <exception>
+#include "DataChan.hpp"
 
-class DeviceAcquisitionException : public std::exception {
+DATACHAN_CPP_API class DeviceAcquisitionException : public std::exception {
     public:
         DeviceAcquisitionException(const char* err_str);
         const char* what();

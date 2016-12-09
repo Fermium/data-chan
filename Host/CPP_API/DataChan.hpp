@@ -19,7 +19,37 @@
 #ifndef DATACHAN_H
 #define DATACHAN_H
 
-class DataChan {
+#ifdef _MSC_VER
+  #define _CRT_SECURE_NO_WARNINGS 1
+#endif
+
+#if _MSC_VER
+	//disable warnings on dll interface unexported
+	#pragma warning (disable : 4275)
+	//disable warnings on dll interface unexported
+	#pragma warning (disable : 4251)
+
+	//disable warnings on incomplete type sqlite3
+	#pragma warning (disable : 4150)
+	//disable warnings on 255 char debug symbols
+	#pragma warning (disable : 4786)
+	//disable warnings on extern before template instantiation
+	#pragma warning (disable : 4231)
+#endif
+
+
+#ifdef _WIN32
+	#ifdef DATACHAN_CPP_EXPORT
+		#define DATACHAN_CPP_API __declspec(dllexport)
+	#else
+		#define DATACHAN_CPP_API __declspec(dllimport)
+	#endif
+
+#else
+        #define DATACHAN_CPP_API
+#endif
+
+DATACHAN_CPP_API class DataChan {
 public:
     static void Init();
     static void Shutdown();

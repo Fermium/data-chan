@@ -20,6 +20,7 @@
 #define MEASURE_HPP
 
 #include "../API/API.h"
+#include "DataChan.hpp"
 #include "InvalidMeasureException.hpp"
 #include <cstddef>
 #include <stdint.h>
@@ -27,7 +28,7 @@
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
 
-class Measure {
+DATACHAN_CPP_API class Measure {
     public:
         Measure(measure_t *nativeMeasure);
         Measure(const Measure& orig);

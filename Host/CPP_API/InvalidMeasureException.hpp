@@ -21,8 +21,9 @@
 
 #include <cstddef>
 #include <exception>
+#include "DataChan.hpp"
 
-class InvalidMeasureException : public std::exception {
+DATACHAN_CPP_API class InvalidMeasureException : public std::exception {
     public:
         InvalidMeasureException();
         const char* what();

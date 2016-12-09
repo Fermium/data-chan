@@ -20,6 +20,7 @@
 #define DEVICE_HPP
 
 #include "../API/API.h"
+#include "DataChan.hpp"
 #include "DeviceAcquisitionException.hpp"
 #include "NoDeviceException.hpp"
 #include "Measure.hpp"
@@ -29,7 +30,7 @@
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
 
-class Device {
+DATACHAN_CPP_API class Device {
     Device(void);
     virtual ~Device(void);
     void Enable(void);

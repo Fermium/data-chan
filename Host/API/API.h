@@ -182,16 +182,55 @@ DATACHAN_API void datachan_shutdown(void);
  */
 DATACHAN_API datachan_acquire_result_t datachan_device_acquire(void);
 
+/**
+ * @brief Logically free an acquired device
+ *
+ * A device that has been acquired __must__ be released,
+ * freeing all its used resources, before exiting the program.
+ * 
+ * @param dev the handle to the device to be released
+ */
+DATACHAN_API void datachan_device_release(datachan_device_t* dev);
 
-DATACHAN_API void datachan_device_release(datachan_device_t*);
 
 /*
  *      Enable/Disable the device output (IN packets): device_enabler.c
  */
 
-DATACHAN_API bool datachan_device_enable(datachan_device_t*);
-DATACHAN_API bool datachan_device_is_enabled(datachan_device_t*);
-DATACHAN_API bool datachan_device_disable(datachan_device_t*);
+/**
+ * @brief enable data transmission from the device
+ * 
+ * Until this function is called the device will never send a
+ * meaningful IN packet.
+ *
+ * @param dev the handle of the device to enable
+ * @return TRUE on success, FALSE if something went wrong or the handle is not valid
+ */
+DATACHAN_API bool datachan_device_enable(datachan_device_t* dev);
+
+/**
+ * @brief check if the device transmission is enabled
+ * 
+ * Check if the data transmission from the given
+ * device has been previously enabled and has not
+ * been disabled.
+ * 
+ * @param dev the handle of the device to check
+ * @return TRUE if the device is currenty enabled, FALSE otherwise
+ */
+DATACHAN_API bool datachan_device_is_enabled(datachan_device_t* dev);
+
+/**
+ * @brief disable data transmission from the device
+ * 
+ * Restore the device in its default state.
+ * After this function is called the device will never send a
+ * meaningful IN packet.
+ *
+ * @param dev the handle of the device to disable
+ * @return TRUE on success, FALSE if something went wrong or the handle is not valid
+ */
+DATACHAN_API bool datachan_device_disable(datachan_device_t* dev);
 
 /*
  *      Enqueue generic buffer (OUT packet content): requests_queue.c
