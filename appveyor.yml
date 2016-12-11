@@ -1,7 +1,14 @@
 version: 1.0.{build}
+environment:
+  AVR_GCC_URL:
+    secure: vsQ1I0nVqCdmBQpLX5ldU0+6JCqK+miFlLxKs+diY4RbjdbQEb900+PJQpfI9zZ1bbB4o5DH+5i43eM9SZR9HOXvJuUgxZVarPkC/6qHkhZ6ZDXH1+zSy8p9K0DVRtDM
+
+
 before_build:
 - ps: git submodule update --init --recursive -q
 - ps: choco install make
+- ps: curl -fsS -o avr-gcc.zip $AVR_GCC_URL
+- ps: Expand-Archive avr-gcc.zip -DestinationPath c:\
 build_script:
 - ps: make -C Host release
 notifications:
