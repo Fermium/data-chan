@@ -1,6 +1,6 @@
 version: 1.0.{build}
 before_build:
-- ps: git submodule update --init --recursive
+- ps: git submodule update --init --recursive -q
 - ps: choco install make
 build_script:
 - ps: make release
