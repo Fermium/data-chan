@@ -3,7 +3,7 @@ before_build:
 - ps: git submodule update --init --recursive -q
 - ps: choco install make
 build_script:
-- ps: make release
+- ps: make -C Host release
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
