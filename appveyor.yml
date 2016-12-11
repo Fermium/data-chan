@@ -1,4 +1,6 @@
 version: 1.0.{build}
+before_build:
+- ps: choco install make
 build_script:
 - ps: make release
 notifications:
