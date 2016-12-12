@@ -11,7 +11,7 @@ before_build:
 - ps: choco install msys2
 - cmd: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
 - ps: Expand-Archive avr-gcc.zip -DestinationPath "C:\Program Files (x86)"
-- ps: $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+- ps: refreshenv
 - ps: $env:Path += ";C:\Program Files (x86)\avr-gcc\bin\"
 
 
