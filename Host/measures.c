@@ -16,8 +16,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../../config.h"
-#include "API.h"
+#include "../config.h"
+#include "DataChan.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -27,7 +27,7 @@
 #include <sys/time.h>
 
 // for repack_measure prototype
-#include "../../Protocol/measure.h"
+#include "../Protocol/measure.h"
 
 #if defined(__MACH__)
     #include <mach/clock.h>

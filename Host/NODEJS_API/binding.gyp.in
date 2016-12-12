@@ -1,9 +1,0 @@
-{
-  "targets": [
-    {
-	"target_name": "DataChan",
-	"sources": [ "./DataChan_wrap.cxx" ],
-	"libraries": [ "-L_PATH_/../API -lDataChan -lusb-1.0 -lpthread -lm" ]
-    }
-  ]
-}

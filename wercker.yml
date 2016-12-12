@@ -1,0 +1,67 @@
+# docker box definition
+box: ubuntu:xenial
+
+# defining the dev pipeline
+build:
+  steps:
+    - install-packages:
+      packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby
+    - script:
+        name: Initialize git submodules
+        code: git submodule update --init --recursive
+    - script:
+        name: Build Project
+        code: make debug
+        
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_API_TOKEN
+deploy :
+  steps :
+    - install-packages:
+        packages: git openssl pkg-config python wget rsync doxygen
+    - script:
+        name: Downloading PIP
+        code: |-
+          wget https://bootstrap.pypa.io/get-pip.py
+          sudo python get-pip.py
+    - script:
+        name: Testing Python
+        code: python --version
+    - script:
+        name: Testing PIP
+        code: pip --version
+    - script:
+        name: Installing MkDocs
+        code: sudo pip install mkdocs
+    - script:
+        name: Building MkDocs Documentation
+        code: |-
+          cd docs
+          mkdocs build
+          cd ../
+    - script:
+        name: Building Doxygen Documentation
+        code: |-
+          make documentation
+          cp -rf Documentation docs/site/
+    - script:
+        name: Configure git
+        code: |-
+          git config --global user.email "pleasemailus@wercker.com"
+          git config --global user.name "werckerbot"
+          git config --global push.default matching
+    - script:
+        name: Deploy to github pages
+        code: |-
+          cd docs
+          git clone $GIT_REMOTE
+          cd data-chan
+          git checkout gh-pages
+          cd ../
+          sudo chmod 0777 -R site
+          sudo rsync -avh ./site/ ./data-chan/
+          cd data-chan
+          git add .
+          git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
+          git push --quiet &> /dev/null
