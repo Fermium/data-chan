@@ -5,6 +5,7 @@ environment:
 
 
 before_build:
+- echo %path:;=&echo.%
 - ps: git submodule update --init --recursive -q
 - ps: choco install make
 - cmd: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
