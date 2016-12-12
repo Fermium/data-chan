@@ -5,11 +5,11 @@ environment:
 
 
 before_build:
-- git submodule update --init --recursive -q
-- choco install make
-- curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
-- Expand-Archive avr-gcc.zip -DestinationPath "C:\Program Files (x86)"
-- echo %path:;=&echo.%
+- ps: git submodule update --init --recursive -q
+- ps: choco install make
+- ps: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
+- ps: Expand-Archive avr-gcc.zip -DestinationPath "C:\Program Files (x86)"
+- ps: echo %path:;=&echo.%
 
 build_script:
 - ps: make -C Device Release
