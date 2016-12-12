@@ -9,8 +9,8 @@ before_build:
 - ps: choco install make
 - cmd: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
 - ps: Expand-Archive avr-gcc.zip -DestinationPath "C:\Program Files (x86)"
-- set PATH="%PATH%;C:\Program Files (x86)\avr-gcc\bin"
-- cmd: echo %path:;=&echo.%
+- set PATH="%PATH%;C:\Program Files (x86)\avr-gcc\bin\"
+- echo %path:;=&echo.%
 
 build_script:
 - ps: make -C Device Release
