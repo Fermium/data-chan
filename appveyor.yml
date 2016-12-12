@@ -7,7 +7,7 @@ environment:
 before_build:
 - ps: git submodule update --init --recursive -q
 - ps: choco install make
-- cmd: curl -O avr-gcc.zip %AVR_GCC_URL%
+- cdm: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
 - ps: Expand-Archive avr-gcc.zip -DestinationPath c:\
 build_script:
 - ps: make -C Host release
