@@ -1,23 +1,22 @@
 version: 1.0.{build}
-environment:
-  AVR_GCC_URL:
-    secure: vsQ1I0nVqCdmBQpLX5ldU0+6JCqK+miFlLxKs+diY4RbjdbQEb900+PJQpfI9zZ1bbB4o5DH+5i43eM9SZR9HOXvJuUgxZVarPkC/6qHkhZ6ZDXH1+zSy8p9K0DVRtDM
-
 
 before_build:
 - ps: git submodule update --init --recursive -q
 - ps: choco install make
 - ps: choco install mingw
 - ps: choco install msys2
-- cmd: curl -fsS -o avr-gcc.zip %AVR_GCC_URL%
-- ps: Expand-Archive avr-gcc.zip -DestinationPath "C:\Program Files (x86)"
+- ps: choco install curl
+- ps: choco install 7zip.install
 - ps: refreshenv
 - ps: $env:Path += ";C:\Program Files (x86)\avr-gcc\bin\"
 
 
 build_script:
-- ps: make -C Device Release
-- ps: make -C Host Release
+- ps: curl -O https://vorboss.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z
+- ps: mkdir libusb-1.0.20
+- ps: Get-ChildItem libusb-1.0.20.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.20"}
+- ps: ls libusb-1.0.20
+- ps: make -C Host release -j2
 
 notifications:
 - provider: Slack
