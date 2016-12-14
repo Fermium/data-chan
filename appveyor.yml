@@ -2,12 +2,13 @@ version: 1.0.{build}
 
 before_build:
 - ps: git submodule update --init --recursive -q
-- ps: choco install make
-- ps: choco install mingw
-- ps: choco install msys2
-- ps: choco install 7zip.install
+- cinst make
+- cinst mingw
+- cinst msys2
+- cinst 7zip.install
 - ps: refreshenv
-- ps: $env:Path += ";C:\Program Files (x86)\avr-gcc\bin\"
+- ps: $env:Path += ";C:\tools\mingw\bin\;C:\tools\mingw64\bin\"
+- ps: refreshenv
 
 
 build_script:
