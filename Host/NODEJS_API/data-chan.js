@@ -22,7 +22,7 @@ var datachan_acquire_result_t = struct({
 
 
 
-module.exports.data_chan = ffi.Library(__dirname+'libDataChan',{
+module.exports.lib =  ffi.Library(__dirname+'/libDataChan',{
   'datachan_is_initialized' : [ref.types.bool,[]],
   'datachan_init' : [ref.types.void,[]],
   'datachan_shutdown' : [ref.types.void,[]],
@@ -39,5 +39,11 @@ module.exports.data_chan = ffi.Library(__dirname+'libDataChan',{
   'datachan_device_set_config' : [ref.types.void,[datachan_device_t_ptr,ref.types.uint32,ref.types.uint8,void_ptr,ref.types.uint16]]
 
 });
-
-//console.log(data_chan.datachan_is_initialized());
+module.exports.search_enum = {
+  'uninitialized' : 0x00,
+  'not_found_or_inaccessible' : 0x01,
+  'cannot_claim' : 0x02,
+  'malloc_fail' : 0x03,
+  'unknown' : 0x04,
+  'success' : 0xFF
+}
