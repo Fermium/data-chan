@@ -5,14 +5,13 @@ before_build:
 - ps: choco install make
 - ps: choco install mingw
 - ps: choco install msys2
-- ps: choco install curl
 - ps: choco install 7zip.install
 - ps: refreshenv
 - ps: $env:Path += ";C:\Program Files (x86)\avr-gcc\bin\"
 
 
 build_script:
-- ps: curl https://vorboss.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z --output libusb-1.0.20.7z
+- ps: Invoke-WebRequest https://vorboss.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z -OutFile libusb-1.0.20.7z
 - ps: mkdir libusb-1.0.20
 - ps: Get-ChildItem libusb-1.0.20.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.20"}
 - ps: ls libusb-1.0.20
