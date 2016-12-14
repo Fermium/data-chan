@@ -39,9 +39,11 @@ clean:
 	-rm -rf ../Documentation/C_API
 	$(MAKE) -C examples clean
 
-install: all
+install: all documentation
 	-mkdir $(INSTALL_DIR)
 	cp ../DataChan.mk $(INSTALL_DIR)/
+	-mkdir $(INSTALL_DIR)/doc
+	cp -rf ../Documentation/C_API/html/ $(INSTALL_DIR)/doc/
 	-mkdir $(INSTALL_DIR)/lib
 	cp $(CLIB_TARGET) $(INSTALL_DIR)/lib/
 	-mkdir $(INSTALL_DIR)/include
@@ -49,6 +51,7 @@ install: all
 	-mkdir $(INSTALL_DIR)/include/Protocol
 	cp ../Protocol/data_management.h ../Protocol/measure.h $(INSTALL_DIR)/include/Protocol/
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(INSTALL_DIR)/lib/
-	ldconfig $(INSTALL_DIR)/lib/
+	-ldconfig $(INSTALL_DIR)/lib/
+	-ln -s $(INSTALL_DIR)/lib/$(CLIB_TARGET) /usr/lib/$(CLIB_TARGET)
 
 include $(LUFA_PATH)/Build/lufa_doxygen.mk
