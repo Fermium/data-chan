@@ -1,8 +1,8 @@
 CC	= gcc
 CXX	= g++
 
-CFLAGS		= -Wall -fPIC -std=gnu99
-CXXFLAGS	= -Wall -fPIC
+CFLAGS		= -fPIC -std=gnu99
+CXXFLAGS	= -fPIC
 
 SHARED_LIB_EXT	= .so
 SHARED_LIB_FLAG	= -shared
