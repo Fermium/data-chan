@@ -6,8 +6,7 @@ before_build:
 - cinst mingw
 - cinst msys2
 - cinst 7zip.install
-- ps: refreshenv
-- ps: $env:Path += ";C:\tools\mingw\bin\;C:\tools\mingw64\bin\"
+- ps: $env:Path += ";C:\tools\mingw64\bin\"
 - ps: refreshenv
 
 
@@ -15,7 +14,10 @@ build_script:
 - ps: Invoke-WebRequest https://vorboss.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z -OutFile libusb-1.0.20.7z
 - ps: mkdir libusb-1.0.20
 - ps: Get-ChildItem libusb-1.0.20.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.20"}
-- ps: ls libusb-1.0.20
+- ps: ls libusb-1.0.20/MinGW64/static/libusb-1.0.a C:\tools\mingw64\x86_64-w64-mingw32\lib\
+- ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
+- ps: ls libusb-1.0.20/include/* C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
+- ps: Copy-Item libusb-1.0.20/
 - ps: make -C Host release -j2
 
 notifications:
