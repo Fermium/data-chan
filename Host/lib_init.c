@@ -16,10 +16,10 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../../config.h"
-#include "API.h"
-#include "../../Protocol/measure_functions.h"
-#include "../../Protocol/data_management_functions.h"
+#include "../config.h"
+#include "DataChan.h"
+#include "../Protocol/measure_functions.h"
+#include "../Protocol/data_management_functions.h"
 
 #include <stdlib.h>
 #include <stdio.h>

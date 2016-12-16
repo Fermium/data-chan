@@ -13,6 +13,7 @@ all:
 %:
 	@echo working on data-chan....
 	@echo
+	-mkdir Documentation
 	$(MAKE) -C Device $@
 	$(MAKE) -C Host $@
 	@echo

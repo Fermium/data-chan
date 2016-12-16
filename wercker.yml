@@ -5,19 +5,10 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-      packages: byacc flex libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client unzip tar gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby
-    - script:
-        name: Installing Swig
-        code: sudo bash scripts/install-swig.sh
-    - script:
-        name: Installing node.js
-        code: sudo bash scripts/install-node.sh
+      packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby
     - script:
         name: Initialize git submodules
         code: git submodule update --init --recursive
-    - script:
-        name: Printing software version
-        code: bash scripts/print-versions.sh
     - script:
         name: Build Project
         code: make debug
@@ -28,7 +19,7 @@ build:
 deploy :
   steps :
     - install-packages:
-        packages: git openssl pkg-config libssl-dev python wget unzip openssh-client rsync doxygen
+        packages: git openssl pkg-config python wget rsync doxygen
     - script:
         name: Downloading PIP
         code: |-
@@ -53,7 +44,7 @@ deploy :
         name: Building Doxygen Documentation
         code: |-
           make documentation
-          cp -rf Documentation docs/site/Doxygen
+          cp -rf Documentation docs/site/
     - script:
         name: Configure git
         code: |-
