@@ -16,7 +16,7 @@ build_script:
 - ps: Get-ChildItem libusb-1.0.20.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.20"}
 - ps: Copy-Item libusb-1.0.20/MinGW64/static/libusb-1.0.a C:\tools\mingw64\x86_64-w64-mingw32\lib\
 - ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
-- ps: Copy-Item libusb-1.0.20/include/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
+- ps: Copy-Item libusb-1.0.20/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
 - ps: ls C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\ -al
 - ps: make -C Host release -j2
 
