@@ -1,5 +1,23 @@
 CC	= gcc
 CXX	= g++
+ifeq ($(OS),Windows_NT)
+        CC = gcc
+        CXX = g++
+else
+        UNAME := $(shell uname)
+        ifeq ($(UNAME), Linux)
+                CC = clang
+                CXX = clang++
+        endif
+        ifeq ($(UNAME), FreeBSD)
+                CC = clang
+                CXX = clang++
+        endif
+        ifeq ($(UNAME), Darwin)
+                CC = clang
+                CXX = clang++
+        endif
+endif
 
 CFLAGS		= -fPIC -std=gnu99
 CXXFLAGS	= -fPIC

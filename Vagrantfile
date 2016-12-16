@@ -54,12 +54,7 @@ Vagrant.configure(2) do |config|
    config.vm.provision "shell", privileged: false, inline: <<-SHELL
      printf "\n\nInstalling software\n"
      sudo apt-get update && sudo apt-get upgrade -y
-     sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client tar gcc g++ gcc-avr avr-libc avrdude binutils-avr make autogen autoconf curl build-essential clang
-     
-     
-     printf "\n\nInstalling Swig\n"
-     sudo bash /vagrant/scripts/install-swig.sh
-     
+     sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client tar gcc g++ gcc-avr avr-libc avrdude binutils-avr make autogen autoconf curl build-essential clang     
      
      printf "\n\nInstalling NodeJS\n"
      sudo bash /vagrant/scripts/install-node.sh
