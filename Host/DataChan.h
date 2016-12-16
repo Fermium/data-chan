@@ -63,8 +63,8 @@
 #include <stdbool.h>
 #include <libusb-1.0/libusb.h>
 #include <pthread.h>
-#include "../../Protocol/measure.h"
-#include "../../Protocol/data_management.h"
+#include "Protocol/measure.h"
+#include "Protocol/data_management.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -87,6 +87,7 @@ typedef struct {
     pthread_mutex_t exitlock;
     pthread_mutex_t enabled_mutex;
     pthread_mutex_t requests_queue_mutex;
+    pthread_mutex_t async_used_id_mutex;
     
     // USB device handler
     libusb_device_handle* handler;
@@ -103,6 +104,9 @@ typedef struct {
     
     // The requests queue
     void *requests_queue;
+
+    // A counter for the used ID
+    uint32_t async_used_id;
 } datachan_device_t;
 
 /*
@@ -198,7 +202,7 @@ DATACHAN_API void datachan_device_release(datachan_device_t* dev);
  */
 
 /**
- * @brief enable data transmission from the device
+ * @brief Enable data transmission from the device
  * 
  * Until this function is called the device will never send a
  * meaningful IN packet.
@@ -209,7 +213,7 @@ DATACHAN_API void datachan_device_release(datachan_device_t* dev);
 DATACHAN_API bool datachan_device_enable(datachan_device_t* dev);
 
 /**
- * @brief check if the device transmission is enabled
+ * @brief Check if the device transmission is enabled
  * 
  * Check if the data transmission from the given
  * device has been previously enabled and has not
@@ -221,7 +225,7 @@ DATACHAN_API bool datachan_device_enable(datachan_device_t* dev);
 DATACHAN_API bool datachan_device_is_enabled(datachan_device_t* dev);
 
 /**
- * @brief disable data transmission from the device
+ * @brief Disable data transmission from the device
  * 
  * Restore the device in its default state.
  * After this function is called the device will never send a
@@ -232,24 +236,41 @@ DATACHAN_API bool datachan_device_is_enabled(datachan_device_t* dev);
  */
 DATACHAN_API bool datachan_device_disable(datachan_device_t* dev);
 
+
 /*
  *      Enqueue generic buffer (OUT packet content): requests_queue.c
  */
 
-DATACHAN_API void datachan_enqueue_request(datachan_device_t*, uint8_t*);
-DATACHAN_API void datachan_dequeue_request(datachan_device_t*, uint8_t*);
+DLL_LOCAL void datachan_enqueue_request(datachan_device_t*, uint8_t*);
+DLL_LOCAL void datachan_dequeue_request(datachan_device_t*, uint8_t*);
+
 
 /*
  *      Simple genaration of OUT packets: commands.c
  */
-DATACHAN_API void datachan_send_sync_command(datachan_device_t*, uint8_t, uint8_t*, uint8_t);
+
+/**
+ * @brief Send a synchronous request to the device
+ * 
+ * Send a synchronous request to the device at the right time.
+ * This function generate the correct structure for the specified
+ * command and place the command in a FIFO queue.
+ * 
+ * @param dev the handle of the device
+ * @param cmdType the byte that identify the command
+ * @param cmdBuf the expansion buffer for the command
+ * @param cmdBufLength the length of the expansion buffer
+ */
+DATACHAN_API void datachan_send_sync_command(datachan_device_t* dev, uint8_t cmdType, uint8_t* cmdBuf, uint8_t cmdBufLength);
+
+DATACHAN_API void datachan_send_async_command(datachan_device_t* dev, uint8_t cmdType, uint8_t* cmdBuf, uint8_t cmdBufLength);
 
 /*
  *      Measures functions: measures.c
  */
 
 DLL_LOCAL void datachan_device_enqueue_measure(datachan_device_t*, const measure_t*);
-DATACHAN_API measure_t* datachan_device_dequeue_measure(datachan_device_t*);
+DATACHAN_API measure_t* datachan_device_dequeue_measure(datachan_device_t* dev);
 DATACHAN_API int32_t datachan_device_enqueued_measures(datachan_device_t*);
 
 DATACHAN_API void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
