@@ -1,0 +1,28 @@
+version: 1.0.{build}
+
+before_build:
+- ps: git submodule update --init --recursive -q
+- cinst make
+- cinst mingw
+- cinst msys2
+- cinst 7zip.install
+- ps: $env:Path += ";C:\tools\mingw64\bin\"
+- ps: refreshenv
+
+
+build_script:
+- ps: Invoke-WebRequest https://vorboss.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.20/libusb-1.0.20.7z -OutFile libusb-1.0.20.7z
+- ps: mkdir libusb-1.0.20
+- ps: Get-ChildItem libusb-1.0.20.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.20"}
+- ps: Copy-Item libusb-1.0.20/MinGW64/static/libusb-1.0.a C:\tools\mingw64\x86_64-w64-mingw32\lib\
+- ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
+- ps: Copy-Item libusb-1.0.20/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
+- ps: make -C Host release
+
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: project-hall
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false

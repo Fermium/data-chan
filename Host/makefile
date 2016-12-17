@@ -13,9 +13,9 @@ default: $(CLIB_TARGET)
 	$(MAKE) -C ./examples $@
 
 all: default
-debug: CFLAGS += -DDEBUG -g -O0
+debug: CFLAGS += -DDEBUG -g -O0 -Wall
 debug: all
-release: CFLAGS += -O3
+release: CFLAGS += -O3 -w
 release: all
 
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
