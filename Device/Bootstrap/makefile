@@ -23,8 +23,8 @@ all:
 debug: all
 release: all
 
-flash: all
-	avrdude -C./avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:$(TARGET).hex:i
+install: all
+	-avrdude -C./avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:$(TARGET).hex:i
 
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
 documentation: doxygen

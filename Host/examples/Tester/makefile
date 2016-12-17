@@ -1,9 +1,9 @@
 TEST_TARGET = Tester
-LIBS = -L../../../API -lDataChan
+LIBS = -L../../ -lDataChan
 CXX = gcc
-CFLAGS = -std=gnu99 -Wall
+CFLAGS += -std=gnu99 -I../../../
 
-.PHONY: default all clean debug release documentation
+.PHONY: default all clean debug release documentation install
 
 default: $(TEST_TARGET)
 all: default
@@ -31,5 +31,6 @@ clean:
 
 flash: all
 
+install: all
 documentation:
 # do nothing. Kept to not break the buildsystem
