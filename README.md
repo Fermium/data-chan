@@ -2,7 +2,8 @@
 
 | Linux | Linux and MacOS | Windows |
 | --- | --- | ---|
-| [![Build Status](https://travis-ci.org/NeroReflex/data-chan.svg?branch=master)](https://travis-ci.org/NeroReflex/data-chan)  | [![wercker status](https://app.wercker.com/status/bdfa5177fa0f6ce71d32e1ba1f257127/s/master "wercker status")](https://app.wercker.com/project/byKey/bdfa5177fa0f6ce71d32e1ba1f257127) | [![Build status](https://ci.appveyor.com/api/projects/status/gwy7av54b9j17oa3?svg=true)](https://ci.appveyor.com/project/NeroReflex/data-chan)
+| Host and Device | Host only | Host only |
+ | [![wercker status](https://app.wercker.com/status/bdfa5177fa0f6ce71d32e1ba1f257127/s/master "wercker status")](https://app.wercker.com/project/byKey/bdfa5177fa0f6ce71d32e1ba1f257127) | [![Build Status](https://travis-ci.org/NeroReflex/data-chan.svg?branch=master)](https://travis-ci.org/NeroReflex/data-chan)  | [![Build status](https://ci.appveyor.com/api/projects/status/gwy7av54b9j17oa3?svg=true)](https://ci.appveyor.com/project/NeroReflex/data-chan)
 
 Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.
 
