@@ -99,3 +99,13 @@ At this point you are ready [build](#building) data-chan:
 cd data-chan #symbolic link to /vagrant
 make release -j2
 ```
+
+## Embeddable library
+
+You can build a library that can be embedded into any other (AVR) project:
+
+
+```sh
+make lib -j2
+```
+
