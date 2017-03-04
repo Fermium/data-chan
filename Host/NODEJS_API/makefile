@@ -8,8 +8,8 @@ clean:
 	-rm -f *.tgz
 
 default:
-	cp ../API/libDataChan.* .
-	npm install
+	cp ../libDataChan.* .
+	npm install 
 	npm pack
 
 all: default
