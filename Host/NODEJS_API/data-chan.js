@@ -35,7 +35,7 @@ module.exports.lib =  ffi.Library(__dirname+'/libDataChan',{
 //  'datachan_dequeue_request' : [ref.types.void,[datachan_device_t_ptr,uint8_t_ptr]],
   'datachan_send_sync_command' : [ref.types.void,[datachan_device_t_ptr,ref.types.uint8,uint8_t_ptr,ref.types.uint8]],
   'datachan_device_dequeue_measure' : [measure_t_ptr,[datachan_device_t_ptr]],
-  'datachan_device_enqueued_measures' : [ref.types.int32,[datachan_device_t_ptr]],
+  //'datachan_device_enqueued_measures' : [ref.types.int32,[datachan_device_t_ptr]],
   'datachan_device_set_config' : [ref.types.void,[datachan_device_t_ptr,ref.types.uint32,ref.types.uint8,void_ptr,ref.types.uint16]]
 
 });
