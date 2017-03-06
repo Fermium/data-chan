@@ -15,10 +15,14 @@ build:
     - script:
         name: Build Project
         code: make debug
-        
+    - script:
+        name: Publish dinamic library on AWS-S3
+        code: (cd Host/NODEJS_API/ && npm run publish-libraries)  
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_API_TOKEN
+        
+        
 deploy :
   steps :
     - install-packages:
