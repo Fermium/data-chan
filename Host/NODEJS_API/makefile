@@ -10,10 +10,16 @@ clean:
 default:
 	cp ../libDataChan.* .
 	npm install 
+	
+release:
+	cp ../libDataChan.* .
+	npm install
 	npm pack
+	
+
+	
 
 all: default
 debug: all
-release: all
 flash: all
 documentation:
