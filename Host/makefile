@@ -18,6 +18,7 @@ all: default
 debug: CFLAGS += -DDEBUG -g -O0 -Wall
 debug: all
 release: CFLAGS += -O3 -w
+release: all
 release: 
 	$(MAKE) -C ./examples $@
 	$(MAKE) -C ./NODEJS_API $@
