@@ -11,9 +11,7 @@ default:
 	cp ../libDataChan.* .
 	npm install 
 	
-release:
-	cp ../libDataChan.* .
-	npm install
+release: clean default
 	npm pack
 	
 

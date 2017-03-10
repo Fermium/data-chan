@@ -10,9 +10,6 @@ publishLibrariesOnAmazonS3("./libDataChan.*");
 
 
 
-
-
-
 function publishLibrariesOnAmazonS3(file_pattern) {
 
     var client = s3.createClient({
