@@ -19,7 +19,7 @@ It's thought to be:
 * Fast
 * Configurable
 
-##Features:
+## Features:
 
 * Broad compatibility with MacOS/Windows/Linux
 * Bindings for most of the major programming languages
