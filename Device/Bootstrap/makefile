@@ -18,7 +18,7 @@ CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/
 LD_FLAGS     =
 
 # Default target
-all:
+lib: CC_FLAGS += -DARDUINOLIB
 
 debug: all
 release: all
