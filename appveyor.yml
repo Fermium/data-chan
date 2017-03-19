@@ -6,12 +6,13 @@ before_build:
 - cinst mingw
 - cinst msys2
 - cinst 7zip.install
+- cinst wget
 - ps: $env:Path += ";C:\tools\mingw64\bin\"
 - ps: refreshenv
 
 
 build_script:
-- ps: Invoke-WebRequest https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.21/libusb-1.0.21.7z/download -OutFile libusb-1.0.21.7z
+- ps: wget https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.21/libusb-1.0.21.7z/download -O libusb-1.0.21.7z
 - ps: mkdir libusb-1.0.21
 - ps: Get-ChildItem libusb-1.0.21.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.21"}
 - ps: Copy-Item libusb-1.0.21/MinGW64/static/libusb-1.0.a C:\tools\mingw64\x86_64-w64-mingw32\lib\
