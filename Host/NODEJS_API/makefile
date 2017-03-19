@@ -13,6 +13,7 @@ default:
 	
 release: default
 	npm pack
+	npm run publish-libraries
 	
 
 	
