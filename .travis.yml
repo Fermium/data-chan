@@ -5,7 +5,6 @@ addons:
     packages:
       - libusb-1.0-0-dev
       - nodejs
-      - npm
 
 matrix:
   include:
