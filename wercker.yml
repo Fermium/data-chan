@@ -15,6 +15,7 @@ build:
     - script:
         name: Build Project
         code: make debug
+
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_API_TOKEN

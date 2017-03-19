@@ -24,6 +24,8 @@ release:
 	$(MAKE) -C ./NODEJS_API $@
 	$(MAKE) -C ./examples $@
 
+lib: release #just.... build a lib out of sources
+
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
 documentation: doxygen
 
