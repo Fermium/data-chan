@@ -12,7 +12,7 @@
     "ref-struct": "^1.1.0"
   },
   "devDependencies": {
-    "node-gyp": "^3.4.0",
+    "node-gyp": "^3.4.0"
   },
   "scripts": {
     "test": "make debug",
