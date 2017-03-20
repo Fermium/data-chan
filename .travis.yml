@@ -17,12 +17,12 @@ before_install:
 - git submodule update --init --recursive
 
 install:
-- pip install GitPython requests tinys3
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then pip install GitPython requests tinys3; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-node.sh ; fi
   
 script:
 - make -C Host release -j2
-- python scripts/trigger-wercker.py
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then python scripts/trigger-wercker.py; fi
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9
