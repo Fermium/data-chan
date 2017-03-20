@@ -16,10 +16,10 @@ build:
         name: Build Project
         code: make debug
     - script: 
-        name: Install python dependencies
+        name: Get libraries from S3
         code: |-
           pip install -r scripts/requirements.txt
-          python scripts/trigger-wercker.py
+          python scripts/post-build-hook.py
 
   after-steps:
     - wantedly/pretty-slack-notify:
