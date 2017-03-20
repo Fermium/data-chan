@@ -21,9 +21,7 @@ install:
   
 script:
 - make -C Host release -j2
-
-publish:
-- (cd Host/NODEJS_API/ && npm run publish-libraries)
+- python scripts/trigger-wercker.py
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9

@@ -20,7 +20,7 @@ build_script:
 - ps: Copy-Item libusb-1.0.21/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
 - ps: make -C Host release
 - ps: cd Host\NODEJS_API
-- ps: npm run publish-libraries
+- ps: python scripts/trigger-wercker.py 
 
 notifications:
 - provider: Slack
