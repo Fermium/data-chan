@@ -37,7 +37,8 @@ fileToUploadName = fileToUpload.replace("Host/", "")
 print("The file \"" + fileToUploadName +  "\" will be uploaded to s3")
 
 if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "")  == "":
-    raise Exception('Missing AWS credentials. There is no point in attemping upload or trigger a build')
+    print("Missing AWS credentials. There is no point in attemping upload or trigger a build")
+    sys.exit(1)
 
 # Upload the datachan library to Amazon S3
 s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
@@ -67,5 +68,4 @@ if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
 else:
     print("We're running on Wercker. Skip triggering a new Wercker build")
 
-    
     
