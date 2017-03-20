@@ -23,3 +23,10 @@ all:
 	@echo
 	@echo LUFA \"make $@\" operation complete.
 
+lib:
+	@echo Executing \"make $@\" on all LUFA library elements.
+	@echo
+	$(MAKE) -C Bootstrap lib
+	$(MAKE) -C Arduino
+	@echo
+	@echo LUFA \"make $@\" operation complete.

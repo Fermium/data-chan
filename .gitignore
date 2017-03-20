@@ -111,3 +111,6 @@ Documentation/
 
 # Compiled example
 Host/API/examples/Tester/Tester
+
+#compiled directory for arduino
+Device/Arduino/build-leonardo/
