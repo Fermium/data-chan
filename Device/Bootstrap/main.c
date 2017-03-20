@@ -41,6 +41,9 @@
 
 static uint8_t ReceivedData[VENDOR_IO_EPSIZE];
 
+void main_setup(void);
+void main_loop(void);
+
 #ifndef ARDUINOLIB
 int main()
 {
