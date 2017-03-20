@@ -8,7 +8,24 @@ import json
 # Get the current repository commit hash
 repo = git.Repo(search_parent_directories=True)
 sha = repo.head.object.hexsha
-branch =  repo.head.ref
+
+try:
+    #try if head is not detached
+    branch =  repo.active_branch.name 
+except TypeError:
+    # apparently we are on a detached head, probably beacause we're building from a CI
+    # in this case, pick the first non-empty branch name from the ENV variables the CI provides
+    ciRepoVar = []
+    ciRepoVar.append(os.environ.get('TRAVIS_BRANCH', ""))
+    ciRepoVar.append(os.environ.get('APPVEYOR_REPO_BRANCH', ""))
+    ciRepoVar.append(os.environ.get('WERCKER_GIT_BRANCH', ""))
+    def get_nonempty(list_of_strings):
+        for s in list_of_strings:
+            if s:
+                return s
+    branch = get_nonempty(ciRepoVar)
+        
+    
 print("SHA of this commit is " + sha + " on branch " + branch)
 
 # Get the file to upload
