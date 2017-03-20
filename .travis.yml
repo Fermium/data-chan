@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
       - libusb-1.0-0-dev
+      - nodejs
 
 matrix:
   include:
@@ -20,6 +21,9 @@ install:
   
 script:
 - make -C Host release -j2
+
+publish:
+- (cd Host/NODEJS_API/ && npm run publish-libraries)
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9

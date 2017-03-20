@@ -11,12 +11,18 @@ LUFA_PATH    = ../Device/lufa/LUFA
 
 default: $(CLIB_TARGET)
 	$(MAKE) -C ./examples $@
+	$(MAKE) -C ./NODEJS_API $@
+	$(MAKE) -C ./examples $@
 
 all: default
 debug: CFLAGS += -DDEBUG -g -O0 -Wall
 debug: all
 release: CFLAGS += -O3 -w
 release: all
+release: 
+	$(MAKE) -C ./examples $@
+	$(MAKE) -C ./NODEJS_API $@
+	$(MAKE) -C ./examples $@
 
 lib: release #just.... build a lib out of sources
 
@@ -40,6 +46,7 @@ clean:
 	-rm -f *.a
 	-rm -rf ../Documentation/C_API
 	$(MAKE) -C examples clean
+	$(MAKE) -C NODEJS_API $@
 
 install: all documentation
 	-mkdir $(INSTALL_DIR)

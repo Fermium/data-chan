@@ -5,17 +5,22 @@ box: ubuntu:xenial
 build:
   steps:
     - install-packages:
-      packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby
+      packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby libcurl4-openssl-dev
     - script:
         name: Initialize git submodules
         code: git submodule update --init --recursive
     - script:
+        name: Install nodejs
+        code: bash scripts/install-node.sh
+    - script:
         name: Build Project
-        code: make lib -j2
-        
+        code: make debug
+
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_API_TOKEN
+        
+        
 deploy :
   steps :
     - install-packages:
