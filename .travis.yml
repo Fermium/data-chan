@@ -19,7 +19,7 @@ before_install:
 
 install:
 - pip install GitPython requests tinys3
-- bash scripts/install-node.sh
+- sudo bash scripts/install-node.sh
 
   
 script:
