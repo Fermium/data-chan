@@ -8,7 +8,7 @@ import json
 # Get the current repository commit hash
 repo = git.Repo(search_parent_directories=True)
 sha = repo.head.object.hexsha
-branch =  repo.active_branch.name
+branch =  repo.head.ref
 print("SHA of this commit is " + sha + " on branch " + branch)
 
 # Get the file to upload
