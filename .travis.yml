@@ -17,7 +17,7 @@ before_install:
 - git submodule update --init --recursive
 
 install:
-- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then pip install -r scripts/requirements.txt ; fi
+- pip install -r scripts/requirements.txt
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-node.sh ; fi
   
 script:
