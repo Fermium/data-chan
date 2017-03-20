@@ -17,9 +17,9 @@ build:
         code: make debug
     - script: 
         name: Install python dependencies
-        code: |
-        pip install -r scripts/requirements.txt
-        python scripts/trigger-wercker.py
+        code: |-
+          pip install -r scripts/requirements.txt
+          python scripts/trigger-wercker.py
 
   after-steps:
     - wantedly/pretty-slack-notify:
