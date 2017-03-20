@@ -19,13 +19,13 @@ build_script:
 - ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
 - ps: Copy-Item libusb-1.0.21/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
 - ps: make -C Host release
-- ps: cd Host\NODEJS_API
-- ps: npm run publish-libraries
+- ps: pip install -r scripts/requirements.txt
+- ps: python scripts/post-build-hook.py 
 
 notifications:
 - provider: Slack
   incoming_webhook: https://hooks.slack.com/services/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
-  channel: project-hall
+  channel: project-hall-flux
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: false
