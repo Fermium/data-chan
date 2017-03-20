@@ -7,7 +7,7 @@ import json
 import sys
 
 #Check if we are executing in a pull request, if so exit with a non error code
-if os.environ.get('APPVEYOR_PULL_REQUEST_NUMBE', "false")  != "false":
+if os.environ.get('APPVEYOR_PULL_REQUEST_NUMBER', "false")  != "false":
     print("This is an AppVeyor pull request. Nothing to do.")
     sys.exit(0)
 if os.environ.get('TRAVIS_PULL_REQUEST', "false")  != "false":
