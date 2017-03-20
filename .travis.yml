@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
       - libusb-1.0-0-dev
+      - libstdc++6
       - nodejs
 
 matrix:
