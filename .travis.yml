@@ -18,6 +18,8 @@ before_install:
 - git submodule update --init --recursive
 
 install:
+- pip install GitPython requests tinys3
+
   
 script:
 - make -C Host release -j2

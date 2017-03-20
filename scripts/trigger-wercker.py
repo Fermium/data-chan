@@ -28,12 +28,18 @@ s3conn.upload(sha + "/" + fileToUploadName,f, bucket )
 #if we are not on wercker
 if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "": 
     print("We're not on Wercker, Triggering a new Wercker build")
+    
+    #endpoint to run (or re-run) a pipeline
     url = 'https://app.wercker.com/api/v3/runs'
+    #authorization headers
     headers = {'Authorization':'Bearer ' + os.environ['WERCKER_TOKEN'] }
+    
+    #get the pipeline id from environmental variables, fallback on default if not found
     a = {"pipelineId": os.environ.get('WERCKER_DESTINATION_PIPELINE', "5855662ab7a7370100caf8fd"), 
         "branch": branch, 
         "commitHash": sha }
     r = requests.get(url, headers=headers, verify=True, params=a)
+    
 else:
     print("We're running on Wercker. Skip triggering a new Wercker build")
 
