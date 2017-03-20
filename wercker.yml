@@ -15,7 +15,8 @@ build:
     - script:
         name: Build Project
         code: make debug
-    - script: Install python dependencies
+    - script: 
+        name: Install python dependencies
         code: pip install GitPython requests tinys3
 
   after-steps:
