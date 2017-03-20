@@ -18,8 +18,7 @@ before_install:
 
 install:
 - pip install GitPython requests tinys3
-- sudo bash scripts/install-node.sh
-
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-node.sh ; fi
   
 script:
 - make -C Host release -j2
