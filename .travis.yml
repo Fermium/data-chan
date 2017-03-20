@@ -5,7 +5,6 @@ addons:
     packages:
       - libusb-1.0-0-dev
       - libstdc++6
-      - nodejs
 
 matrix:
   include:
@@ -20,6 +19,7 @@ before_install:
 
 install:
 - pip install GitPython requests tinys3
+- bash scripts/install-node.sh
 
   
 script:
