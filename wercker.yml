@@ -15,11 +15,6 @@ build:
     - script:
         name: Build Project
         code: make debug
-    - script: 
-        name: Get libraries from S3
-        code: |-
-          pip install -r scripts/requirements.txt
-          python scripts/post-build-hook.py
 
   after-steps:
     - wantedly/pretty-slack-notify:
