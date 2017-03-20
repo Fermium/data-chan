@@ -4,6 +4,8 @@ import glob
 import os
 import requests
 import json
+import sys
+
 
 # Get the current repository commit hash
 repo = git.Repo(search_parent_directories=True)
@@ -34,6 +36,9 @@ fileToUploadName = fileToUpload.replace("Host/", "")
 
 print("The file \"" + fileToUploadName +  "\" will be uploaded to s3")
 
+if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "")  == "":
+    print("Missing AWS credentials. There is no point in attemping upload or trigger a build")
+    sys.exit(1)
 
 # Upload the datachan library to Amazon S3
 s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
@@ -44,21 +49,23 @@ s3conn.upload(sha + "/" + fileToUploadName,f, bucket )
 
 #if we are not on wercker
 if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "": 
-    print("We're not on Wercker, Triggering a new Wercker build")
-    
-    #endpoint to run (or re-run) a pipeline
-    url = 'https://app.wercker.com/api/v3/runs'
-    #authorization headers
-    headers = {'Authorization':'Bearer ' + os.environ['WERCKER_TOKEN'] }
-    
-    #get the pipeline id from environmental variables, fallback on default if not found
-    a = {"pipelineId": os.environ.get('WERCKER_DESTINATION_PIPELINE', "5855662ab7a7370100caf8fd"), 
-        "branch": branch, 
-        "commitHash": sha }
-    r = requests.get(url, headers=headers, verify=True, params=a)
-    
+    #if the wercker token is not empty
+    if os.environ.get('WERCKER_TOKEN', "") != "":
+        print("We're not on Wercker, Triggering a new Wercker build")
+        
+        #endpoint to run (or re-run) a pipeline
+        url = 'https://app.wercker.com/api/v3/runs'
+        #authorization headers
+        headers = { 'Authorization':'Bearer ' + os.environ['WERCKER_TOKEN'] }
+        
+        #get the pipeline id from environmental variables, fallback on default if not found
+        a = {"pipelineId": os.environ.get('WERCKER_DESTINATION_PIPELINE', "5855662ab7a7370100caf8fd"), 
+            "branch": branch, 
+            "commitHash": sha }
+        r = requests.get(url, headers=headers, verify=True, params=a)
+    else:
+        print("We're not on Wercker but no WERCKER_TOKEN was found, so we can't trigger a new pipeline")
 else:
     print("We're running on Wercker. Skip triggering a new Wercker build")
 
-    
     
