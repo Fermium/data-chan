@@ -83,7 +83,7 @@ else:
 
 # if we are not on wercker
 if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
-    # if the wercker token is not empty
+    # if the Wercker token is not empty
     if os.environ.get('WERCKER_TOKEN', "") != "":
         print("we're not on Wercker, triggering a new Wercker build")
 
@@ -99,7 +99,7 @@ if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
         r = requests.post(url, headers=headers, json=payload)
 
         if r.status_code == 200:
-            print("wercker build triggered")
+            print("Wercker build triggered")
         else:
             print("build not triggered, response code " + str(r.status_code))
             sys.exit(1)
