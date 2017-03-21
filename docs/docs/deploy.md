@@ -27,7 +27,7 @@ The script fetches a few environmental variables that you're supposed to set up 
 
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
-* AWS_DESTINATION_BUCKET (defaults to ["data-chan-js-binaries"](https://s3-eu-west-1.amazonaws.com/data-chan-js-binaries/), hosted by [Fermium LABS](https://fermiumlabs.com)) [WERCKER_TOKEN](http://devcenter.wercker.com/docs/api/getting-started/authentication)
+* AWS_DESTINATION_BUCKET (defaults to ["data-chan-js-binaries"](https://data-chan-js-binaries.s3.amazonaws.com/index.html), hosted by [Fermium LABS](https://fermiumlabs.com)) [WERCKER_TOKEN](http://devcenter.wercker.com/docs/api/getting-started/authentication)
 * WERCKER_DESTINATION_PIPELINE (defaults to [5855662ab7a7370100caf8fd](https://app.wercker.com/fermiumlabs/data-chan/runs)) 
 
-The default bucket is publicly accessible [here](https://s3-eu-west-1.amazonaws.com/data-chan-js-binaries/)
+The default bucket is publicly accessible [here](https://data-chan-js-binaries.s3.amazonaws.com/index.html)
