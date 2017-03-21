@@ -36,10 +36,10 @@ hash = repo.head.object.hexsha
 hash = hash.encode("ascii")
 pr = isPullRequest()
 
-hash = "8de14cbd7e5d6d8698dccc85b56badb2ee124c71"
 
 # Find the file to upload
 fileToUpload = glob.glob('**/libDataChan.*')[0]
+expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 
 
 def getBranch():
@@ -89,7 +89,6 @@ a = map(ntpath.basename, a)
 
 
 # Check for missing filenames
-expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 missingFilenames = set(expectedFilenames) - set(a)
 if len(missingFilenames) > 0:
     print("still missing the following libraries in S3: " + ", ".join(missingFilenames))
