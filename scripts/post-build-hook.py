@@ -11,8 +11,8 @@ import boto
 parser = argparse.ArgumentParser(description="Manage Data-chan binaries")
 parser.add_argument('--upload', dest='upload', help='Upload Data-chan binaries', action='store_true')
 parser.set_defaults(upload=False) 
-parser.add_argument('--bucket', dest='bucket', help='Upload Data-chan binaries')
-parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build')
+parser.add_argument('--bucket', dest='bucket', help='S3 bucket')
+parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger a Wercker build to the provided pipeline')
 parser.add_argument('--download', dest='download', help='Download all datachan libraries in the provided directory')
 args = parser.parse_args()
 
