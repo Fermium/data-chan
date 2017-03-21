@@ -102,6 +102,7 @@ if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
             print("wercker build triggered")
         else:
             print("build not triggered, response code " + str(r.status_code))
+            sys.exit(1)
 
     else:
         print("we're not on Wercker but no WERCKER_TOKEN was found, so we can't trigger a new pipeline. exiting.")
