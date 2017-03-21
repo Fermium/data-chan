@@ -46,9 +46,9 @@ void MainRoutine(void) {
   if (datachan_output_enabled()) {
     measure_t* test_measure = new_nonrealtime_measure(0xFF);
 
-    add_measure(test_measure, 0, 173.345);
-    add_measure(test_measure, 1, 45.5);
-    add_measure(test_measure, 2, 56.12);
+    float data = 0.0049 * analogRead(0);
+
+    add_measure(test_measure, 0, data);
 
     datachan_register_measure(test_measure);
 
