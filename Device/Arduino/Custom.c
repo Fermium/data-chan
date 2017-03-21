@@ -20,6 +20,8 @@
 
 #include <Custom.h>
 
+#include <datachan.h>
+
 void Process_Async(uint8_t* data) {
   /*
     data is the content of the packet minus the CRC, the CMD_ASYNC_RESPONSE,
@@ -42,7 +44,7 @@ void Event_Init(void) {
 void MainRoutine(void) {
   // An example of measure generation :)
   if (datachan_output_enabled()) {
-    measure_t* test_measure = new_nonrealtime_measure(0xFF;
+    measure_t* test_measure = new_nonrealtime_measure(0xFF);
 
     add_measure(test_measure, 0, 173.345);
     add_measure(test_measure, 1, 45.5);

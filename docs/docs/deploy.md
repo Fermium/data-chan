@@ -1,7 +1,7 @@
 # Deploy
 
-Data-chan is a cross-platform piece of software. 
-That means it needs to be built on many platform. 
+Data-chan is a cross-platform piece of software.
+That means it needs to be built on many platform.
 
 To achieve that, we use three CIs:
 
@@ -17,16 +17,15 @@ The libraries created by Travis and Appveyor are automatically uploaded to an [A
 
 The destination bucket must be selected with the `--bucket my-s3-bucket` option.
 
-For a complete cross-platform build three dynamic libraries needs to be uploaded:
+Three dynamic libraries are uploaded for each commit, under a directory with the same name as the long [commit hash](https://git-scm.com/book/it/v2/Git-Basics-Viewing-the-Commit-History):
 
 * libDataChan.so for Linux
 * libDataChan.dll for Windows
 * libDataChan.dylib for MacOS
 
-
 Since Wercker is extremely fast, it's build can be re-triggered automatically after upload if the `--trigger-wercker 123-this-is-my-pipelineId-456` option is used. This way Wercker it can be used to deploy on platforms other than s3, such as [GitHub releases](https://help.github.com/articles/about-releases/).
 
-The script needs a few environmental variables that you're supposed to set up in your CI if you want to seriously fork data-chan:
+The script uses a few environment variables to configure the AWS credentials:
 
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY

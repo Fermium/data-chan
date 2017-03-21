@@ -38,3 +38,12 @@ arduino:
 	$(MAKE) -C Arduino
 	@echo
 	@echo Arduino Executable compiled.
+
+arduinoupload:
+	@echo Flashing arduino program...
+	@echo
+	$(MAKE) -C Bootstrap lib
+	-$(MAKE) -C Arduino upload
+	@echo
+	@echo Arduino program flashed.
+
