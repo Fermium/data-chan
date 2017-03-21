@@ -12,17 +12,12 @@
     "ref-struct": "^1.1.0"
   },
   "devDependencies": {
-    "express": "^4.14.0",
-    "glob": "^7.1.1",
-    "node-gyp": "^3.4.0",
-    "nodegit": "^0.18.0",
-    "s3": "^4.4.0"
+    "node-gyp": "^3.4.0"
   },
   "scripts": {
     "test": "make debug",
-    "exec": "exec",
-    "publish-libraries": "node s3-publish.js"
-  },
+    "exec": "exec"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NeroReflex/data-chan.git"

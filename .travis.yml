@@ -4,7 +4,6 @@ addons:
   apt:
     packages:
       - libusb-1.0-0-dev
-      - nodejs
 
 matrix:
   include:
@@ -18,12 +17,12 @@ before_install:
 - git submodule update --init --recursive
 
 install:
+- pip install -r scripts/requirements.txt
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-node.sh ; fi
   
 script:
 - make -C Host release -j2
-
-publish:
-- (cd Host/NODEJS_API/ && npm run publish-libraries)
+- python scripts/post-build-hook.py
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9

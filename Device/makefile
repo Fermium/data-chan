@@ -23,3 +23,18 @@ all:
 	@echo
 	@echo LUFA \"make $@\" operation complete.
 
+clean:
+	@echo Cleaning solution....
+	@echo
+	$(MAKE) -C Bootstrap clean
+	$(MAKE) -C Arduino clean
+	@echo
+	@echo Solution is clean.
+
+arduino:
+	@echo Building Arduino Executable
+	@echo
+	$(MAKE) -C Bootstrap lib
+	$(MAKE) -C Arduino
+	@echo
+	@echo Arduino Executable compiled.

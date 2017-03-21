@@ -38,8 +38,10 @@ int main(int argc, char** argv) {
 
             if ((argc > 1) && (strcmp(argv[1], "-s") == 0)) {
               if (data_out != (measure_t*)NULL) {
+                    for (int k = 0; k < data_out->measuresNum; k++) {
                       printf("\n\nMeasure: \n");
-                      printf("Value: %f", data_out->value);
+                      printf("Channel %u Value: %f", (unsigned int)data_out->channels[k], data_out->values[k]);
+                    }
               }
             }
             free((void*)data_out);

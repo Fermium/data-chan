@@ -31,6 +31,10 @@ struct request_t {
     struct request_t *next;
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void datachan_init(void);
 
 void datachan_sudden_disconnection(void);
@@ -42,5 +46,10 @@ void datachan_process_report(uint8_t* DataArray);
 bool datachan_output_enabled(void);
 
 void datachan_register_measure(measure_t *);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif
