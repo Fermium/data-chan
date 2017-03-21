@@ -49,6 +49,7 @@ print("hash of this commit is " + hash + " on branch " + getBranch())
 
 # Find the file to upload
 fileToUpload = glob.glob('Host/libDataChan.*')[0]
+filename = fileToUpload.replace("Host", "").replace("/", "").replace("\\", "")
 
 print("The file \"" + fileToUpload +  "\" will be uploaded to s3")
 
@@ -61,7 +62,7 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
 s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
 f = open(fileToUpload,'rb')
 bucket = os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries") 
-s3conn.upload(hash + "/" + fileToUpload.replace("Host/", ""),f, bucket )
+s3conn.upload(hash + "/" + filename, f, bucket )
 
 
 # if we are not on wercker
