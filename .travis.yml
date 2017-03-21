@@ -22,7 +22,7 @@ install:
   
 script:
 - make -C Host release -j2
-- python scripts/post-build-hook.py --upload
+- python scripts/post-build-hook.py --uploads3 data-chan-js-binaries
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9

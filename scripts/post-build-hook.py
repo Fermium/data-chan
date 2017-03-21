@@ -9,10 +9,8 @@ import boto
 
 
 parser = argparse.ArgumentParser(description="Manage Data-chan binaries")
-parser.add_argument('--upload', dest='upload', help='Upload Data-chan binaries', action='store_true')
-parser.set_defaults(upload=False)
-parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build', action='store_true')
-parser.set_defaults(wercker=False)
+parser.add_argument('--uploads3', dest='uploads3', help='Upload Data-chan binaries')
+parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build')
 parser.add_argument('--download', dest='download', help='Download all datachan libraries in the provided directory')
 args = parser.parse_args()
 
@@ -71,7 +69,7 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
 
 # Open connection to s3
 s3conn = boto.connect_s3()
-bucket = s3conn.get_bucket(os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries"))
+bucket = s3conn.get_bucket(args.uploads3)
 
 # Upload to S3
 if args.upload is True:
@@ -120,7 +118,7 @@ def triggerWerckerPipeline():
         # authorization headers
         headers = {'Authorization': 'Bearer ' + os.environ['WERCKER_TOKEN']}
         # get the pipeline id from environmental variables, fallback on default if not found
-        payload = {"pipelineId": os.environ.get('WERCKER_DESTINATION_PIPELINE', "5855662ab7a7370100caf8fd"),
+        payload = {"pipelineId": args.wercker,
                    "branch": getBranch(),
                    "commitHash": hash}
         r = requests.post(url, headers=headers, json=payload)
