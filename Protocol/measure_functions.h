@@ -28,7 +28,7 @@ inline measure_t* new_nonrealtime_measure(uint8_t mu)
 
 inline void add_measure(measure_t* elem, uint8_t ch, float vl)
 {
-    elem->channels[elem->measuresNum] = vl;
+    elem->channels[elem->measuresNum] = ch;
     elem->values[elem->measuresNum] = vl;
 
     elem->measuresNum++;
