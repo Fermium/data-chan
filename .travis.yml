@@ -22,7 +22,7 @@ install:
   
 script:
 - make -C Host release -j2
-- python scripts/post-build-hook.py --upload --trigger-wercker
+- python scripts/post-build-hook.py --upload
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9
