@@ -5,6 +5,8 @@ import os
 import requests
 import json
 import sys
+import ntpath #cross platform path tools
+
 
 #Check if we are executing in a pull request, if so exit with a non error code
 if os.environ.get('APPVEYOR_PULL_REQUEST_NUMBER', "false")  != "false":
@@ -17,7 +19,8 @@ if os.environ.get('TRAVIS_PULL_REQUEST', "false")  != "false":
 
 # Get the current repository commit hash
 repo = git.Repo(search_parent_directories=True)
-hash = repo.head.object.hexhash.encode("ascii")
+hash = repo.head.object.hexsha
+hash = hash.encode("ascii")
 
 def getBranch():
     "Get the branch using git or CI environmental variables"
@@ -48,8 +51,7 @@ def getBranch():
 print("hash of this commit is " + hash + " on branch " + getBranch())
 
 # Find the file to upload
-fileToUpload = glob.glob('Host/libDataChan.*')[0]
-filename = fileToUpload.replace("Host", "").replace("/", "").replace("\\", "")
+fileToUpload = glob.glob('**/libDataChan.*')[0]
 
 print("The file \"" + fileToUpload +  "\" will be uploaded to s3")
 
@@ -62,7 +64,9 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
 s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
 f = open(fileToUpload,'rb')
 bucket = os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries") 
-s3conn.upload(hash + "/" + filename, f, bucket )
+s3conn.upload(hash + "/" + ntpath.basename(fileToUpload), f, bucket )
+
+
 
 
 # if we are not on wercker
@@ -86,7 +90,6 @@ if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
             print("Wercker build triggered")
         else:
             print("Build not triggered, response code " + str(r.status_code))
-        print()
 
     else:
         print("We're not on Wercker but no WERCKER_TOKEN was found, so we can't trigger a new pipeline. Exiting.")
