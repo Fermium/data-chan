@@ -9,7 +9,9 @@ import boto
 
 
 parser = argparse.ArgumentParser(description="Manage Data-chan binaries")
-parser.add_argument('--uploads3', dest='uploads3', help='Upload Data-chan binaries')
+parser.add_argument('--upload', dest='upload', help='Upload Data-chan binaries', action='store_true')
+parser.set_defaults(upload=False) 
+parser.add_argument('--bucket', dest='bucket', help='Upload Data-chan binaries')
 parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build')
 parser.add_argument('--download', dest='download', help='Download all datachan libraries in the provided directory')
 args = parser.parse_args()
@@ -69,7 +71,7 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
 
 # Open connection to s3
 s3conn = boto.connect_s3()
-bucket = s3conn.get_bucket(args.uploads3)
+bucket = s3conn.get_bucket(args.bucket)
 
 # Upload to S3
 if args.upload is True:
@@ -90,7 +92,7 @@ a = map(ntpath.basename, a)
 # Check for missing filenames
 missingFilenames = set(expectedFilenames) - set(a)
 if len(missingFilenames) > 0:
-    print("still missing the following libraries in S3: " + ", ".join(missingFilenames))
+    print("CHECK: still missing the following libraries in S3: " + ", ".join(missingFilenames))
     sys.exit(0)
 else:
     print("all needed lbraries are present in S3: " + ", ".join(expectedFilenames))
