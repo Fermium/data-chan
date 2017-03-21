@@ -65,7 +65,6 @@ f = open(fileToUpload, 'rb')
 bucket = os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries")
 s3conn.upload(hash + "/" + ntpath.basename(fileToUpload), f, bucket)
 
-hash = "f7a5b16d137db7a62eb522adf8f6cab338873e0e"
 # Get a list of all filenames in the current folder
 a = [d["key"] for d in list(s3conn.list(hash, bucket))]
 a = map(ntpath.basename, a)
