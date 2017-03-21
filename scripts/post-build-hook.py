@@ -1,17 +1,19 @@
 import git
-import tinys3
 import glob
 import os
 import requests
 import sys
 import ntpath  # cross platform path tools
 import argparse
+import boto
+
 
 parser = argparse.ArgumentParser(description="Manage Data-chan binaries")
 parser.add_argument('--upload', dest='upload', help='Upload Data-chan binaries', action='store_true')
 parser.set_defaults(upload=False)
 parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build', action='store_true')
 parser.set_defaults(wercker=False)
+parser.add_argument('--download', dest='download', help='Download all datachan libraries in the provided directory')
 args = parser.parse_args()
 
 
@@ -33,6 +35,8 @@ repo = git.Repo(search_parent_directories=True)
 hash = repo.head.object.hexsha
 hash = hash.encode("ascii")
 pr = isPullRequest()
+
+hash = "8de14cbd7e5d6d8698dccc85b56badb2ee124c71"
 
 # Find the file to upload
 fileToUpload = glob.glob('**/libDataChan.*')[0]
@@ -66,17 +70,22 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
     sys.exit(1)
 
 # Open connection to s3
-s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
-f = open(fileToUpload, 'rb')
-bucket = os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries")
+s3conn = boto.connect_s3()
+bucket = s3conn.get_bucket(os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries"))
 
 if args.upload is True:
     print("Uploading \"" + fileToUpload + "\"...")
-    s3conn.upload(hash + "/" + ntpath.basename(fileToUpload), f, bucket)
+    s3key = boto.s3.key.Key(bucket)
+    s3key.key = hash + "/" + ntpath.basename(fileToUpload)
+    s3key.set_contents_from_filename(fileToUpload)
 
-# Get a list of all filenames in the current s3 folder
-a = [d["key"] for d in list(s3conn.list(hash, bucket))]
+
+# Get a list of all filenames in the current hash S3 folder
+a = []
+for key in bucket.list(prefix=hash):
+    a.append(key.name.encode("ascii"))
 a = map(ntpath.basename, a)
+
 
 
 # Check for missing filenames
@@ -87,6 +96,14 @@ if len(missingFilenames) > 0:
     sys.exit(0)
 else:
     print("all needed lbraries are present in S3: " + ", ".join(expectedFilenames))
+    if args.download is not False:
+        # If directory does not exist make it
+        if not os.path.exists(args.download):
+            os.makedirs(args.download)
+        for f in expectedFilenames:
+            s3key = boto.s3.key.Key(bucket)
+            s3key.key = hash + "/" + f
+            s3key.get_contents_to_filename(os.path.join(args.download, f))
 
 
 def triggerWerckerPipeline():
