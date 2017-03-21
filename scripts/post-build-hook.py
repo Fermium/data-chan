@@ -73,6 +73,7 @@ if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_A
 s3conn = boto.connect_s3()
 bucket = s3conn.get_bucket(os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries"))
 
+# Upload to S3
 if args.upload is True:
     print("Uploading \"" + fileToUpload + "\"...")
     s3key = boto.s3.key.Key(bucket)
