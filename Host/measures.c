@@ -42,13 +42,17 @@ void repack_measure(measure_t* out, uint8_t* in) {
     memcpy((void*)&out->type, (const void*)in, sizeof(out->type));
     in += sizeof(out->type);
 
-    // the second byte is the source channel
-    memcpy((void*)&out->channel, (const void*)in, sizeof(out->channel));
-    in += sizeof(out->channel);
+    // channels....
+    memcpy((void*)&out->channels, (const void*)in, sizeof(out->channels));
+    in += sizeof(out->channels);
 
-    // let's continue with the value...
-    memcpy((void*)&out->value, (const void*)in, sizeof(out->value));
-    in += sizeof(out->value);
+    // values...
+    memcpy((void*)&out->values, (const void*)in, sizeof(out->values));
+    in += sizeof(out->values);
+
+    // number of entries
+    memcpy((void*)&out->measuresNum, (const void*)in, sizeof(out->measuresNum));
+    in += sizeof(out->measuresNum);
 
     // ...measurement unit...
     memcpy((void*)&out->mu, (const void*)in, sizeof(out->mu));

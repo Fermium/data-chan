@@ -22,9 +22,10 @@ lib: CC_FLAGS += -DARDUINOLIB
 
 debug: all
 release: all
-
+arduino: lib
 install: all
 	-avrdude -C./avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:$(TARGET).hex:i
+upload:
 
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
 documentation: doxygen

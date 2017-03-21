@@ -16,3 +16,4 @@ include $(ARDUINO_MK)/Arduino.mk
 
 CFLAGS_STD = -D__DISABLE_USB_ISR
 OTHER_OBJS = -L ../Bootstrap -ldatachan
+ISP_PROG   = usbasp

@@ -39,20 +39,29 @@
 #include "datachan.h"
 #include "Custom.h"
 
-/** Main program entry point. This routine configures the hardware required by the application, then
- *  enters a loop to run the application tasks in sequence.
- */
-int main(void)
+static uint8_t ReceivedData[VENDOR_IO_EPSIZE];
+
+#ifndef ARDUINOLIB
+int main()
+{
+	setup();
+
+	for (;;) loop();
+}
+#endif // ARDUINOLIB
+
+void setup()
 {
 	SetupHardware();
 
 	GlobalInterruptEnable();
+}
 
-	for (;;) {
+void loop(void)
+{
 		USB_USBTask();
 
-		uint8_t ReceivedData[VENDOR_IO_EPSIZE];
-		//memset(ReceivedData, 0x00, sizeof(ReceivedData));
+		memset(ReceivedData, 0x00, sizeof(ReceivedData));
 
 		Endpoint_SelectEndpoint(VENDOR_OUT_EPADDR);
 		if (Endpoint_IsOUTReceived())
@@ -73,7 +82,6 @@ int main(void)
 			Endpoint_Write_Stream_LE(ReceivedData, VENDOR_IO_EPSIZE, NULL);
 			Endpoint_ClearIN();
 		}
-	}
 }
 
 /** Configures the bare minimum hardware to setup the USB. */

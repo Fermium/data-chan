@@ -1,4 +1,4 @@
-################################ C/C++ 
+################################ C/C++
 
 # Compiled Object files
 *.slo
@@ -103,7 +103,7 @@ Host/PYTHON_API/*.py
 Host/PYTHON_API/*.pyc
 
 # Vagrant
-
+vagrant
 .vagrant/
 
 # Compiled documentation
@@ -112,5 +112,8 @@ Documentation/
 # Compiled example
 Host/API/examples/Tester/Tester
 
-#compiled directory for arduino
-Device/Arduino/build-leonardo/
+Host/examples/Tester/Tester
+
+Device/Arduino/leonardo-build/
+
+docs/site/
