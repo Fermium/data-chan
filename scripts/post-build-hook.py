@@ -5,67 +5,76 @@ import os
 import requests
 import sys
 import ntpath  # cross platform path tools
+import argparse
+
+parser = argparse.ArgumentParser(description="Manage Data-chan binaries")
+parser.add_argument('--upload', dest='upload', help='Upload Data-chan binaries', action='store_true')
+parser.set_defaults(upload=False)
+parser.add_argument('--trigger-wercker', dest='wercker', help='Trigger wercker build', action='store_true')
+parser.set_defaults(wercker=False)
+args = parser.parse_args()
 
 
-# Check if we are executing in a pull request, if so exit with a non error code
-if os.environ.get('APPVEYOR_PULL_REQUEST_NUMBER', "false") != "false":
-    print("this is an AppVeyor pull request. Nothing to do.")
+def isPullRequest():
+    """Verify using environmental variables if we are in a PR."""
+    if os.environ.get('APPVEYOR_PULL_REQUEST_NUMBER', "false") != "false":
+        return True
+    if os.environ.get('TRAVIS_PULL_REQUEST', "false") != "false":
+        return True
+    return False
+
+
+if isPullRequest() is True:
+    print("We're in a PR, exiting")
     sys.exit(0)
-if os.environ.get('TRAVIS_PULL_REQUEST', "false") != "false":
-    print("this is a Travis pull request. Nothing to do.")
-    sys.exit(0)
-
 
 # Get the current repository commit hash
 repo = git.Repo(search_parent_directories=True)
 hash = repo.head.object.hexsha
 hash = hash.encode("ascii")
+pr = isPullRequest()
+
+# Find the file to upload
+fileToUpload = glob.glob('**/libDataChan.*')[0]
 
 
 def getBranch():
-    "Get the branch using git or CI environmental variables"
-
-    # try if head is not detached
+    """Get the branch using git or CI environmental variables."""
     try:
+        # Works only if head is not detached
         branch = repo.active_branch.name
         return branch
     except TypeError:
         # apparently we are on a detached head, probably beacause we're building from a CI
-        # in this case, pick the first non-empty branch name from the ENV variables the CI provides
         CIRepoENVVAr = []
         CIRepoENVVAr.append(os.environ.get('TRAVIS_BRANCH', ""))
         CIRepoENVVAr.append(os.environ.get('APPVEYOR_REPO_BRANCH', ""))
         CIRepoENVVAr.append(os.environ.get('WERCKER_GIT_BRANCH', ""))
 
-        # Pick the first non-empty string
+        # Pick the first non-empty branch name
         def get_nonempty(list_of_strings):
             for s in list_of_strings:
                 if s:
                     return s
-
         branch = get_nonempty(CIRepoENVVAr)
         return branch
 
 
-print("hash of this commit is " + hash + " on branch " + getBranch())
-
-# Find the file to upload
-fileToUpload = glob.glob('**/libDataChan.*')[0]
-
-print("file \"" + fileToUpload + "\" will be uploaded (overwriting of needed) to s3")
-
-# If credentials are missing throw an error
+# If AWS credentials are missing throw an error
 if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "") == "":
     print("missing AWS credentials. There is no point in attemping upload or trigger a build")
     sys.exit(1)
 
-# Upload the datachan library to Amazon S3
+# Open connection to s3
 s3conn = tinys3.Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
 f = open(fileToUpload, 'rb')
 bucket = os.environ.get('AWS_DESTINATION_BUCKET', "data-chan-js-binaries")
-s3conn.upload(hash + "/" + ntpath.basename(fileToUpload), f, bucket)
 
-# Get a list of all filenames in the current folder
+if args.upload is True:
+    print("Uploading \"" + fileToUpload + "\"...")
+    s3conn.upload(hash + "/" + ntpath.basename(fileToUpload), f, bucket)
+
+# Get a list of all filenames in the current s3 folder
 a = [d["key"] for d in list(s3conn.list(hash, bucket))]
 a = map(ntpath.basename, a)
 
@@ -80,17 +89,19 @@ else:
     print("all needed lbraries are present in S3: " + ", ".join(expectedFilenames))
 
 
-# if we are not on wercker
-if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
-    # if the Wercker token is not empty
-    if os.environ.get('WERCKER_TOKEN', "") != "":
-        print("we're not on Wercker, triggering a new Wercker build")
-
+def triggerWerckerPipeline():
+    """Trigger a Wercker pipeline. Returns false if failed."""
+    if args.wercker is True:
+        if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
+            print("we're running on Wercker. skip triggering a new Wercker build. exiting.")
+            return False;
+        if os.environ.get('WERCKER_TOKEN', "") == "":
+            print("no WERCKER_TOKEN was found, so we can't trigger a new pipeline. exiting.")
+            return False;
         # endpoint to run (or re-run) a pipeline
         url = 'https://app.wercker.com/api/v3/runs'
         # authorization headers
         headers = {'Authorization': 'Bearer ' + os.environ['WERCKER_TOKEN']}
-
         # get the pipeline id from environmental variables, fallback on default if not found
         payload = {"pipelineId": os.environ.get('WERCKER_DESTINATION_PIPELINE', "5855662ab7a7370100caf8fd"),
                    "branch": getBranch(),
@@ -101,11 +112,9 @@ if os.environ.get('WERCKER_MAIN_PIPELINE_STARTED', "") == "":
             print("Wercker build triggered")
         else:
             print("build not triggered, response code " + str(r.status_code))
-            sys.exit(1)
+            return False
+        return True
 
-    else:
-        print("we're not on Wercker but no WERCKER_TOKEN was found, so we can't trigger a new pipeline. exiting.")
-        sys.exit(0)
-else:
-    print("we're running on Wercker. skip triggering a new Wercker build. exiting.")
-    sys.exit(0)
+
+if triggerWerckerPipeline() is False:
+    sys.exit(1)
