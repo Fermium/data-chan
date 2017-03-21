@@ -5,6 +5,7 @@ pages:
 - Home: index.md
 - FAQ: faq.md
 - Build: build.md
+- Install: install.md
 - Library API:
     - Getting Started: library_usage/get_started.md
     - API Documentation: API_Documentation.md
@@ -16,5 +17,6 @@ pages:
     - OUT Packets:
         - Sync Request:    OUT_packets/sync_request.md
         - Async Request:    OUT_packets/async_request.md
+- Arduino: arduino.md
 - Deploy: deploy.md
 theme: readthedocs
