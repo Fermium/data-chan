@@ -11,20 +11,21 @@ PROGRAMMER	 = usbasp
 F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
-TARGET       = Bootstrap
-SRC          = $(TARGET).c Descriptors.c datachan.c Settings.c Custom.c $(LUFA_SRC_USB)
+TARGET       = datachan
+SRC          = main.c Descriptors.c datachan.c Settings.c Custom.c $(LUFA_SRC_USB)
 LUFA_PATH    = ../lufa/LUFA
-CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/
+CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -I.
 LD_FLAGS     =
 
 # Default target
-all:
+lib: CC_FLAGS += -DARDUINOLIB
 
 debug: all
 release: all
-
+arduino: lib
 install: all
 	-avrdude -C./avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:$(TARGET).hex:i
+upload:
 
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
 documentation: doxygen

@@ -12,6 +12,8 @@ debug: all
 release: CFLAGS += -O3
 release: all
 
+
+
 OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
 HEADERS = $(wildcard *.h)
 
@@ -33,4 +35,5 @@ flash: all
 
 install: all
 documentation:
+arduinoupload:
 # do nothing. Kept to not break the buildsystem

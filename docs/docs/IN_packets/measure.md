@@ -2,35 +2,16 @@
 
 A MEASURE packet has the data field formed this way:
 
-<table border="1">
-	<tr>
-		<td>bytes</td>
-		<td>0</td>
-		<td>1</td>
-		<td>2 to 6</td>
-		<td>7</td>
-		<td>8 to 12</td>
-		<td>13 to 14</td>
-	</tr>
-	<tr>
-		<td>type</td>
-		<td>byte (8bits)</td>
-		<td>byte (8bits)</td>
-		<td>float (32bits)</td>
-		<td>byte (8bits)</td>
-		<td>big int (32bits)</td>
-		<td>small int (16bits)</td>
-	</tr>
-	<tr>
-		<td>descr</td>
-		<td>type</td>
-		<td>channel</td>
-		<td>value</td>
-		<td>mu</td>
-		<td>timestamp</td>
-		<td>millis</td>
-	</tr>
-</table>
+| bytes  | 0    | 1:9      | 10:46    | 47             | 48      | 49:52     | 53:54     |
+|--------|------|----------|----------|----------------|---------|-----------|-----------|
+| type   | byte | byte[9]  | float[9] | byte           | byte    | big int   | small int |
+| descr  | type | channels | measures | channels count | mu      | timestamp | millis    |
+
+Additional Notes:
+- a data type followed by two square parenthesis means an array of that type.
+- a big int is large: 32 bits <=> 4 bytes
+- a small int is large: 16 bits <=> 2 bytes
+- mu means: "Unit of Measurement"
 
 Allowed measure types are:
 
@@ -61,13 +42,16 @@ This is useful if you have a long-running system with it's own [RTC](https://en.
 In a PROGRESSIVE measure millis:time contains an index number, increased by one each measure.
 
 
-## Channel
+## Channels
 
-The channel field is used to identify the channel that has generated the measure.
+The channels field is used to identify the channel that has generated the measure.
 
 Channels can match measurement channels (such as the one in ADCs or different sensors) or can be considered as endpoints for different functions of your device.
 
 The channel numeration starts from 1 and goes up to 255.
+
+There are "channels count" valid channels in a measure packet:
+each one is specific to a single measure.
 
 ## Unit of Measurement
 

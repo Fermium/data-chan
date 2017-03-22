@@ -1,8 +1,26 @@
 CC	= gcc
 CXX	= g++
+ifeq ($(OS),Windows_NT)
+        CC = gcc
+        CXX = g++
+else
+        UNAME := $(shell uname)
+        ifeq ($(UNAME), Linux)
+                CC = clang
+                CXX = clang++
+        endif
+        ifeq ($(UNAME), FreeBSD)
+                CC = clang
+                CXX = clang++
+        endif
+        ifeq ($(UNAME), Darwin)
+                CC = clang
+                CXX = clang++
+        endif
+endif
 
-CFLAGS		= -Wall -fPIC -std=gnu99
-CXXFLAGS	= -Wall -fPIC
+CFLAGS		= -fPIC -std=gnu99
+CXXFLAGS	= -fPIC
 
 SHARED_LIB_EXT	= .so
 SHARED_LIB_FLAG	= -shared

@@ -42,6 +42,8 @@
 #define CMD_ASYNC_REQUEST       0x03 // this is a request that can be fulfilled at any time
 #define MEASURE                 0x04 // this is a measure
 
+#define MAX_MEASURE_NUM         8
+
 
 /********************************************************************************
  *                          measure data structures and macros                  *
@@ -86,8 +88,9 @@ and more.... Read the documentation!
 typedef struct {
 	uint8_t type; // type of measure
 	uint8_t mu; // measurement unit (SI) : read above
-	uint8_t channel; // the channel of measure, starting from 1, channel zero is reserved
-	float value; // float is used because of microcontrollers limitations: https://gcc.gnu.org/wiki/avr-gcc
+    uint8_t measuresNum; // number of measures
+	uint8_t channels[MAX_MEASURE_NUM]; // the channel of measure, starting from 1, channel zero is reserved
+	float values[MAX_MEASURE_NUM]; // float is used because of microcontrollers limitations: https://gcc.gnu.org/wiki/avr-gcc
 	uint32_t time; // the UNIX time of the measure
 	uint16_t millis; // this is the offset from the given UNIX time expressed in milliseconds
 } measure_t;
@@ -104,6 +107,7 @@ typedef struct {
 #endif
 
 // please, stop complaining like a retard shit
-measure_t* new_nonrealtime_measure(uint8_t mu, uint8_t ch, float vl);
+measure_t* new_nonrealtime_measure(uint8_t mu);
+void add_measure(measure_t* elem, uint8_t ch, float vl);
 
 #endif // __MEASURE_H__

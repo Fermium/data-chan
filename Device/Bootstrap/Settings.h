@@ -39,7 +39,15 @@ struct setting_queue_t {
 	struct setting_queue_t *next;
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void setSetting(const setting_entry_t*);
 memory_block_t *getSetting(uint32_t, uint8_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

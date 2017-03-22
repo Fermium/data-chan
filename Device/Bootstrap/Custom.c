@@ -18,6 +18,8 @@
 
 #include "Custom.h"
 
+#ifndef ARDUINOLIB
+
 void Process_Async(uint8_t* data) {
   /*
     data is the content of the packet minus the CRC, the CMD_ASYNC_RESPONSE,
@@ -39,6 +41,16 @@ void Event_Init(void) {
 
 void MainRoutine(void) {
   // An example of measure generation :)
-  if (datachan_output_enabled())
-    datachan_register_measure(new_nonrealtime_measure(0xFF, 1, 169.754699f));
+  if (datachan_output_enabled()) {
+    measure_t* test_measure = new_nonrealtime_measure(0xFF);
+
+    add_measure(test_measure, 0, 173.345);
+    add_measure(test_measure, 1, 45.5);
+    add_measure(test_measure, 2, 56.12);
+
+    datachan_register_measure(test_measure);
+
+  }
 }
+
+#endif // ARDUINOLIB

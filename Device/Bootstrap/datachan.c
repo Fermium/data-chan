@@ -33,13 +33,17 @@ void unpack_measure(measure_t* in, uint8_t* out) {
     memcpy(out, (const void*)&in->type, sizeof(in->type));
     out += sizeof(in->type);
 
-    // the second byte is the source channel
-    memcpy((out), (const void*)&in->channel, sizeof(in->channel));
-    out += sizeof(in->channel);
+    // channels....
+    memcpy((out), (const void*)&in->channels, sizeof(in->channels));
+    out += sizeof(in->channels);
 
-    // let's continue with the value...
-    memcpy((out), (const void*)&in->value, sizeof(in->value));
-    out += sizeof(in->value);
+    // values...
+    memcpy((out), (const void*)&in->values, sizeof(in->values));
+    out += sizeof(in->values);
+
+    // number of entries
+    memcpy((out), (const void*)&in->measuresNum, sizeof(in->measuresNum));
+    out += sizeof(in->measuresNum);
 
     // ...measurement unit...
     memcpy(out, (const void*)&in->mu, sizeof(in->mu));

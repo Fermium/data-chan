@@ -19,19 +19,29 @@
 #ifndef __CUSTOM__
 #define __CUSTOM__
 
-#include "../../Protocol/measure.h"
-#include "../../Protocol/data_management.h"
-#include "BulkVendor.h"
-#include "datachan.h"
-#include "Settings.h"
-#include <stdint.h>
-#include <string.h>
-#include <stdbool.h>
+#ifndef __ARDUINO__
+    #include "../../Protocol/measure.h"
+    #include "../../Protocol/data_management.h"
+    #include "BulkVendor.h"
+    #include "datachan.h"
+    #include "Settings.h"
+    #include <stdint.h>
+    #include <string.h>
+    #include <stdbool.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void Process_Async(uint8_t*);
 void Event_Init(void);
 void Event_Connected(void);
 void Event_Disconnected(void);
 void MainRoutine(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __CUSTOM__
