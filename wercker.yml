@@ -10,9 +10,6 @@ build:
         name: Initialize git submodules
         code: git submodule update --init --recursive
     - script:
-        name: Install nodejs
-        code: bash scripts/install-node.sh
-    - script:
         name: Build Project
         code: make debug
 
