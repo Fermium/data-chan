@@ -25,7 +25,9 @@ CXXFLAGS	= -fPIC
 SHARED_LIB_EXT	= .so
 SHARED_LIB_FLAG	= -shared
 
+ifndef INSTALL_DIR
 INSTALL_DIR = /datachan
+endif
 
 SHARED_LIB_FLAG	= -shared
 ifeq ($(OS),Windows_NT)
