@@ -19,6 +19,8 @@ build_script:
 - ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
 - ps: Copy-Item libusb-1.0.21/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
 - ps: make -C Host release
+
+after_build:
 - ps: pip install -r scripts/requirements.txt
 - ps: python scripts/post-build-hook.py --bucket data-chan-js-binaries --upload
 

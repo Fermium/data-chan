@@ -1,11 +1,13 @@
 ifndef IDE_DIR
-$(error You have to define IDE_DIR (without the final /))
+echo "Warning: sYou should to define IDE_DIR (without the final /)"
+echo "Warning: Failing back to /usr/bin/arduino (Ubuntu)"
+IDE_DIR="/usr/bin/arduino"
 endif
 
-ARDUINO_MK     = ../Make-Arduino/
-ARDUINO_DIR     = ../Make-Arduino/
+ARDUINO_MK     = ../Make-Arduino
+ARDUINO_DIR     = ../Make-Arduino
 USER_LIB_PATH   = sketchbook
-AVR_TOOLS_DIR = $(IDE_DIR)/hardware/tools/avr/
+AVR_TOOLS_DIR = /usr
 #ARDUINO_LIBS  +=
 BOARD_TAG       = leonardo
 MCU             = atmega32u4

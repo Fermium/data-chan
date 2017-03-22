@@ -13,15 +13,13 @@ matrix:
   - os: osx
     osx_image: xcode8.2
     
-before_install:
-- git submodule update --init --recursive
-
 install:
 - pip install -r scripts/requirements.txt
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash scripts/install-node.sh ; fi
   
 script:
 - make -C Host release -j2
+
+after_success:
 - python scripts/post-build-hook.py --bucket data-chan-js-binaries --upload
 
 notifications:
