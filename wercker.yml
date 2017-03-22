@@ -8,10 +8,12 @@ build:
       packages: git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip gcc g++ gcc-avr avr-libc binutils-avr make autogen autoconf curl clang build-essential ruby libcurl4-openssl-dev python-pip
     - script:
         name: Initialize git submodules
-        code: git submodule update --init --recursive
+        code: |
+          git submodule update --init --recursive
     - script:
         name: Build Project
-        code: make debug
+        code: |
+          make debug
 
   after-steps:
     - wantedly/pretty-slack-notify:
