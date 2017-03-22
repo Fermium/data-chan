@@ -39,8 +39,6 @@ hash = hash.encode("ascii")
 pr = isPullRequest()
 
 
-# Find the file to upload
-fileToUpload = glob.glob('**/libDataChan.*')[0]
 expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 
 
@@ -77,6 +75,7 @@ bucket = s3conn.get_bucket(args.bucket)
 
 # Upload to S3
 if args.upload is True:
+    fileToUpload = glob.glob('**/libDataChan.*')[0]
     print("Uploading \"" + fileToUpload + "\"...")
     s3key = boto.s3.key.Key(bucket)
     s3key.key = hash + "/" + ntpath.basename(fileToUpload)
