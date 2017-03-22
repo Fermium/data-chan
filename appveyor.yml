@@ -19,7 +19,7 @@ install:
 - ps: New-Item C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0 -type directory
 - ps: Copy-Item libusb-1.0.21/include/libusb-1.0/libusb.h C:\tools\mingw64\x86_64-w64-mingw32\include\libusb-1.0\
 
-build:
+build_script:
 - ps: make -C Host release
 
 after_build:
