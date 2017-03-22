@@ -11,7 +11,7 @@ before_build:
 - ps: refreshenv
 
 
-install:
+before_build:
 - ps: wget https://netcologne.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.21/libusb-1.0.21.7z -O libusb-1.0.21.7z
 - ps: mkdir libusb-1.0.21
 - ps: Get-ChildItem libusb-1.0.21.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.21"}
