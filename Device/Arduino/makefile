@@ -13,6 +13,7 @@ BOARD_TAG       = leonardo
 MCU             = atmega32u4
 F_CPU           = 16000000
 CFLAGS          += -I../Bootstrap/ -D__ARDUINO__
+PROGRAMMER	 = usbasp
 
 include $(ARDUINO_MK)/Arduino.mk
 
@@ -22,3 +23,6 @@ ISP_PROG   = usbasp
 ISP_PORT   = /dev/ttyACM1
 
 arduinoupload: all
+
+avrflash: all
+	-avrdude -C../avrdude.conf -p $(MCU) -c $(PROGRAMMER) -Uflash:w:build-$(BOARD_TAG)/Arduino.hex:i

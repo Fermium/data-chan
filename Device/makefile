@@ -43,7 +43,7 @@ arduinoupload:
 	@echo Flashing arduino program...
 	@echo
 	$(MAKE) -C Bootstrap lib
-	-$(MAKE) -C Arduino upload
+	$(MAKE) -C Arduino avrflash
 	@echo
 	@echo Arduino program flashed.
 
