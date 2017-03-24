@@ -1,14 +1,13 @@
 pipeline:
   build:
     image: ubuntu:xenial
+    # see https://github.com/docker/docker/issues/19763 to why we use --volumes and not --device
     volumes:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true
     commands:
       - export DEBIAN_FRONTEND=noninteractive
-      - apt update
-      - apt install -y gcc gcc-avr avr-libc avrdude make git usbutils clang  libusb-1.0-0-dev doxygen
-      - lsusb
+      - apt -qq update && apt -qq install -y gcc gcc-avr avr-libc avrdude make git usbutils clang libusb-1.0-0-dev doxygen
       - make release -j2
       - make install
       - lsusb
@@ -20,11 +19,10 @@ pipeline:
     channel: project-hall-flux
     username: drone-ci
     icon_url: https://github.com/drone/brand/raw/master/logos/png/drone-logo_512.png
-    
     when:
-     status: [ failure ]
+     status: [ failure, success ]
      
-     
+# Build only on workers that have usb on docker enabled
 labels:
   USB: true
 
