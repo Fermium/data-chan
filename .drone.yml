@@ -11,6 +11,7 @@ pipeline:
       - lsusb
       - make release -j2
       - make install
+      - (cd Host/examples/Tester && ./Tester -s )
       
 labels:
   USB: true
