@@ -1,7 +1,7 @@
 pipeline:
   build:
     image: ubuntu:xenial
-    devices:
+    volumes:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true
     commands:
