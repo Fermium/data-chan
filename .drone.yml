@@ -20,7 +20,8 @@ pipeline:
     channel: project-hall-flux
     when:
      status: [ failure ]
-      
+     
+     
 labels:
   USB: true
 
