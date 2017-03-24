@@ -1,0 +1,16 @@
+pipeline:
+  build:
+    image: ubuntu:xenial
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
+    privileged: true
+    commands:
+      - apt update
+      - apt install -y gcc gcc-avr avr-libc avrdude make
+      - make release -j2
+      - make install
+#      - lsusb
+      
+labels:
+  USB: true
+
