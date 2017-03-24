@@ -5,6 +5,8 @@
 #include <unistd.h>
 
 int main(int argc, char** argv) {
+    int exitValue = EXIT_SUCCESS;
+
     //initialize everything
     datachan_init();
     printf("Device transmission initialization success!\n\n");
@@ -73,10 +75,12 @@ int main(int argc, char** argv) {
             default:
                 printf("Unknown error");
         }
+
+        exitValue = EXIT_FAILURE;
     }
 
     // shutdown everything
     datachan_shutdown();
     printf("\nDevice transmission shutdown\n");
-    return EXIT_SUCCESS;
+    return exitValue;
 }
