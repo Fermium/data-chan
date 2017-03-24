@@ -5,11 +5,12 @@ pipeline:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true
     commands:
+      - export DEBIAN_FRONTEND=noninteractive
       - apt update
-      - apt install -y gcc gcc-avr avr-libc avrdude make
+      - apt install -y gcc gcc-avr avr-libc avrdude make git usbutils 
+      - lsusb
       - make release -j2
       - make install
-#      - lsusb
       
 labels:
   USB: true
