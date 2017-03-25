@@ -32,14 +32,17 @@ if isPullRequest() is True:
     print("We're in a PR, exiting")
     sys.exit(0)
 
-# Get the current repository commit hash
-repo = git.Repo()
-hash = repo.head.object.hexsha.decode("ascii")
-pr = isPullRequest()
-
 
 expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 
+def getHash():
+    """Get the git commit hash."""
+    hash = repo.head.object.hexsha
+    return hash.decode("ascii")
+
+def getRepo():
+    """Get the git repo."""
+    return git.Repo()
 
 def getBranch():
     """Get the branch using git or CI environmental variables."""
@@ -61,6 +64,11 @@ def getBranch():
                     return s
         branch = get_nonempty(CIRepoENVVAr)
         return branch
+        
+        
+repo = getRepo()
+pr = isPullRequest()
+hash = getHash()
 
 print("REPO INFO:")
 print("\tSHA: " + hash)
