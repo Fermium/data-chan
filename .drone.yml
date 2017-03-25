@@ -12,7 +12,7 @@ pipeline:
       - make release -j2
       - make install
       - lsusb
-      - (cd Host/examples/Tester && ./Tester -s )
+      - (cd Host/examples/Tester && ./Tester )
 
   slack:
     image: plugins/slack
