@@ -37,7 +37,7 @@ expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 
 def getHash():
     """Get the git commit hash."""
-    hash = repo.head.object.hexsha
+    hash = repo.head.commit.hexsha
     return hash
 
 def getRepo():
