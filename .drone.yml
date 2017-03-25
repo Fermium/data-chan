@@ -1,16 +1,29 @@
 pipeline:
   build:
     image: ubuntu:xenial
-    devices:
+    # see https://github.com/docker/docker/issues/19763 to why we use --volumes and not --device
+    volumes:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true
     commands:
-      - apt update
-      - apt install -y gcc gcc-avr avr-libc avrdude make
+      - export DEBIAN_FRONTEND=noninteractive
+      - apt-get update > /dev/null
+      - apt-get install -y gcc gcc-avr avr-libc avrdude make git usbutils clang libusb-1.0-0-dev doxygen > /dev/null
       - make release -j2
       - make install
-#      - lsusb
-      
+      - lsusb
+      - (cd Host/examples/Tester && ./Tester -s )
+
+  slack:
+    image: plugins/slack
+    webhook: https://hooks.slack.com/services/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
+    channel: project-hall-flux
+    username: drone-ci
+    icon_url: https://github.com/drone/brand/raw/master/logos/png/drone-logo_512.png
+    when:
+     status: [ failure, success ]
+     
+# Build only on workers that have usb on docker enabled
 labels:
   USB: true
 
