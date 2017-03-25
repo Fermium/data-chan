@@ -1,14 +1,14 @@
 pipeline:
   build:
-    image: phusion/baseimage
+    image: ubuntu:xenial
     # see https://github.com/docker/docker/issues/19763 to why we use --volumes and not --device
     volumes:
       - "/dev/bus/usb:/dev/bus/usb"
     privileged: true
     commands:
       - export DEBIAN_FRONTEND=noninteractive
-      - apt-get update
-      - apt-get install -y gcc gcc-avr avr-libc avrdude make git usbutils clang libusb-1.0-0-dev doxygen
+      - apt-get update > /dev/null
+      - apt-get install -y gcc gcc-avr avr-libc avrdude make git usbutils clang libusb-1.0-0-dev doxygen > /dev/null
       - make release -j2
       - make install
       - lsusb
