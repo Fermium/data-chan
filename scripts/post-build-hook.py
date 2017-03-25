@@ -37,7 +37,7 @@ expectedFilenames = ["libDataChan.dll", "libDataChan.dylib", "libDataChan.so"]
 
 def getHash():
     """Get the git commit hash."""
-    hash = repo.head.commit.hexsha
+    hash = repo.head.object.hexsha
     return hash
 
 def getRepo():
@@ -56,7 +56,7 @@ def getBranch():
         CIRepoENVVAr.append(os.environ.get('TRAVIS_BRANCH', ""))
         CIRepoENVVAr.append(os.environ.get('APPVEYOR_REPO_BRANCH', ""))
         CIRepoENVVAr.append(os.environ.get('WERCKER_GIT_BRANCH', ""))
-
+        CIRepoENVVAr.append(os.environ.get('DRONE_COMMIT_BRANCH', ""))
         # Pick the first non-empty branch name
         def get_nonempty(list_of_strings):
             for s in list_of_strings:
