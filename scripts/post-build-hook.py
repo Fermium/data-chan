@@ -100,7 +100,7 @@ if args.upload is True:
 # Get a list of all filenames in the current hash S3 folder
 a = []
 for key in bucket.list(prefix=hash):
-    a.append(key.name.encode("ascii"))
+    a.append(key.name)
 a = map(ntpath.basename, a)
 
 
