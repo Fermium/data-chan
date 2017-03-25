@@ -33,7 +33,7 @@ if isPullRequest() is True:
     sys.exit(0)
 
 # Get the current repository commit hash
-repo = git.Repo(search_parent_directories=True)
+repo = git.Repo()
 hash = repo.head.object.hexsha
 hash = hash.encode("ascii")
 pr = isPullRequest()
@@ -65,9 +65,9 @@ def getBranch():
 
 
 # If AWS credentials are missing throw an error
-if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "") == "":
-    print("missing AWS credentials. There is no point in attemping upload or trigger a build")
-    sys.exit(1)
+#if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "") == "":
+#    print("missing AWS credentials. There is no point in attemping upload or trigger a build")
+#    sys.exit(1)
 
 # Open connection to s3
 s3conn = boto.connect_s3()
