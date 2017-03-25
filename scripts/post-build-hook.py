@@ -63,6 +63,14 @@ def getBranch():
         branch = get_nonempty(CIRepoENVVAr)
         return branch
 
+print("REPO INFO:")
+print("\tSHA: " + hash)
+print("\tBRANCH: " + getBranch())
+if pr:
+    print("\tThis is a PR")
+else:
+    print("\tThis is NOT a PR")
+
 
 # If AWS credentials are missing throw an error
 #if os.environ.get('AWS_ACCESS_KEY_ID', "") == "" or os.environ.get('AWS_SECRET_ACCESS_KEY', "") == "":
