@@ -34,8 +34,7 @@ if isPullRequest() is True:
 
 # Get the current repository commit hash
 repo = git.Repo()
-hash = repo.head.object.hexsha
-hash = hash.encode("ascii")
+hash = repo.head.object.hexsha.decode("ascii")
 pr = isPullRequest()
 
 
