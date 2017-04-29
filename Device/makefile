@@ -27,23 +27,5 @@ clean:
 	@echo Cleaning solution....
 	@echo
 	$(MAKE) -C Bootstrap clean
-	$(MAKE) -C Arduino clean
 	@echo
 	@echo Solution is clean.
-
-arduino:
-	@echo Building Arduino Executable
-	@echo
-	$(MAKE) -C Bootstrap lib
-	$(MAKE) -C Arduino
-	@echo
-	@echo Arduino Executable compiled.
-
-arduinoupload:
-	@echo Flashing arduino program...
-	@echo
-	$(MAKE) -C Bootstrap lib
-	$(MAKE) -C Arduino avrflash
-	@echo
-	@echo Arduino program flashed.
-

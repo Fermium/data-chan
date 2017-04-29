@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
                     }
               }
             }
-            free((void*)data_out);
+            datachan_clean_measure(data_out);
         }
 
         // release the device handler

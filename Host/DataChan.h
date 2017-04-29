@@ -273,6 +273,16 @@ DLL_LOCAL void datachan_device_enqueue_measure(datachan_device_t*, const measure
 DATACHAN_API measure_t* datachan_device_dequeue_measure(datachan_device_t* dev);
 DATACHAN_API int32_t datachan_device_enqueued_measures(datachan_device_t*);
 
+/**
+ * Remove a measure from memory.
+ *
+ * Avoid memory leaks calling this function when a measure isn't needed
+ * anymore.
+ *
+ * @param measure the measure to be removed from memory
+ */
+DATACHAN_API void datachan_clean_measure(measure_t* measure);
+
 DATACHAN_API void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
 
 #ifdef __cplusplus

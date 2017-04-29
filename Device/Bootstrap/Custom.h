@@ -22,7 +22,6 @@
 #ifndef __ARDUINO__
     #include "../../Protocol/measure.h"
     #include "../../Protocol/data_management.h"
-    #include "BulkVendor.h"
     #include "datachan.h"
     #include "Settings.h"
     #include <stdint.h>

@@ -106,6 +106,10 @@ void datachan_device_enqueue_measure(datachan_device_t* dev, const measure_t* m)
     pthread_mutex_unlock(&dev->measures_queue_mutex);
 }
 
+void datachan_clean_measure(measure_t* measure) {
+   free((void*)measure);
+}
+
 measure_t* datachan_device_dequeue_measure(datachan_device_t* dev) {
     if (dev == (datachan_device_t*)NULL)
         return (measure_t*)NULL;
