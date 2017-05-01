@@ -25,7 +25,11 @@ void Process_Async(uint8_t* inData, uint8_t* outData) {
     inData is the content of the packet minus the CRC and the command ID.
 
     outData will be the output buffer, without the CMD_ASYNC_RESPONSE,
-    the ID and the CRC........ so outData is (GENERIC_REPORT_SIZE - 1 - 4) in size
+    the ID and the CRC........ so outData is (GENERIC_REPORT_SIZE - 1 - 1 - 4) in size:
+
+    -1 reserved to the CMD_ASYNC_RESPONSE
+    -1 reserved to the CRC
+    -1 reserved to the ID
   */
 }
 

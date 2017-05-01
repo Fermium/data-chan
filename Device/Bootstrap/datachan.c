@@ -119,7 +119,7 @@ void datachan_generate_report(uint8_t* DataArray)
             response_builder += sizeof(req->id);
 
             // generate the buffer response
-            uint8_t buffer[GENERIC_REPORT_SIZE - sizeof(req->id) - 1];
+            uint8_t buffer[GENERIC_REPORT_SIZE - sizeof(req->id) - 1 - 1];
 
             // call the external function that will generate the response
             Process_Async(req->buffer, buffer);
