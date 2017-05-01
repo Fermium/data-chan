@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-void Process_Async(uint8_t*);
+void Process_Async(uint8_t*, uint8_t*);
 void Event_Init(void);
 void Event_Connected(void);
 void Event_Disconnected(void);

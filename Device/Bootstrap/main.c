@@ -44,14 +44,14 @@ static uint8_t ReceivedData[VENDOR_IO_EPSIZE];
 void main_setup(void);
 void main_loop(void);
 
-#ifndef ARDUINOLIB
+#ifndef EXTLIB
 int main()
 {
 	main_setup();
 
 	for (;;) main_loop();
 }
-#endif // ARDUINOLIB
+#endif // EXTLIB
 
 void main_setup(void)
 {

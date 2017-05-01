@@ -18,12 +18,14 @@
 
 #include "Custom.h"
 
-#ifndef ARDUINOLIB
+#ifndef EXTLIB
 
-void Process_Async(uint8_t* data) {
+void Process_Async(uint8_t* inData, uint8_t* outData) {
   /*
-    data is the content of the packet minus the CRC, the CMD_ASYNC_RESPONSE,
-    and the ID.... so data have (GENERIC_REPORT_SIZE - 1 - 4) size
+    inData is the content of the packet minus the CRC and the command ID.
+
+    outData will be the output buffer, without the CMD_ASYNC_RESPONSE,
+    the ID and the CRC........ so outData is (GENERIC_REPORT_SIZE - 1 - 4) in size
   */
 }
 
@@ -53,4 +55,4 @@ void MainRoutine(void) {
   }
 }
 
-#endif // ARDUINOLIB
+#endif // EXTLIB

@@ -86,9 +86,6 @@ void datachan_generate_report(uint8_t* DataArray)
     // every unused byte will be NONE
     memset((void*)DataArray, NONE, VENDOR_IO_EPSIZE);
 
-    // by default nothing is sent
-    DataArray[0] = (uint8_t)NONE;
-
     if (hostListening) {
 
       //if (datachan_output_enabled())datachan_register_measure(new_nonrealtime_measure(0xFF, 1, 169.754699f));
@@ -109,13 +106,13 @@ void datachan_generate_report(uint8_t* DataArray)
             // point to the first byte after the response type
             uint8_t *response_builder = DataArray + 1;
 
+            // flag the response as an async request response
+            DataArray[0] = CMD_ASYNC_RESPONSE;
+
             // get the async request to be fulfilled and remove it from the queue
             struct request_t* req = cmd_queue;
             //req->next = (struct request_t*)NULL;
             cmd_queue = cmd_queue->next;
-
-            // flag the response as an async request response
-            DataArray[0] = CMD_ASYNC_RESPONSE;
 
             // write the ID of the request
             memcpy((void*)response_builder, (const void*)&req->id, sizeof(req->id));
@@ -124,11 +121,11 @@ void datachan_generate_report(uint8_t* DataArray)
             // generate the buffer response
             uint8_t buffer[GENERIC_REPORT_SIZE - sizeof(req->id) - 1];
 
+            // call the external function that will generate the response
+            Process_Async(req->buffer, buffer);
+
             // apply the generated response
             memcpy((void*)response_builder, (const void*)buffer, sizeof(buffer));
-
-            // call the external function that will generate the response
-            Process_Async(buffer);
 
             // remove from the memory the fulfilled async command
             if (req->buffer != NULL) free((void*)req->buffer);
