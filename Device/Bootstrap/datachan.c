@@ -124,11 +124,11 @@ void datachan_generate_report(uint8_t* DataArray)
             // generate the buffer response
             uint8_t buffer[GENERIC_REPORT_SIZE - sizeof(req->id) - 1];
 
-            // call the external function that will generate the response
-            Process_Async(buffer);
-
             // apply the generated response
             memcpy((void*)response_builder, (const void*)buffer, sizeof(buffer));
+
+            // call the external function that will generate the response
+            Process_Async(buffer);
 
             // remove from the memory the fulfilled async command
             if (req->buffer != NULL) free((void*)req->buffer);
