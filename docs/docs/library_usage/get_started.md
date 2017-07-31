@@ -35,3 +35,14 @@ The library shutdown importance is __unknown__.
 Avoid library shutdown may lead to the host system in a bad state or with memory leaks: you __should__ never forget to shutdown the library.
 
 Shutting down the library cleans memory that was used during the program execution.
+
+# Set VID and PID
+
+You can set your own USB VID, PID, manufacturer and product name strings by defining them before including data-chan:
+
+```
+#define USB_VID 0x03EB
+#define USB_PID 0x204F
+#define USB_MANUFACTURER L"NeroReflex"
+#define USB_NAME L"datachan tester"
+```
