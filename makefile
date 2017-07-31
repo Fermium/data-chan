@@ -11,6 +11,7 @@
 all:
 
 %:
+	export DATACHAN_HWCONFIG
 	@echo working on data-chan....
 	@echo
 	mkdir -p Documentation

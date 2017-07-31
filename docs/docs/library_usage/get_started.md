@@ -38,11 +38,14 @@ Shutting down the library cleans memory that was used during the program executi
 
 # Set VID and PID
 
-You can set your own USB VID, PID, manufacturer and product name strings by defining them before including data-chan:
+You can set your own USB VID, PID, manufacturer and product name strings by defining them in your Makefile and exporting them to datachan:
 
 ```
-#define USB_VID 0x03EB
-#define USB_PID 0x204F
-#define USB_MANUFACTURER L"NeroReflex"
-#define USB_NAME L"datachan tester"
+USB_VID = 0x1234
+USB_PID = 0x1234
+USB_MANUFACTURER = My Company Name
+USB_NAME = My Product
+
+DATACHAN_HWCONFIG = -DUSB_VID=$(USB_VID) -DUSB_PID=$(USB_PID) -DUSB_MANUFACTURER="L\"$(USB_MANUFACTURER)\"" -DUSB_NAME="L\"$(USB_NAME)\""
+export DATACHAN_HWCONFIG
 ```

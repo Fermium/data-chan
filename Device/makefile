@@ -19,6 +19,7 @@ all:
 %:
 	@echo Executing \"make $@\" on all LUFA library elements.
 	@echo
+	export DATACHAN_HWCONFIG
 	$(MAKE) -C Bootstrap $@
 	@echo
 	@echo LUFA \"make $@\" operation complete.

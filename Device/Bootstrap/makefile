@@ -15,7 +15,9 @@ TARGET       = datachan
 SRC          = main.c Descriptors.c datachan.c Settings.c Custom.c $(LUFA_SRC_USB)
 LUFA_PATH    = ../lufa/LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -I.
+CC_FLAGS += $(DATACHAN_HWCONFIG)
 LD_FLAGS     =
+
 
 # Default target
 lib: CC_FLAGS += -DEXTLIB
