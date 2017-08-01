@@ -9,8 +9,16 @@ int main(int argc, char** argv) {
     datachan_init();
     printf("Device transmission initialization success!\n\n");
 
+    int vid, pid;
+    do {
+        printf("Enter Device PID:\n");
+        scanf("%d", &pid);
+        printf("Enter Device VID:\n");
+        scanf("%d", &vid);
+    } while ((vid > 0) && (pid > 0));
+
     // try to acquire a device
-    datachan_acquire_result_t scan_result = datachan_device_acquire();
+    datachan_acquire_result_t scan_result = datachan_device_acquire(vid, pid);
     if (scan_result.result == success) {
         // get the device handler
         datachan_device_t *device = scan_result.device;
