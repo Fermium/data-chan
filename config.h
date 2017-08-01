@@ -24,10 +24,18 @@
 #endif
 
 // USB Device Configuration
-#define USB_VID                                 0x03EB
-#define USB_PID                                 0x204F
-#define USB_MANUFACTURE                         L"Denis"
-#define USB_NAME                                L"datachan tester"
+#ifndef USB_VID
+	#define USB_VID 0x03EB
+#endif
+#ifndef USB_PID
+	#define USB_PID 0x204F
+#endif
+#ifndef USB_MANUFACTURER
+	#define USB_MANUFACTURER L"NeroReflex"
+#endif
+#ifndef USB_NAME
+	#define USB_NAME L"datachan tester"
+#endif
 #define GENERIC_REPORT_SIZE                     63
 #define GENERIC_POLL_INTERVAL_MS                0x01 // originally was 0x05
 
