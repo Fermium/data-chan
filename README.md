@@ -41,6 +41,10 @@ Official compatibility list is:
 
 On any other system that supports libusb1.0 you may need to install a generic Libusb driver to have your device working.
 
+## Download
+
+The compiled libraries can be downloaded in [this](https://data-chan-js-binaries.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
+
 ## Docs
 Documentation is kept up-to-date with the master branch.
 Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!
