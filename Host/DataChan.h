@@ -182,9 +182,11 @@ DATACHAN_API void datachan_shutdown(void);
  * it is necessary that the OS provides permission,
  * in order to access and use an USB device.
  *
+ * @param vid the Vendor ID of the USB device
+ * @param pid the ProductID of the USB device
  * @return the result of the operation and, on succes, a pointer to the device structure
  */
-DATACHAN_API datachan_acquire_result_t datachan_device_acquire(void);
+DATACHAN_API datachan_acquire_result_t datachan_device_acquire(uint16_t vid, uint16_t pid);
 
 /**
  * @brief Logically free an acquired device

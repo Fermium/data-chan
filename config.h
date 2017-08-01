@@ -23,20 +23,24 @@
 	#define __DEVICE__
 #endif
 
-// USB Device Configuration
-#ifndef USB_VID
-	#define USB_VID 0x03EB
+#ifdef __DEVICE__
+	// USB Device Configuration
+	#ifndef USB_VID
+		#define USB_VID 0x03EB
+	#endif
+	#ifndef USB_PID
+		#define USB_PID 0x204F
+	#endif
+	#ifndef USB_MANUFACTURER
+		#define USB_MANUFACTURER L"NeroReflex"
+	#endif
+	#ifndef USB_NAME
+		#define USB_NAME L"datachan tester"
+	#endif
 #endif
-#ifndef USB_PID
-	#define USB_PID 0x204F
-#endif
-#ifndef USB_MANUFACTURER
-	#define USB_MANUFACTURER L"NeroReflex"
-#endif
-#ifndef USB_NAME
-	#define USB_NAME L"datachan tester"
-#endif
-#define GENERIC_REPORT_SIZE                     63
+
+// following macros are standard for data-chan. Any other nuber will not work!
+#define GENERIC_REPORT_SIZE                     63 // do not change: the official library will refuse to work!
 #define GENERIC_POLL_INTERVAL_MS                0x01 // originally was 0x05
 
 /*

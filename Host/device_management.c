@@ -29,14 +29,14 @@
 // defined in lib_init.c
 extern libusb_context* ctx;
 
-datachan_acquire_result_t datachan_device_acquire(void) {
+datachan_acquire_result_t datachan_device_acquire(uint16_t vid, uint16_t pid) {
     datachan_acquire_result_t res;
     res.device = (datachan_device_t*)NULL;
     res.result = unknown;
 
     if (datachan_is_initialized()) {
         // search for the associated device
-        libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, USB_VID, USB_PID);
+        libusb_device_handle* handle = libusb_open_device_with_vid_pid(ctx, vid, pid);
 
         if (handle != (libusb_device_handle*)NULL) {
             //libusb_set_auto_detach_kernel_driver(handle, 1);

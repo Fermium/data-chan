@@ -4,7 +4,6 @@ CLIB_FLAG = -shared
 CLIB_TARGET = libDataChan.$(SHARED_LIB_EXT)
 
 CFLAGS += -DDATACHAN_EXPORT -D__HOST__ -DDATACHAN_CPP_EXPORT -I ../
-CFLAGS += $(HWCONFIG)
 LIBS = -lusb-1.0 -lpthread -lm
 LUFA_PATH    = ../Device/lufa/LUFA
 
@@ -22,7 +21,6 @@ release:
 	$(MAKE) -C ./examples $@
 
 lib: release #just.... build a lib out of sources
-arduinoupload: all
 
 documentation: export PROJECT_NUMBER:=$(shell git rev-parse HEAD ; git diff-index --quiet HEAD || echo "(with uncommitted changes)")
 documentation: doxygen
