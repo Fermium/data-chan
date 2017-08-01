@@ -1,3 +1,4 @@
 GitPython
 requests
 boto
+google_compute_engine
