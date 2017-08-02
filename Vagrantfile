@@ -36,6 +36,8 @@ Vagrant.configure(2) do |config|
       sudo pip install mkdocs
       # link volume to home user folder
       ln -s /vagrant /home/vagrant/data-chan
+      
+      bash /vagrant/scripts/print-versions.sh
     SHELL
   end
 
