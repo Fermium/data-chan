@@ -41,11 +41,10 @@ On a generic system you will need at least:
 * g++
 * libusb-1.0-0-dev
 * libpthread-stubs0-dev (pre-installed on most systems)
-* npm
 * python      (^2.7)
 * python-dev  (^2.7)
 
-__NOTE:__ gcc and avr-libc used versions are 4.8, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).
+__NOTE:__ gcc and avr-libc used versions are 4.X, but any other greater versions should do a better job (gcc 6 compatibility is almost completely tested).
 
 On Ubuntu/Debian run:
 
@@ -57,16 +56,10 @@ On MacOS if you use Homebrew you have to tap an external repo:
 
 ```sh
 brew tap osx-cross/avr
-brew install avr-libc avr-gcc libusb
+brew install avr-libc49 avr-gcc49 libusb
 ```
 
-__NOTE:__ On MacOS if you want to build the node.js plugin you __have to__ install XCode!
-
-The other way is __manually__ excluding node.js from the build and use the GNU C/C++ Compiler:
-
-```sh
-brew install make gcc g++
-```
+For now compatibility with avr-gcc 7 (avr-gcc in brew) appears to be broken
 
 If you're using windows you will need to install:
 
@@ -80,8 +73,11 @@ __Note:__ You'll be able to use the firmware bootloader shipped with your device
 
 ## Vagrant Environment
 
-For your convenience a Vagrant development environment is provided.
-It's based on Ubuntu Xenial and preconfigured with everything you need to develop on linux.
+For your convenience two Vagrant development environments are provided.
+
+* "arch", based on [Arch Linux](https://www.archlinux.org/), for bleeding edge development
+* "ubuntu", based on Ubuntu Xenial, for stable development
+
 
 1. Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html):
@@ -89,8 +85,8 @@ It's based on Ubuntu Xenial and preconfigured with everything you need to develo
 1. Start Vagrant
 
 ```sh
-vagrant up
-vagrant ssh
+vagrant up ubuntu
+vagrant ssh ubuntu
 ```
 
 At this point you are ready [build](#building) data-chan:
@@ -108,4 +104,3 @@ You can build a library that can be embedded into any other (AVR) project:
 ```sh
 make lib -j2
 ```
-

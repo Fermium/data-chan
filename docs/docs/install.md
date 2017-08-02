@@ -11,4 +11,4 @@ However, be notified that it requires *root* privileges.
 That command is also useful in a development PC, because:
 - it adds the libDataChan where the system expects it to be found
 - it generates and installs the documentation for your specific version
-- it uploads the firmware to the cpu if possible (not the [Arduino](arduino.md) one)
+- it uploads the firmware to the MCU
