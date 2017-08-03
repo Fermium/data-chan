@@ -20,7 +20,7 @@ script:
 - make -C Host release -j2
 
 after_success:
-- python scripts/post-build-hook.py --bucket data-chan-js-binaries --upload
+- python scripts/post-build-hook.py --bucket data-chan-libs --upload
 
 notifications:
   slack: fermiumlabs:ngig6ilx4TKXMIZU4dkgFXe9

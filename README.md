@@ -45,7 +45,7 @@ On any other system that supports libusb1.0 you may need to install a generic Li
 
 ## Download
 
-The compiled libraries can be downloaded in [this](https://data-chan-js-binaries.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
+The compiled libraries can be downloaded in [this](https://data-chan-libs.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
 
 ## Docs
 Documentation is kept up-to-date with the master branch.
