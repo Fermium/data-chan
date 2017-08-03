@@ -17,6 +17,5 @@ pages:
     - OUT Packets:
         - Sync Request:    OUT_packets/sync_request.md
         - Async Request:    OUT_packets/async_request.md
-- Arduino: arduino.md
 - Deploy: deploy.md
 theme: readthedocs
