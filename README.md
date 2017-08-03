@@ -43,6 +43,13 @@ Official compatibility list is:
 
 On any other system that supports libusb1.0 you may need to install a generic Libusb driver to have your device working.
 
+# Libraries
+
+Libraries are available to interface data-chan with various programming languages:
+
+* NodeJS: [fermiumlabs/data-chan-nodejs](https://github.com/fermiumlabs/data-chan-nodejs)
+* Python: [fermiumlabs/data-chan-python](https://github.com/fermiumlabs/data-chan-python)
+
 ## Download
 
 The compiled libraries can be downloaded in [this](https://data-chan-libs.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
