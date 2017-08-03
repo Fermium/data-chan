@@ -22,7 +22,7 @@ build_script:
 
 after_build:
 - ps: pip install -r scripts/requirements.txt
-- ps: python scripts/post-build-hook.py --bucket data-chan-js-binaries --upload
+- ps: python scripts/post-build-hook.py --bucket data-chan-libs --upload
 
 notifications:
 - provider: Slack
