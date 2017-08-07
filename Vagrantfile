@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
       # Display the VirtualBox GUI when booting the machine
       vb.gui = false
 
-      vb.name = 'data-chan'
+      vb.name = 'data-chan-ubuntu'
       # Customize the amount of memory on the VM:
       vb.memory = '1024'
 
@@ -101,6 +101,60 @@ Vagrant.configure(2) do |config|
        bash /vagrant/scripts/print-versions.sh
 
        printf "\n\n\n\nThe box is ready. Now simply run \"vagrant ssh\" to connect! \n"
+
+     SHELL
+  end
+  config.vm.define 'windows_10_64' do |windows_10_64|
+    # Every Vagrant development environment requires a box. You can search for
+    # boxes at https://atlas.hashicorp.com/search.
+    ubuntu.vm.box = 'bento/ubuntu-16.04'
+    config.vm.box_url = 's3://example.com/secret.box'
+
+
+    # Create a public network, which generally matched to bridged network.
+    # Bridged networks make the machine appear as another physical device on
+    # your network.
+    ubuntu.vm.network 'private_network', type: 'dhcp'
+
+    # Provider-specific configuration so you can fine-tune various
+    # backing providers for Vagrant. These expose provider-specific options.
+    ubuntu.vm.provider 'virtualbox' do |vb|
+      # Display the VirtualBox GUI when booting the machine
+      vb.gui = false
+
+      vb.name = 'data-chan-win10-64'
+      # Customize the amount of memory on the VM:
+      vb.memory = '2048'
+      vb.cpus = 2
+
+      # Limit CPU usage
+      vb.customize ['modifyvm', :id, '--cpuexecutioncap', '65']
+    end
+
+    ## Enable USB Controller on VirtualBox
+    #ubuntu.vm.provider 'virtualbox' do |vb|
+    #  vb.customize ['modifyvm', :id, '--usb', 'on']
+    #  vb.customize ['modifyvm', :id, '--usbehci', 'on']
+    #end
+
+    ## Implement determined configuration attributes
+    #ubuntu.vm.provider 'virtualbox' do |vb|
+    #  vb.customize ['usbfilter', 'add', '0',
+    #                '--target', :id,
+    #                '--name', 'datachan tester',
+    #                '--product', 'datachan tester']
+    #end
+
+    #ubuntu.vm.provider 'virtualbox' do |vb|
+    #  vb.customize ['usbfilter', 'add', '0',
+    #                '--target', :id,
+    #                '--name', 'USBasp',
+    #                '--product', 'USBasp']
+    #end
+
+    ###############################################################
+    windows_10_64.vm.provision 'shell', privileged: false, inline: <<-SHELL
+       echo "aaaa"
 
      SHELL
   end
