@@ -77,13 +77,16 @@ For your convenience three Vagrant development environments are provided.
 
 * "arch", based on [Arch Linux](https://www.archlinux.org/), for bleeding edge development
 * "ubuntu", based on Ubuntu Xenial, for stable development
-* "windows", based on windows server. It is required access to a working Windows server 2012 vagrant box from [boxcutter/windows](https://github.com/boxcutter/windows).
+* "windows", based on windows server. It is required access to a working Windows server 2012/2016 vagrant box from [boxcutter/windows](https://github.com/boxcutter/windows) ( windows server 2016 supported [here](https://github.com/fermiumlabs/boxcutter-windows) )
 
 ```shell
 cd .. #get outside of the data-chan repo
 git clone git@github.com:boxcutter/windows.git
-make virtualbox/eval-win2012r2-standard-ssh
-vagrant box add box/virtualbox/eval-win2012r2-standard-ssh-*.box --name eval-win2012r2-standard-ssh
+make virtualbox/eval-win2016-standard-ssh
+vagrant box add box/virtualbox/eval-win2012r2-standard-ssh-*.box --name eval-win2016-standard-ssh
+cd data-chan 
+vagrant up windows
+vagrant reload #to reload powershell
 ```
 
 

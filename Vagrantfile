@@ -156,9 +156,9 @@ Vagrant.configure(2) do |config|
     #                '--product', 'USBasp']
     # end
     ###############################################################
+    windows.vm.provision :shell, path: "scripts/desktopShortcut.ps1"   
     windows.vm.provision :shell, path: "scripts/InstallChocolatey.ps1"
-    windows.vm.provision :shell, path: "scripts/reloadPowershell.ps1"  
-    windows.vm.provision :shell, path: "scripts/install.ps1"    
+    windows.vm.provision :shell, path: "scripts/install.ps1"
 
   end
 end
