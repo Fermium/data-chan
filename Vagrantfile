@@ -105,29 +105,29 @@ Vagrant.configure(2) do |config|
      SHELL
   end
   config.vm.define 'windows' do |windows|
-    # Every Vagrant development environment requires a box. You can search for
-    # boxes at https://atlas.hashicorp.com/search.
+    
+    # The following box is from a privte s3 bucket.
+    # To use it you need to install this vagrant plugin: https://github.com/WhoopInc/vagrant-s3auth
+    # You can build the box yourself following instructions from https://github.com/boxcutter/windows or https://github.com/fermiumlabs/boxcutter-windows
+    # If you are a company access to the boxes can be given through the "requester pays" feature of AWS
+    # If you're a nonprofit or an individual developing OSS, write to us at info (at) fermiumlabs (dot) com
+    # This box is maintaned by Fermium LABS srl (https://fermiumlabs.com)
     windows.vm.box = 'eval-win2012r2-enterprise-ssh'
     windows.vm.box_url = 's3://fermiumlabs-vagrant-boxes/virtualbox/eval-win2012r2-standard-ssh-nocm-1.0.4.box'
-    # windows.vm.network 'private_network', type: 'dhcp'
-
-    # Port forward WinRM and RDP
-    windows.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp', auto_correct: true
+    windows.vm.network 'private_network', type: 'dhcp'
+        
+    # Let Vagrant know this is a windows box
     windows.vm.communicator = 'winrm'
     windows.vm.guest = :windows
-
-    windows.vm.network :forwarded_port, guest: 5985, host: 55_985, id: 'winrm', auto_correct: true
-    # Port forward SSH
-    windows.vm.network :forwarded_port, guest: 22, host: 2222, id: 'ssh', auto_correct: true
-
+    
+    # Wait a bit more for windows to shutdown
     windows.windows.halt_timeout = 20
-    # username/password for accessing the image
-    # windows.winrm.username = "vagrant"
-    # windows.winrm.password = "vagrant"
+
+    # Personalize VirtuabBox VM for windows
     windows.vm.provider :virtualbox do |v, _override|
       v.gui = true
-      v.customize ['modifyvm', :id, '--memory', 1536]
-      v.customize ['modifyvm', :id, '--cpus', 1]
+      v.customize ['modifyvm', :id, '--memory', 2048]
+      v.customize ['modifyvm', :id, '--cpus', 2]
       v.customize ['modifyvm', :id, '--vram', '256']
       v.customize ['setextradata', 'global', 'GUI/MaxGuestResolution', 'any']
       v.customize ['setextradata', :id, 'CustomVideoMode1', '1024x768x32']
@@ -154,6 +154,6 @@ Vagrant.configure(2) do |config|
     #                '--product', 'USBasp']
     # end
     ###############################################################
-    windows.vm.provision 'shell', privileged: true, path: "scripts/install.ps1"
+    windows.vm.provision 'shell', privileged: true, path: 'scripts/install.ps1'
   end
 end
