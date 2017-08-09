@@ -112,8 +112,8 @@ Vagrant.configure(2) do |config|
     # If you are a company access to the boxes can be given through the "requester pays" feature of AWS
     # If you're a nonprofit or an individual developing OSS, write to us at info (at) fermiumlabs (dot) com
     # This box is maintaned by Fermium LABS srl (https://fermiumlabs.com)
-    windows.vm.box = 'eval-win2012r2-enterprise-ssh'
-    windows.vm.box_url = 's3://fermiumlabs-vagrant-boxes/virtualbox/eval-win2012r2-standard-ssh-nocm-1.0.4.box'
+    windows.vm.box = 'eval-win2016-standard-ssh'
+    windows.vm.box_url = 's3://fermiumlabs-vagrant-boxes/virtualbox/eval-win2016-standard-ssh-nocm-1.0.4.box'
     windows.vm.network 'private_network', type: 'dhcp'
         
     # Let Vagrant know this is a windows box
@@ -129,8 +129,10 @@ Vagrant.configure(2) do |config|
       v.customize ['modifyvm', :id, '--memory', 2048]
       v.customize ['modifyvm', :id, '--cpus', 2]
       v.customize ['modifyvm', :id, '--vram', '256']
+      v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
       v.customize ['setextradata', 'global', 'GUI/MaxGuestResolution', 'any']
       v.customize ['setextradata', :id, 'CustomVideoMode1', '1024x768x32']
+      
     end
 
     ## Enable USB Controller on VirtualBox
@@ -154,6 +156,9 @@ Vagrant.configure(2) do |config|
     #                '--product', 'USBasp']
     # end
     ###############################################################
-    windows.vm.provision 'shell', privileged: true, path: 'scripts/install.ps1'
+    windows.vm.provision :shell, path: "scripts/InstallChocolatey.ps1"
+    windows.vm.provision :shell, path: "scripts/reloadPowershell.ps1"  
+    windows.vm.provision :shell, path: "scripts/install.ps1"    
+
   end
 end

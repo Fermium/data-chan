@@ -1,10 +1,8 @@
-Set-ExecutionPolicy AllSigned; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 cinst -y mingw
 cinst -y make
 cinst -y msys2
 cinst -y 7zip.install
 cinst -y wget
-
 set "PATH=%PATH%;C:\tools\mingw64\bin\"
 
 refreshenv

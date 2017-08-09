@@ -43,7 +43,6 @@
 # Vagrant
 vagrant
 .vagrant/
-libusb-*.7z
 
 
 # Compiled documentation
@@ -54,6 +53,8 @@ Host/API/examples/Tester/Tester
 Host/examples/Tester/Tester
 Host/examples/Potentiometer/Potentiometer
 
-
 # docs build
 docs/site/
+
+# Downloaded files
+libusb-*.7z
