@@ -154,6 +154,6 @@ Vagrant.configure(2) do |config|
     #                '--product', 'USBasp']
     # end
     ###############################################################
-    windows.vm.provision 'shell', privileged: true, path: "scripts/vagrant_provision_win.ps1"
+    windows.vm.provision 'shell', privileged: true, path: "scripts/install.ps1"
   end
 end

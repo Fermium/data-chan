@@ -73,10 +73,18 @@ __Note:__ You'll be able to use the firmware bootloader shipped with your device
 
 ## Vagrant Environment
 
-For your convenience two Vagrant development environments are provided.
+For your convenience three Vagrant development environments are provided.
 
 * "arch", based on [Arch Linux](https://www.archlinux.org/), for bleeding edge development
 * "ubuntu", based on Ubuntu Xenial, for stable development
+* "windows", based on windows server. It is required access to a working Windows server 2012 vagrant box from [boxcutter/windows](https://github.com/boxcutter/windows).
+
+```shell
+cd .. #get outside of the data-chan repo
+git clone git@github.com:boxcutter/windows.git
+make virtualbox/eval-win2012r2-standard-ssh
+vagrant box add box/virtualbox/eval-win2012r2-standard-ssh-*.box --name eval-win2012r2-standard-ssh
+```
 
 
 1. Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
