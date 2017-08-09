@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
       sudo pip install mkdocs
       # link volume to home user folder
       ln -s /vagrant /home/vagrant/data-chan
-      
+
       bash /vagrant/scripts/print-versions.sh
     SHELL
   end
@@ -66,25 +66,25 @@ Vagrant.configure(2) do |config|
     end
 
     ## Enable USB Controller on VirtualBox
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # ubuntu.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['modifyvm', :id, '--usb', 'on']
     #  vb.customize ['modifyvm', :id, '--usbehci', 'on']
-    #end
+    # end
 
     ## Implement determined configuration attributes
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # ubuntu.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['usbfilter', 'add', '0',
     #                '--target', :id,
     #                '--name', 'datachan tester',
     #                '--product', 'datachan tester']
-    #end
+    # end
 
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # ubuntu.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['usbfilter', 'add', '0',
     #                '--target', :id,
     #                '--name', 'USBasp',
     #                '--product', 'USBasp']
-    #end
+    # end
 
     ###############################################################
     ubuntu.vm.provision 'shell', privileged: false, inline: <<-SHELL
@@ -104,58 +104,56 @@ Vagrant.configure(2) do |config|
 
      SHELL
   end
-  config.vm.define 'windows_10_64' do |windows_10_64|
+  config.vm.define 'windows' do |windows|
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://atlas.hashicorp.com/search.
-    ubuntu.vm.box = 'bento/ubuntu-16.04'
-    config.vm.box_url = 's3://example.com/secret.box'
+    windows.vm.box = 'eval-win2012r2-enterprise-ssh'
+    windows.vm.box_url = 's3://fermiumlabs-vagrant-boxes/virtualbox/eval-win2012r2-standard-ssh-nocm-1.0.4.box'
+    # windows.vm.network 'private_network', type: 'dhcp'
 
+    # Port forward WinRM and RDP
+    windows.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp', auto_correct: true
+    windows.vm.communicator = 'winrm'
+    windows.vm.guest = :windows
 
-    # Create a public network, which generally matched to bridged network.
-    # Bridged networks make the machine appear as another physical device on
-    # your network.
-    ubuntu.vm.network 'private_network', type: 'dhcp'
+    windows.vm.network :forwarded_port, guest: 5985, host: 55_985, id: 'winrm', auto_correct: true
+    # Port forward SSH
+    windows.vm.network :forwarded_port, guest: 22, host: 2222, id: 'ssh', auto_correct: true
 
-    # Provider-specific configuration so you can fine-tune various
-    # backing providers for Vagrant. These expose provider-specific options.
-    ubuntu.vm.provider 'virtualbox' do |vb|
-      # Display the VirtualBox GUI when booting the machine
-      vb.gui = false
-
-      vb.name = 'data-chan-win10-64'
-      # Customize the amount of memory on the VM:
-      vb.memory = '2048'
-      vb.cpus = 2
-
-      # Limit CPU usage
-      vb.customize ['modifyvm', :id, '--cpuexecutioncap', '65']
+    windows.windows.halt_timeout = 20
+    # username/password for accessing the image
+    # windows.winrm.username = "vagrant"
+    # windows.winrm.password = "vagrant"
+    windows.vm.provider :virtualbox do |v, _override|
+      v.gui = true
+      v.customize ['modifyvm', :id, '--memory', 1536]
+      v.customize ['modifyvm', :id, '--cpus', 1]
+      v.customize ['modifyvm', :id, '--vram', '256']
+      v.customize ['setextradata', 'global', 'GUI/MaxGuestResolution', 'any']
+      v.customize ['setextradata', :id, 'CustomVideoMode1', '1024x768x32']
     end
 
     ## Enable USB Controller on VirtualBox
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # windows.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['modifyvm', :id, '--usb', 'on']
     #  vb.customize ['modifyvm', :id, '--usbehci', 'on']
-    #end
+    # end
 
     ## Implement determined configuration attributes
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # windows.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['usbfilter', 'add', '0',
     #                '--target', :id,
     #                '--name', 'datachan tester',
     #                '--product', 'datachan tester']
-    #end
+    # end
 
-    #ubuntu.vm.provider 'virtualbox' do |vb|
+    # windows.vm.provider 'virtualbox' do |vb|
     #  vb.customize ['usbfilter', 'add', '0',
     #                '--target', :id,
     #                '--name', 'USBasp',
     #                '--product', 'USBasp']
-    #end
-
+    # end
     ###############################################################
-    windows_10_64.vm.provision 'shell', privileged: false, inline: <<-SHELL
-       echo "aaaa"
-
-     SHELL
+    windows.vm.provision 'shell', privileged: true, path: "scripts/vagrant_provision_win.ps1"
   end
 end
