@@ -4,8 +4,12 @@ cinst -y make
 cinst -y msys2
 cinst -y 7zip.install
 cinst -y wget
+cinst -y python3
+
 set "PATH=%PATH%;C:\tools\mingw64\bin\"
+
 refreshenv
+
 wget https://netcologne.dl.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.21/libusb-1.0.21.7z -OutFile libusb-1.0.21.7z
 mkdir libusb-1.0.21
 Get-ChildItem libusb-1.0.21.7z | % {& "C:\Program Files\7-Zip\7z.exe" "x" $_.fullname "-olibusb-1.0.21"}
