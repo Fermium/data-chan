@@ -44,7 +44,7 @@ Vagrant.configure(2) do |config|
   config.vm.define 'ubuntu' do |ubuntu|
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://atlas.hashicorp.com/search.
-    ubuntu.vm.box = 'bento/ubuntu-16.04'
+    ubuntu.vm.box = 'ubuntu/xenial64'
 
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on
@@ -89,7 +89,7 @@ Vagrant.configure(2) do |config|
     ###############################################################
     ubuntu.vm.provision 'shell', privileged: false, inline: <<-SHELL
        printf "\n\nInstalling software\n"
-       sudo apt-get update && sudo apt-get upgrade -y
+       sudo apt-get update 
        sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client tar gcc g++ gcc-avr avr-libc avrdude binutils-avr make autogen autoconf curl build-essential clang
 
        printf "\n\nInstalling pip and mkdocs\n"
