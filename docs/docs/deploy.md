@@ -30,4 +30,4 @@ The script uses a few environment variables to configure the AWS credentials:
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 
-The default bucket is publicly accessible [here](https://data-chan-js-binaries.s3.amazonaws.com/index.html)
+The default bucket is publicly accessible [here](https://data-chan-libs.s3.amazonaws.com/index.html)

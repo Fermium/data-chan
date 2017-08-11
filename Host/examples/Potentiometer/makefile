@@ -35,5 +35,4 @@ flash: all
 
 install: all
 documentation:
-arduinoupload:
 # do nothing. Kept to not break the buildsystem
