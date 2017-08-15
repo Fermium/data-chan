@@ -21,6 +21,10 @@ It's thought to be:
 * Fast
 * Configurable
 
+## Docs
+Documentation is kept up-to-date with the master branch.
+Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!
+
 ## Features:
 
 * Broad compatibility with MacOS/Windows/Linux
@@ -52,8 +56,4 @@ Libraries are available to interface data-chan with various programming language
 
 ## Download
 
-The compiled libraries can be downloaded in [this](https://data-chan-libs.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
-
-## Docs
-Documentation is kept up-to-date with the master branch.
-Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!
+The compiled libraries can be downloaded in [this](https://data-chan-libs.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash.
