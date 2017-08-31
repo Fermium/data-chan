@@ -1,5 +1,5 @@
 /**
-	data-chan physic through USB
+	
 	Copyright (C) 2017 Fermium LABS srl
 	
 	This program is free software: you can redistribute it and/or modify
