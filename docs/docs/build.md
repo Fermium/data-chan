@@ -7,7 +7,7 @@ The entire project can be compiled with the `make debug` or `make release` comma
 Get the source
 
 ```sh
-git clone https://github.com/NeroReflex/data-chan.git && cd data-chan
+git clone https://github.com/fermiumlabs/data-chan.git && cd data-chan
 git submodule update --init --recursive #fetch the LUFA submodule
 ```
 
@@ -108,4 +108,3 @@ You can build a library that can be embedded into any other (AVR) project:
 ```sh
 make lib -j2
 ```
-

@@ -51,4 +51,4 @@ Depends. It's not made to work with beginner-friendly boards as the Arduino UNO 
 
 #### I have found a bug
 
-[Submit an issue!](https://github.com/NeroReflex/data-chan/issues/new)
+[Submit an issue!](https://github.com/fermiumlabs/data-chan/issues/new)

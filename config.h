@@ -1,6 +1,6 @@
 /**
 	data-chan physic through USB
-	Copyright (C) 2016  Benato Denis
+	Copyright (C) 2017 Fermium LABS srl
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 		#define USB_PID 0x204F
 	#endif
 	#ifndef USB_MANUFACTURER
-		#define USB_MANUFACTURER L"NeroReflex"
+		#define USB_MANUFACTURER L"MyManufacturer"
 	#endif
 	#ifndef USB_NAME
 		#define USB_NAME L"datachan tester"

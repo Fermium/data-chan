@@ -1,5 +1,5 @@
 site_name: data-chan
-repo_url: https://github.com/NeroReflex/data-chan
+repo_url: https://github.com/fermiumlabs/data-chan
 
 pages:
 - Home: index.md
@@ -9,7 +9,7 @@ pages:
 - Library API:
     - Getting Started: library_usage/get_started.md
     - API Documentation: API_Documentation.md
-- Protocol: 
+- Protocol:
     - Specifications: protocol.md
     - IN Packets:
         - Measure:    IN_packets/measure.md

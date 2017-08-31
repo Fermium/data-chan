@@ -4,7 +4,7 @@
 | :---: | :---: | :---: | :---: |
 | Host, Device and docs | HW (Host, Device, Flashing) | Host only | Host only |
 | Deploy docs | No deployment | Deploy lib | Deploy lib|
- | [![wercker status](https://app.wercker.com/status/75da37fe4a9fc37d604da68759866454/s/master "wercker status")](https://app.wercker.com/project/byKey/75da37fe4a9fc37d604da68759866454) | [![Build Status](https://drone-ci.dev.fermiumlabs.com/api/badges/NeroReflex/data-chan/status.svg)](https://drone-ci.dev.fermiumlabs.com/NeroReflex/data-chan) | [![Build Status](https://travis-ci.org/fermiumlabs/data-chan.svg?branch=master)](https://travis-ci.org/fermiumlabs/data-chan)  | [![Build status](https://ci.appveyor.com/api/projects/status/a8svd5ij2f9mdh7m?svg=true)](https://ci.appveyor.com/project/dfermiumlabs/data-chan) |
+ | [![wercker status](https://app.wercker.com/status/75da37fe4a9fc37d604da68759866454/s/master "wercker status")](https://app.wercker.com/project/byKey/75da37fe4a9fc37d604da68759866454) | [![Build Status](https://drone-ci.dev.fermiumlabs.com/api/badges/fermiumlabs/data-chan/status.svg)](https://drone-ci.dev.fermiumlabs.com/fermiumlabs/data-chan) | [![Build Status](https://travis-ci.org/fermiumlabs/data-chan.svg?branch=master)](https://travis-ci.org/fermiumlabs/data-chan)  | [![Build status](https://ci.appveyor.com/api/projects/status/a8svd5ij2f9mdh7m?svg=true)](https://ci.appveyor.com/project/dfermiumlabs/data-chan) |
  
 
 Data-chan is an USB framework/protocol for communication between Atmel AVR devices (mainly Atmega 32u4) and a PC.
@@ -46,7 +46,3 @@ On any other system that supports libusb1.0 you may need to install a generic Li
 ## Download
 
 The compiled libraries can be downloaded in [this](https://data-chan-js-binaries.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
-
-## Docs
-Documentation is kept up-to-date with the master branch.
-Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!
