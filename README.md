@@ -1,8 +1,8 @@
-# Data-chan
-
+## Deprecation notice
 ## Data-chan is now available at [fermiumlabs/data-chan](https://github.com/fermiumlabs/data-chan)
 
 ---
+# Data-chan
 
  
 
