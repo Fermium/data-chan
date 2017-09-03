@@ -18,8 +18,8 @@ build:
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_API_TOKEN
-        
-        
+
+
 deploy :
   steps :
     - install-packages:
@@ -50,24 +50,3 @@ deploy :
           mkdir ../Documentation
           mkdir ../Documentation/C_API
           make documentation
-          cp -rf Documentation docs/site/
-    - script:
-        name: Configure git
-        code: |-
-          git config --global user.email "pleasemailus@wercker.com"
-          git config --global user.name "werckerbot"
-          git config --global push.default matching
-    - script:
-        name: Deploy to github pages
-        code: |-
-          cd docs
-          git clone $GIT_REMOTE
-          cd data-chan
-          git checkout gh-pages
-          cd ../
-          sudo chmod 0777 -R site
-          sudo rsync -avh ./site/ ./data-chan/
-          cd data-chan
-          git add .
-          git commit -m "[ci skip]deploy commit from $WERCKER_STARTED_BY" --quiet &> /dev/null
-          git push --quiet &> /dev/null
