@@ -1,6 +1,3 @@
-# DEPRECATION NOTICE
-# Data-chan is now available at [fermiumlabs/data-chan](https://github.com/fermiumlabs/data-chan)
-
 ### Data-chan
 
 
@@ -61,4 +58,3 @@ Libraries are available to interface data-chan with various programming language
 ## Download
 
 The compiled libraries can be downloaded in [this](https://data-chan-js-binaries.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
-
