@@ -47,4 +47,6 @@ deploy :
     - script:
         name: Building Doxygen Documentation
         code: |-
+          mkdir ../Documentation
+          mkdir ../Documentation/C_API
           make documentation

@@ -20,5 +20,5 @@ The API documentation you can find online is related to a specific git revision,
 
 You can read the the git commit hash of the documentation on the left side of the documentation title.
 
-You can find the C API documentation [here](C_API/html).
+You can find the C API documentation [here](Documentation/C_API/html).
 
