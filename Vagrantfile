@@ -1,6 +1,27 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# install dependencies
+unless Vagrant.has_plugin?('vagrant-s3auth')
+  # Attempt to install ourself. Bail out on failure so we don't get stuck in an
+  # infinite loop.
+  system('vagrant plugin install vagrant-s3auth') || exit!
+
+  # Relaunch Vagrant so the plugin is detected. Exit with the same status code.
+  exit system('vagrant', *ARGV)
+end
+
+
+unless Vagrant.has_plugin?('vagrant-reload')
+  # Attempt to install ourself. Bail out on failure so we don't get stuck in an
+  # infinite loop.
+  system('vagrant plugin install vagrant-reload') || exit!
+
+  # Relaunch Vagrant so the plugin is detected. Exit with the same status code.
+  exit system('vagrant', *ARGV)
+end
+
+
 Vagrant.configure(2) do |config|
   config.vm.define 'arch' do |arch|
     # Every Vagrant development environment requires a box. You can search for
@@ -89,7 +110,7 @@ Vagrant.configure(2) do |config|
     ###############################################################
     ubuntu.vm.provision 'shell', privileged: false, inline: <<-SHELL
        printf "\n\nInstalling software\n"
-       sudo apt-get update 
+       sudo apt-get update
        sudo apt-get -y install byacc flex doxygen libpcre3 libpcre3-dev git openssl pkg-config libssl-dev wget libusb-1.0-0-dev zlib1g-dev unzip python python-dev openssh-client tar gcc g++ gcc-avr avr-libc avrdude binutils-avr make autogen autoconf curl build-essential clang
 
        printf "\n\nInstalling pip and mkdocs\n"
@@ -105,21 +126,30 @@ Vagrant.configure(2) do |config|
      SHELL
   end
   config.vm.define 'windows' do |windows|
-    
     # The following box is from a privte s3 bucket.
     # To use it you need to install this vagrant plugin: https://github.com/WhoopInc/vagrant-s3auth
     # You can build the box yourself following instructions from https://github.com/boxcutter/windows or https://github.com/fermiumlabs/boxcutter-windows
     # If you are a company access to the boxes can be given through the "requester pays" feature of AWS
     # If you're a nonprofit or an individual developing OSS, write to us at info (at) fermiumlabs (dot) com
     # This box is maintaned by Fermium LABS srl (https://fermiumlabs.com)
+
     windows.vm.box = 'eval-win2016-standard-ssh'
     windows.vm.box_url = 's3://fermiumlabs-vagrant-boxes/virtualbox/eval-win2016-standard-ssh-nocm-1.0.4.box'
     windows.vm.network 'private_network', type: 'dhcp'
-        
+
+    windows.vm.provider :parallels do |prl, _override|
+      _override.vm.box_url = 's3://fermiumlabs-vagrant-boxes/parallels/eval-win2016-standard-ssh-nocm-1.0.4.box'
+      prl.memory = 3072
+      prl.cpus = 3
+    end
+    windows.vm.provider :vmware do |_vmw, _override|
+      _override.vm.box_url = 's3://fermiumlabs-vagrant-boxes/vmware/eval-win2016-standard-ssh-nocm-1.0.4.box'
+    end
+
     # Let Vagrant know this is a windows box
     windows.vm.communicator = 'winrm'
     windows.vm.guest = :windows
-    
+
     # Wait a bit more for windows to shutdown
     windows.windows.halt_timeout = 20
 
@@ -129,10 +159,9 @@ Vagrant.configure(2) do |config|
       v.customize ['modifyvm', :id, '--memory', 2048]
       v.customize ['modifyvm', :id, '--cpus', 2]
       v.customize ['modifyvm', :id, '--vram', '256']
-      v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
+      v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
       v.customize ['setextradata', 'global', 'GUI/MaxGuestResolution', 'any']
       v.customize ['setextradata', :id, 'CustomVideoMode1', '1024x768x32']
-      
     end
 
     ## Enable USB Controller on VirtualBox
@@ -156,9 +185,9 @@ Vagrant.configure(2) do |config|
     #                '--product', 'USBasp']
     # end
     ###############################################################
-    windows.vm.provision :shell, path: "scripts/desktopShortcut.ps1"   
-    windows.vm.provision :shell, path: "scripts/InstallChocolatey.ps1"
-    windows.vm.provision :shell, path: "scripts/install.ps1"
-
+    windows.vm.provision :shell, path: 'scripts/desktopShortcut.ps1'
+    windows.vm.provision :shell, path: 'scripts/InstallChocolatey.ps1'
+    windows.vm.provision :shell, path: 'scripts/install.ps1'
+    windows.vm.provision :reload
   end
 end
