@@ -23,8 +23,7 @@ It's thought to be:
 * Configurable
 
 ## Docs
-Documentation is kept up-to-date with the master branch.
-Check out the [DOCS](https://neroreflex.github.io/data-chan/) to learn more!
+Doc is on it's way. hang tight. 
 
 ## Features:
 
