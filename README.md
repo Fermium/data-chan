@@ -56,4 +56,4 @@ Libraries are available to interface data-chan with various programming language
 
 ## Download
 
-The compiled libraries can be downloaded in [this](https://data-chan-js-binaries.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
+The compiled libraries can be downloaded in [this](http://data-chan-libs.s3.amazonaws.com/index.html) s3 bucket, identified by the commit hash. 
