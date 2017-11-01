@@ -88,6 +88,7 @@ typedef struct {
     pthread_mutex_t enabled_mutex;
     pthread_mutex_t requests_queue_mutex;
     pthread_mutex_t async_used_id_mutex;
+	pthread_mutex_t packetcounter_mutex;
     
     // USB device handler
     libusb_device_handle* handler;
@@ -107,6 +108,10 @@ typedef struct {
 
     // A counter for the used ID
     uint32_t async_used_id;
+	
+	// A failure counter
+	uint32_t packet_success;
+	uint32_t packet_lost;
 } datachan_device_t;
 
 /*
@@ -286,6 +291,20 @@ DATACHAN_API int32_t datachan_device_enqueued_measures(datachan_device_t*);
 DATACHAN_API void datachan_clean_measure(measure_t* measure);
 
 DATACHAN_API void datachan_device_set_config(datachan_device_t*, uint32_t, uint8_t, void*, uint16_t);
+
+/**
+ * @brief Shutdown the library
+ *
+ * Reset the packet counter.
+ */
+DATACHAN_API void datachan_packetcounter_reset(datachan_device_t*);
+
+/**
+ * @brief Shutdown the library
+ *
+ * Get the percentage of transmission errors.
+ */
+DATACHAN_API float datachan_packetcounter_get_failure_rate(datachan_device_t*);
 
 #ifdef __cplusplus
 }

@@ -63,9 +63,19 @@ int datachan_raw_read(datachan_device_t* dev, uint8_t* data) {
     // copy the result on the unsafe buffer (on success)
     if ((result == 0) && (bytes_transferred >= GENERIC_REPORT_SIZE))
         memcpy((void*)data, (const void*)data_in, GENERIC_REPORT_SIZE);
-    else if (bytes_transferred != 0)
+	else if (bytes_transferred != 0)
         bytes_transferred = 0;
-
+	
+	int success = bytes_transferred;
+	
+	// update the packet counter
+	pthread_mutex_lock(&dev->packetcounter_mutex);
+	if (success)
+		dev->packet_success++;
+	else
+		dev->packet_lost++;
+	pthread_mutex_unlock(&dev->packetcounter_mutex);
+	
     return bytes_transferred;
 }
 
@@ -100,6 +110,15 @@ int datachan_raw_write(datachan_device_t* dev, uint8_t* data, int data_length) {
 
     // error check
     bytes_transferred = (result == 0) ? bytes_transferred : 0;
+	int success = bytes_transferred;
+	
+	// update the packet counter
+	pthread_mutex_lock(&dev->packetcounter_mutex);
+	if (success)
+		dev->packet_success++;
+	else
+		dev->packet_lost++;
+	pthread_mutex_unlock(&dev->packetcounter_mutex);
 
     return bytes_transferred;
 }

@@ -68,3 +68,15 @@ void datachan_device_release(datachan_device_t* dev) {
     // device structure clean
     datachan_device_cleanup(dev);
 }
+
+void datachan_packetcounter_reset(datachan_device_t* dev) {
+	dev->packet_success = 0;
+	dev->packet_lost = 0;
+}
+
+float datachan_packetcounter_get_failure_rate(datachan_device_t* dev) {
+	if (dev->packet_success == 0)
+		return dev->packet_lost;
+	
+	return (dev->packet_lost / dev->packet_success) * 100;
+}
