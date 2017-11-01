@@ -70,13 +70,20 @@ void datachan_device_release(datachan_device_t* dev) {
 }
 
 void datachan_packetcounter_reset(datachan_device_t* dev) {
+	pthread_mutex_lock(&dev->packetcounter_mutex);
+	
 	dev->packet_success = 0;
 	dev->packet_lost = 0;
+	
+	pthread_mutex_unlock(&dev->packetcounter_mutex);
 }
 
 float datachan_packetcounter_get_failure_rate(datachan_device_t* dev) {
-	if (dev->packet_success == 0)
-		return dev->packet_lost;
+	float rate = 0.0;
 	
-	return (dev->packet_lost / dev->packet_success) * 100;
+	pthread_mutex_lock(&dev->packetcounter_mutex);
+	rate = (dev->packet_success == 0) ? dev->packet_lost : (dev->packet_lost / dev->packet_success) * 100;
+	pthread_mutex_unlock(&dev->packetcounter_mutex);
+	
+	return rate;
 }
