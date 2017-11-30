@@ -11,10 +11,9 @@ matrix:
     dist: trusty
     sudo: required
   - os: osx
-    osx_image: xcode8.2
 
 install:
-- pip install -r scripts/requirements.txt
+- pip install --user -r scripts/requirements.txt
 
 script:
 - make -C Host release -j2
