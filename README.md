@@ -1,5 +1,8 @@
-### Data-chan
+<a href="https://fermiumlabs.com/">
+    <img src="https://fermiumlabs.com/Assets/img/logos/Horizontal-Main_500px.png" alt="Fermium LABS logo" width="200" align="right" />
+</a>
 
+# Data-chan
 
 | Linux | Linux | Linux and macOS | Windows |
 | :---: | :---: | :---: | :---: |
